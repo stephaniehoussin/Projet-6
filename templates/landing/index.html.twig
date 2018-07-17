@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleHeaderLanding.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'landing/parts/headerLanding.html.twig' %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}

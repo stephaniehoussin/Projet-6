@@ -8,12 +8,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SpotController extends Controller
 {
     /**
-     * @Route("/spot", name="spot")
+     * @Route("/make_spot", name="make_spot")
      */
-    public function index()
+    public function makeSpot()
     {
-        return $this->render('spot/index.html.twig', [
-            'controller_name' => 'SpotController',
-        ]);
+        return $this->render('spot/makeSpot.html.twig');
     }
+    /**
+     * @Route("/search_spot", name="search_spot")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchSpot()
+    {
+        return $this->render('spot/searchSpot.html.twig');
+    }
+
 }
