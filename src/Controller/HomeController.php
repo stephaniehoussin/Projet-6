@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\inscriptionType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
 
 class HomeController extends Controller
 {
@@ -26,11 +30,24 @@ class HomeController extends Controller
 
     /**
      * @Route("inscription", name="inscription")
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function inscription()
+    public function inscription(Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('landing/inscription.html.twig');
+        $user = new User();
+        $form = $this->createForm(inscriptionType::class, $user);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre inscription est bien prise en compte, vous allez recevoir un email contenant un lien pour activer votre compte');
+        }
+        return $this->render('landing/inscription.html.twig',[
+            'inscription' => $form->createView(),
+        ]);
     }
 
     /**

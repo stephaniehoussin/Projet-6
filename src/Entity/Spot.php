@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpotRepository")
- * @Vich\Uploadable()
+ * @Vich\Uploadable
  */
 class Spot
 {
@@ -29,8 +29,8 @@ class Spot
      */
     private $picture;
     /**
-     * @var
-     * @Vich\UploadableField(mapping"spot_pictures", fileNameProperty="picture")
+     * @var File
+     * @Vich\UploadableField(mapping="spot_pictures", fileNameProperty="picture")
      */
     private $pictureFile;
     /**
