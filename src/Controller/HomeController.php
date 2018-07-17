@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\connexionType;
 use App\Form\inscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,8 +24,14 @@ class HomeController extends Controller
      * @Route("/connexion", name="connexion")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function connexion()
+    public function connexion(Request $request)
     {
+        $form = $this->createForm(connexionType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+
+        }
         return $this->render('landing/connexion.html.twig');
     }
 
