@@ -32,7 +32,17 @@ class HomeController extends Controller
         {
 
         }
-        return $this->render('landing/connexion.html.twig');
+        return $this->render('landing/connexion.html.twig',[
+            'connexion' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/game", name="game")
+     */
+    public function game()
+    {
+        return $this->render('landing/game.html.twig');
     }
 
     /**
