@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%}
+        #menu {
+            position: absolute;
+            background: #fff;
+            padding: 10px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        #geocoder-container > div {
+            min-width:50%;
+            margin-left:25%;
+        }
+        .coordinates {
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding:5px 10px;
+            margin: 0;
+            font-size: 11px;
+            line-height: 18px;
+            border-radius: 3px;
+            display: none;
+        }
+        #fly {
+            display: block;
+            position: relative;
+            margin: 0px auto;
+            width: 50%;
+            height: 40px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            font-size: 12px;
+            text-align: center;
+            color: #fff;
+            background: #ee8a65;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+<div id='map'></div>
+
+<div id='menu'>
+    <input id='streets' type='radio' name='rtoggle' value='streets'>
+    <label for='streets'>streets</label>
+    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+    <label for='satellite'>satellite</label>
+</div>
+    <div id="geo">
+
+    </div>
+    <pre id='coordinates' class='coordinates'></pre>
+<script>
+
+    // INITIALISATION DE LA CARTE
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg';
+
+
+   var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 9,
+        center: [2.333333, 48.866667]
+    });
+    // INITIALISATION DE LA CARTE
+
+    // MISE EN PLACE MARQUEUR QU ON PEUT DEPLACER
+    var marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([2.333333, 48.866667])
+        .addTo(map);
+
+    function onDragEnd() {
+        var lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML = 'Longitude:' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    }
+    marker.on('dragend', onDragEnd);
+    // MISE EN PLACE MARQUEUR QU ON PEUT DEPLACER
+
+        // GEOLOCALISATION
+    // Add geolocate control to the map.
+      map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true,
+        },
+        trackUserLocation: true
+    }));
+        // GEOLOCALISATION
+
+
+    // RECHERCHE ADRESSE ET MARQUEUR QUI SE MET EN PLACE
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+    });
+
+    map.addControl(geocoder);
+
+    // After the map style has loaded on the page, add a source layer and default
+    // styling for a single point.
+    map.on('load', function() {
+        map.addSource('single-point', {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": []
+            }
+        });
+
+        map.addLayer({
+            "id": "point",
+            "source": "single-point",
+            "type": "circle",
+            "paint": {
+                "circle-radius": 10,
+                "circle-color": "#007cbf"
+            }
+        });
+
+        // Listen for the `geocoder.input` event that is triggered when a user
+        // makes a selection and add a symbol that matches the result.
+        geocoder.on('result', function(ev) {
+            map.getSource('single-point').setData(ev.result.geometry);
+        });
+    });
+    // RECHERCHE ADRESSE ET MARQUEUR QUI SE MET EN PLACE
+
+
+    // PERMET DE CHOISIR ENTRE STREETS ET SATELLITE
+    var layerList = document.getElementById('menu');
+    var inputs = layerList.getElementsByTagName('input');
+
+    function switchLayer(layer) {
+        var layerId = layer.target.id;
+        map.setStyle('mapbox://styles/mapbox/' + layerId + '-v9');
+    }
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = switchLayer;
+    }
+    // PERMET DE CHOISIR ENTRE STREETS ET SATELLITE
+
+    // AFFICHE LES ICONES + ET - QUI PERMETTENT DE ZOOMER OU NON MANUELLEMENT
+    map.addControl(new mapboxgl.NavigationControl());
+    // AFFICHE LES ICONES + ET - QUI PERMETTENT DE ZOOMER OU NON MANUELLEMENT
+
+</script>
+
+
+{% endblock %}
