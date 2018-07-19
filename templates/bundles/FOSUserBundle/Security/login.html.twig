@@ -34,11 +34,6 @@
                 <hr class="mb-4">
                 <h2>Connexion</h2>
                 <hr class="mb-4">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
                 {% block fos_user_content %}
                     {{ include('@FOSUser/Security/login_content.html.twig') }}
                 {% endblock fos_user_content %}
