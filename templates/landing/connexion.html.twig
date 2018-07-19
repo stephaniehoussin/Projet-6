@@ -40,7 +40,7 @@
                     </div>
                 {% endfor %}
                 {{ form_start(connexion) }}
-                {{ form_row(connexion.pseudo) }}
+                {{ form_row(connexion.username) }}
                 {{ form_row(connexion.password) }}
                 <button type="submit" class="btn btn-primary" name="submit"  id="connexion">Envoyer</button>
                 {{ form_end(connexion) }}

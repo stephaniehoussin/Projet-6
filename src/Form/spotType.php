@@ -28,22 +28,22 @@ class spotType extends AbstractType
     {
         $builder
             ->add('latitude', HiddenType::class,array(
-                'label' => 'latitude'
+                'label' => 'Latitude'
             ))
             ->add('longitude', HiddenType::class,array(
-                'label' => 'longitude'
+                'label' => 'Longitude'
             ))
             ->add('pictureFile', VichImageType::class,array(
-                'label' => 'image'
+                'label' => 'Image'
             ))
             ->add('title', TextType::class,array(
-                'label' => 'title'
+                'label' => 'Titre'
             ))
             ->add('description', TextareaType::class,array(
-                'label' => 'description'
+                'label' => 'Description'
             ))
             ->add('category', EntityType::class,array(
-                'label' => 'choisir la catégorie',
+                'label' => 'Choisir la catégorie',
                     'class' => Category::class,
             ));
     }

@@ -12,11 +12,11 @@ class connexionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class,array(
-                'label' => 'pseudo'
+            ->add('username', TextType::class,array(
+                'label' => 'Pseudo'
             ))
             ->add('password', PasswordType::class,array(
-                'label' => 'password'
+                'label' => 'Mot de passe'
             ));
     }
 

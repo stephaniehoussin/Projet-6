@@ -15,20 +15,20 @@ class inscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class,array(
-                'label' => 'pseudo'
+            ->add('username', TextType::class,array(
+                'label' => 'Pseudo'
             ))
             ->add('email', RepeatedType::class,array(
                 'type' => EmailType::class,
                 'required' => true,
-                'first_options' => array('label' => 'email'),
-                'second_options' => array('label' => 'email confirmation')
+                'first_options' => array('label' => 'Email'),
+                'second_options' => array('label' => 'Email confirmation')
             ))
             ->add('password', RepeatedType::class,array(
                 'type' => PasswordType::class,
                 'required' => true,
-                'first_options' => array('label' => 'password'),
-                'second_options' => array('label' => 'password confirmation')
+                'first_options' => array('label' => 'Mot de passe'),
+                'second_options' => array('label' => 'Mot de passe confirmation')
             ));
     }
 
