@@ -22,7 +22,7 @@ fos_user_registration_register:
     methods: GET|POST
     controller: fos_user.registration.controller:registerAction
 
-fos_user_check_email:
+fos_user_registration_check_email:
     path:    /check-email
     methods: GET|POST
     controller: fos_user.registration.controller:checkEmailAction
