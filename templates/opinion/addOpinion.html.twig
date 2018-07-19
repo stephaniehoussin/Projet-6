@@ -15,9 +15,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="btn btn-primary" role ="button" href="{{ path('landing') }}">Retour Accueil</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#">Bon retour parmis nous !</a>
                     </li>
@@ -32,18 +30,17 @@
         <div class="row">
             <div class="col-md-8 connexion">
                 <hr class="mb-4">
-                <h2>Connexion</h2>
+                <h2>Donner mon avis</h2>
                 <hr class="mb-4">
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success" role="alert">
                         {{ message }}
                     </div>
                 {% endfor %}
-                {{ form_start(connexion) }}
-                {{ form_row(connexion.pseudo) }}
-                {{ form_row(connexion.password) }}
+                {{ form_start(opinion) }}
+                {{ form_row(opinion.message) }}
                 <button type="submit" class="btn btn-primary" name="submit"  id="connexion">Envoyer</button>
-                {{ form_end(connexion) }}
+                {{ form_end(opinion) }}
             </div>
         </div>
     </div>
