@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\connexionType;
+use App\Form\contactType;
 use App\Form\inscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -74,5 +75,24 @@ class HomeController extends Controller
     public function home()
     {
         return $this->render('home/index.html.twig');
+    }
+
+    /**
+     * @Route("/contact", name="contact")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function contact(Request $request)
+    {
+        $form = $this->createForm(contactType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $this->addFlash('success', 'Merci pour votre message, nous allons y répondre très vite');
+        }
+        return $this->render('home/contact.html.twig',[
+            'contact' => $form->createView(),
+        ]);
+
     }
 }

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        body { margin:0; padding:0; }
+        #map { width:100%;
+            height: 80%;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="col-md-8 inscription">
+                <hr class="mb-4">
+                <h2>Spot</h2>
+                <hr class="mb-4">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="smap">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2">
+                {{ form_start(spot) }}
+                {{ form_row(spot.latitude) }}
+                {{ form_row(spot.longitude) }}
+                {{ form_row(spot.pictureFile) }}
+                {{ form_row(spot.title) }}
+                {{ form_row(spot.description) }}
+                {{ form_row(spot.category) }}
+                <button type="submit" class="btn btn-primary" name="submit"  id="inscription">Envoyer</button>
+                {{ form_end(spot) }}
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            zoom: 9,
+            center: [2.333333, 48.866667]
+        });
+        // GEOLOCALISATION
+        // Add geolocate control to the map.
+         map.addControl(new mapboxgl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true,
+            },
+            trackUserLocation: true,
+        }));
+        // GEOLOCALISATION
+    </script>
+{% endblock %}
+
+

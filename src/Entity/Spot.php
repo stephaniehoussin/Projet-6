@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpotRepository")
@@ -26,11 +27,14 @@ class Spot
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
+     * @Assert\Valid
      */
     private $picture;
     /**
+     * @Assert\File(maxSize="2M", mimeTypes={"image/png", "image/jpeg", "image/pjpeg"})
      * @var File
-     * @Vich\UploadableField(mapping="spot_pictures", fileNameProperty="picture")
+     * @Vich\UploadableField(mapping="spot_images", fileNameProperty="picture")
      */
     private $pictureFile;
     /**
@@ -59,12 +63,12 @@ class Spot
     private $longitude;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbLikes;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbTrees;
 
@@ -86,8 +90,10 @@ class Spot
      */
     private $comments;
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"persist"})
+     * @Assert\Type(type="App\Entity\Category")
+     * @Assert\Valid()
      */
     private $category;
 
@@ -269,12 +275,19 @@ class Spot
         return $this;
     }
 
-    public function getCategory(): ?string
+    /**
+     * @return Category
+     */
+    public function getCategory()
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    /**
+     * @param Category|null $category
+     * @return Spot
+     */
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
 

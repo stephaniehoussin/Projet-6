@@ -67,7 +67,10 @@ section {
 #footer ul.quick-links li:hover a i {
     font-weight: 700;
 }
-
+.smap {
+    width: 100%;
+    height: 300px;
+}
 
 
 
