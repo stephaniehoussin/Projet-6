@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\connexionType;
 use App\Form\contactType;
-use App\Form\inscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

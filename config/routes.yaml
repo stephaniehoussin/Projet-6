@@ -5,34 +5,34 @@
 fos_user_security_login:
     path:    /connexion
     methods: GET|POST
-    controller: fos_user.security.controller:loginAction
+    controller: fos_user.security.controller::loginAction
 
 fos_user_security_check:
     path:    /connexion_check
     methods: POST
-    controller: fos_user.security.controller:checkAction
+    controller: fos_user.security.controller::checkAction
 
 fos_user_security_logout:
     path:    /deconnexion
     methods: GET|POST
-    controller: fos_user.security.controller:logoutAction
+    controller: fos_user.security.controller::logoutAction
 
 fos_user_registration_register:
     path:    /inscription
     methods: GET|POST
-    controller: fos_user.registration.controller:registerAction
+    controller: fos_user.registration.controller::registerAction
 
 fos_user_registration_check_email:
     path:    /check-email
     methods: GET|POST
-    controller: fos_user.registration.controller:checkEmailAction
+    controller: fos_user.registration.controller::checkEmailAction
 
 fos_user_registration_confirm:
     path:    /confirm
     methods: GET|POST
-    controller: fos_user.registration.controller:confirmAction
+    controller: fos_user.registration.controller::confirmAction
 
 fos_user_registration_confirmed:
     path:    /confirmed
     methods: GET
-    controller: fos_user.registration.controller:confirmedAction
+    controller: fos_user.registration.controller::confirmedAction
