@@ -18,8 +18,12 @@ security:
                 provider: fos_userbundle
                 login_path: /connexion
                 check_path: /connexion_check
+                default_target_path: /account/
+                always_use_default_target_path: true
                 csrf_token_generator: security.csrf.token_manager
-            logout:    true
+            logout:
+                path:  /deconnexion
+                target: /connexion
             anonymous: true
 
             # activate different ways to authenticate
@@ -33,10 +37,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-          - { path: ^/connexion$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-          - { path: ^/inscription$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-          - { path: ^/admin/, role: ROLE_ADMIN }
-          - { path: ^/account/, role: ROLE_USER}
+          - { path: ^/connexion$, allow_if: "not has_role('ROLE_USER')" }
+          - { path: ^/inscription$, allow_if: "not has_role('ROLE_USER')" }
+          - { path: ^/admin/, roles: ROLE_ADMIN }
+          - { path: ^/account/, roles: ROLE_USER}
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
