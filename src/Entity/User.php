@@ -31,10 +31,7 @@ class User
      */
     private $password;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $status;
+
 
     public function getId()
     {
@@ -77,15 +74,4 @@ class User
         return $this;
     }
 
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 }
