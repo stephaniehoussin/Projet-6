@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "@FOSUser/layout.html.twig" %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -34,17 +34,9 @@
                 <hr class="mb-4">
                 <h2>Inscription</h2>
                 <hr class="mb-4">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {{ form_start(inscription) }}
-                {{ form_row(inscription.pseudo) }}
-                {{ form_row(inscription.email) }}
-                {{ form_row(inscription.password) }}
-                <button type="submit" class="btn btn-primary" name="submit"  id="inscription">Envoyer</button>
-                {{ form_end(inscription) }}
+                {% block fos_user_content %}
+                    {% include "@FOSUser/Resetting/request_content.html.twig" %}
+                {% endblock fos_user_content %}
             </div>
         </div>
     </div>

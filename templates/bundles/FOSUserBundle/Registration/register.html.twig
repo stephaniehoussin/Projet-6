@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "@FOSUser/layout.html.twig" %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,9 +15,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Bon retour parmis nous !</a>
+                        <a class="btn btn-primary" role ="button" href="{{ path('landing') }}">Retour Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#">Bientôt parmis nous !</a>
                     </li>
                 </ul>
             </div>
@@ -28,25 +30,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 connexion">
+            <div class="col-md-8 inscription">
                 <hr class="mb-4">
-                <h2>Contactez nous</h2>
+                <h2>Inscription</h2>
                 <hr class="mb-4">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {{ form_start(contact) }}
-                <div class="form-group">
-                    {{ form_widget(contact, { 'attr': {'class': 'form-control'} }) }}
-                </div>
-                <button type="submit" class="btn btn-primary" name="submit"  id="connexion">Envoyer</button>
-                {{ form_end(contact) }}
+                {% block fos_user_content %}
+                    {% include "@FOSUser/Registration/register_content.html.twig" %}
+                {% endblock fos_user_content %}
             </div>
         </div>
     </div>
-
 {% endblock %}
 {% block javascript %}
 {% endblock %}
