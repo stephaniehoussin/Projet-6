@@ -1,12 +1,29 @@
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
+        fos_userbundle:
+            id: fos_user.user_provider.username
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: /connexion
+                check_path: /connexion_check
+                default_target_path: /account/
+                always_use_default_target_path: true
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path:  /deconnexion
+                target: /connexion
             anonymous: true
 
             # activate different ways to authenticate
@@ -20,5 +37,24 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+          - { path: ^/connexion$, allow_if: "not has_role('ROLE_USER')" }
+          - { path: ^/inscription$, allow_if: "not has_role('ROLE_USER')" }
+          - { path: ^/admin/, roles: ROLE_ADMIN }
+          - { path: ^/account/, roles: ROLE_USER}
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+
+    role_hierarchy:
+            ROLE_ADMIN:    [ROLE_ADMIN, ROLE_MODERATEUR, ROLE_USER]
+            ROLE_MODERATEUR:    [ROLE_MODERATEUR, ROLE_USER]
+            ROLE_USER:    ROLE_USER
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: App\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: '%env(MAILER_ADDRESS)%'
+        sender_name: '%env(MAILER_SENDER)%'

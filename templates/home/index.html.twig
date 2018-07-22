@@ -1,11 +1,19 @@
-{% extends "base.html.twig" %}
-
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/styleHeaderHome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleNavHome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 {% endblock %}
-
+{% block nav %}
+    {% include 'home/parts/navHome.html.twig' %}
+    {% include 'home/parts/coverHome.html.twig' %}
+{% endblock %}
 {% block body %}
-    {% include 'home/parts/headerHome.html.twig' %}
+{% endblock %}
+{% block footer %}
+    {% include 'home/parts/footerHome.html.twig' %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
 {% endblock %}

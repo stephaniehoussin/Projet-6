@@ -1,9 +1,10 @@
+parameters:
+    app.path.spots:  /uploads/spots
 vich_uploader:
     db_driver: orm
-parameters:
-    app.path.spots:    /uploads/spots
+
     mappings:
-        spots_picture:
+        spot_images:
             uri_prefix:  '%app.path.spots%'
             upload_destination:  '%kernel.project_dir%/public/uploads/spots'
             namer: vich_uploader.namer_uniqid

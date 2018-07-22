@@ -2,90 +2,73 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="App\Entity\Spot", mappedBy="user", cascade={"remove"})
+     */
+    private $spots;
+
+
+    public function __construct()
+    {
+       parent::__construct();
+       $this->spots = new ArrayCollection();
+    }
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @return mixed
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $pseudo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $status;
-
     public function getId()
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
     {
-        return $this->email;
+        $this->id = $id;
     }
 
-    public function setEmail(string $email): self
+    /**
+     * @return Collection|Spot[]
+     */
+    public function getSpot() : Collection
     {
-        $this->email = $email;
-
-        return $this;
+        return $this->spots;
     }
 
-    public function getPseudo(): ?string
+    /**
+     * @param Spot $spot
+     */
+    public function addSpot(Spot $spot)
     {
-        return $this->pseudo;
+        $this->spots[] = $spot;
+        $spot->setUser($this);
     }
 
-    public function setPseudo(string $pseudo): self
+    /**
+     * @param Spot $spot
+     */
+    public function removeSpot(Spot $spot)
     {
-        $this->pseudo = $pseudo;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
+        $this->spots->removeElement($spot);
     }
 }
