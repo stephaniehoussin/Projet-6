@@ -39,7 +39,7 @@ class SpotController extends Controller
      */
     public function searchSpot()
     {
-        return $this->render('spot/test.html.twig');
+        return $this->render('spot/searchSpot.html.twig');
     }
 
 }
