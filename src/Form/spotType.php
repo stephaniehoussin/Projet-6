@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,10 +28,10 @@ class spotType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('latitude', HiddenType::class,array(
+            ->add('latitude', NumberType::class,array(
                 'label' => 'Latitude'
             ))
-            ->add('longitude', HiddenType::class,array(
+            ->add('longitude', NumberType::class,array(
                 'label' => 'Longitude'
             ))
             ->add('pictureFile', VichImageType::class,array(
@@ -41,11 +42,8 @@ class spotType extends AbstractType
             ))
             ->add('description', TextareaType::class,array(
                 'label' => 'Description'
-            ))
-            ->add('category', EntityType::class,array(
-                'label' => 'Choisir la catégorie',
-                    'class' => Category::class,
             ));
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

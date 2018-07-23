@@ -27,7 +27,7 @@ class Comment
     private $message;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $report;
     /**
@@ -38,8 +38,14 @@ class Comment
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="comments")
+     * @ORM\JoinColumn(name="spot_id", referencedColumnName="id")
      */
     private $spot;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     public function getId()
     {

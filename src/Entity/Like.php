@@ -21,6 +21,19 @@ class Like
      */
     private $nbLikes;
 
+    /**
+     * @var
+     * @ORM\JoinColumn(name="spot", referencedColumnName="id")
+     * @@ORM\ManyToOne(targetEntity="App\Entity\Spot", mappedBy="likes")
+     */
+    private $spot;
+
+    /**
+     * @var
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
     public function getId()
     {
         return $this->id;
@@ -37,4 +50,27 @@ class Like
 
         return $this;
     }
+
+    public function getSpot() : Spot
+    {
+        return $this->spot;
+    }
+
+    public function setSpot(Spot $spot =null)
+    {
+        $this->spot = $spot;
+        return $this;
+    }
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

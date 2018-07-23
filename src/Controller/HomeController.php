@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/home", name="home")
+     * @Route("/accueil", name="accueil")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function home()

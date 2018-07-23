@@ -1,5 +1,7 @@
 <?php
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
@@ -41,7 +43,7 @@ class Spot
      */
     private $title;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $description;
     /**
@@ -53,74 +55,86 @@ class Spot
      */
     private $longitude;
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $nbLikes;
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $nbTrees;
-    /**
      * @ORM\Column(type="integer")
      * Assert\Range(min = 0, max = 2)
      * 0 = refused, 1 = waiting, 2 = accepted
      */
     private $status;
     /**
-     * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="spots")
      */
     private $user;
     /**
-     * @var
-     * @ORM\JoinColumn(name="comment", referencedColumnName="id")
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot", cascade="persist")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot", cascade="remove")
      */
     private $comments;
     /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade="persist")
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"persist"})
      * @Assert\Type(type="App\Entity\Category")
      * @Assert\Valid()
      */
     private $category;
+
     public function __construct()
     {
         $this->date = new \DateTime();
         $this->updateAt = new \DateTime();
         $this->status = 1;
+      //  $this->categories = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
+
     public function getId()
     {
         return $this->id;
     }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
+
+    /**
+     * @param \DateTimeInterface $date
+     * @return Spot
+     */
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
     public function getPicture(): ?string
     {
         return $this->picture;
     }
-    public function setPicture(string $picture): self
+
+    /**
+     * @param null|string $picture
+     */
+    public function setPicture(?string $picture): void
     {
         $this->picture = $picture;
-        return $this;
     }
+
     /**
-     * @return File|null
+     * @return null|File
      */
     public function getPictureFile(): ?File
     {
         return $this->pictureFile;
     }
+
     /**
-     * @param File|null $picture
+     * @param null|File $picture
      */
     public function setPictureFile(?File $picture = null):void
     {
@@ -129,88 +143,134 @@ class Spot
             $this->updateAt = new \DateTime();
         }
     }
-    public function getUpdateAt(): ?\DateTimeInterface
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateAt()
     {
         return $this->updateAt;
     }
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+
+    /**
+     * @param $updateAt
+     * @return $this
+     */
+    public function setUpdateAt( $updateAt)
     {
         $this->updateAt = $updateAt;
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
+
+    /**
+     * @param string $title
+     * @return Spot
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
+
+    /**
+     * @param string $description
+     * @return Spot
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
     }
+
+    /**
+     * @return float|null
+     */
     public function getLatitude(): ?float
     {
         return $this->latitude;
     }
+
+    /**
+     * @param float $latitude
+     * @return Spot
+     */
     public function setLatitude(float $latitude): self
     {
         $this->latitude = $latitude;
         return $this;
     }
+
+    /**
+     * @return float|null
+     */
     public function getLongitude(): ?float
     {
         return $this->longitude;
     }
+
+    /**
+     * @param float $longitude
+     * @return Spot
+     */
     public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
         return $this;
     }
-    public function getNbLikes(): ?int
-    {
-        return $this->nbLikes;
-    }
-    public function setNbLikes(int $nbLikes): self
-    {
-        $this->nbLikes = $nbLikes;
-        return $this;
-    }
-    public function getNbTrees(): ?int
-    {
-        return $this->nbTrees;
-    }
-    public function setNbTrees(int $nbTrees): self
-    {
-        $this->nbTrees = $nbTrees;
-        return $this;
-    }
-    public function getStatus(): ?int
+
+    /**
+     * @return null|string
+     */
+    public function getStatus(): ?string
     {
         return $this->status;
     }
-    public function setStatus(int $status): self
+
+    /**
+     * @param string $status
+     * @return Spot
+     */
+    public function setStatus(string $status): self
     {
         $this->status = $status;
         return $this;
     }
-    public function getUser(): ?string
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
     {
         return $this->user;
     }
-    public function setUser(string $user): self
+
+    /**
+     * @param User|null $user
+     * @return $this
+     */
+    public function setUser(User $user = null)
     {
         $this->user = $user;
         return $this;
     }
-    public function getComments(): ?string
+
+    public function getComments()
     {
         return $this->comments;
     }
@@ -218,11 +278,36 @@ class Spot
      * @param string $comments
      * @return Spot
      */
-    public function setComments(string $comments): self
+    public function setComments($comments)
     {
         $this->comments = $comments;
         return $this;
     }
+
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setSpot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getSpot() === $this) {
+                $comment->setSpot(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Category
      */
@@ -230,13 +315,17 @@ class Spot
     {
         return $this->category;
     }
+
     /**
-     * @param Category|null $category
+     * @param Category $category
      * @return Spot
      */
     public function setCategory(Category $category = null)
     {
         $this->category = $category;
+
         return $this;
     }
+
+
 }

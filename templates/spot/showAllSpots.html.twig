@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+{% endblock %}
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#">Logo</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('accueil') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('je-spote') }}">Je spote</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('je-cherche-un-spot') }}">Je cherche un spot</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('mon-compte') }}">Mon compte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 page_marge_top">
+                    <hr class="mb-4">
+                    <h2>Tous les Spots</h2>
+                    <hr class="mb-4">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                    {% if spots %}
+                    {% for spot in spots %}
+                        <div class="col-md-3 col-md-3">
+                        <div class="card">
+                            <div class="card-spots">
+                            <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }}</h5>
+                                <p class="card-spot-description">{{ spot.description }}</p>
+                                <a href="{{ path('spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+
+
+            </div>
+        </div>
+
+{% endblock %}
+
+

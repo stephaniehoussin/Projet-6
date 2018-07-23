@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Comment;
+use App\Form\commentType;
+use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends Controller
 {

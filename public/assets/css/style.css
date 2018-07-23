@@ -1,78 +1,163 @@
-<<<<<<< HEAD
-.inscription
-{
-    margin-top: 100px;
+/******************** MENU DE NAVIGATION **********************/
+#mainNav {
+    background-color: white;
+
 }
-.connexion
-{
-    margin-top: 100px;
-}
-.game
-{
-    margin-top: 100px;
-}
-.game h2
-{
-    color : black;
-}
-/* Footer */
-section {
-    padding: 40px 0;
+#mainNav .navbar-toggler {
+    font-size: 12px;
+    right: 0;
+    padding: 13px;
+    text-transform: uppercase;
+    color: white;
+    border: 0;
+    background-color: green;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#footer {
-    background: green;
+#mainNav .navbar-brand {
+    color: green;
+    font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+    font-size: 60px;
+
 }
 
-#footer a {
-    color: #ffffff;
-    text-decoration: none !important;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
+#mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+    color: green;
 }
-#footer ul.social li{
-    padding: 3px 0;
+
+#mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 90%;
+    font-weight: 400;
+    padding: 0.75em 0;
+    letter-spacing: 1px;
+    color: green;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-#footer ul.social li a i {
-    margin-right: 5px;
-    font-size:25px;
-    -webkit-transition: .5s all ease;
-    -moz-transition: .5s all ease;
-    transition: .5s all ease;
+
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #fed136;
 }
-#footer ul.social li:hover a i {
-    font-size:30px;
-    margin-top:-10px;
+
+@media (min-width: 992px) {
+    #mainNav {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
+        -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
+        transition: padding-top 0.3s, padding-bottom 0.3s;
+        border: none;
+        background-color: transparent;
+    }
+    #mainNav .navbar-brand {
+        font-size: 1.75em;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    #mainNav .navbar-nav .nav-item .nav-link {
+        padding: 1.1em 1em !important;
+    }
+    #mainNav.navbar-shrink {
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: white;
+    }
+    #mainNav.navbar-shrink .navbar-brand {
+        font-size: 1.25em;
+        padding: 12px 0;
+    }
 }
-#footer ul.social li a,
-#footer ul.quick-links li a{
-    color:#ffffff;
+
+/******************** ELEMENTS COMMUNS HOME + LANDING **********************/
+header.masthead {
+    text-align: center;
+    color: white;
+    background-image: url("../img/cover.jpg");
+    /* background-color: #6AEF97;*/
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-#footer ul.social li a:hover{
-    color:#eeeeee;
-}
-#footer ul.quick-links li{
-    padding: 3px 0;
-    -webkit-transition: .5s all ease;
-    -moz-transition: .5s all ease;
-    transition: .5s all ease;
-}
-#footer ul.quick-links li:hover{
-    padding: 3px 0;
-    margin-left:5px;
-    font-weight:700;
-}
-#footer ul.quick-links li a i{
-    margin-right: 5px;
-}
-#footer ul.quick-links li:hover a i {
+
+.btn {
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
-.smap {
-    width: 100%;
-    height: 300px;
+
+.btn-xl {
+    font-size: 18px;
+    padding: 20px 40px;
 }
 
+.btn-primary {
+    background-color: green;
+    border-color: green;
+}
+
+.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    background-color: green ;
+    border-color: green;
+    color: white;
+}
+
+.btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+}
+
+
+/******************** COVER LANDING **********************/
+/*espace entre le menu et le reste*/
+header.masthead .cover-landing {
+    padding-top: 150px;
+    padding-bottom: 100px;
+    color:black;
+    font-weight: bold;
+}
+/* texte de bienvenue */
+header.masthead .cover-landing .cover-landing-text {
+    font-size: 22px;
+    /* font-style: italic;*/
+    line-height: 22px;
+    margin-bottom: 25px;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+/* titre du site*/
+header.masthead .cover-landing .cover-landing-title {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 50px;
+    margin-bottom: 25px;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+    /*espace entre le menu et le reste*/
+    header.masthead .cover-landing {
+        padding-top: 200px;
+        padding-bottom: 150px;
+    }
+    /* texte de bienvenue */
+    header.masthead .cover-landing .cover-landing-text {
+        font-size: 20px;
+        /*  font-style: italic;*/
+        line-height: 20px;
+        margin-bottom: 25px;
+        font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }/* titre du site*/
+    header.masthead .cover-landing .cover-landing-title {
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 75px;
+        margin-bottom: 50px;
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+}
+
+/******************** LANDING PAGE **********************/
 section.landing-spot-title
 {
     background-color: green;
@@ -129,3 +214,124 @@ section.landing-opinion-content
     height: 400px;
 }
 
+/******************** COVER HOME **********************/
+header.masthead .cover-home {
+    padding-top: 150px;
+    padding-bottom: 100px;
+}
+
+header.masthead .cover-home .cover-home-title {
+    font-size: 22px;
+    font-style: italic;
+    line-height: 22px;
+    margin-bottom: 25px;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header.masthead .cover-home .cover-home-text {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 50px;
+    margin-bottom: 25px;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+    header.masthead .cover-home {
+        padding-top: 300px;
+        padding-bottom: 200px;
+    }
+    header.masthead .cover-home .cover-home-title {
+        font-size: 40px;
+        font-style: italic;
+        line-height: 40px;
+        margin-bottom: 25px;
+        font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    header.masthead .cover-home .cover-home-text {
+        font-size: 45px;
+        font-weight: 700;
+        line-height: 75px;
+        margin-bottom: 50px;
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+}
+
+
+/******************** FOOTER **********************/
+#footer {
+    background: green;
+}
+
+#footer a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#footer ul.social li{
+    padding: 3px 0;
+}
+#footer ul.social li a i {
+    margin-right: 5px;
+    font-size:25px;
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+#footer ul.social li:hover a i {
+    font-size:30px;
+    margin-top:-10px;
+}
+#footer ul.social li a,
+#footer ul.quick-links li a{
+    color:#ffffff;
+}
+#footer ul.social li a:hover{
+    color:#eeeeee;
+}
+#footer ul.quick-links li{
+    padding: 3px 0;
+    -webkit-transition: .5s all ease;
+    -moz-transition: .5s all ease;
+    transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+    padding: 3px 0;
+    margin-left:5px;
+    font-weight:700;
+}
+#footer ul.quick-links li a i{
+    margin-right: 5px;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+
+/******************** FOOTER **********************/
+
+.page_marge_top
+{
+    margin-top: 100px;
+}
+
+.game h2
+{
+    color : black;
+}
+
+section {
+    padding: 40px 0;
+}
+
+.smap {
+    width: 100%;
+    height: 300px;
+}
+
+
+
+.service-heading {
+    margin: 15px 0;
+    text-transform: none;
+}

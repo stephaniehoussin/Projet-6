@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AccountController extends Controller
 {
     /**
-     * @Route("/account", name="account")
+     * @Route("/mon-compte", name="mon-compte")
      */
     public function index()
     {

@@ -19,6 +19,8 @@ class SpotRepository extends ServiceEntityRepository
         parent::__construct($registry, Spot::class);
     }
 
+
+
 //    /**
 //     * @return Spot[] Returns an array of Spot objects
 //     */

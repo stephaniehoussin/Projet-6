@@ -71,4 +71,12 @@ class User extends BaseUser
     {
         $this->spots->removeElement($spot);
     }
+
+    /**
+     * @return Collection|Spot[]
+     */
+    public function getSpots(): Collection
+    {
+        return $this->spots;
+    }
 }

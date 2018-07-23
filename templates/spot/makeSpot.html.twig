@@ -10,7 +10,6 @@
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/styleNavLanding.css') }}">
     <style>
         body { margin:0; padding:0; }
         #map { width:100%;
@@ -28,10 +27,16 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                    <a class="btn btn-primary" role ="button" href="{{ path('home') }}">Retour Accueil</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('accueil') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Je Spote !</a>
+                        <a class="nav-link js-scroll-trigger" href="{{ path('tous-les-spots') }}">Tous les Spots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('je-cherche-un-spot') }}">Je cherche un spot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="{{ path('mon-compte') }}">Mon compte</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +48,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-            <div class="col-md-8 inscription">
+            <div class="col-md-8 page_marge_top">
                 <hr class="mb-4">
                 <h2>Spot</h2>
                 <hr class="mb-4">
