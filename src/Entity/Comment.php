@@ -38,7 +38,6 @@ class Comment
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="comments")
-     * @ORM\JoinColumn(name="spot_id", referencedColumnName="id")
      */
     private $spot;
 
@@ -99,15 +98,24 @@ class Comment
 
         return $this;
     }
-    public function getSpot(): ?string
+
+    /**
+     * @return Spot
+     */
+    public function getSpot()
     {
         return $this->spot;
     }
 
-    public function setSpot(string $spot): self
+    /**
+     * @param Spot $spot
+     * @return Comment
+     */
+    public function setSpot(Spot $spot)
     {
         $this->spot = $spot;
 
         return $this;
     }
 }
+

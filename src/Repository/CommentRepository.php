@@ -27,17 +27,31 @@ class CommentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-   public function getCommentsBySpot($spotId)
-   {
-       $qb = $this->createQueryBuilder('c')
-           ->select('c')
-           ->orderBy('c.date', 'DESC')
-           ->where('c.spot = :spotId')
-           ->setParameter('spotId', $spotId);
-
-       return $qb->getQuery()->getResult();
-
-   }
+// METHODE OK QUI COMPTE LE NOMBRE DE COMMENTAIRES D UN SPOT
+    public function countCommentsBySpot($spotId)
+    {
+        $nb = $this
+            ->createQueryBuilder('c')
+            ->select('count(c) as nb')
+            ->where('c.spot = :spotId')
+            ->setParameter('spotId', $spotId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+// METHODE QUI RECUPERE LE CONTENU DES MESSAGES D UN SPOT
+    public function recupCommentsBySpot($spotId)
+    {
+        $rq = $this
+            ->createQueryBuilder('c')
+            ->select('c.message')
+            ->where('c.spot = :spotId')
+            //   ->orderBy('c.date', 'ASC')
+            ->setParameter('spotId', $spotId)
+            ->getQuery()
+            ->getScalarResult();
+        return $rq;
+    }
 
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
@@ -68,3 +82,4 @@ class CommentRepository extends ServiceEntityRepository
     }
     */
 }
+

@@ -65,7 +65,7 @@ class Spot
      */
     private $user;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot", cascade="remove")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot")
      */
     private $comments;
     /**
@@ -82,7 +82,7 @@ class Spot
         $this->date = new \DateTime();
         $this->updateAt = new \DateTime();
         $this->status = 1;
-      //  $this->categories = new ArrayCollection();
+        //  $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -270,42 +270,37 @@ class Spot
         return $this;
     }
 
-    public function getComments()
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment() : Collection
     {
         return $this->comments;
     }
+
     /**
-     * @param string $comments
-     * @return Spot
+     * @return Collection|Comment[]
      */
-    public function setComments($comments)
+    public function getComments() : Collection
     {
-        $this->comments = $comments;
-        return $this;
+        return $this->comments;
     }
 
-
-    public function addComment(Comment $comment): self
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setSpot($this);
-        }
-
-        return $this;
+        $this->comments[] = $comment;
+        $comment->setSpot($this);
     }
 
-    public function removeComment(Comment $comment): self
+    /**
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
     {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-            // set the owning side to null (unless already changed)
-            if ($comment->getSpot() === $this) {
-                $comment->setSpot(null);
-            }
-        }
-
-        return $this;
+        $this->comments->removeElement($comment);
     }
 
     /**
@@ -329,3 +324,4 @@ class Spot
 
 
 }
+
