@@ -2,15 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
  */
-class Comment
+class Commentaire
 {
     /**
      * @ORM\Id()
@@ -30,9 +27,10 @@ class Comment
     private $message;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $report;
+
     /**
      * @var
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -40,20 +38,14 @@ class Comment
     private $user;
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="commentaires")
      */
-    private $spot;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="comment")
-     */
-    private $commentaires;
+    private $comment;
 
 
     public function __construct()
     {
         $this->date = new \DateTime();
-        $this->commentaires = new ArrayCollection();
     }
 
     public function getId()
@@ -96,7 +88,6 @@ class Comment
 
         return $this;
     }
-
     public function getUser(): ?string
     {
         return $this->user;
@@ -108,58 +99,24 @@ class Comment
 
         return $this;
     }
-
     /**
-     * @return Spot
-     */
-    public function getSpot()
-    {
-        return $this->spot;
-    }
-
-    /**
-     * @param Spot $spot
      * @return Comment
      */
-    public function setSpot(Spot $spot)
+    public function getComment()
     {
-        $this->spot = $spot;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getCommentaire() : Collection
-    {
-        return $this->commentaires;
-    }
-
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getCommentaires() : Collection
-    {
-        return $this->commentaires;
-    }
-
-    /**
-     * @param Commentaire $commentaire
-     */
-    public function addCommentaire(Commentaire $commentaire)
-    {
-        $this->commentaires[] = $commentaire;
-        $commentaire->setComment($this);
+        return $this->comment;
     }
 
     /**
      * @param Comment $comment
+     * @return Commentaire
      */
-    public function removeCommentaire(Commentaire $commentaire)
+    public function setComment(Comment $comment)
     {
-        $this->commentaires->removeElement($commentaire);
+        $this->comment = $comment;
+
+        return $this;
     }
 
-}
 
+}

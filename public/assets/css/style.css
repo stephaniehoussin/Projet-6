@@ -310,6 +310,13 @@ header.masthead .cover-home .cover-home-text {
 
 /******************** FOOTER **********************/
 
+/******************** CARD **********************/
+
+.card
+{
+    margin-bottom: 20px;
+}
+
 .page_marge_top
 {
     margin-top: 100px;

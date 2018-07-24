@@ -3,7 +3,26 @@
 {% block title %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        div#map {
+            width: 100%;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 {% endblock %}
 {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -57,20 +76,41 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-spots">
-                        {{ spot.latitude }}
-                        {{ spot.longitude }}
-                        <p>Catégorie</p>
-                        <p>adresses</p>
-                        <button type="submit">Like me</button>
-                        <button type="submit">Tree me</button>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title">Emplacement du Spot</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p><i class="fa fa-heart"> chiffre</i></p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><i class="fa fa-tree"> chiffre</i></p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                        <div id="map"></div>
+                      {#  {{ spot.latitude }}
+                        {{ spot.longitude }}#}
+                        </div>
+                        <p><i class="fa fa-thumb-tack"> Catégorie</i></p>
+                        <p><i class="fa fa-map-marker"> Adresses</i></p>
+                        <button type="submit"><i class="fa fa-heart"> Like me</i></button>
+                        <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-spots">
-                        <div class="col-md-6 col-md-6">
-                            <p>Date : {{ spot.date|date("d/m/Y") }}</p>
+                        <h5 class="card-title">Informations du Spot</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><i class="fa fa-user"> Pseudo</i></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i></p>
+                            </div>
                         </div>
                         <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                         <div class="card-body">
@@ -82,37 +122,73 @@
                 </div>
             </div>
         </div>
+        <hr class="mb-4">
         <div class="row">
-            <div class="col-md-12">
                 <div class="col-md-12">
-                    {{ form_start(form) }}
+                    {{ form_start(form_comment) }}
                     <div class="form-group">
-                        {{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}
+                        {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
+                        {{ form_label(form_comment.message) }}
+                        {{ form_widget(form_comment.message) }}
                     </div>
-                    <button type="submit" id="comment">Je commente ce spot</button>
-                    {{ form_end(form) }}
+                    <button type="submit" id="comment" class="btn-lg btn-block">Je commente ce spot</button>
+                    {{ form_end(form_comment) }}
 
                 </div>
             </div>
-        </div>
-
+        <hr class="mb-4">
         <div class="row">
-            <div class="col-md-8">
-                <div class="card">
                     {% if spot.comments %}
                         {% for comment in spot.comments %}
-                            <p class="card-date">{{ comment.date|date("d/m/Y") }}</p>
+                            <div class="col-md-4">
+                            <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">User le : {{ comment.date|date("d/m/Y") }}</h5>
                             {# <p class="card-user">{{ comment.user }}</p>#}
-                            <p class="card-message">{{ comment.message }}</p>
+                            <p class="card-text">{{ comment.message }}</p>
+                               {# {% for comment in comment.commentaires %}
+                                <p class="card-text">{{ comment.message }}</p>
+                                {% endfor %}#}
+                                {{ form_start(form_commentaire) }}
+                                <div class="form-group">
+                                    {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
+                                    {{ form_label(form_commentaire.message) }}
+                                    {{ form_widget(form_commentaire.message) }}
+                                </div>
+                                <button type="submit" id="commentaire">Répondre</button>
+                                    {% if comment.commentaire %}
+                                {% for commentaire in comment.commentaires %}
+                               <p>{{ commentaire.message }}</p>
+                                {% endfor %}
+                                {% endif %}
+
+                                <button type="submit" id="signal">Signaler</button>
+                                {{ form_end(form_commentaire) }}
+
+                            </div>
+                            </div>
+                            </div>
                         {% else %}
                             <p>Il n'y a pas encore de commentaires sur ce spot</p>
-                        {% endfor %}
+                            </div>
+
+                                {% endfor %}
                     {% endif %}
-                </div>
-            </div>
+
         </div>
 
-    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            zoom: 9,
+            center: [2.333333, 48.866667]
+        });
+
+    </script>
 {% endblock %}
 
 

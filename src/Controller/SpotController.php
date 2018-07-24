@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
+use App\Form\commentaireType;
 use App\Form\commentType;
 use App\Form\spotType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -74,9 +76,9 @@ class SpotController extends Controller
         // $em = $this->getDoctrine()->getManager();
         // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
         $comment = new Comment();
-        $form = $this->createForm(commentType::class, $comment);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
+        $form_comment = $this->createForm(commentType::class, $comment);
+        $form_comment->handleRequest($request);
+        if($form_comment->isSubmitted() && $form_comment->isValid())
         {
             // cette ligne enregistre le spot_id
             $comment->setSpot($spot);
@@ -87,16 +89,32 @@ class SpotController extends Controller
             $this->addFlash('success', 'Merci pour votre commentaire');
             dump($comment);
         }
+
+        $comment = $em->getRepository(Comment::class)->findOneBy(['id' => $id]);
+        $commentaire = new Commentaire();
+        $form_commentaire = $this->createForm(commentaireType::class, $commentaire);
+        $form_commentaire->handleRequest($request);
+        if($form_commentaire->isSubmitted() && $form_commentaire->isValid())
+        {
+            $commentaire->setComment($comment);
+            $entityManager->persist($commentaire);
+            $entityManager->flush();
+            dump($commentaire);
+        }
         //  $comments = $em->getRepository(Spot::class)->findById($id);
         // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
         // $comments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
         $comments = $em->getRepository(Comment::class)->recupCommentsBySpot($spot->getId());
+        $commentaires = $em->getRepository(Commentaire::class)->recupCommentsByComment($comment->getId());
         dump($comments);
+        dump($commentaires);
         return $this->render('spot/showOneSpot.html.twig',array(
             'spot' => $spot,
             'comment' => $comment,
             'comments' => $comments,
-            'form' => $form->createView()
+            'commentaires' => $commentaires,
+            'form_comment' => $form_comment->createView(),
+            'form_commentaire' => $form_commentaire->createView()
         ));
     }
 
