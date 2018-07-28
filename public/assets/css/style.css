@@ -72,8 +72,8 @@
 header.masthead {
     text-align: center;
     color: white;
-    background-image: url("../img/cover.jpg");
-    /* background-color: #6AEF97;*/
+   /* background-image: url("../img/3.png");*/
+    background-color: greenyellow;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -157,62 +157,45 @@ header.masthead .cover-landing .cover-landing-title {
     }
 }
 
-/******************** LANDING PAGE **********************/
-section.landing-spot-title
+.text--transparent {
+    fill: transparent; }
+.text--line
 {
-    background-color: green;
-    padding-top: 30px;
-    padding-bottom: 30px;
     text-align: center;
 }
-section.landing-spot-content
-{
-    height: 400px;
+.anim-shape {
+    -webkit-transform-origin: 0x 50px;
+    transform-origin: 0x 50px;
+    -webkit-transform: scale(0, 1) translate(0, 0);
+    transform: scale(0, 1) translate(0, 0);
+    -webkit-animation: moving-panel 3s infinite alternate;
+    animation: moving-panel 3s infinite alternate; }
+.colortext .anim-shape:nth-child(1) {
+    fill: black; }
+
+.shadow {
+    -webkit-transform: translate(10px, 10px);
+    transform: translate(10px, 10px); }
+
+.anim-shape--shadow {
+    fill: #000;
+    fill-opacity: 0.2; }
+
+@-webkit-keyframes moving-panel {
+    100% {
+        -webkit-transform: scale(1, 1) translate(20px, 0);
+        transform: scale(1, 1) translate(20px, 0); } }
+@keyframes moving-panel {
+    100% {
+        -webkit-transform: scale(1, 1) translate(20px, 0);
+        transform: scale(1, 1) translate(20px, 0); } }
+
+svg {
+    width: 100%;
+    display: block;
+    font: 300 8.5em/1  'Tangerine', Impact;
 }
-section.landing-stats-title
-{
-    background-color: green;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-section.landing-stats-content
-{
-    height: 400px;
-}
-section.landing-how-title
-{
-    background-color: green;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-section.landing-how-content
-{
-    height: 400px;
-}
-section.landing-join-us-title
-{
-    background-color: green;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-section.landing-join-us-content
-{
-    height: 400px;
-}
-section.landing-opinion-title
-{
-    background-color: green;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-}
-section.landing-opinion-content
-{
-    height: 400px;
-}
+
 
 /******************** COVER HOME **********************/
 header.masthead .cover-home {
@@ -308,7 +291,22 @@ header.masthead .cover-home .cover-home-text {
     font-weight: 700;
 }
 
-/******************** FOOTER **********************/
+/******************** LANDING PAGE **********************/
+
+#landing-title {
+    background: url(../img/cover.jpg) fixed center center;
+    background-size: cover;
+    padding: 30px 0;
+    width: 100%;
+    margin-top: 20px;
+}
+#landing-title h3
+{
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
 
 /******************** CARD **********************/
 
@@ -336,9 +334,127 @@ section {
     height: 300px;
 }
 
-
-
 .service-heading {
     margin: 15px 0;
     text-transform: none;
 }
+
+
+/*********SECTION STATS *******************/
+.container-landing-stats-content {
+    perspective: 1000px;
+    display: inline-block;
+    margin: 3%;
+}
+
+.container-landing-stats-content,
+.front-landing-stats-content {
+    width: 150px;
+    height: 150px;
+}
+.front-landing-stats-content
+ {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.number
+{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 15px;
+}
+.caption i
+{
+    font-size: 40px;
+}
+#locale
+{
+    text-align: center;
+    font-size: 30px;
+}
+
+
+/*********SECTION OPINION *******************/
+img {
+    width: 100%;
+}
+
+a {
+    color: black;
+}
+
+.caption,
+h1,
+.date {
+    margin: 0;
+    text-align: center;
+}
+
+.caption,
+h1 {
+    font-family: "Reenie Beanie", sans-serif;
+    font-size: 2em;
+    padding: 10px 10px 0 10px;
+}
+
+.date {
+    font-size: 0.75em;
+}
+
+.description {
+    font-size: 0.9em;
+    padding: 0 20px 20px 20px;
+    text-align: left;
+}
+
+.container-landing-opinion-content {
+    perspective: 1000px;
+    display: inline-block;
+    margin: 3%;
+}
+
+.container-landing-opinion-content:hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.container-landing-opinion-content,
+.front-landing-opinion-content,
+.back-landing-opinion-content {
+    width: 250px;
+    height: 250px;
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.front-landing-opinion-content,
+.back-landing-opinion-content {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.front-landing-opinion-content {
+    z-index: 2;
+}
+
+.back-landing-opinion-content {
+    transform: rotateY(180deg);
+}
+
+#landing-opinion-content {
+    text-align: center;
+}
+

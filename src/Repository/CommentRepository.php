@@ -27,6 +27,16 @@ class CommentRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countAllComments()
+    {
+        $nb = $this
+            ->createQueryBuilder('c')
+            ->select('count(c) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+            return $nb;
+    }
+
 // METHODE OK QUI COMPTE LE NOMBRE DE COMMENTAIRES D UN SPOT
     public function countCommentsBySpot($spotId)
     {
@@ -50,6 +60,17 @@ class CommentRepository extends ServiceEntityRepository
             ->setParameter('spotId', $spotId)
             ->getQuery()
             ->getScalarResult();
+        return $rq;
+    }
+
+    public function commentIsReport()
+    {
+        $rq = $this
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.report = 1')
+            ->getQuery()
+            ->getSingleResult();
         return $rq;
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Entity\Spot;
 use App\Form\contactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +16,17 @@ class HomeController extends Controller
     /**
      * @Route("/landing", name="landing")
      */
-    public function landing()
+    public function landing(Request $request, EntityManagerInterface $entityManager)
     {
-        return $this->render('landing/index.html.twig');
+        $datetime = date("d-m-Y");
+        $em = $this->getDoctrine()->getManager();
+        $totalNbComments = $em->getRepository(Comment::class)->countAllComments();
+        $spot = $em->getRepository(Spot::class)->recupLastSpot();
+        return $this->render('landing/index.html.twig',array(
+            'totalNbComments' => $totalNbComments,
+            'spot' => $spot,
+            'datetime' => $datetime
+        ));
     }
 
     /**

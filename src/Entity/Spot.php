@@ -56,7 +56,7 @@ class Spot
     private $longitude;
     /**
      * @ORM\Column(type="integer")
-     * Assert\Range(min = 0, max = 2)
+     * @Assert\Range(min = 0, max = 2)
      * 0 = refused, 1 = waiting, 2 = accepted
      */
     private $status;
@@ -65,7 +65,7 @@ class Spot
      */
     private $user;
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot", cascade={"remove"})
      */
     private $comments;
     /**
@@ -82,7 +82,6 @@ class Spot
         $this->date = new \DateTime();
         $this->updateAt = new \DateTime();
         $this->status = 1;
-        //  $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -321,7 +320,6 @@ class Spot
 
         return $this;
     }
-
 
 }
 

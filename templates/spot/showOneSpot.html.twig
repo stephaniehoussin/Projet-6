@@ -124,7 +124,8 @@
         </div>
         <hr class="mb-4">
         <div class="row">
-                <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="card">
                     {{ form_start(form_comment) }}
                     <div class="form-group">
                         {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
@@ -133,48 +134,75 @@
                     </div>
                     <button type="submit" id="comment" class="btn-lg btn-block">Je commente ce spot</button>
                     {{ form_end(form_comment) }}
-
+                </div>
+            </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <img class="card-img-top" src="" alt="Card image cap">
+                        <p>Date du jour</p>
+                        <div class="card-body">
+                            <h5 class="card-spot-title">
+                                {% if nbComments %}
+                                    <p>{{ nbComments }} commentaires sur ce Spot !</p>
+                                {% else %}
+                                    <p>Pas encore de commentaires sur ce spot</p>
+                                {% endif %}
+                            </h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         <hr class="mb-4">
         <div class="row">
-                    {% if spot.comments %}
+                <hr class="mb-4">
+                Commentaires
+            <hr class="mb-4">
+        </div>
+
                         {% for comment in spot.comments %}
-                            <div class="col-md-4">
-                            <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">User le : {{ comment.date|date("d/m/Y") }}</h5>
-                            {# <p class="card-user">{{ comment.user }}</p>#}
-                            <p class="card-text">{{ comment.message }}</p>
-                               {# {% for comment in comment.commentaires %}
-                                <p class="card-text">{{ comment.message }}</p>
-                                {% endfor %}#}
-                                {{ form_start(form_commentaire) }}
-                                <div class="form-group">
-                                    {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
-                                    {{ form_label(form_commentaire.message) }}
-                                    {{ form_widget(form_commentaire.message) }}
+                            {% if comment.parent == null %}
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">User le : {{ comment.date|date("d/m/Y") }}</h5>
+                                        <p class="card-text">{{ comment.message }}</p>
+                                            <button type="submit">Signaler</button>
+                                            <button type="submit">Répondre</button>
+                                    </div>
                                 </div>
-                                <button type="submit" id="commentaire">Répondre</button>
-                                    {% if comment.commentaire %}
-                                {% for commentaire in comment.commentaires %}
-                               <p>{{ commentaire.message }}</p>
-                                {% endfor %}
-                                {% endif %}
-
-                                <button type="submit" id="signal">Signaler</button>
-                                {{ form_end(form_commentaire) }}
-
                             </div>
-                            </div>
-                            </div>
-                        {% else %}
-                            <p>Il n'y a pas encore de commentaires sur ce spot</p>
-                            </div>
+                            {% endif %}
+                            {% for child in comment.children %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ child.date|date("d/m/Y à H:i", "Europe/Paris") }}</h5>
+                                        <p class="card-text">{{ child.message }}</p>
+                                    <a class="btn-default btn btn-reply" href=""><p>Signaler</p></a>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+        </div>
 
-                                {% endfor %}
-                    {% endif %}
 
+    {#    {{ form_start(form_commentaire) }}
+        <div class="form-group">
+            {{ form_widget(form_commentaire, {'attr' : {'class': 'form-control'}}) }}
+        </div>
+        <button type="submit" id="commentaire">Répondre</button>
+        <button type="submit" id="signal">Signaler</button>
+        {{ form_end(form_commentaire) }}
+
+        {% if comment.commentaire %}
+            {% for commentaire in comment.commentaires %}
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">User le : {{ commentaire.date|date("d/m/Y") }}</h5>
+                            <p class="card-text">{{ commentaire.message }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}#}
         </div>
 
 {% endblock %}

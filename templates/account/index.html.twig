@@ -1,7 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon compte{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include 'account/parts/navAccount.html.twig' %}
+{% endblock %}
 {% block body %}
-
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
 {% endblock %}

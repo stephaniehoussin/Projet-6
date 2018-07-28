@@ -2,40 +2,104 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <style>
+        div#map {
+            width: 100%;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 {% endblock %}
 {% block nav %}
     {% include 'landing/parts/navLanding.html.twig' %}
     {% include 'landing/parts/coverLanding.html.twig' %}
 {% endblock %}
 {% block body %}
-
-    <section class="landing-spot-title">
-        <div class="container">
+<div class="container">
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Un spot c'est quoi? </h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="landing-spot-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    texte sur un spot
-                </div>
-                <div class="col-md-6">
-                    aperçu d'un spot
+                    <h3>Un spot c'est quoi? </h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="landing-how-title">
+
+    <section id="landing-spot-content">
         <div class="container">
             <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-spots">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title">Emplacement du Spot</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-heart">12</i></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <p><i class="fa fa-tree"> 8</i></p>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="map"></div>
+                            </div>
+                            <p><i class="fa fa-thumb-tack"> Au bord de l'eau</i></p>
+                            <p><i class="fa fa-map-marker"> Bois de Boulogne </i></p>
+                            <button type="submit"><i class="fa fa-heart"> Like me</i></button>
+                            <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-spots">
+                            <h5 class="card-title">Informations du Spot</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><i class="fa fa-user"> Fanny</i></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><i class="fa fa-calendar"> 23/07/2018</i></p>
+                                </div>
+                            </div>
+                            <img class="card-img-top" src="{{ asset('assets/img/boisdeboulogne.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-spot-title">Spot #11 Spot au top !</h5>
+                                <p class="card-spot-description">Lieu incroyable ! Les pieds dans l'eau . On a fait un
+                                pique nique mémorable !</p>
+                                <button type="button">Enregistrer dans mes favoris</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
+            <div class="row">
                 <div class="col-md-12">
-                    <h2>Comment ça marche ?</h2>
+                    <h3>Comment ça marche? </h3>
                 </div>
             </div>
         </div>
@@ -49,11 +113,13 @@
             </div>
         </div>
     </section>
-    <section class="landing-join-us-title">
-        <div class="container">
+
+    <!-------------------SECTION REJOIGNEZ NOUS------------------>
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Rejoignez nous !</h2>
+                    <h3>Rejoignez nous ! </h3>
                 </div>
             </div>
         </div>
@@ -61,63 +127,164 @@
     <section class="landing-join-us-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
 
                 </div>
             </div>
         </div>
     </section>
-    <section class="landing-stats-title">
-        <div class="container">
+    <!-------------------SECTION STATS------------------>
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Aujourd'hui !</h2>
+                    <h3>Aujourd'hui </h3>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="landing-stats-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <h3>Spoteurs</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="locale"></div>
+            </div>
+            </div>
+
+        <div class="container-landing-stats-content">
+                <div class="front-landing-stats-content">
+                    <p class="caption"><i class="fa fa-users"></i></p>
+                    <p class="number">Nombre</p>
                 </div>
-                <div class="col-md-3">
-                    <h3>Spots</h3>
-                </div>
-                <div class="col-md-3">
-                    <h3>Likes</h3>
-                </div>
-                <div class="col-md-3">
-                    <h3>Arbres</h3>
-                </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="caption"><i class="fa fa-map"></i></p>
+                <p class="number">Nombre</p>
             </div>
         </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="caption"><i class="fa fa-heart"></i></p>
+                <p class="number">Nombre</p>
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="caption"><i class="fa fa-tree"></i></p>
+                <p class="number">Nombre</p>
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="caption"> <i class="fa fa-comments"></i></p>
+                <p class="number">{{ totalNbComments }}</p>
+            </div>
+        </div>
+
     </section>
-    <section class="landing-opinion-title">
-        <div class="container">
+
+    <!------------------------------SECTION OPINION--------------->
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Derniers avis postés sur YouSpot !</h2>
+                    <h3>Derniers avis postés sur YouSpot !</h3>
                 </div>
             </div>
         </div>
     </section>
     <section class="landing-opinion-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
+        <div id="landing-opinion-content">
+            <p></p>
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                        <a class="btn btn-primary text-uppercase js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                        <a class="btn btn-primary text-uppercase js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                        <a class="btn btn-primary text-uppercase js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
 {% endblock %}
 {% block footer %}
     {% include 'landing/parts/footerLanding.html.twig' %}
-
-
 {% endblock %}
-{% block javascript %}
+{% block javascripts %}
     {{ parent() }}
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        zoom: 9,
+        center: [2.333333, 48.866667]
+    });
+
+</script>
+    <script type="text/javascript">
+        function afficher() {
+            var offsetUTC = +12,
+                lD = new Date(),
+                oD = new Date();
+            oD.setHours(lD.getUTCHours()+offsetUTC);
+
+            document.getElementById('locale').innerHTML = "Le  "+lD.toLocaleString();
+        }
+
+        window.onload=function() {
+            afficher();
+            setInterval(afficher,1000);
+        }
+    </script>
 {% endblock %}

@@ -30,7 +30,19 @@ class Comment
     private $message;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent", cascade={"persist", "remove"})
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="children")
+     */
+    private $parent;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\Range(min = 0, max = 2)
+     * 0 = noSignal, 1 = signal, 2 = alreadySignal
      */
     private $report;
     /**
@@ -44,16 +56,12 @@ class Comment
      */
     private $spot;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="comment")
-     */
-    private $commentaires;
-
 
     public function __construct()
     {
         $this->date = new \DateTime();
-        $this->commentaires = new ArrayCollection();
+        $this->report = 0;
+        $this->children = new ArrayCollection();
     }
 
     public function getId()
@@ -127,39 +135,62 @@ class Comment
 
         return $this;
     }
-
     /**
+     * Set parent
+     *
+     * @param string $parent
+     *
+     * @return Comment
+     */
+    public function setParent(Comment $parent)
+    {
+        $this->parent = $parent;
+        $parent->addChild($this);
+        return $this;
+    }
+    /**
+     * Get parent
+     *
+     * @return string
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    /**
+     * Add child
+     *
+     * @param Comment $child
+     *
+     * @return Comment
+     */
+    public function addChild(Comment $child)
+    {
+        $this->children[] = $child;
+        return $this;
+    }
+    /**
+     * Remove child
+     *
+     * @param Comment $child
+     */
+    public function removeChild(Comment $child)
+    {
+        $this->children->removeElement($child);
+    }
+    /**
+     * Get children
+     *
      * @return Collection
      */
-    public function getCommentaire() : Collection
+    public function getChildren()
     {
-        return $this->commentaires;
+        return $this->children;
     }
 
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getCommentaires() : Collection
-    {
-        return $this->commentaires;
-    }
 
-    /**
-     * @param Commentaire $commentaire
-     */
-    public function addCommentaire(Commentaire $commentaire)
-    {
-        $this->commentaires[] = $commentaire;
-        $commentaire->setComment($this);
-    }
 
-    /**
-     * @param Comment $comment
-     */
-    public function removeCommentaire(Commentaire $commentaire)
-    {
-        $this->commentaires->removeElement($commentaire);
-    }
+
 
 }
 

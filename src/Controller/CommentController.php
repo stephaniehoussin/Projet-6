@@ -20,4 +20,18 @@ class CommentController extends Controller
             'controller_name' => 'CommentController',
         ]);
     }
+
+    /**
+     * @Route("/report_comment" , name="report_comment")
+     */
+    public function reportComment(Request $request, EntityManagerInterface $entityManager)
+    {
+
+      /*  $em = $this->getDoctrine()->getManager();
+        $report = $em->getRepository(Comment::class)->commentIsReport();
+        dump($report);
+        return $report;*/
+
+    }
+
 }

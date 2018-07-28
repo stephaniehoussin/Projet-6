@@ -68,10 +68,10 @@ class SpotController extends Controller
      */
     public function showOneSpot(Request $request, EntityManagerInterface $entityManager,$id,Spot $spot)
     {
-        // $id = intval($spot->getId());
         $em = $this->getDoctrine()->getManager();
         // je récupère l'id du spot en cours dans $spot
         $spot = $em->getRepository(Spot::class)->findOneBy(['id' => $id]);
+        $nbComments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
         dump($spot);
         // $em = $this->getDoctrine()->getManager();
         // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
@@ -89,8 +89,15 @@ class SpotController extends Controller
             $this->addFlash('success', 'Merci pour votre commentaire');
             dump($comment);
         }
-
-        $comment = $em->getRepository(Comment::class)->findOneBy(['id' => $id]);
+        return $this->render('spot/showOneSpot.html.twig',array(
+            'spot' => $spot,
+            'comment' => $comment,
+              'nbComments' => $nbComments,
+            // 'commentaires' => $commentaires,
+            'form_comment' => $form_comment->createView(),
+            // 'form_commentaire' => $form_commentaire->createView()
+        ));
+     /*   $comment = $em->getRepository(Comment::class)->findOneBy(['id' => $id]);
         $commentaire = new Commentaire();
         $form_commentaire = $this->createForm(commentaireType::class, $commentaire);
         $form_commentaire->handleRequest($request);
@@ -100,22 +107,19 @@ class SpotController extends Controller
             $entityManager->persist($commentaire);
             $entityManager->flush();
             dump($commentaire);
-        }
+        }*/
         //  $comments = $em->getRepository(Spot::class)->findById($id);
         // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
-        // $comments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
-        $comments = $em->getRepository(Comment::class)->recupCommentsBySpot($spot->getId());
-        $commentaires = $em->getRepository(Commentaire::class)->recupCommentsByComment($comment->getId());
-        dump($comments);
-        dump($commentaires);
-        return $this->render('spot/showOneSpot.html.twig',array(
-            'spot' => $spot,
-            'comment' => $comment,
-            'comments' => $comments,
-            'commentaires' => $commentaires,
-            'form_comment' => $form_comment->createView(),
-            'form_commentaire' => $form_commentaire->createView()
-        ));
+        //
+      /*  if($comment)
+        {
+            $comments = $em->getRepository(Comment::class)->recupCommentsBySpot($spot->getId());
+            $commentaires = $em->getRepository(Commentaire::class)->recupCommentsByComment($comment->getId());
+            dump($comments);
+            dump($commentaires);
+        }*/
+
+
     }
 
 }

@@ -19,6 +19,19 @@ class SpotRepository extends ServiceEntityRepository
         parent::__construct($registry, Spot::class);
     }
 
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function recupLastSpot()
+    {
+        return  $this
+            ->createQueryBuilder('s')
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 
 //    /**
