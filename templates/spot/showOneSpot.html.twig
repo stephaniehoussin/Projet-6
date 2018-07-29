@@ -90,8 +90,8 @@
                         </div>
                         <div class="col-md-12">
                         <div id="map"></div>
-                      {#  {{ spot.latitude }}
-                        {{ spot.longitude }}#}
+                        {{ spot.latitude }}
+                        {{ spot.longitude }}
                         </div>
                         <p><i class="fa fa-thumb-tack"> Catégorie</i></p>
                         <p><i class="fa fa-map-marker"> Adresses</i></p>
@@ -106,7 +106,7 @@
                         <h5 class="card-title">Informations du Spot</h5>
                         <div class="row">
                             <div class="col-md-6">
-                                <p><i class="fa fa-user"> Pseudo</i></p>
+                                <p><i class="fa fa-user"> {{ spot.user }}</i></p>
                             </div>
                             <div class="col-md-6">
                                 <p><i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i></p>
@@ -139,7 +139,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <img class="card-img-top" src="" alt="Card image cap">
-                        <p>Date du jour</p>
+                        <div id="locale"></div>
                         <div class="card-body">
                             <h5 class="card-spot-title">
                                 {% if nbComments %}
@@ -217,6 +217,22 @@
         });
 
     </script>
+        <script type="text/javascript">
+            function afficher() {
+                var offsetUTC = +12,
+                    lD = new Date(),
+                    oD = new Date();
+                oD.setHours(lD.getUTCHours()+offsetUTC);
+
+                document.getElementById('locale').innerHTML = "Le  "+lD.toLocaleString();
+            }
+
+        window.onload=function() {
+            afficher();
+            setInterval(afficher,1000);
+        }
+    </script>
+
 {% endblock %}
 
 

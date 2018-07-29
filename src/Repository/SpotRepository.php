@@ -17,6 +17,7 @@ class SpotRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Spot::class);
+
     }
 
     /**
@@ -33,6 +34,27 @@ class SpotRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllSpotsByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->setParameter('userId', $userId)
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
+
+
+    }
+
+    public function allSpotsHome()
+    {
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(6);
+        return $rq->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Spot[] Returns an array of Spot objects

@@ -18,7 +18,7 @@ security:
                 provider: fos_userbundle
                 login_path: /connexion
                 check_path: /connexion_check
-                default_target_path: /account/
+                default_target_path: /mon-compte/
                 always_use_default_target_path: true
                 csrf_token_generator: security.csrf.token_manager
             logout:
@@ -40,7 +40,7 @@ security:
           - { path: ^/connexion$, allow_if: "not has_role('ROLE_USER')" }
           - { path: ^/inscription$, allow_if: "not has_role('ROLE_USER')" }
           - { path: ^/admin/, roles: ROLE_ADMIN }
-          - { path: ^/account/, roles: ROLE_USER}
+          - { path: ^/mon-compte/, roles: ROLE_USER}
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

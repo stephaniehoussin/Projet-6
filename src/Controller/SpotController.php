@@ -7,6 +7,8 @@ use App\Form\commentaireType;
 use App\Form\commentType;
 use App\Form\spotType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,10 +32,14 @@ class SpotController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $entityManager =$this->getDoctrine()->getManager();
+            $currentUser = $this->getUser();
+            dump($currentUser);
+            $spot->setUser($currentUser);
             $entityManager->persist($spot);
             $entityManager->flush();
             $this->addFlash('success', 'Votre spot est bien enregistré!');
-            //  return $this->redirectToRoute('home');
+              return $this->redirectToRoute('tous-les-spots');
         }
         return $this->render('spot/makeSpot.html.twig',[
             'spot' => $form->createView(),
@@ -45,19 +51,28 @@ class SpotController extends Controller
      */
     public function searchSpot()
     {
-        return $this->render('spot/searchSpot.html.twig');
+        $entityManager = $this->getDoctrine()->getManager();
+        $spots = $entityManager->getRepository(Spot::class)->findAll();
+        return $this->render('spot/searchSpot.html.twig',array(
+            'spots' => $spots));
     }
 
     /**
      * @Route("/tous-les-spots", name="tous-les-spots")
+     * @param Spot $spot
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAllSpots()
+    public function showAllSpots(EntityManagerInterface $entityManager,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $spots = $em->getRepository(Spot::class)->findAll();
+       // $nbComments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
         return $this->render('spot/showAllSpots.html.twig',array(
-            'spots' => $spots
+            'spots' => $spots,
+        //    'nbComments' => $nbComments,
+
         ));
     }
 
@@ -97,29 +112,30 @@ class SpotController extends Controller
             'form_comment' => $form_comment->createView(),
             // 'form_commentaire' => $form_commentaire->createView()
         ));
-     /*   $comment = $em->getRepository(Comment::class)->findOneBy(['id' => $id]);
-        $commentaire = new Commentaire();
-        $form_commentaire = $this->createForm(commentaireType::class, $commentaire);
-        $form_commentaire->handleRequest($request);
-        if($form_commentaire->isSubmitted() && $form_commentaire->isValid())
-        {
-            $commentaire->setComment($comment);
-            $entityManager->persist($commentaire);
-            $entityManager->flush();
-            dump($commentaire);
-        }*/
-        //  $comments = $em->getRepository(Spot::class)->findById($id);
-        // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
-        //
-      /*  if($comment)
-        {
-            $comments = $em->getRepository(Comment::class)->recupCommentsBySpot($spot->getId());
-            $commentaires = $em->getRepository(Commentaire::class)->recupCommentsByComment($comment->getId());
-            dump($comments);
-            dump($commentaires);
-        }*/
+    }
 
-
+    /**
+     * @Route("/mes-spots", name="mes-spots")
+     */
+    public function spotsByUser()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $spots = $em->getRepository(Spot::class)->findAllSpotsByUser($user->getId());
+        return $this->render('account/mySpots.html.twig',array(
+            'spots' => $spots
+        ));
+    }
+    /**
+     * @Route("map-search", name="map-search")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function searchSpotMap(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $spots = $em->getRepository(Spot::class)->findAll();
+        return new JsonResponse($spots);
     }
 
 }

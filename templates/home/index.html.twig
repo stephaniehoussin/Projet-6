@@ -8,6 +8,178 @@
     {% include 'home/parts/coverHome.html.twig' %}
 {% endblock %}
 {% block body %}
+    <div class="container">
+    <!-------------------SECTION TOUS SPOTS-------------->
+    <section class="allSpots">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 page_marge_top">
+                    <hr class="mb-4">
+                    <h2>Tous les Spots</h2>
+                    <hr class="mb-4">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if spots %}
+                {% for spot in spots %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-spots">
+                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-spot-title"> <i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i> <i class="fa fa-user"> {{ spot.user }}</i></h5>
+
+                                    <p class="card-spot-description">Spot #{{ spot.id }}</p>
+                                    <p class="card-spot-description">{{ spot.title }}</p>
+                                    <p class="card-spot-description">{{ spot.description }}</p>
+                                    <a href="{{ path('spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+        </div>
+    </section>
+    <!-------------------SECTION STATS------------------>
+
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Aujourd'hui </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-stats-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="locale"></div>
+            </div>
+        </div>
+
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">Nombre</p>
+                <p class="text">Utilisateurs</p>
+
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">Nombre</p>
+                <p class="text">Spots</p>
+
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">Nombre</p>
+                <p class="text">J'aime</p>
+
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">Nombre</p>
+                <p class="text">Arbre</p>
+
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">{{ totalNbComments }}</p>
+                <p class="text"> Commentaires</p>
+
+            </div>
+        </div>
+        <div class="container-landing-stats-content">
+            <div class="front-landing-stats-content">
+                <p class="number">Nombre</p>
+                <p class="text"> Avis</p>
+
+            </div>
+        </div>
+
+    </section>
+    <!------------------------------SECTION OPINION--------------->
+    <section id="landing-title">
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Derniers avis postés sur YouSpot !</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="landing-opinion-content">
+        <div id="landing-opinion-content">
+            <p><a class="btn btn-opinion  js-scroll-trigger" href="{{ path('les-opinions') }}">Voir tous les avis</a></p>
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-landing-opinion-content">
+                <div class="flipper">
+                    <div class="front-landing-opinion-content">
+                        <img src="assets/img/test.jpg" alt="cherry blossoms">
+                        <p class="date">23/07/1997</p>
+                        <p class="caption"></p>
+                    </div>
+                    <div class="back-landing-opinion-content">
+                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
+                            <h1>User</h1>
+                        </a>
+                        <p class="date">23/07/1997</p>
+                        <p class="description">Extrait</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    </div>
 {% endblock %}
 {% block footer %}
     {% include 'home/parts/footerHome.html.twig' %}

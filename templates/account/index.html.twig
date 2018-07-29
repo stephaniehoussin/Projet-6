@@ -2,14 +2,18 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 {% endblock %}
 {% block nav %}
     {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 {% block body %}
+
+
 {% endblock %}
 {% block footer %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
+
 {% endblock %}

@@ -26,6 +26,17 @@ class Opinion
      */
     private $message;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="opinions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -54,4 +65,22 @@ class Opinion
 
         return $this;
     }
+    /**
+     * @return User
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     * @return $this
+     */
+    public function setUser(User $user = null)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
 }

@@ -62,6 +62,7 @@ class Spot
     private $status;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="spots")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**
@@ -254,7 +255,7 @@ class Spot
     /**
      * @return User
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }

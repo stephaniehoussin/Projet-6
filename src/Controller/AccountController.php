@@ -14,4 +14,5 @@ class AccountController extends Controller
     {
         return $this->render('account/index.html.twig');
     }
+
 }

@@ -24,6 +24,14 @@ class User extends BaseUser
      */
     private $spots;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="App\Entity\Opinion", mappedBy="user", cascade={"remove"})
+     */
+    private $opinions;
+
+
+
 
     public function __construct()
     {
@@ -78,5 +86,39 @@ class User extends BaseUser
     public function getSpots(): Collection
     {
         return $this->spots;
+    }
+
+
+    /**
+     * @return Collection|Opinion[]
+     */
+    public function getOpinion() : Collection
+    {
+        return $this->opinions;
+    }
+
+    /**
+     * @param Opinion $opinion
+     */
+    public function addOpinion(Opinion $opinion)
+    {
+        $this->opinions[] = $opinion;
+        $opinion->setUser($this);
+    }
+
+    /**
+     * @param Opinion $opinion
+     */
+    public function removeOpinion(Opinion $opinion)
+    {
+        $this->opinions->removeElement($opinion);
+    }
+
+    /**
+     * @return Collection|Opinion[]
+     */
+    public function getOpinions(): Collection
+    {
+        return $this->opinions;
     }
 }

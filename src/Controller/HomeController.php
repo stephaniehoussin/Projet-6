@@ -43,7 +43,17 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return $this->render('home/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $spots = $em->getRepository(Spot::class)->findAll();
+        $datetime = date("d-m-Y");
+        $em = $this->getDoctrine()->getManager();
+        $totalNbComments = $em->getRepository(Comment::class)->countAllComments();
+        $spots = $em->getRepository(Spot::class)->allSpotsHome();
+        return $this->render('home/index.html.twig',array(
+            'totalNbComments' => $totalNbComments,
+            'datetime' => $datetime,
+            'spots' => $spots
+        ));
     }
 
     /**

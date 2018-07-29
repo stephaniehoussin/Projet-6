@@ -40,7 +40,7 @@
             <div class="col-md-12">
                 <div class="col-md-12 page_marge_top">
                     <hr class="mb-4">
-                    <h2>Tous les Spots</h2>
+                    <h2>Toutes les opinions</h2>
                     <hr class="mb-4">
                     {% for message in app.flashes('success') %}
                         <div class="alert alert-success" role="alert">
@@ -51,29 +51,27 @@
             </div>
         </div>
         <div class="row">
-                    {% if spots %}
-                    {% for spot in spots %}
-                        <div class="col-md-4">
+            {% if opinions %}
+                {% for opinion in opinions %}
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-spots">
-                            <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-spot-title"> <i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i> <i class="fa fa-user"> {{ spot.user }}</i></h5>
+                                <img class="card-img-top" src="{{ asset('assets/img/test.jpg') }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-spot-title"> <i class="fa fa-calendar">  {{ opinion.date|date("d/m/Y") }}</i> <i class="fa fa-user"> {{ opinion.user }}</i></h5>
 
-                                <p class="card-spot-description">Spot #{{ spot.id }}</p>
-                                <p class="card-spot-description">{{ spot.title }}</p>
-                                <p class="card-spot-description">{{ spot.description }}</p>
-                                <a href="{{ path('spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                                    <p class="card-spot-description">Spot #{{ opinion.id }}</p>
+                                    <p class="card-spot-description">{{ opinion.message }}</p>
+                                </div>
                             </div>
                         </div>
-                        </div>
-                        </div>
-                    {% endfor %}
-                    {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
 
-            </div>
         </div>
+    </div>
 
 {% endblock %}
 
