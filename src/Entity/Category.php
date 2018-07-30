@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -19,92 +21,71 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $park;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var array
+     * @ORM\OneToMany(targetEntity="App\Entity\Spot", mappedBy="Category")
      */
-    private $barPlace;
+    private $spots;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $restaurantPlace;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $forest;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $water;
-
-
+    public function __construct()
+    {
+        $this->spots = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getPark(): ?string
+    public function getName(): ?string
     {
-        return $this->park;
+        return $this->name;
     }
 
-    public function setPark(string $park): self
+    public function setName(string $name): self
     {
-        $this->park = $park;
+        $this->name = $name;
 
         return $this;
     }
-
-    public function getBarPlace(): ?string
+    /**
+     * @return Collection|Spot[]
+     */
+    public function getSpot() : Collection
     {
-        return $this->barPlace;
+        return $this->spots;
     }
 
-    public function setBarPlace(string $barPlace): self
+    /**
+     * @return Collection|Spot[]
+     */
+    public function getSpots() : Collection
     {
-        $this->barPlace = $barPlace;
-
-        return $this;
+        return $this->spots;
     }
 
-    public function getRestaurantPlace(): ?string
+    /**
+     * @param Spot $spot
+     */
+    public function addSpot(Spot $spot)
     {
-        return $this->restaurantPlace;
+        $this->spots[] = $spot;
+        $spot->setCategory($this);
     }
 
-    public function setRestaurantPlace(string $restaurantPlace): self
+    /**
+     * @param Spot $spot
+     */
+    public function removeSpot(Spot $spot)
     {
-        $this->restaurantPlace = $restaurantPlace;
-
-        return $this;
+        $this->spots->removeElement($spot);
     }
 
-    public function getForest(): ?string
-    {
-        return $this->forest;
-    }
 
-    public function setForest(string $forest): self
-    {
-        $this->forest = $forest;
-
-        return $this;
-    }
-
-    public function getWater(): ?string
-    {
-        return $this->water;
-    }
-
-    public function setWater(string $water): self
-    {
-        $this->water = $water;
-
-        return $this;
-    }
 }

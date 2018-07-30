@@ -58,9 +58,18 @@
                             {{ message }}
                         </div>
                     {% endfor %}
+
+                   <form>
+                       <select name="categorie">
+                    {% for category in categories %}
+                        <option>{{ category.name }}</option>
+                    {% endfor %}
+                       </select>
+                   </form>
+
                     {% for spot in spots %}
-                        {{ spot.latitude }}
-                        {{ spot.longitude }}
+                    {#{{ spot.latitude }}
+                        {{ spot.longitude }}#}
                     {% endfor %}
                     <div class="smap">
                         <div id="mapid"></div>

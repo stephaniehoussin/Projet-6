@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Commentaire;
 use App\Form\commentaireType;
 use App\Form\commentType;
@@ -52,9 +53,12 @@ class SpotController extends Controller
     public function searchSpot()
     {
         $entityManager = $this->getDoctrine()->getManager();
+        $categories = $entityManager->getRepository(Category::class)->findAll();
         $spots = $entityManager->getRepository(Spot::class)->findAll();
         return $this->render('spot/searchSpot.html.twig',array(
-            'spots' => $spots));
+            'spots' => $spots,
+            'categories' => $categories
+        ));
     }
 
     /**

@@ -69,12 +69,9 @@ class Spot
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="spot", cascade={"remove"})
      */
     private $comments;
+
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade="persist")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id")
-     * @Assert\Type(type="App\Entity\Category")
-     * @Assert\Valid()
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="spots")
      */
     private $category;
 
@@ -315,7 +312,7 @@ class Spot
      * @param Category $category
      * @return Spot
      */
-    public function setCategory(Category $category = null)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 

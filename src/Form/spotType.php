@@ -4,6 +4,7 @@ namespace App\Form;
 use App\Entity\Category;
 use App\Entity\Spot;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -33,6 +34,10 @@ class spotType extends AbstractType
             ))
             ->add('longitude', NumberType::class,array(
                 'label' => 'Longitude'
+            ))
+            ->add('category', EntityType::class,array(
+                'label' => 'Choisir la catégorie',
+                    'class' => Category::class,
             ))
             ->add('pictureFile', VichImageType::class,array(
                 'label' => 'Image'
