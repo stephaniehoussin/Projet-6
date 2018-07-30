@@ -6,22 +6,38 @@
 
         <ul id="menu-content" class="menu-content collapse out">
             <li>
-                <a href="#">
+                <a href="{{ path('mes-infos') }}">
                     <i class="fa fa-users fa-lg"></i> Mes infos
                 </a>
             </li>
             <li>
                 <a href="{{ path('mes-spots') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots
+                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots validés
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('mes-spots') }}">
+                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots en attente de validation
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('mes-spots-favoris') }}">
+                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots favoris
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots favoris
+                    <i class="fa fa-dashboard fa-lg"></i> Mes commentaires signalés
                 </a>
-            </li><li>
-                <a href="#">
+            </li>
+            <li>
+                <a href="{{ path('mes-stats') }}">
                     <i class="fa fa-dashboard fa-lg"></i> Mes Stats
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('contact') }}">
+                    <i class="fa fa-dashboard fa-lg"></i> Nous contacter
                 </a>
             </li>
         </ul>

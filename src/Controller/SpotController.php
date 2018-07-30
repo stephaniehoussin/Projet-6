@@ -20,7 +20,7 @@ use App\Entity\Like;
 class SpotController extends Controller
 {
     /**
-     * @Route("/je-spote", name="je-spote")
+     * @Route("accueil/je-spote", name="je-spote")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response
@@ -46,7 +46,7 @@ class SpotController extends Controller
         ]);
     }
     /**
-     * @Route("/je-cherche-un-spot", name="je-cherche-un-spot")
+     * @Route("accueil/je-cherche-un-spot", name="je-cherche-un-spot")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function searchSpot()
@@ -58,7 +58,7 @@ class SpotController extends Controller
     }
 
     /**
-     * @Route("/tous-les-spots", name="tous-les-spots")
+     * @Route("accueil/tous-les-spots", name="tous-les-spots")
      * @param Spot $spot
      * @param EntityManagerInterface $entityManager
      * @param Request $request
@@ -77,7 +77,7 @@ class SpotController extends Controller
     }
 
     /**
-     * @Route("/spot/{id}", name="spot")
+     * @Route("accueil/spot/{id}", name="spot")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -114,20 +114,9 @@ class SpotController extends Controller
         ));
     }
 
+
     /**
-     * @Route("/mes-spots", name="mes-spots")
-     */
-    public function spotsByUser()
-    {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $spots = $em->getRepository(Spot::class)->findAllSpotsByUser($user->getId());
-        return $this->render('account/mySpots.html.twig',array(
-            'spots' => $spots
-        ));
-    }
-    /**
-     * @Route("map-search", name="map-search")
+     * @Route("accueil/map-search", name="map-search")
      * @param Request $request
      * @return JsonResponse
      */

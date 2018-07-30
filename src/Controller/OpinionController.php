@@ -15,7 +15,7 @@ class OpinionController extends Controller
 {
 
     /**
-     * @Route("/add-opinion", name="add-opinion")
+     * @Route("accueil/add-opinion", name="add-opinion")
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response
@@ -40,7 +40,7 @@ class OpinionController extends Controller
     }
 
     /**
-     * @Route("/les-opinions", name="les-opinions")
+     * @Route("accueil/les-opinions", name="les-opinions")
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

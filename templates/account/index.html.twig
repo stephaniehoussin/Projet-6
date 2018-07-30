@@ -8,8 +8,52 @@
     {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 {% block body %}
+<div class="account-content">
 
+    <section id="title">
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="locale"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="landing-stats-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="locale"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="jumbotron">
+
+        <h1 class="display-4">Espace personnel</h1>
+        <p class="lead">Toutes vos infos perso reunis au même endroit</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ path('accueil') }}" role="button">Retour Accueil</a>
+        </p>
+    </div>
+</div>
+    <script type="text/javascript">
+        function afficher() {
+            var offsetUTC = +12,
+                lD = new Date(),
+                oD = new Date();
+            oD.setHours(lD.getUTCHours()+offsetUTC);
+
+            document.getElementById('locale').innerHTML = "Le  "+lD.toLocaleString();
+        }
+
+        window.onload=function() {
+            afficher();
+            setInterval(afficher,1000);
+        }
+    </script>
 {% endblock %}
 {% block footer %}
 {% endblock %}

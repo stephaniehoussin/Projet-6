@@ -63,6 +63,17 @@ class CommentRepository extends ServiceEntityRepository
         return $rq;
     }
 
+    public function countCommentsByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('c')
+            ->select('count(c) as nb')
+            ->where('c.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
     public function commentIsReport()
     {
         $rq = $this

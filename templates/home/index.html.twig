@@ -9,13 +9,13 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-    <!-------------------SECTION TOUS SPOTS-------------->
+    <!-------------------SECTION DERNIERS SPOTS-------------->
     <section class="allSpots">
         <div class="row">
             <div class="col-md-12">
                 <div class="col-md-12 page_marge_top">
                     <hr class="mb-4">
-                    <h2>Tous les Spots</h2>
+                    <h2>Les derniers Spots</h2>
                     <hr class="mb-4">
                     {% for message in app.flashes('success') %}
                         <div class="alert alert-success" role="alert">
@@ -49,6 +49,23 @@
 
         </div>
     </section>
+
+        <!-------------------SECTION ASSOCIATION-------------->
+
+        <section id="subscribe">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="subscribe-title">Recevoir la newsletter</h3>
+                        <p class="subscribe-text">Tous les derniers spots postés et la vie d'une association !</p>
+                    </div>
+                    <div class="col-md-4 subscribe-btn-container">
+                        <a class="subscribe-btn" href="#">M'inscrire</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <!-------------------SECTION STATS------------------>
 
     <section id="landing-title">

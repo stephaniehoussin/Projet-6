@@ -388,6 +388,42 @@ h1 {
         display: none;
     }
 }
+
+/*************************PAGE ACCUEIL****************/
+#subscribe {
+    background: url(../img/cover.jpg) fixed center center;
+    background-size: cover;
+    padding: 80px 0;
+}
+
+#subscribe .subscribe-title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+#subscribe .subscribe-btn-container {
+    text-align: center;
+    padding-top: 20px;
+}
+
+#subscribe .subscribe-btn {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: 0.5s;
+    margin: 10px;
+    background: #497435;
+    border: 2px solid #497435;
+}
+
+
+
 /*************************************MON COMPTE********************************/
 /***************MON COMPTE MENU DE NAVIGATION********/
 .nav-account-menu {
@@ -398,7 +434,7 @@ h1 {
     background-image: url("../img/cover.jpg");
     position: fixed;
     top: 0;
-    width: 200px;
+    width: 300px;
     height: 100%;
     color: white;
 }
@@ -521,7 +557,8 @@ body {
     padding: 0;
 }
 
-.account-content {
+.account-content
+{
     margin-left: 235px;
     padding-left: 100px;
     padding-right: 35px;
@@ -535,11 +572,17 @@ body {
     }
 }
 
+
+/***************MON COMPTE ACCUEIL ************************/
+.jumbotron
+{
+    margin-top: 100px;
+}
 /********************PAGES MENU**********************/
 /*****************PAGES GENERAL**********************/
 .page_marge_top
 {
-    margin-top: 100px;
+    margin-top: 20px;
 }
 /****************** PAGE MENU JE SPOTE*******************/
 .smap {
