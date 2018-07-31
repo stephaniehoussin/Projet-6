@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\Commentaire;
-use App\Form\commentaireType;
 use App\Form\commentType;
 use App\Form\SpotFilterType;
 use App\Form\spotType;
@@ -21,6 +19,10 @@ use App\Entity\Spot;
 use App\Entity\Comment;
 use App\Entity\Tree;
 use App\Entity\Like;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class SpotController extends Controller
 {
@@ -79,7 +81,7 @@ class SpotController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function showAllSpots(SpotRepository $spotRepository,Request $request)
+    public function showAllSpots(SpotRepository $spotRepository, Request $request)
     {
         $spots = $spotRepository->findAll();
         return $this->render('spot/showAllSpots.html.twig', array(
@@ -97,7 +99,7 @@ class SpotController extends Controller
      * @param Spot $spot
      * @return Response
      */
-    public function showOneSpot(SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
+    public function showOneSpot(SpotRepository $spotRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
     {
 
         $spot = $spotRepository->findOneBy(['id' => $id]);
@@ -126,14 +128,20 @@ class SpotController extends Controller
     /**
      * @Route("accueil/map-search", name="map-search")
      * @param Request $request
-     * @param SpotRepository $spotRepository
-     * @return JsonResponse
+     * @return Response
      */
-    public function searchSpotMap(Request $request, SpotRepository $spotRepository)
+    public function searchSpotMap(Request $request,SpotRepository $spotRepository)
     {
-        $spots = $spotRepository->findAll();
-        return new JsonResponse($spots);
-    }
+          $titles = array();
+         $term = trim(strip_tags($request->get('term')));
+         $spots = $spotRepository->findSpotByTitle($term);
+         foreach($spots as $spot)
+         {
+             $titles[] = $spot->getTitle();
+         }
+         return new JsonResponse($titles);
 
+
+    }
 }
 

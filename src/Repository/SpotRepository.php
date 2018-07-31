@@ -56,7 +56,15 @@ class SpotRepository extends ServiceEntityRepository
         return $rq->getQuery()->getResult();
     }
 
-//    /**
+    public function findSpotByTitle($term)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->where($qb->expr()->like('s.title', ':title'))
+            ->setParameter("title", "%$term%")
+            ->setMaxResults(20);
+
+        return $qb->getQuery()->getResult();
+    }
 //     * @return Spot[] Returns an array of Spot objects
 //     */
     /*
