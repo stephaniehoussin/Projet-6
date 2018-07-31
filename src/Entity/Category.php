@@ -24,8 +24,7 @@ class Category
     private $name;
 
     /**
-     * @var array
-     * @ORM\OneToMany(targetEntity="App\Entity\Spot", mappedBy="Category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Spot", mappedBy="category", cascade={"remove"})
      */
     private $spots;
 
@@ -33,6 +32,8 @@ class Category
     {
         $this->spots = new ArrayCollection();
     }
+
+
     public function __toString()
     {
         return $this->getName();

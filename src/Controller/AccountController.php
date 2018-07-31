@@ -56,7 +56,7 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mon-sompte/mes-infos", name="mes-infos")
+     * @Route("mon-compte/mes-infos", name="mes-infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function informationsByUser()

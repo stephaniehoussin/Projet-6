@@ -27,19 +27,21 @@
     </nav>
 {% endblock %}
 {% block body %}
-
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 page_marge_top">
-                <hr class="mb-4">
-                <h2>Inscription</h2>
-                <hr class="mb-4">
-                {% block fos_user_content %}
-                    {% include "@FOSUser/Registration/register_content.html.twig" %}
-                {% endblock fos_user_content %}
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Inscription</h2>
+                        {% block fos_user_content %}
+                            {% include "@FOSUser/Registration/register_content.html.twig" %}
+                        {% endblock fos_user_content %}
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
+
 {% endblock %}
 {% block javascript %}
 {% endblock %}

@@ -88,21 +88,16 @@ class SpotController extends Controller
     public function showOneSpot(Request $request, EntityManagerInterface $entityManager,$id,Spot $spot)
     {
         $em = $this->getDoctrine()->getManager();
-        // je récupère l'id du spot en cours dans $spot
         $spot = $em->getRepository(Spot::class)->findOneBy(['id' => $id]);
         $nbComments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
-        dump($spot);
-        // $em = $this->getDoctrine()->getManager();
-        // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
         $comment = new Comment();
         $form_comment = $this->createForm(commentType::class, $comment);
         $form_comment->handleRequest($request);
         if($form_comment->isSubmitted() && $form_comment->isValid())
         {
-            // cette ligne enregistre le spot_id
+            $currentUser = $this->getUser();
             $comment->setSpot($spot);
-
-            //$comment->setMessage($comment);
+            $comment->setUser($currentUser);
             $entityManager->persist($comment);
             $entityManager->flush();
             $this->addFlash('success', 'Merci pour votre commentaire');
@@ -112,9 +107,7 @@ class SpotController extends Controller
             'spot' => $spot,
             'comment' => $comment,
               'nbComments' => $nbComments,
-            // 'commentaires' => $commentaires,
             'form_comment' => $form_comment->createView(),
-            // 'form_commentaire' => $form_commentaire->createView()
         ));
     }
 

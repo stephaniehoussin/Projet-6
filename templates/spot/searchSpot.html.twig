@@ -47,37 +47,42 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12 page_marge_top">
-                    <hr class="mb-4">
-                    <h2>Spot</h2>
-                    <hr class="mb-4">
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-
-                   <form>
-                       <select name="categorie">
-                    {% for category in categories %}
-                        <option>{{ category.name }}</option>
-                    {% endfor %}
-                       </select>
-                   </form>
-
-                    {% for spot in spots %}
-                    {#{{ spot.latitude }}
-                        {{ spot.longitude }}#}
-                    {% endfor %}
-                    <div class="smap">
-                        <div id="mapid"></div>
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Je cherche un spot</h2>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <section class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form>
+                            <select name="categorie">
+                                {% for category in categories %}
+                                    <option>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+
+                        {% for spot in spots %}
+                            {#{{ spot.latitude }}
+                                {{ spot.longitude }}#}
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="smap">
+                            <div id="mapid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
 
     <!-- chargement de l'api leaflet-->
 

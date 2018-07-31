@@ -72,8 +72,14 @@ class Spot
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="spots")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $infosSupp;
+
 
     public function __construct()
     {
@@ -258,10 +264,10 @@ class Spot
     }
 
     /**
-     * @param User|null $user
+     * @param User $user
      * @return $this
      */
-    public function setUser(User $user = null)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
@@ -315,6 +321,17 @@ class Spot
     public function setCategory(Category $category)
     {
         $this->category = $category;
+        return $this;
+    }
+
+    public function getInfosSupp(): ?string
+    {
+        return $this->infosSupp;
+    }
+
+    public function setInfosSupp(?string $infosSupp): self
+    {
+        $this->infosSupp = $infosSupp;
 
         return $this;
     }

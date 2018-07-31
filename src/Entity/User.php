@@ -30,6 +30,12 @@ class User extends BaseUser
      */
     private $opinions;
 
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", cascade={"remove"})
+     */
+    private $comments;
+
 
 
 
@@ -37,6 +43,8 @@ class User extends BaseUser
     {
        parent::__construct();
        $this->spots = new ArrayCollection();
+       $this->comments = new ArrayCollection();
+       $this->opinions = new ArrayCollection();
     }
 
     /**
@@ -121,4 +129,39 @@ class User extends BaseUser
     {
         return $this->opinions;
     }
+
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComment() : Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+        $comment->setUser($this);
+    }
+
+    /**
+     * @param Comment $comment
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
 }
