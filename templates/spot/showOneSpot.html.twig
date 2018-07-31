@@ -3,14 +3,6 @@
 {% block title %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-   <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />-->
-
-
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.4/leaflet.css"/>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style>
@@ -127,14 +119,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        {{ form_start(form_comment) }}
+                        {{ form_start(formComment) }}
                         <div class="form-group">
                             {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
-                            {{ form_label(form_comment.message) }}
-                            {{ form_widget(form_comment.message) }}
+                            {{ form_label(formComment.message) }}
+                            {{ form_widget(formComment.message) }}
                         </div>
                         <button type="submit" id="comment" class="btn-lg btn-block">Je commente ce spot</button>
-                        {{ form_end(form_comment) }}
+                        {{ form_end(formComment) }}
                     </div>
                 </div>
                 <div class="col-md-6">

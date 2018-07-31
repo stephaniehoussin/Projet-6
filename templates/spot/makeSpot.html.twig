@@ -3,13 +3,7 @@
 {% block title %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-   <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.min.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.2.0/mapbox-gl-geocoder.css' type='text/css' />-->
-    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />-->
+
     <!-- CDN Stylesheet -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.4/leaflet.css"/>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -72,12 +66,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        {{ form_start(spot) }}
+                        {{ form_start(formSpot) }}
                         <div class="form-group">
-                            {{ form_widget(spot, { 'attr': {'class': 'form-control'} }) }}
+                            {{ form_row(formSpot, { 'attr': {'class': 'form-control'} }) }}
                         </div>
                         <button type="submit" class="btn btn-primary" name="submit"  id="inscription">Envoyer</button>
-                        {{ form_end(spot) }}
+                        {{ form_end(formSpot) }}
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Category;
@@ -45,12 +46,12 @@ class CategoryController extends Controller
 
     /**
      * @Route("show-category", name="show-category")
+     * @param CategoryRepository $categoryRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showCategory()
+    public function showCategory(CategoryRepository $categoryRepository)
     {
-        $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository(Category::class)->findAll();
+        $categories = $categoryRepository->findAll();
         return $this->render('category/index.html.twig',array(
             'categories' => $categories
         ));

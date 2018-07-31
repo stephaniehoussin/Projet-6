@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Repository\SpotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,12 +27,13 @@ class AccountController extends Controller
 
     /**
      * @Route("mon-compte/mes-spots", name="mes-spots")
+     * @param SpotRepository $spotRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function spotsByUser()
+    public function spotsByUser(SpotRepository $spotRepository)
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $spots = $em->getRepository(Spot::class)->findAllSpotsByUser($user->getId());
+        $spots = $spotRepository->findAllSpotsByUser($user->getId());
         return $this->render('account/accountPersonalSpots.html.twig',array(
             'spots' => $spots
         ));
