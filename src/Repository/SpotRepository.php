@@ -45,8 +45,6 @@ class SpotRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->setMaxResults(10);
         return $qb->getQuery()->getResult();
-
-
     }
 
     public function findAllSpotsByDate($page)

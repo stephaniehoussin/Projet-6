@@ -26,15 +26,29 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mon-compte/mes-spots", name="mes-spots")
+     * @Route("mon-compte/mes-spots-valides", name="mes-spots-valides")
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function spotsByUser(SpotRepository $spotRepository)
+    public function spotsValidedByUser(SpotRepository $spotRepository)
     {
         $user = $this->getUser();
         $spots = $spotRepository->findAllSpotsByUser($user->getId());
-        return $this->render('account/accountPersonalSpots.html.twig',array(
+        return $this->render('account/accountPersonalSpotsAccepted.html.twig',array(
+            'spots' => $spots,
+        ));
+    }
+
+    /**
+     * @Route("mon-compte/mes-spots-en-attente", name="mes-spots-en-attente")
+     * @param SpotRepository $spotRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function spotsWaitingByUser(SpotRepository $spotRepository)
+    {
+        $user = $this->getUser();
+        $spots = $spotRepository->findAllSpotsByUser($user->getId());
+        return $this->render('account/accountPersonalSpotsWaiting.html.twig',array(
             'spots' => $spots
         ));
     }
