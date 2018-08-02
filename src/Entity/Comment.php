@@ -46,8 +46,7 @@ class Comment
      */
     private $report;
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
     private $user;
     /**
@@ -105,12 +104,16 @@ class Comment
         return $this;
     }
 
-    public function getUser(): ?string
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(string $user): self
+    /**
+     * @param User $user
+     * @return $this
+     */
+    public function setUser(User $user)
     {
         $this->user = $user;
 

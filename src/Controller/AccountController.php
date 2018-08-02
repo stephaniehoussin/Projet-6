@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Repository\SpotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,14 +26,29 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mon-compte/mes-spots", name="mes-spots")
+     * @Route("mon-compte/mes-spots-valides", name="mes-spots-valides")
+     * @param SpotRepository $spotRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function spotsByUser()
+    public function spotsValidedByUser(SpotRepository $spotRepository)
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $spots = $em->getRepository(Spot::class)->findAllSpotsByUser($user->getId());
-        return $this->render('account/accountPersonalSpots.html.twig',array(
+        $spots = $spotRepository->findAllSpotsByUser($user->getId());
+        return $this->render('account/accountPersonalSpotsAccepted.html.twig',array(
+            'spots' => $spots,
+        ));
+    }
+
+    /**
+     * @Route("mon-compte/mes-spots-en-attente", name="mes-spots-en-attente")
+     * @param SpotRepository $spotRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function spotsWaitingByUser(SpotRepository $spotRepository)
+    {
+        $user = $this->getUser();
+        $spots = $spotRepository->findAllSpotsByUser($user->getId());
+        return $this->render('account/accountPersonalSpotsWaiting.html.twig',array(
             'spots' => $spots
         ));
     }
@@ -56,7 +72,7 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mon-sompte/mes-infos", name="mes-infos")
+     * @Route("mon-compte/mes-infos", name="mes-infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function informationsByUser()

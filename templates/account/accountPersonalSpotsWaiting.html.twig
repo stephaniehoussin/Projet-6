@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+{% endblock %}
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'account/parts/navAccount.html.twig' %}
+    <div class="account-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8 page_marge_top">
+                    <hr class="mb-4">
+                    <h2>Mes Spot</h2>
+                    <hr class="mb-4">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            {% if spots %}
+                {% for spot in spots %}
+                    {% if spot.status == 1 %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-spots">
+                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }} {{ spot.user }}</h5>
+                                    <p class="card-spot-description">{{ spot.description }}</p>
+                                    <a href="{{ path('spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

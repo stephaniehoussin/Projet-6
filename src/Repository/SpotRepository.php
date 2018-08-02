@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Spot;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use http\Exception\InvalidArgumentException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method Spot|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,8 +45,25 @@ class SpotRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->setMaxResults(10);
         return $qb->getQuery()->getResult();
+    }
 
+    public function findAllSpotsByDate($page)
+    {
 
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException("La page que vous souhaitez atteindre ne semble pas valide");
+        }
+
+        if($page < 1)
+        {
+            throw new NotFoundHttpException("Désolé la page souhaitée n'existe pas");
+        }
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(12)
+            ->setFirstResult($page * 12 - 12);
+        return $rq->getQuery()->getResult();
     }
 
     public function allSpotsHome()
@@ -56,7 +75,37 @@ class SpotRepository extends ServiceEntityRepository
         return $rq->getQuery()->getResult();
     }
 
-//    /**
+    public function findSpotByTitle($term)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->where($qb->expr()->like('s.title', ':title'))
+            ->setParameter("title", "%$term%")
+            ->setMaxResults(20);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function getTest($id)
+    {
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC')
+            ->setParameter('id', $id);
+        $spots = $rq->getQuery()->getArrayResult();
+        return $spots;
+
+    }
+
+    public function countAllSpots()
+    {
+        $nb = $this->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
 //     * @return Spot[] Returns an array of Spot objects
 //     */
     /*

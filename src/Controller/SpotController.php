@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Commentaire;
-use App\Form\commentaireType;
+use App\Entity\Category;
 use App\Form\commentType;
+use App\Form\SpotFilterType;
 use App\Form\spotType;
+use App\Repository\CommentRepository;
+use App\Repository\SpotRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,103 +17,127 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Spot;
 use App\Entity\Comment;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Tree;
 use App\Entity\Like;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class SpotController extends Controller
 {
     /**
      * @Route("accueil/je-spote", name="je-spote")
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function makeSpot(Request $request, EntityManagerInterface $entityManager)
+    public function makeSpot(Request $request)
     {
         $spot = new Spot();
         $form = $this->createForm(spotType::class, $spot);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $entityManager =$this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $currentUser = $this->getUser();
-            dump($currentUser);
+            if($currentUser->haRole('ROLE_MODERATEUR'))
+            {
+                $spot->setStatus(2);
+            }
             $spot->setUser($currentUser);
             $entityManager->persist($spot);
             $entityManager->flush();
             $this->addFlash('success', 'Votre spot est bien enregistré!');
-              return $this->redirectToRoute('tous-les-spots');
+            return $this->redirectToRoute('tous-les-spots', ['page' => 1]);
         }
-        return $this->render('spot/makeSpot.html.twig',[
-            'spot' => $form->createView(),
+        return $this->render('spot/makeSpot.html.twig', [
+            'formSpot' => $form->createView(),
         ]);
     }
+
     /**
-     * @Route("accueil/je-cherche-un-spot", name="je-cherche-un-spot")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("accueil/je-cherche-un-spot/", name="je-cherche-un-spot")
+     * @param SpotRepository $spotRepository
+     * @return Response
      */
-    public function searchSpot()
+    public function searchSpot(SpotRepository $spotRepository,Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $spots = $entityManager->getRepository(Spot::class)->findAll();
-        return $this->render('spot/searchSpot.html.twig',array(
-            'spots' => $spots));
+         $spots = $spotRepository->findAll();
+        $form = $this->createForm(SpotFilterType::class);
+        return $this->render('spot/searchSpot.html.twig', array(
+            'spots' => $spots,
+            'formFilter' => $form->createView()
+        ));
+    }
+
+    public function ajaxFilter(Request $request)
+    {
+        $form = $this->createForm(SpotFilterType::class);
+        $form->handleRequest($request);
+
+        $form->getData();
+
     }
 
     /**
-     * @Route("accueil/tous-les-spots", name="tous-les-spots")
-     * @param Spot $spot
-     * @param EntityManagerInterface $entityManager
+     * @Route("accueil/tous-les-spots/{page}", requirements={"page" = "\d+"} , name="tous-les-spots")
+     * @param SpotRepository $spotRepository
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param $page
+     * @return Response
      */
-    public function showAllSpots(EntityManagerInterface $entityManager,Request $request)
+    public function showAllSpots(SpotRepository $spotRepository, Request $request,$page)
     {
-        $em = $this->getDoctrine()->getManager();
-        $spots = $em->getRepository(Spot::class)->findAll();
-       // $nbComments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
-        return $this->render('spot/showAllSpots.html.twig',array(
+        $spots = $spotRepository->findAllSpotsByDate($page);
+        $nbSpots = $spotRepository->countAllSpots();
+        $nbPages = ceil($nbSpots / 12);
+        if($page != 1 && $page > $nbPages)
+        {
+            throw new NotFoundHttpException("La page n'existe pas");
+        }
+        $pagination = [
+            'page' => $page,
+            'nbPages' => $nbPages,
+            'nbSpots' => $nbSpots
+        ];
+        return $this->render('spot/showAllSpots.html.twig', array(
             'spots' => $spots,
-        //    'nbComments' => $nbComments,
-
+            'pagination' => $pagination
         ));
     }
 
     /**
      * @Route("accueil/spot/{id}", name="spot")
+     * @param SpotRepository $spotRepository
+     * @param CommentRepository $commentRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Spot $spot
+     * @return Response
      */
-    public function showOneSpot(Request $request, EntityManagerInterface $entityManager,$id,Spot $spot)
+    public function showOneSpot(SpotRepository $spotRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
     {
-        $em = $this->getDoctrine()->getManager();
-        // je récupère l'id du spot en cours dans $spot
-        $spot = $em->getRepository(Spot::class)->findOneBy(['id' => $id]);
-        $nbComments = $em->getRepository(Comment::class)->countCommentsBySpot($spot->getId());
-        dump($spot);
-        // $em = $this->getDoctrine()->getManager();
-        // $comments = $em->getRepository(Comment::class)->getCommentsBySpot($spot->getId());
-        $comment = new Comment();
-        $form_comment = $this->createForm(commentType::class, $comment);
-        $form_comment->handleRequest($request);
-        if($form_comment->isSubmitted() && $form_comment->isValid())
-        {
-            // cette ligne enregistre le spot_id
-            $comment->setSpot($spot);
 
-            //$comment->setMessage($comment);
+        $spot = $spotRepository->findOneBy(['id' => $id]);
+        $nbComments = $commentRepository->countCommentsBySpot($spot->getId());
+        $comment = new Comment();
+        $form = $this->createForm(commentType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $currentUser = $this->getUser();
+            $comment->setSpot($spot);
+            $comment->setUser($currentUser);
             $entityManager->persist($comment);
             $entityManager->flush();
             $this->addFlash('success', 'Merci pour votre commentaire');
             dump($comment);
         }
-        return $this->render('spot/showOneSpot.html.twig',array(
+        return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
             'comment' => $comment,
-              'nbComments' => $nbComments,
-            // 'commentaires' => $commentaires,
-            'form_comment' => $form_comment->createView(),
-            // 'form_commentaire' => $form_commentaire->createView()
+            'nbComments' => $nbComments,
+            'formComment' => $form->createView(),
         ));
     }
 
@@ -118,14 +145,47 @@ class SpotController extends Controller
     /**
      * @Route("accueil/map-search", name="map-search")
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      */
-    public function searchSpotMap(Request $request)
+    public function searchSpotMap(Request $request,SpotRepository $spotRepository)
     {
-        $em = $this->getDoctrine()->getManager();
-        $spots = $em->getRepository(Spot::class)->findAll();
-        return new JsonResponse($spots);
+          $titles = array();
+         $term = trim(strip_tags($request->get('term')));
+         $spots = $spotRepository->findSpotByTitle($term);
+         foreach($spots as $spot)
+         {
+             $titles[] = $spot->getTitle();
+         }
+         return new JsonResponse($titles);
+
+
     }
 
+    /**
+     * @Route("carte/", name="find")
+     */
+    public function test(SpotRepository $spotRepository,Request $request)
+    {
+        $spots = $spotRepository->findAll();
+        $spot = new Spot();
+        $form = $this->createForm(spotType::class, $spot);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $currentUser = $this->getUser();
+            dump($currentUser);
+            $spot->setUser($currentUser);
+            $entityManager->persist($spot);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre spot est bien enregistré!');
+            return $this->redirectToRoute('tous-les-spots');
+        }
+
+        return $this->render('landing/test.html.twig', array(
+            'spots' => $spots,
+            'formSpot' => $form->createView(),
+        ));
+    }
 }
 
