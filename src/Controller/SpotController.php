@@ -17,6 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Spot;
 use App\Entity\Comment;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Entity\Tree;
 use App\Entity\Like;
 use Symfony\Component\Serializer\Serializer;
@@ -44,7 +45,7 @@ class SpotController extends Controller
             $entityManager->persist($spot);
             $entityManager->flush();
             $this->addFlash('success', 'Votre spot est bien enregistré!');
-            return $this->redirectToRoute('tous-les-spots');
+            return $this->redirectToRoute('tous-les-spots', ['page' => 1]);
         }
         return $this->render('spot/makeSpot.html.twig', [
             'formSpot' => $form->createView(),
@@ -52,7 +53,7 @@ class SpotController extends Controller
     }
 
     /**
-     * @Route("accueil/je-cherche-un-spot", name="je-cherche-un-spot")
+     * @Route("accueil/je-cherche-un-spot/", name="je-cherche-un-spot")
      * @param SpotRepository $spotRepository
      * @return Response
      */
@@ -76,16 +77,29 @@ class SpotController extends Controller
     }
 
     /**
-     * @Route("accueil/tous-les-spots", name="tous-les-spots")
+     * @Route("accueil/tous-les-spots/{page}", requirements={"page" = "\d+"} , name="tous-les-spots")
      * @param SpotRepository $spotRepository
      * @param Request $request
+     * @param $page
      * @return Response
      */
-    public function showAllSpots(SpotRepository $spotRepository, Request $request)
+    public function showAllSpots(SpotRepository $spotRepository, Request $request,$page)
     {
-        $spots = $spotRepository->findAllSpotsByDate();
+        $spots = $spotRepository->findAllSpotsByDate($page);
+        $nbSpots = $spotRepository->countAllSpots();
+        $nbPages = ceil($nbSpots / 12);
+        if($page != 1 && $page > $nbPages)
+        {
+            throw new NotFoundHttpException("La page n'existe pas");
+        }
+        $pagination = [
+            'page' => $page,
+            'nbPages' => $nbPages,
+            'nbSpots' => $nbSpots
+        ];
         return $this->render('spot/showAllSpots.html.twig', array(
             'spots' => $spots,
+            'pagination' => $pagination
         ));
     }
 

@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,10 +18,17 @@ class SpotFilterType extends AbstractType
         $builder
             ->add('category', EntityType::class,[
                 'class'=> Category::class,
-                    'label' => 'Filtrer par catégories']
+                    'label' => 'Filtre par catégories']
             )
-      //  ->add('distance', ChoiceType::class,['choices'=>['10km'=>10, '2km'=>2]])
-        ;
+            ->add('date',DateType::class,array(
+                'label' => 'Filtre par date'
+            ) )
+            ->add('user', EntityType::class,[
+                'class' => User::class,
+                'label' => 'Filtre par Spoteur'
+            ]);
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

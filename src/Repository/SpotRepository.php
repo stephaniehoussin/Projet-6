@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Spot;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use http\Exception\InvalidArgumentException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method Spot|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,11 +49,22 @@ class SpotRepository extends ServiceEntityRepository
 
     }
 
-    public function findAllSpotsByDate()
+    public function findAllSpotsByDate($page)
     {
+
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException("La page que vous souhaitez atteindre ne semble pas valide");
+        }
+
+        if($page < 1)
+        {
+            throw new NotFoundHttpException("Désolé la page souhaitée n'existe pas");
+        }
         $rq = $this->createQueryBuilder('s')
             ->select('s')
-            ->orderBy('s.date', 'DESC');
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(12)
+            ->setFirstResult($page * 12 - 12);
         return $rq->getQuery()->getResult();
     }
 
@@ -84,6 +97,15 @@ class SpotRepository extends ServiceEntityRepository
         $spots = $rq->getQuery()->getArrayResult();
         return $spots;
 
+    }
+
+    public function countAllSpots()
+    {
+        $nb = $this->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
     }
 
 //     * @return Spot[] Returns an array of Spot objects
