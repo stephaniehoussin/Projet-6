@@ -54,8 +54,8 @@
                             </div>
                         <div class="row">
                             <div class="col-md-6">
-                            <p><i class="fa fa-thumb-tack"> Au bord de l'eau</i></p>
-                                <p><i class="fa fa-map-marker"> Bois de Boulogne </i></p>
+                            <p><i class="fa fa-thumb-tack">{{ spot.category }}</i></p>
+                                <p><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
                             </div>
                         </div>
                             <div class="row">
@@ -75,17 +75,16 @@
                             <h5 class="card-title">Informations du Spot</h5>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <p><i class="fa fa-user"> Fanny</i></p>
+                                    <p><i class="fa fa-user"> {{ spot.user }}</i></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><i class="fa fa-calendar"> 23/07/2018</i></p>
+                                    <p><i class="fa fa-calendar"> {{ spot.date|date("d/m/Y") }}</i></p>
                                 </div>
                             </div>
-                            <img class="card-img-top" src="{{ asset('assets/img/boisdeboulogne.jpg') }}" alt="Card image cap">
+                            <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-spot-title">Spot #11 Spot au top !</h5>
-                                <p class="card-spot-description">Lieu incroyable ! Les pieds dans l'eau . On a fait un
-                                pique nique mémorable !</p>
+                                <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }}</h5>
+                                <p class="card-spot-description">{{ spot.description }}</p>
                                 <button type="button">Enregistrer dans mes favoris</button>
                             </div>
                         </div>

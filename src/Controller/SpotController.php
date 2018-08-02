@@ -56,9 +56,9 @@ class SpotController extends Controller
      * @param SpotRepository $spotRepository
      * @return Response
      */
-    public function searchSpot(SpotRepository $spotRepository)
+    public function searchSpot(SpotRepository $spotRepository,Request $request)
     {
-        $spots = $spotRepository->findAll();
+         $spots = $spotRepository->findAll();
         $form = $this->createForm(SpotFilterType::class);
         return $this->render('spot/searchSpot.html.twig', array(
             'spots' => $spots,
@@ -83,7 +83,7 @@ class SpotController extends Controller
      */
     public function showAllSpots(SpotRepository $spotRepository, Request $request)
     {
-        $spots = $spotRepository->findAll();
+        $spots = $spotRepository->findAllSpotsByDate();
         return $this->render('spot/showAllSpots.html.twig', array(
             'spots' => $spots,
         ));
@@ -142,6 +142,33 @@ class SpotController extends Controller
          return new JsonResponse($titles);
 
 
+    }
+
+    /**
+     * @Route("carte/", name="find")
+     */
+    public function test(SpotRepository $spotRepository,Request $request)
+    {
+        $spots = $spotRepository->findAll();
+        $spot = new Spot();
+        $form = $this->createForm(spotType::class, $spot);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $currentUser = $this->getUser();
+            dump($currentUser);
+            $spot->setUser($currentUser);
+            $entityManager->persist($spot);
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre spot est bien enregistré!');
+            return $this->redirectToRoute('tous-les-spots');
+        }
+
+        return $this->render('landing/test.html.twig', array(
+            'spots' => $spots,
+            'formSpot' => $form->createView(),
+        ));
     }
 }
 

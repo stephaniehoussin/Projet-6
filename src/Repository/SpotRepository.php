@@ -47,6 +47,14 @@ class SpotRepository extends ServiceEntityRepository
 
     }
 
+    public function findAllSpotsByDate()
+    {
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC');
+        return $rq->getQuery()->getResult();
+    }
+
     public function allSpotsHome()
     {
         $rq = $this->createQueryBuilder('s')
@@ -65,6 +73,19 @@ class SpotRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+
+    public function getTest($id)
+    {
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC')
+            ->setParameter('id', $id);
+        $spots = $rq->getQuery()->getArrayResult();
+        return $spots;
+
+    }
+
 //     * @return Spot[] Returns an array of Spot objects
 //     */
     /*

@@ -14,8 +14,11 @@ class SpotFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('category', EntityType::class,['class'=> Category::class])
-        ->add('distance', ChoiceType::class,['choices'=>['10km'=>10, '2km'=>2]])
+            ->add('category', EntityType::class,[
+                'class'=> Category::class,
+                    'label' => 'Filtrer par catégories']
+            )
+      //  ->add('distance', ChoiceType::class,['choices'=>['10km'=>10, '2km'=>2]])
         ;
     }
 
