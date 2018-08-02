@@ -40,7 +40,7 @@ class SpotController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $currentUser = $this->getUser();
-            if($currentUser->haRole('ROLE_MODERATEUR'))
+            if($currentUser->hasRole('ROLE_MODERATEUR'))
             {
                 $spot->setStatus(2);
             }

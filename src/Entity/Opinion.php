@@ -37,6 +37,10 @@ class Opinion
         $this->date = new \DateTime();
     }
 
+    public function __toString()
+    {
+        return $this->getMessage();
+    }
     public function getId()
     {
         return $this->id;
