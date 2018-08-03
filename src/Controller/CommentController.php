@@ -5,8 +5,6 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Entity\Comment;
-use App\Form\commentType;
 use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends Controller
@@ -27,10 +25,6 @@ class CommentController extends Controller
     public function reportComment(Request $request, EntityManagerInterface $entityManager)
     {
 
-      /*  $em = $this->getDoctrine()->getManager();
-        $report = $em->getRepository(Comment::class)->commentIsReport();
-        dump($report);
-        return $report;*/
 
     }
 

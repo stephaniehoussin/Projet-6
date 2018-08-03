@@ -6,7 +6,6 @@ namespace App\Controller;
 use App\Entity\Opinion;
 use App\Form\opinionType;
 use Doctrine\ORM\EntityManagerInterface;
-use const Grpc\OP_RECV_INITIAL_METADATA;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;

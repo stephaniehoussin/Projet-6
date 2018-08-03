@@ -2,18 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\Spot;
 use App\Form\contactType;
 use App\Repository\CommentRepository;
 use App\Repository\OpinionRepository;
 use App\Repository\SpotRepository;
 use App\Repository\UserRepository;
+use App\Services\PageDecoratorsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
 
 class HomeController extends Controller
 {
@@ -26,10 +24,16 @@ class HomeController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function landing(SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request,UserRepository $userRepository, OpinionRepository $opinionRepository)
+    public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request,UserRepository $userRepository, OpinionRepository $opinionRepository)
     {
         $datetime = date("d-m-Y");
-        $totalNbComments = $commentRepository->countAllComments();
+        //$number = $pageDecoratorsService->recupData();
+
+      /*  $totalNbComments = $pageDecoratorsService->recupData();
+        $totalNbSpots = $pageDecoratorsService->recupData();
+        $totalNbUsers = $pageDecoratorsService->recupData();
+        $totalNbOpinions = $pageDecoratorsService->recupData();*/
+       $totalNbComments = $commentRepository->countAllComments();
         $totalNbSpots = $spotRepository->countAllSpots();
         $totalNbUsers = $userRepository->countAllUsers();
         $totalNbOpinions = $opinionRepository->countAllOpinions();
@@ -45,14 +49,6 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/game", name="game")
-     */
-    public function game()
-    {
-        return $this->render('landing/game.html.twig');
-    }
-
-    /**
      * @Route("/accueil", name="accueil")
      * @param SpotRepository $spotRepository
      * @param CommentRepository $commentRepository
@@ -60,7 +56,6 @@ class HomeController extends Controller
      */
     public function home(SpotRepository $spotRepository,CommentRepository $commentRepository,UserRepository $userRepository,OpinionRepository $opinionRepository)
     {
-        //$spots = $spotRepository->findAll();
         $datetime = date("d-m-Y");
         $totalNbComments = $commentRepository->countAllComments();
         $totalNbSpots = $spotRepository->countAllSpots();

@@ -32,11 +32,6 @@
                 <hr class="mb-4">
                 <h2>Contactez nous</h2>
                 <hr class="mb-4">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
                 {{ form_start(contact) }}
                 <div class="form-group">
                     {{ form_widget(contact, { 'attr': {'class': 'form-control'} }) }}

@@ -4,8 +4,6 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-
 {% endblock %}
 {% block nav %}
 
@@ -15,16 +13,15 @@
 
     {% include 'account/parts/navAccount.html.twig' %}
     <div class="account-content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-8 page_marge_top">
-                    <hr class="mb-4">
-                    <h2>Mes Spot</h2>
-                    <hr class="mb-4">
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Mes spots en attente de validation</h2>
+                    </div>
                 </div>
-
             </div>
-        </div>
+        </section>
         <div class="row">
             {% if spots %}
                 {% for spot in spots %}

@@ -2,14 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\User;
 use App\Repository\SpotRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Entity\Spot;
 
 class AccountController extends Controller
 {
@@ -18,10 +13,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-       // $em = $this->getDoctrine()->getManager();
-       // $nbComments = $em->getRepository(Comment::class)->countCommentsByUser($user->getId());
         return $this->render('account/index.html.twig',array(
-        //    'nbComments' => $nbComments
         ));
     }
 
@@ -34,7 +26,7 @@ class AccountController extends Controller
     {
         $user = $this->getUser();
         $spots = $spotRepository->findAllSpotsByUser($user->getId());
-        return $this->render('account/accountPersonalSpotsAccepted.html.twig',array(
+        return $this->render('account/spotsAccepted.html.twig',array(
             'spots' => $spots,
         ));
     }
@@ -48,7 +40,7 @@ class AccountController extends Controller
     {
         $user = $this->getUser();
         $spots = $spotRepository->findAllSpotsByUser($user->getId());
-        return $this->render('account/accountPersonalSpotsWaiting.html.twig',array(
+        return $this->render('account/spotsWaiting.html.twig',array(
             'spots' => $spots
         ));
     }
@@ -59,7 +51,7 @@ class AccountController extends Controller
      */
     public function favoritesSpotsByUser()
     {
-        return $this->render('account/accountFavoritesSpots.html.twig');
+        return $this->render('account/favoritesSpots.html.twig');
     }
 
     /**
@@ -68,7 +60,7 @@ class AccountController extends Controller
      */
     public function statsByUser()
     {
-        return $this->render('account/accountPersonalStats.html.twig');
+        return $this->render('account/stats.html.twig');
     }
 
     /**
@@ -77,7 +69,15 @@ class AccountController extends Controller
      */
     public function informationsByUser()
     {
-        return $this->render('account/accountInformations.html.twig');
+        return $this->render('account/informations.html.twig');
     }
 
+    /**
+     * @Route("mon-compte/commentaires-signales", name="commentaires-signales")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function reportCommentsByUser()
+    {
+        return $this->render('account/reportComments.html.twig');
+    }
 }
