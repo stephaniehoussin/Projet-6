@@ -19,6 +19,18 @@ class OpinionRepository extends ServiceEntityRepository
         parent::__construct($registry, Opinion::class);
     }
 
+
+    public function countAllOpinions()
+    {
+        $nb = $this
+            ->createQueryBuilder('o')
+            ->select('count(o) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+
 //    /**
 //     * @return Opinion[] Returns an array of Opinion objects
 //     */
