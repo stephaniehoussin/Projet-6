@@ -6,7 +6,9 @@ use App\Entity\Comment;
 use App\Entity\Spot;
 use App\Form\contactType;
 use App\Repository\CommentRepository;
+use App\Repository\OpinionRepository;
 use App\Repository\SpotRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,15 +26,21 @@ class HomeController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function landing(SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request, EntityManagerInterface $entityManager)
+    public function landing(SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request,UserRepository $userRepository, OpinionRepository $opinionRepository)
     {
         $datetime = date("d-m-Y");
         $totalNbComments = $commentRepository->countAllComments();
+        $totalNbSpots = $spotRepository->countAllSpots();
+        $totalNbUsers = $userRepository->countAllUsers();
+        $totalNbOpinions = $opinionRepository->countAllOpinions();
         $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
             'totalNbComments' => $totalNbComments,
             'spot' => $spot,
-            'datetime' => $datetime
+            'datetime' => $datetime,
+            'totalNbSpots' => $totalNbSpots,
+            'totalNbUsers' => $totalNbUsers,
+            'totalNbOpinions' => $totalNbOpinions
         ));
     }
 
@@ -50,16 +58,22 @@ class HomeController extends Controller
      * @param CommentRepository $commentRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(SpotRepository $spotRepository,CommentRepository $commentRepository)
+    public function home(SpotRepository $spotRepository,CommentRepository $commentRepository,UserRepository $userRepository,OpinionRepository $opinionRepository)
     {
         //$spots = $spotRepository->findAll();
         $datetime = date("d-m-Y");
         $totalNbComments = $commentRepository->countAllComments();
+        $totalNbSpots = $spotRepository->countAllSpots();
+        $totalNbUsers = $userRepository->countAllUsers();
+        $totalNbOpinions = $opinionRepository->countAllOpinions();
         $spots = $spotRepository->allSpotsHome();
         return $this->render('home/index.html.twig',array(
             'totalNbComments' => $totalNbComments,
             'datetime' => $datetime,
-            'spots' => $spots
+            'spots' => $spots,
+            'totalNbSpots' => $totalNbSpots,
+            'totalNbUsers' => $totalNbUsers,
+            'totalNbOpinions' => $totalNbOpinions
         ));
     }
 

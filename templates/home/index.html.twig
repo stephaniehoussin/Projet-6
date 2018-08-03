@@ -10,21 +10,17 @@
 {% block body %}
     <div class="container">
     <!-------------------SECTION DERNIERS SPOTS-------------->
-    <section class="allSpots">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12 page_marge_top">
-                    <hr class="mb-4">
-                    <h2>Les derniers Spots</h2>
-                    <hr class="mb-4">
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
+
+        <section id="landing-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Les derniers spots</h3>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <section class="lastSpotsHome">
         <div class="row">
             {% if spots %}
                 {% for spot in spots %}
@@ -45,10 +41,9 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
-
         </div>
-    </section>
+        </section>
+
 
         <!-------------------SECTION ASSOCIATION-------------->
 
@@ -87,14 +82,14 @@
 
         <div class="container-landing-stats-content">
             <div class="front-landing-stats-content">
-                <p class="number">Nombre</p>
+                <p class="number">{{ totalNbUsers }}</p>
                 <p class="text">Utilisateurs</p>
 
             </div>
         </div>
         <div class="container-landing-stats-content">
             <div class="front-landing-stats-content">
-                <p class="number">Nombre</p>
+                <p class="number">{{ totalNbSpots }}</p>
                 <p class="text">Spots</p>
 
             </div>
@@ -122,7 +117,7 @@
         </div>
         <div class="container-landing-stats-content">
             <div class="front-landing-stats-content">
-                <p class="number">Nombre</p>
+                <p class="number">{{ totalNbOpinions }}</p>
                 <p class="text"> Avis</p>
 
             </div>
