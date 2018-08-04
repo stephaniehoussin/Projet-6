@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\SpotRepository;
+use App\Services\PageDecoratorsService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -58,9 +59,12 @@ class AccountController extends Controller
      * @Route("mon-compte/mes-stats", name="mes-stats")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function statsByUser()
+    public function statsByUser(PageDecoratorsService $pageDecoratorsService)
     {
-        return $this->render('account/stats.html.twig');
+        $result = $pageDecoratorsService->recupAllData();
+        return $this->render('account/stats.html.twig',array(
+            'result' => $result
+        ));
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Form\SpotFilterType;
 use App\Form\spotType;
 use App\Repository\CommentRepository;
 use App\Repository\SpotRepository;
+use App\Services\PageDecoratorsService;
 use App\Services\SpotManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,24 +22,23 @@ class SpotController extends Controller
 {
     /**
      * @Route("accueil/je-spote", name="je-spote")
+     * @param SpotManager $spotManager
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function makeSpot(SpotManager $spotManager,Request $request, EntityManagerInterface $entityManager)
+    public function makeSpot(SpotManager $spotManager,Request $request)
     {
         $spot = $spotManager->initSpot();
         $form = $this->createForm(spotType::class, $spot);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $spotManager->makeSpotManager($spot);
             $currentUser = $this->getUser();
             if($currentUser->hasRole('ROLE_MODERATEUR'))
             {
                 $spot->setStatus(2);
             }
             $spot->setUser($currentUser);
-            $entityManager->persist($spot);
-            $entityManager->flush();
+            $spotManager->persistSpot($spot);
             $this->addFlash('success', 'Votre spot est bien enregistré!');
             return $this->redirectToRoute('je-cherche-un-spot', ['page' => 1]);
         }
@@ -78,6 +78,7 @@ class SpotController extends Controller
 
     /**
      * @Route("accueil/spot/{id}", name="spot")
+     * @param SpotManager $spotManager
      * @param SpotRepository $spotRepository
      * @param CommentRepository $commentRepository
      * @param Request $request
@@ -98,10 +99,8 @@ class SpotController extends Controller
             $currentUser = $this->getUser();
             $comment->setSpot($spot);
             $comment->setUser($currentUser);
-            $entityManager->persist($comment);
-            $entityManager->flush();
+            $spotManager->persistComment($comment);
             $this->addFlash('success', 'Merci pour votre commentaire');
-            dump($comment);
         }
         return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
@@ -120,6 +119,19 @@ class SpotController extends Controller
     {
         $spots = $spotRepository->findAll();
         return new JsonResponse($spots);
+    }
+
+    /**
+     * @Route("/test", name="test")
+     * @param PageDecoratorsService $pageDecoratorsService
+     * @return Response
+     */
+    public function test(PageDecoratorsService $pageDecoratorsService)
+    {
+        $result = $pageDecoratorsService->recupAllData();
+        return $this->render('home/test.html.twig',array(
+            'result' => $result
+        ));
     }
 
 }

@@ -85,22 +85,22 @@ class SpotRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-
-    public function getTest($id)
-    {
-        $rq = $this->createQueryBuilder('s')
-            ->select('s')
-            ->orderBy('s.date', 'DESC')
-            ->setParameter('id', $id);
-        $spots = $rq->getQuery()->getArrayResult();
-        return $spots;
-
-    }
-
     public function countAllSpots()
     {
         $nb = $this->createQueryBuilder('s')
             ->select('count(s) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function countSpotsByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;

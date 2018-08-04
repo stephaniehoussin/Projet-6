@@ -1,9 +1,11 @@
 <?php
 namespace App\Services;
 use App\Entity\Comment;
+use App\Repository\OpinionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Spot;
+use App\Entity\Opinion;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -30,8 +32,21 @@ class SpotManager
     }
 
 
-    public function makeSpotManager(Spot $spot)
+    public function persistSpot(Spot $spot)
     {
+        $this->em->persist($spot);
+        $this->em->flush();
+    }
 
+    public function persistComment(Comment $comment)
+    {
+        $this->em->persist($comment);
+        $this->em->flush();
+    }
+
+    public function persistOpinion(Opinion $opinion)
+    {
+        $this->em->persist($opinion);
+        $this->em->flush();
     }
 }

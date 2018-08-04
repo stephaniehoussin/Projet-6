@@ -17,58 +17,38 @@ class HomeController extends Controller
 {
     /**
      * @Route("/landing", name="landing")
+     * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotRepository $spotRepository
-     * @param CommentRepository $commentRepository
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request,UserRepository $userRepository, OpinionRepository $opinionRepository)
+    public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $datetime = date("d-m-Y");
-        //$number = $pageDecoratorsService->recupData();
-
-      /*  $totalNbComments = $pageDecoratorsService->recupData();
-        $totalNbSpots = $pageDecoratorsService->recupData();
-        $totalNbUsers = $pageDecoratorsService->recupData();
-        $totalNbOpinions = $pageDecoratorsService->recupData();*/
-       $totalNbComments = $commentRepository->countAllComments();
-        $totalNbSpots = $spotRepository->countAllSpots();
-        $totalNbUsers = $userRepository->countAllUsers();
-        $totalNbOpinions = $opinionRepository->countAllOpinions();
+        $result = $pageDecoratorsService->recupAllData();
         $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
-            'totalNbComments' => $totalNbComments,
             'spot' => $spot,
             'datetime' => $datetime,
-            'totalNbSpots' => $totalNbSpots,
-            'totalNbUsers' => $totalNbUsers,
-            'totalNbOpinions' => $totalNbOpinions
+            'result' => $result
         ));
     }
 
     /**
      * @Route("/accueil", name="accueil")
+     * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotRepository $spotRepository
-     * @param CommentRepository $commentRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(SpotRepository $spotRepository,CommentRepository $commentRepository,UserRepository $userRepository,OpinionRepository $opinionRepository)
+    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $datetime = date("d-m-Y");
-        $totalNbComments = $commentRepository->countAllComments();
-        $totalNbSpots = $spotRepository->countAllSpots();
-        $totalNbUsers = $userRepository->countAllUsers();
-        $totalNbOpinions = $opinionRepository->countAllOpinions();
+        $result = $pageDecoratorsService->recupAllData();
         $spots = $spotRepository->allSpotsHome();
         return $this->render('home/index.html.twig',array(
-            'totalNbComments' => $totalNbComments,
             'datetime' => $datetime,
             'spots' => $spots,
-            'totalNbSpots' => $totalNbSpots,
-            'totalNbUsers' => $totalNbUsers,
-            'totalNbOpinions' => $totalNbOpinions
+            'result' => $result
         ));
     }
 

@@ -19,7 +19,7 @@ class LikeRepository extends ServiceEntityRepository
         parent::__construct($registry, Like::class);
     }
 
-    public function countNbLikes()
+    public function countAllLikes()
     {
         $nb = $this->createQueryBuilder('l')
             ->select('COUNT(l) as nb')

@@ -19,13 +19,5 @@ class CommentController extends Controller
         ]);
     }
 
-    /**
-     * @Route("/report_comment" , name="report_comment")
-     */
-    public function reportComment(Request $request, EntityManagerInterface $entityManager)
-    {
-
-
-    }
 
 }
