@@ -29,15 +29,15 @@ class PageDecoratorsService
        $totalNbComments = $this->commentRepository->countAllComments();
        $totalNbUsers = $this->userRepository->countAllUsers();
        $totalNbOpinions = $this->opinionRepository->countAllOpinions();
-       $totalNbLikes = $this->likeRepository->countAllLikes();
-       $totalNbTrees = $this->treeRepository->countAllTrees();
+     //  $totalNbLikes = $this->likeRepository->countAllLikes();
+     //  $totalNbTrees = $this->treeRepository->countAllTrees();
        $result = array(
            'totalNbSpots' => $totalNbSpots,
            'totalNbComments' => $totalNbComments,
            'totalNbUsers' => $totalNbUsers,
            'totalNbOpinions'=> $totalNbOpinions,
-           'totalNbLikes' => $totalNbLikes,
-           'totalNbTrees' => $totalNbTrees
+          // 'totalNbLikes' => $totalNbLikes,
+          // 'totalNbTrees' => $totalNbTrees
        );
        return $result;
    }
