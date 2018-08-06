@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'account/parts/navAccount.html.twig' %}
+    <div class="account-content">
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Mes spots favoris</h2>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+{% endblock %}
+
+

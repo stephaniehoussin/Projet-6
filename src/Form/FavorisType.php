@@ -1,26 +1,27 @@
 <?php
+
 namespace App\Form;
 
+use App\Entity\Favoris;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Comment;
 
-class commentType extends AbstractType
+class FavorisType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', TextareaType::class,array(
-                'label' => 'Je commente le spot!'
+            ->add('favoris', SubmitType::class,array(
+                'label' => 'Fav Me !'
             ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => comment::class
+            'data_class' => Favoris::class
         ]);
     }
 }

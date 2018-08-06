@@ -19,10 +19,34 @@ class TreeRepository extends ServiceEntityRepository
         parent::__construct($registry, Tree::class);
     }
 
-    public function countNbTrees()
+    public function countAllTrees()
     {
         $nb = $this->createQueryBuilder('t')
             ->select('COUNT(t) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function countTreesBySpot($spotId)
+    {
+        $nb = $this
+            ->createQueryBuilder('t')
+            ->select('count(t) as nb')
+            ->where('t.spot = :spotId')
+            ->setParameter('spotId', $spotId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function countTreesByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('t')
+            ->select('count(t) as nb')
+            ->where('t.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;

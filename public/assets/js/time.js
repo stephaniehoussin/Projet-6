@@ -1,16 +1,13 @@
-window.onload=function() {
-    horloge('horloge');
-};
+function afficher() {
+    var offsetUTC = +12,
+        lD = new Date(),
+        oD = new Date();
+    oD.setHours(lD.getUTCHours()+offsetUTC);
 
-function horloge(el) {
-    if(typeof el=="string") { el = document.getElementById(el); }
-    function actualiser() {
-        var date = new Date();
-        var str = date.getHours();
-        str += ':'+(date.getMinutes()<10?'0':'')+date.getMinutes();
-        str += ':'+(date.getSeconds()<10?'0':'')+date.getSeconds();
-        el.innerHTML = str;
-    }
-    actualiser();
-    setInterval(actualiser,1000);
+    document.getElementById('locale').innerHTML = "Le  "+lD.toLocaleString();
 }
+
+window.onload=function() {
+    afficher();
+    setInterval(afficher,1000);
+};

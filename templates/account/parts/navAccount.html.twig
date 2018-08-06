@@ -5,40 +5,45 @@
     <div class="menu-list">
 
         <ul id="menu-content" class="menu-content collapse out">
+
             <li>
-                <a href="{{ path('mes-infos') }}">
-                    <i class="fa fa-users fa-lg"></i> Mes infos
-                </a>
+                <a href="{{ path('mon-compte') }}">Accueil Espace personnel</a>
+            </li>
+            {% if is_granted('ROLE_MODERATEUR') %}
+                <li>
+                    <a href="{{ path('spots-en-attente') }}">Spots en attente de validation</a>
+                </li>
+                <li>
+                    <a href="{{ path('commentaires-signales') }}">Commentaires signalés</a>
+                </li>
+            {% endif %}
+
+            <li>
+                <a href="{{ path('mes-infos') }}">Mes infos</a>
             </li>
             <li>
-                <a href="{{ path('mes-spots-valides') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots validés
-                </a>
+                <a href="{{ path('mes-spots-valides') }}">Mes Spots validés</a>
+            </li>
+
+            {% if is_granted('ROLE_MODERATEUR') == false %}
+            <li>
+                <a href="{{ path('mes-spots-en-attente') }}">Mes Spots en attente de validation</a>
+            </li>
+            {% endif %}
+
+            <li>
+                <a href="{{ path('mes-spots-favoris') }}">Mes Spots favoris</a>
+            </li>
+            {% if is_granted('ROLE_MODERATEUR') == false %}
+            <li>
+                <a href="{{ path('mes-commentaires-signales') }}">Mes commentaires signalés</a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('contact') }}">Nous contacter</a>
             </li>
             <li>
-                <a href="{{ path('mes-spots-en-attente') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots en attente de validation
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('mes-spots-favoris') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Spots favoris
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes commentaires signalés
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('mes-stats') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Mes Stats
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('contact') }}">
-                    <i class="fa fa-dashboard fa-lg"></i> Nous contacter
-                </a>
+                <a href="{{ path('fos_user_security_logout') }}">Se deconnecter</a>
             </li>
         </ul>
     </div>

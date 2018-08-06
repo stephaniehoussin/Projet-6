@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TreeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LoveRepository")
  */
-class Tree
+class Love
 {
     /**
      * @ORM\Id()
@@ -17,13 +17,12 @@ class Tree
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="trees")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="loves")
      */
     private $spot;
 
     /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="trees")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="loves")
      */
     private $user;
 
@@ -32,19 +31,9 @@ class Tree
         return $this->id;
     }
 
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
+    /**
+     * @return Spot
+     */
     public function getSpot()
     {
         return $this->spot;
@@ -52,11 +41,23 @@ class Tree
 
     /**
      * @param Spot $spot
-     * @return Tree
+     * @return Love
      */
     public function setSpot(Spot $spot)
     {
         $this->spot = $spot;
         return $this;
     }
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

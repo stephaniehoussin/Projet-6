@@ -2,78 +2,55 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\Spot;
 use App\Form\contactType;
 use App\Repository\CommentRepository;
 use App\Repository\OpinionRepository;
 use App\Repository\SpotRepository;
 use App\Repository\UserRepository;
+use App\Services\PageDecoratorsService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\User;
 
 class HomeController extends Controller
 {
     /**
      * @Route("/landing", name="landing")
+     * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotRepository $spotRepository
-     * @param CommentRepository $commentRepository
-     * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function landing(SpotRepository $spotRepository,CommentRepository $commentRepository,Request $request,UserRepository $userRepository, OpinionRepository $opinionRepository)
+    public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $datetime = date("d-m-Y");
-        $totalNbComments = $commentRepository->countAllComments();
-        $totalNbSpots = $spotRepository->countAllSpots();
-        $totalNbUsers = $userRepository->countAllUsers();
-        $totalNbOpinions = $opinionRepository->countAllOpinions();
+        $result = $pageDecoratorsService->countAllData();
         $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
-            'totalNbComments' => $totalNbComments,
             'spot' => $spot,
             'datetime' => $datetime,
-            'totalNbSpots' => $totalNbSpots,
-            'totalNbUsers' => $totalNbUsers,
-            'totalNbOpinions' => $totalNbOpinions
+            'result' => $result
         ));
     }
 
     /**
-     * @Route("/game", name="game")
-     */
-    public function game()
-    {
-        return $this->render('landing/game.html.twig');
-    }
-
-    /**
      * @Route("/accueil", name="accueil")
+     * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotRepository $spotRepository
-     * @param CommentRepository $commentRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(SpotRepository $spotRepository,CommentRepository $commentRepository,UserRepository $userRepository,OpinionRepository $opinionRepository)
+    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,OpinionRepository $opinionRepository)
     {
-        //$spots = $spotRepository->findAll();
         $datetime = date("d-m-Y");
-        $totalNbComments = $commentRepository->countAllComments();
-        $totalNbSpots = $spotRepository->countAllSpots();
-        $totalNbUsers = $userRepository->countAllUsers();
-        $totalNbOpinions = $opinionRepository->countAllOpinions();
+        $result = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
+        $opinions = $opinionRepository->allOpinions();
         return $this->render('home/index.html.twig',array(
-            'totalNbComments' => $totalNbComments,
             'datetime' => $datetime,
             'spots' => $spots,
-            'totalNbSpots' => $totalNbSpots,
-            'totalNbUsers' => $totalNbUsers,
-            'totalNbOpinions' => $totalNbOpinions
+            'result' => $result,
+            'opinions' => $opinions
         ));
     }
 

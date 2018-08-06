@@ -45,7 +45,7 @@ class spotType extends AbstractType
                 'label' => 'Description'
             ))
             ->add('infosSupp', TextType::class,array(
-                'label' => 'Informations supplémentaires adresse'
+                'label' => 'Indiquer une adresse'
             ));
 
     }

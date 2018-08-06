@@ -1,26 +1,26 @@
 <?php
 namespace App\Form;
 
+use App\Entity\Tree;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Comment;
 
-class commentType extends AbstractType
+class TreeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('message', TextareaType::class,array(
-                'label' => 'Je commente le spot!'
+            ->add('nbTrees', SubmitType::class,array(
+                'label' => 'Tree Me !'
             ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => comment::class
+            'data_class' => Tree::class
         ]);
     }
 }

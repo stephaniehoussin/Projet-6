@@ -20,9 +20,6 @@ class SpotFilterType extends AbstractType
                 'class'=> Category::class,
                     'label' => 'Filtre par catégories']
             )
-            ->add('date',DateType::class,array(
-                'label' => 'Filtre par date'
-            ) )
             ->add('user', EntityType::class,[
                 'class' => User::class,
                 'label' => 'Filtre par Spoteur'

@@ -4,8 +4,11 @@
 
 #mainNav
  {
-    background-color: black;
+   /* background-color: #15204C;*/
+    background-image: url("../img/c5.jpg");
+    background-repeat: no-repeat;
 
+    background-size: cover;
 }
 /*bouton menu en responsive*/
 #mainNav .navbar-toggler
@@ -14,9 +17,9 @@
     right: 0;
     padding: 13px;
     text-transform: uppercase;
-    color: white;
+    color: black;
     border: 0;
-    background-color: #497435;
+    background-image: url("../img/c7.jpg");
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 /*logo*/
@@ -24,7 +27,7 @@
 /** la taille ne fontionne que en responsive **/
 #mainNav .navbar-brand
 {
-    color: white;
+    color: black;
     font-family: 'Tangerine', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 40px;
 
@@ -33,7 +36,7 @@
 /** je ne sais pas sur quoi ca agit ***/
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover
 {
-    color: white;
+    color: black;
 }
 /*liens menu*/
 #mainNav .navbar-nav .nav-item .nav-link
@@ -42,7 +45,7 @@
     font-weight: 600;
     /*padding: 0.75em 0;*/
     letter-spacing: 1px;
-    color: white;
+    color: black;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 1.1em 1em;
 }
@@ -56,45 +59,16 @@
 {
     font-size: 15px;
     padding: 10px 10px;
-    background-color: #497435;
+    background-image: url("../img/c7.jpg");
     border-color: #497435;
 }
 
-/*@media (min-width: 992px) {
-    #mainNav {
-        padding-top: 25px;
-        padding-bottom: 25px;
-        -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-        -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
-        transition: padding-top 0.3s, padding-bottom 0.3s;
-        border: none;
-        background-color: transparent;
-    }
-    #mainNav .navbar-brand {
-        font-size: 1.75em;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    #mainNav .navbar-nav .nav-item .nav-link {
-        padding: 1.1em 1em !important;
-    }
-    #mainNav.navbar-shrink {
-        padding-top: 0;
-        padding-bottom: 0;
-        background-color: white;
-    }
-    #mainNav.navbar-shrink .navbar-brand {
-        font-size: 1.25em;
-        padding: 12px 0;
-    }
-}*/
 
 /******************** LANDING ET HOME COVER **********************/
 header.masthead {
     text-align: center;
     color: black;
-    background-image: url("../img/cover.jpg");
+    background-image: url("../img/c7.jpg");
   /*  background-color: greenyellow;*/
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -113,14 +87,14 @@ header.masthead {
 .btn-cover {
     font-size: 18px;
     padding: 15px 20px;
-    background-color: #497435;
+    background-image: url("../img/c5.jpg");
     border-color: #497435;
 }
 
 .btn-cover:active, .btn-cover:focus, .btn-cover:hover {
     background-color: #497435 ;
     border-color: #497435;
-    color: white;
+    color: black;
 }
 .btn-cover:active, .btn-cover:focus {
     box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
@@ -143,39 +117,19 @@ header.masthead .cover .cover-text {
 }
 /* titre du site*/
 header.masthead .cover .cover-title {
+    font-family: 'Tangerine';
     font-size: 60px;
     font-weight: 700;
     line-height: 75px;
     margin-bottom: 50px;
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   /* font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
 }
-/*@media (min-width: 768px) {
-
-    header.masthead .cover {
-        padding-top: 200px;
-        padding-bottom: 150px;
-    }
-
-    header.masthead .cover .cover-text {
-        font-size: 20px;
-
-        line-height: 20px;
-        margin-bottom: 25px;
-        font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-    header.masthead .cover .cover-title {
-        font-size: 60px;
-        font-weight: 700;
-        line-height: 75px;
-        margin-bottom: 50px;
-        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    }
-}*/
-
 /********************FOOTER GENERAL**********************/
 #footer
 {
-    background: #497435;
+    background-image: url("../img/c5.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     text-align: center;
     color : black;
 }
@@ -199,7 +153,8 @@ header.masthead .cover .cover-title {
 /******************** LANDING PAGE GENERAL**********************/
 /*bloc titre*/
 #landing-title {
-    background: url(../img/cover.jpg) fixed center center;
+    background-image: url("../img/c5.jpg");
+    background-repeat: no-repeat;
     background-size: cover;
     padding: 30px 0;
     width: 100%;
@@ -212,6 +167,10 @@ header.masthead .cover .cover-title {
     font-weight: 700;
     text-align: center;
 }
+#landing-spot-content .card
+{
+    border: 0;
+}
 
 /********* LANDING PAGE SECTION SPOTS *******************/
 @media all and (max-width: 1024px) {
@@ -219,6 +178,7 @@ header.masthead .cover .cover-title {
     #landing-spot-content .card
     {
         margin-bottom: 20px;
+
     }
 }
 .button-spot-content
@@ -226,59 +186,35 @@ header.masthead .cover .cover-title {
     width: 40%;
 }
 /*********LANDING PAGE SECTION STATS *******************/
-.container-landing-stats-content {
-    perspective: 1000px;
-    display: inline-block;
-    margin: 3%;
-}
-
-.container-landing-stats-content,
-.front-landing-stats-content {
-    width: 100px;
-    height: 100px;
-}
-.front-landing-stats-content
- {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.number
-{
-    text-align: center;
-    font-size: 15px;
-    margin-top: 15px;
-}
-.text
-{
-    font-size: 15px;
-    text-align: center;
-}
 #locale
 {
     text-align: center;
     font-size: 30px;
 }
 
-@media all and (max-width: 1024px){
-    .caption i
-    {
-        font-size: 20px;
+.landing-stats-content .card
+{
+    margin-left: 30px;
+    margin-bottom: 35px;
+}
+.landing-stats-content h5
+{
+    font-size: 12px;
+}
+.landing-stats-content .card-text
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    .landing-stats-content  .card {
+        max-width: 8rem;
     }
-    .number
+    .landing-stats-content .card-text
     {
-        text-align: center;
         font-size: 10px;
-        margin-top: 5px;
-    }
-    .container-landing-stats-content,
-    .front-landing-stats-content {
-        width: 75px;
-        height: 75px;
     }
 
 }
@@ -394,7 +330,7 @@ h1 {
 
 /*************************PAGE ACCUEIL****************/
 #subscribe {
-    background: url(../img/cover.jpg) fixed center center;
+    background: url(../img/c7.jpg) fixed center center;
     background-size: cover;
     padding: 80px 0;
 }
@@ -421,14 +357,33 @@ h1 {
     border-radius: 2px;
     transition: 0.5s;
     margin: 10px;
-    background: #497435;
+    background: url(../img/c5.jpg);
     border: 2px solid #497435;
+
 }
+#subscribe .subscribe-btn:hover
+{
+    text-decoration: none;
+    color: black;
+}
+
+
+.lastSpotsHome .card
+{
+    margin-bottom: 20px;
+}
+
+.lastSpotsHome .btn
+{
+    background-image: url("../img/c5.jpg");
+    border-color: #497435;
+}
+
 
 
 /******************PAGES ELEMENTS COMMUNS*******************/
 #page-title {
-    background: url(../img/cover.jpg) fixed center center;
+    background: url(../img/c7.jpg) fixed center center;
     background-size: cover;
     padding: 30px 0;
     width: 100%;
@@ -451,33 +406,42 @@ h1 {
 }
 
 
-/******************SEARCH SPOT*******************/
+
 
 
 /*************************************MON COMPTE********************************/
 /***************MON COMPTE MENU DE NAVIGATION********/
+
+/* bandeau */
 .nav-account-menu {
     overflow: auto;
-    font-size: 12px;
     font-weight: 400;
-   /* background-color: #2e353d;*/
-    background-image: url("../img/cover.jpg");
+    background-color: #e9ecef;
     position: fixed;
     top: 0;
     width: 300px;
     height: 100%;
-    color: white;
+    font-size: 20px;
 }
+
+/* titre bandeau */
 .nav-account-menu .brand {
-    background-color: black;
-    line-height: 50px;
+    background-color: #e9ecef;
+    line-height: 80px;
     display: block;
-    text-align: center;
-    font-size: 14px;
+    text-align: left;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Tangerine';
+    margin-left: 20px;
 }
+/* permet de faire disparaitre l'icone du menu en normal*/
 .nav-account-menu .toggle-btn {
     display: none;
 }
+
+/* liste */
 .nav-account-menu ul,
 .nav-account-menu li {
     list-style: none;
@@ -485,72 +449,15 @@ h1 {
     margin: 0;
     line-height: 35px;
     cursor: pointer;
+    margin-left: 10px;
 }
-.nav-account-menu ul :not(collapsed) .arrow:before,
-.nav-account-menu li :not(collapsed) .arrow:before {
-    content: "\f078";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
-    float: right;
-}
-.nav-account-menu ul .active,
-.nav-account-menu li .active {
-    border-left: 3px solid #d19b3d;
-    background-color: #4f5b69;
-}
-.nav-account-menu ul .sub-menu li.active,
-.nav-account-menu li .sub-menu li.active {
-    color: #d19b3d;
-}
-.nav-account-menu ul .sub-menu li.active a,
-.nav-account-menu li .sub-menu li.active a {
-    color: #d19b3d;
-}
-.nav-account-menu ul .sub-menu li,
-.nav-account-menu li .sub-menu li {
-    background-color: #181c20;
-    border: none;
-    line-height: 28px;
-    border-bottom: 1px solid #23282e;
-    margin-left: 0;
-}
-.nav-account-menu ul .sub-menu li:hover,
-.nav-account-menu li .sub-menu li:hover {
-    background-color: #020203;
-}
-.nav-account-menu ul .sub-menu li:before,
-.nav-account-menu li .sub-menu li:before {
-    content: "\f105";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
-}
-.nav-account-menu li {
-    padding-left: 0;
-    border-left: 3px solid #2e353d;
-    border-bottom: 1px solid #23282e;
-}
+/* joue sur la liste */
 .nav-account-menu li a {
     text-decoration: none;
-    color: #e1ffff;
+    color: black;
+    font-size: 15px;
 }
-.nav-account-menu li a i {
-    padding-left: 10px;
-    width: 20px;
-    padding-right: 20px;
-}
-.nav-account-menu li:hover {
-    border-left: 3px solid #d19b3d;
-    background-color: #4f5b69;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
-}
+
 @media (max-width: 767px) {
     .nav-account-menu {
         position: relative;
@@ -563,18 +470,18 @@ h1 {
         position: absolute;
         right: 10px;
         top: 10px;
-        z-index: 10 !important;
+        z-index: 10;
         padding: 3px;
-        background-color: #ffffff;
+       /* background-color: #ffffff;*/
         color: #000;
         width: 40px;
-        text-align: center;
+       /* text-align: center;*/
     }
     .brand {
-        text-align: left !important;
+        text-align: left;
         font-size: 22px;
         padding-left: 20px;
-        line-height: 50px !important;
+        line-height: 50px;
     }
 }
 @media (min-width: 767px) {
@@ -598,15 +505,34 @@ body {
     .account-content {
         margin-left: 0;
         padding-left: 10px;
-        padding-right: 35px;
+        padding-right: 10px;
     }
 }
 
 
 /***************MON COMPTE ACCUEIL ************************/
-.jumbotron
+#account-title {
+    background-color: #e9ecef;
+    padding: 30px;
+    margin-bottom: 60px;
+    text-align: center;
+    font-family: 'Tangerine';
+    margin-top: 20px;
+
+
+}
+#account-title h2
 {
-    margin-top: 100px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.account-home .card
+{
+    margin-bottom: 20px;
+    margin-left: 40px;
+    text-align: center;
+
 }
 /********************PAGES MENU**********************/
 /*****************PAGES GENERAL**********************/
@@ -614,14 +540,44 @@ body {
 {
     margin-top: 20px;
 }
+.card-img-top
+{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+@media all and (max-width: 1024px) {
+
+    .card-img-top
+    {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/******************PAGE MENU JE CHERCHE UN SPOT *******************/
+#map-searchSpot
+{
+    width:100%;
+    height: 100%;
+}
+
 /****************** PAGE MENU JE SPOTE*******************/
 .smap {
     width: 100%;
     height: 500px;
 }
-.service-heading {
-    margin: 15px 0;
-    text-transform: none;
+#map-makeSpot
+{
+    width:100%;
+    height: 80%;
+}
+
+/****************** PAGE UN SPOT*******************/
+
+.one-spot .card-img-top
+{
+    height: 360px;
 }
 
 /****************** PAGE LES OPINIONS*******************/

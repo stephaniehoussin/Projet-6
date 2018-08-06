@@ -2,62 +2,87 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 {% endblock %}
 {% block nav %}
     {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 {% block body %}
 <div class="account-content">
-
-    <section id="title">
+    <section id="account-title">
         <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="locale"></div>
+                    <h2>Espace personnel</h2>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="landing-stats-content">
+    <section class="account-home">
+        {% if is_granted('ROLE_MODERATEUR') %}
         <div class="row">
-            <div class="col-md-12">
-                <div id="locale"></div>
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">SPOTS en attente de validation</h5>
+                    <p class="card-text">{{ nbSpotsWaiting }}</p>
+                    <a href="{{ path('spots-en-attente') }}" class="btn btn-primary">Voir</a>
+                </div>
+            </div>
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">COMMENTAIRES signalés à traiter</h5>
+                    <p class="card-text">Commentaires signalés à traiter</p>
+                    <a href="{{ path('commentaires-signales') }}" class="btn btn-primary">Voir</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">SPOTS</h5>
+                <p class="card-text">{{ result.totalNbSpotsByUser }}</p>
+            </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">COMMENTAIRES</h5>
+                <p class="card-text">{{ result.totalNbCommentsByUser }}</p>
+            </div>
+        </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">OPINIONS</h5>
+                    <p class="card-text">{{ result.totalNbOpinionsByUser }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">LIKES</h5>
+                    <p class="card-text">{{ result.totalNbLovesByUser }}</p>
+                </div>
+            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">ARBRES</h5>
+                    <p class="card-text">{{ result.totalNbTreesByUser }}</p>
+                </div>
+            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">FAVORIS</h5>
+                    <p class="card-text">{{ result.totalNbFavorisByUser }}</p>
+                </div>
             </div>
         </div>
     </section>
-
-    <div class="jumbotron">
-
-        <h1 class="display-4">Espace personnel</h1>
-        <p class="lead">Toutes vos infos perso reunis au même endroit</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="{{ path('accueil') }}" role="button">Retour Accueil</a>
-        </p>
-    </div>
 </div>
-    <script type="text/javascript">
-        function afficher() {
-            var offsetUTC = +12,
-                lD = new Date(),
-                oD = new Date();
-            oD.setHours(lD.getUTCHours()+offsetUTC);
-
-            document.getElementById('locale').innerHTML = "Le  "+lD.toLocaleString();
-        }
-
-        window.onload=function() {
-            afficher();
-            setInterval(afficher,1000);
-        }
-    </script>
 {% endblock %}
 {% block footer %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
-
+    <script src="{{ asset('assets/js/time.js') }}"></script>
 {% endblock %}
