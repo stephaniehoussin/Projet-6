@@ -17,6 +17,67 @@
             </div>
         </div>
     </section>
+
+    <section class="account-home">
+        {% if is_granted('ROLE_MODERATEUR') %}
+        <div class="row">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">SPOTS en attente de validation</h5>
+                    <p class="card-text">{{ nbSpotsWaiting }}</p>
+                    <a href="{{ path('spots-en-attente') }}" class="btn btn-primary">Voir</a>
+                </div>
+            </div>
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">COMMENTAIRES signalés à traiter</h5>
+                    <p class="card-text">Commentaires signalés à traiter</p>
+                    <a href="{{ path('commentaires-signales') }}" class="btn btn-primary">Voir</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">SPOTS</h5>
+                <p class="card-text">{{ result.totalNbSpotsByUser }}</p>
+            </div>
+        </div>
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">COMMENTAIRES</h5>
+                <p class="card-text">{{ result.totalNbCommentsByUser }}</p>
+            </div>
+        </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">OPINIONS</h5>
+                    <p class="card-text">{{ result.totalNbOpinionsByUser }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">LIKES</h5>
+                    <p class="card-text">{{ result.totalNbLovesByUser }}</p>
+                </div>
+            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">ARBRES</h5>
+                    <p class="card-text">{{ result.totalNbTreesByUser }}</p>
+                </div>
+            </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">FAVORIS</h5>
+                    <p class="card-text">{{ result.totalNbFavorisByUser }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}
 {% block footer %}

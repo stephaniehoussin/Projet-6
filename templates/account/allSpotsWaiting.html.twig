@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'account/parts/navAccount.html.twig' %}
+    <div class="account-content">
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Spots en attente de validation</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+                  <div class="reponsive-table">
+                      <table class="table table-hover table-responsive">
+                          <thead>
+                          <tr>
+                              <th>id</th>
+                              <th>user</th>
+                              <th>date</th>
+                              <th>title</th>
+                              <th>description</th>
+                              <th>Voir</th>
+                              <th>Valider</th>
+                              <th>Rejeter</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                {% for spot in spots %}
+                          <tr>
+                              <td>{{ spot.id }}</td>
+                              <td>{{ spot.user }}</td>
+                              <td>{{ spot.date|date('d/m/Y') }}</td>
+                              <td>{{ spot.title }}</td>
+                              <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
+                              <td><a href="{{ path('spot', { id : spot.id }) }}" class="btn btn-primary">Voir</a></td>
+                              <td><a href="{{ path('choice-status', { id : spot.id, status : 2 }) }}" class="btn btn-success">Valider</a></td>
+                              <td><a href="{{ path('choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Rejeter</a></td>
+                          </tr>
+                {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

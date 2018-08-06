@@ -22,9 +22,7 @@ class SpotRepository extends ServiceEntityRepository
 
     }
 
-    /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
+    // RECUPERATION DU DERNIER SPOT
     public function recupLastSpot()
     {
         return  $this
@@ -35,7 +33,7 @@ class SpotRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-
+   // RECUPERATION DE TOUS LES SPOTS PAR USER
     public function findAllSpotsByUser($userId)
     {
         $qb = $this->createQueryBuilder('u')
@@ -47,6 +45,8 @@ class SpotRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+
+  // RECUPERATION DE TOUS LES SPOTS PAR DATE ET PAR PAGE
     public function findAllSpotsByDate($page)
     {
 
@@ -66,15 +66,18 @@ class SpotRepository extends ServiceEntityRepository
         return $rq->getQuery()->getResult();
     }
 
+    // RECUPERATION DE 6 SPOTS POUR PAGE ACCUEIL
     public function allSpotsHome()
     {
         $rq = $this->createQueryBuilder('s')
             ->select('s')
+            ->where('s.status = 2')
             ->orderBy('s.date', 'DESC')
             ->setMaxResults(6);
         return $rq->getQuery()->getResult();
     }
 
+    // RECUPERATIONS DE SPOTS PAR TITRE
     public function findSpotByTitle($term)
     {
         $qb = $this->createQueryBuilder('s');
@@ -85,6 +88,7 @@ class SpotRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    // COMPTEUR DE TOUS LES SPOTS
     public function countAllSpots()
     {
         $nb = $this->createQueryBuilder('s')
@@ -94,6 +98,7 @@ class SpotRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    // COMPTEUR DE TOUS LES SPOTS PAR USER
     public function countSpotsByUser($userId)
     {
         $nb = $this
@@ -101,6 +106,28 @@ class SpotRepository extends ServiceEntityRepository
             ->select('count(s) as nb')
             ->where('s.user = :userId')
             ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    // RECUPERE TOUS LES SPOTS EN ATTENTE DE VALIDATION
+    public function findSpotsByWaitingStatus()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->select('s')
+            ->where('s.status = 1')
+            ->orderBy('s.date', 'ASC');
+        return $qb->getQuery()->getResult();
+
+    }
+
+    public function countSpotsByWaitingStatus()
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 1')
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;

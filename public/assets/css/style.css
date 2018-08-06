@@ -526,6 +526,14 @@ body {
     font-size: 40px;
     font-weight: bold;
 }
+
+.account-home .card
+{
+    margin-bottom: 20px;
+    margin-left: 40px;
+    text-align: center;
+
+}
 /********************PAGES MENU**********************/
 /*****************PAGES GENERAL**********************/
 .page_marge_top
