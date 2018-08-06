@@ -16,7 +16,7 @@ easy_admin:
             - { entity: 'User', label: 'Spoteurs'}
             - { entity: 'Category',label: 'Catégories'}
             - { entity: 'Favoris'}
-            - { entity: 'Like'}
+            - { entity: 'Love'}
             - { entity: 'Tree'}
             - { entity: 'Newsletter'}
             - { entity: 'Opinion', label: 'Opinions' }
@@ -87,21 +87,59 @@ easy_admin:
 
         Comment:
             class: App\Entity\Comment
+            list:
+                title: 'Commentaires'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
 
         Favoris:
             class : App\Entity\Favoris
+            list:
+                title: 'Favoris'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
 
-        Like:
-            class: App\Entity\Like
+        Love:
+            class: App\Entity\Love
+            list:
+                title: 'Jaime'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+
 
         Tree:
             class: App\Entity\Tree
+            list:
+                title: 'Arbres'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+
 
         Newsletter:
             class: App\Entity\Newsletter
 
         Opinion:
             class: App\Entity\Opinion
+            list:
+                 title: 'Avis'
+                 actions:
+                     - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+
 
         User:
             class: App\Entity\User
