@@ -5,24 +5,39 @@
     <div class="menu-list">
 
         <ul id="menu-content" class="menu-content collapse out">
+            {% if is_granted('ROLE_MODERATEUR') %}
+                <li>
+                    <a href="#">Spots en attente de validation</a>
+                </li>
+                <li>
+                    <a href="{{ path('commentaires-signales') }}">Commentaires signalés</a>
+                </li>
+            {% endif %}
+
             <li>
                 <a href="{{ path('mes-infos') }}">Mes infos</a>
             </li>
             <li>
+                <a href="{{ path('mes-stats') }}">Mes Stats</a>
+            </li>
+            <li>
                 <a href="{{ path('mes-spots-valides') }}">Mes Spots validés</a>
             </li>
+
+            {% if is_granted('ROLE_MODERATEUR') == false %}
             <li>
                 <a href="{{ path('mes-spots-en-attente') }}">Mes Spots en attente de validation</a>
             </li>
+            {% endif %}
+
             <li>
                 <a href="{{ path('mes-spots-favoris') }}">Mes Spots favoris</a>
             </li>
+            {% if is_granted('ROLE_MODERATEUR') == false %}
             <li>
-                <a href="{{ path('commentaires-signales') }}">Mes commentaires signalés</a>
+                <a href="{{ path('mes-commentaires-signales') }}">Mes commentaires signalés</a>
             </li>
-            <li>
-                <a href="{{ path('mes-stats') }}">Mes Stats</a>
-            </li>
+            {% endif %}
             <li>
                 <a href="{{ path('contact') }}">Nous contacter</a>
             </li>

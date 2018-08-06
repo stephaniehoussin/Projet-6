@@ -40,6 +40,18 @@ class LoveRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function countLovesByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('l')
+            ->select('count(l) as nb')
+            ->where('l.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
 //    /**
 //     * @return Love[] Returns an array of Love objects
 //     */

@@ -25,16 +25,31 @@ class User extends BaseUser
     private $spots;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favoris", mappedBy="user", cascade={"remove"})
+     */
+    private $favoris;
+
+    /**
      * @var
      * @ORM\OneToMany(targetEntity="App\Entity\Opinion", mappedBy="user", cascade={"remove"})
      */
     private $opinions;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", cascade={"remove"})
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Love", mappedBy="user", cascade={"remove"})
+     */
+    private $loves;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tree", mappedBy="user", cascade={"remove"})
+     */
+    private $trees;
 
 
 
@@ -45,6 +60,8 @@ class User extends BaseUser
        $this->spots = new ArrayCollection();
        $this->comments = new ArrayCollection();
        $this->opinions = new ArrayCollection();
+       $this->loves = new ArrayCollection();
+       $this->favoris = new ArrayCollection();
     }
 
     public function __toString()
@@ -168,5 +185,101 @@ class User extends BaseUser
     {
         return $this->comments;
     }
+
+
+    /**
+     * @return Collection|Love[]
+     */
+    public function getLove() : Collection
+    {
+        return $this->loves;
+    }
+
+    /**
+     * @param Love $love
+     */
+    public function addLove(Love $love)
+    {
+        $this->loves[] = $love;
+        $love->setUser($this);
+    }
+
+    /**
+     * @param Love $love
+     */
+    public function removeLove(Love $love)
+    {
+        $this->loves->removeElement($love);
+    }
+
+    /**
+     * @return Collection|Love[]
+     */
+    public function getLoves(): Collection
+    {
+        return $this->loves;
+    }
+
+
+    /**
+     * @return Collection|Tree[]
+     */
+    public function getTree() : Collection
+    {
+        return $this->trees;
+    }
+
+    /**
+     * @param Tree $tree
+     */
+    public function addTree(Tree $tree)
+    {
+        $this->trees[] = $tree;
+        $tree->setUser($this);
+    }
+
+    /**
+     * @param Tree $tree
+     */
+    public function removeTree(Tree $tree)
+    {
+        $this->trees->removeElement($tree);
+    }
+
+    /**
+     * @return Collection|Tree[]
+     */
+    public function getTrees(): Collection
+    {
+        return $this->trees;
+    }
+
+
+    /**
+     * @return Collection|Favoris[]
+     */
+    public function getFavoris() : Collection
+    {
+        return $this->favoris;
+    }
+
+    /**
+     * @param Favoris $favoris
+     */
+    public function addFavoris(Favoris $favoris)
+    {
+        $this->favoris[] = $favoris;
+        $favoris->setUser($this);
+    }
+
+    /**
+     * @param Favoris $favoris
+     */
+    public function removeFavoris(Favoris $favoris)
+    {
+        $this->favoris->removeElement($favoris);
+    }
+
+
 
 }

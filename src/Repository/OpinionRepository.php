@@ -37,8 +37,20 @@ class OpinionRepository extends ServiceEntityRepository
             ->orderBy('o.date', 'DESC')
             ->setMaxResults(6);
         return $rq->getQuery()->getResult();
+
     }
 
+    public function countOpinionsByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('o')
+            ->select('count(o) as nb')
+            ->where('o.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
 
 //    /**
 //     * @return Opinion[] Returns an array of Opinion objects

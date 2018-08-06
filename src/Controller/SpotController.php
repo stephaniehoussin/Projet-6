@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\commentType;
+use App\Form\FavorisType;
 use App\Form\LoveType;
 use App\Entity\Love;
 use App\Form\SpotFilterType;
@@ -36,7 +37,8 @@ class SpotController extends Controller
         $spot = $spotManager->initSpot();
         $form = $this->createForm(spotType::class, $spot);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $currentUser = $this->getUser();
             if($currentUser->hasRole('ROLE_MODERATEUR'))
             {
@@ -44,7 +46,6 @@ class SpotController extends Controller
             }
             $spot->setUser($currentUser);
             $spotManager->persistSpot($spot);
-            $this->addFlash('success', 'Votre spot est bien enregistré!');
             return $this->redirectToRoute('je-cherche-un-spot', ['page' => 1]);
         }
         return $this->render('spot/makeSpot.html.twig', [
@@ -85,12 +86,15 @@ class SpotController extends Controller
      * @Route("accueil/spot/{id}", name="spot")
      * @param SpotManager $spotManager
      * @param SpotRepository $spotRepository
+     * @param TreeRepository $treeRepository
+     * @param LoveRepository $loveRepository
      * @param CommentRepository $commentRepository
      * @param Request $request
      * @param EntityManagerInterface $entityManager
      * @param $id
      * @param Spot $spot
      * @return Response
+     * @throws \Doctrine\ORM\ORMException
      */
     public function showOneSpot(SpotManager $spotManager, SpotRepository $spotRepository,TreeRepository $treeRepository, LoveRepository $loveRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
     {
@@ -105,25 +109,24 @@ class SpotController extends Controller
             $comment->setSpot($spot);
             $comment->setUser($currentUser);
             $spotManager->persistComment($comment);
-            $this->addFlash('success', 'Merci pour votre commentaire');
         }
 
 
-        $spot = $spotRepository->findOneBy(['id' => $id]);
-        $nbLikes = $loveRepository->countLikesBySpot($spot->getId());
-        $like = $spotManager->initLike();
-        $formLike = $this->createForm(LoveType::class, $like);
-        $formLike->handleRequest($request);
-        if($formLike->isSubmitted() && $formLike->isValid())
+     //   $spot = $spotRepository->findOneBy(['id' => $id]);
+        $nbLoves = $loveRepository->countLovesBySpot($spot->getId());
+        $love = $spotManager->initLove();
+        $formLove = $this->createForm(LoveType::class, $love);
+        $formLove->handleRequest($request);
+        if($formLove->isSubmitted() && $formLove->isValid())
         {
                 $currentUser = $this->getUser();
-                $like->setSpot($spot);
-                $like->setUser($currentUser);
-                $spotManager->persistLike($like);
+                $love->setSpot($spot);
+                $love->setUser($currentUser);
+                $spotManager->persistLove($love);
 
         }
 
-        $spot = $spotRepository->findOneBy(['id' => $id]);
+       // $spot = $spotRepository->findOneBy(['id' => $id]);
         $nbTrees = $treeRepository->countTreesBySpot($spot->getId());
         $tree = $spotManager->initTree();
         $formTree = $this->createForm(TreeType::class, $tree);
@@ -135,16 +138,29 @@ class SpotController extends Controller
             $tree->setUser($currentUser);
             $spotManager->persistTree($tree);
         }
+
+        $favoris = $spotManager->initFavoris();
+        $formFavoris = $this->createForm(FavorisType::class, $favoris);
+        $formFavoris->handleRequest($request);
+        if($formFavoris->isSubmitted() && $formFavoris->isValid())
+        {
+            $currentUser = $this->getUser();
+            $favoris->setSpot($spot);
+            $favoris->setUser($currentUser);
+            $spotManager->persistFavoris($favoris);
+        }
         return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
             'comment' => $comment,
             'nbComments' => $nbComments,
             'formComment' => $formComment->createView(),
-            'formLike' => $formLike->createView(),
+            'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
-            'nbLikes' => $nbLikes,
+            'formFavoris' => $formFavoris->createView(),
+            'favoris' => $favoris,
+            'nbLoves' => $nbLoves,
             'nbTrees' => $nbTrees,
-            'like' => $like,
+            'love' => $love,
             'tree' => $tree
         ));
     }

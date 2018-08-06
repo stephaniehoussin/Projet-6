@@ -40,6 +40,18 @@ class TreeRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function countTreesByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('t')
+            ->select('count(t) as nb')
+            ->where('t.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
 //    /**
 //     * @return Tree[] Returns an array of Tree objects
 //     */

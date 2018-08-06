@@ -23,7 +23,7 @@ class Tree
 
     /**
      * @var
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="trees")
      */
     private $user;
 
@@ -38,7 +38,7 @@ class Tree
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user)
     {
         $this->user = $user;
 

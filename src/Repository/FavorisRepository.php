@@ -19,6 +19,42 @@ class FavorisRepository extends ServiceEntityRepository
         parent::__construct($registry, Favoris::class);
     }
 
+
+    public function countAllFavoris()
+    {
+        $nb = $this->createQueryBuilder('f')
+            ->select('COUNT(f) as nb')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+    public function countFavorisByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('f')
+            ->select('count(f) as nb')
+            ->where('f.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function recupFavoritesSpotsByUser($userId,$spotId)
+    {
+        $rq = $this
+            ->createQueryBuilder('c')
+            ->select('c.spot,c.user')
+            ->where('c.spot = :spotId')
+            ->andWhere('c.user = :userId')
+            ->setParameter('spotId', $spotId)
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $rq;
+    }
+
+
 //    /**
 //     * @return Favoris[] Returns an array of Favoris objects
 //     */

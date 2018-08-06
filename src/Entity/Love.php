@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="LoveRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LoveRepository")
  */
 class Love
 {
@@ -22,8 +22,7 @@ class Love
     private $spot;
 
     /**
-     * @var
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="loves")
      */
     private $user;
 

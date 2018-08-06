@@ -1,23 +1,21 @@
 <?php
 namespace App\Services;
 use App\Entity\Comment;
-use App\Repository\OpinionRepository;
+use App\Entity\Favoris;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Spot;
 use App\Entity\Opinion;
-use App\Entity\User;
 use App\Entity\Love;
 use App\Entity\Tree;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 class SpotManager
 
 {
 
-    public function __construct(SessionInterface $session,EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->session = $session;
         $this->em = $em;
     }
 
@@ -33,7 +31,7 @@ class SpotManager
         return $comment;
     }
 
-    public function initLike()
+    public function initLove()
 {
     $love = new Love();
     return $love;
@@ -44,6 +42,13 @@ class SpotManager
         $tree = new Tree();
         return $tree;
     }
+
+    public function initFavoris()
+    {
+        $favoris = new Favoris();
+        return $favoris;
+    }
+
 
     public function persistSpot(Spot $spot)
     {
@@ -63,6 +68,12 @@ class SpotManager
         $this->em->flush();
 
     }
+
+    public function persistFavoris(Favoris $favoris)
+    {
+        $this->em->persist($favoris);
+        $this->em->flush();
+    }
     public function persistTree(Tree $tree)
     {
         $this->em->persist($tree);
@@ -70,10 +81,10 @@ class SpotManager
 
     }
 
-    public function persistLike(Love $like)
-{
-    $this->em->persist($like);
-    $this->em->flush();
-}
+    public function persistLove(Love $love)
+    {
+        $this->em->persist($love);
+        $this->em->flush();
+    }
 
 }

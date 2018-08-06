@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FavorisRepository;
 use App\Repository\SpotRepository;
 use App\Repository\UserRepository;
 use App\Services\PageDecoratorsService;
@@ -51,7 +52,7 @@ class AccountController extends Controller
      * @Route("mon-compte/mes-spots-favoris", name="mes-spots-favoris")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function favoritesSpotsByUser()
+    public function favoritesSpotsByUser(FavorisRepository $favorisRepository)
     {
         return $this->render('account/favoritesSpots.html.twig');
     }
@@ -62,7 +63,8 @@ class AccountController extends Controller
      */
     public function statsByUser(PageDecoratorsService $pageDecoratorsService)
     {
-        $result = $pageDecoratorsService->recupAllData();
+        $currentUser = $this->getUser();
+        $result = $pageDecoratorsService->countDataByUser($currentUser->getId());
         return $this->render('account/stats.html.twig',array(
             'result' => $result
         ));
@@ -78,11 +80,20 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mon-compte/commentaires-signales", name="commentaires-signales")
+     * @Route("mon-compte/mes-commentaires-signales", name="mes-commentaires-signales")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function reportCommentsByUser()
     {
-        return $this->render('account/reportComments.html.twig');
+        return $this->render('account/userReportComments.html.twig');
+    }
+
+    /**
+     * @Route("mon-compte/commentaires-signales", name="commentaires-signales")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function reportAllComments()
+    {
+        return $this->render('account/reportAllComments.html.twig');
     }
 }

@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $datetime = date("d-m-Y");
-        $result = $pageDecoratorsService->recupAllData();
+        $result = $pageDecoratorsService->countAllData();
         $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
             'spot' => $spot,
@@ -43,7 +43,7 @@ class HomeController extends Controller
     public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,OpinionRepository $opinionRepository)
     {
         $datetime = date("d-m-Y");
-        $result = $pageDecoratorsService->recupAllData();
+        $result = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
         $opinions = $opinionRepository->allOpinions();
         return $this->render('home/index.html.twig',array(
