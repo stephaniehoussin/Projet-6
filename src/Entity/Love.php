@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\LikeRepository")
+ * @ORM\Entity(repositoryClass="LoveRepository")
  */
-class Like
+class Love
 {
     /**
      * @ORM\Id()
@@ -17,14 +17,7 @@ class Like
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbLikes;
-
-    /**
-     * @var
-     * @ORM\JoinColumn(name="spot", referencedColumnName="id")
-     * @@ORM\ManyToOne(targetEntity="App\Entity\Spot", mappedBy="likes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="loves")
      */
     private $spot;
 
@@ -39,24 +32,19 @@ class Like
         return $this->id;
     }
 
-    public function getNbLikes(): ?int
-    {
-        return $this->nbLikes;
-    }
-
-    public function setNbLikes(int $nbLikes): self
-    {
-        $this->nbLikes = $nbLikes;
-
-        return $this;
-    }
-
-    public function getSpot() : Spot
+    /**
+     * @return Spot
+     */
+    public function getSpot()
     {
         return $this->spot;
     }
 
-    public function setSpot(Spot $spot =null)
+    /**
+     * @param Spot $spot
+     * @return Love
+     */
+    public function setSpot(Spot $spot)
     {
         $this->spot = $spot;
         return $this;

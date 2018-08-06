@@ -17,13 +17,7 @@ class Tree
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $nbTrees;
-    /**
-     * @var
-     * @ORM\JoinColumn(name="spot", referencedColumnName="id")
-     * @@ORM\ManyToOne(targetEntity="App\Entity\Spot", mappedBy="trees")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="trees")
      */
     private $spot;
 
@@ -38,17 +32,6 @@ class Tree
         return $this->id;
     }
 
-    public function getNbTrees(): ?int
-    {
-        return $this->nbTrees;
-    }
-
-    public function setNbTrees(int $nbTrees): self
-    {
-        $this->nbTrees = $nbTrees;
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -62,12 +45,16 @@ class Tree
         return $this;
     }
 
-    public function getSpot() : Spot
+    public function getSpot()
     {
         return $this->spot;
     }
 
-    public function setSpot(Spot $spot =null)
+    /**
+     * @param Spot $spot
+     * @return Tree
+     */
+    public function setSpot(Spot $spot)
     {
         $this->spot = $spot;
         return $this;

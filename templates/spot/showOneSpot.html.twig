@@ -34,7 +34,8 @@
                 </div>
             </div>
         </section>
-        <section class="page-content">
+
+        <section class="one-spot">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -43,10 +44,10 @@
                                         <h5 class="card-title">Emplacement du Spot</h5>
                                    <div class="row">
                                     <div class="col-md-6">
-                                        <p><i class="fa fa-heart"> chiffre</i></p>
+                                        <p><i class="fa fa-heart"> {{ nbLikes }}</i></p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><i class="fa fa-tree"> chiffre</i></p>
+                                        <p><i class="fa fa-tree"> {{ nbTrees }}</i></p>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -54,8 +55,15 @@
                                 </div>
                                 <p><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
                                 <p><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
-                                <button type="submit"><i class="fa fa-heart"> Like me</i></button>
-                                <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
+                               <!-- <button type="submit" name="submit" id="like"><i class="fa fa-heart">
+                                    </i></button>-->
+                                {{ form_start(formLike) }}
+                               <!-- <button type="submit" name="submit" class="btn">Valider</button>-->
+                                {{ form_end(formLike) }}
+
+                                {{ form_start(formTree) }}
+                                {{ form_end(formTree) }}
+                               <!-- <button type="submit" name="submit" id="tree"><i class="fa fa-tree"> Tree me</i></button>-->
                             </div>
                         </div>
                     </div>
@@ -82,24 +90,11 @@
                     </div>
                 </div>
             </div>
-            <hr class="mb-4">
+        </section>
+        <section class="comments">
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        {{ form_start(formComment) }}
-                        <div class="form-group">
-                            {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
-                            {{ form_label(formComment.message) }}
-                            {{ form_widget(formComment.message) }}
-                        </div>
-                        <button type="submit" id="comment" class="btn-lg btn-block">Je commente ce spot</button>
-                        {{ form_end(formComment) }}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="" alt="Card image cap">
-                        <div id="locale"></div>
                         <div class="card-body">
                             <h5 class="card-spot-title">
                                 {% if nbComments %}
@@ -111,6 +106,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        {{ form_start(formComment) }}
+                            {#{{ form_widget(form, {'attr' : {'class': 'form-control'}}) }}#}
+                            {{ form_label(formComment.message) }}
+                            {{ form_widget(formComment.message) }}
+                        <button type="submit" id="comment" class="btn-lg btn-block">Je commente ce spot</button>
+                        {{ form_end(formComment) }}
+                    </div>
+                </div>
+
             </div>
             <hr class="mb-4">
             <div class="row">

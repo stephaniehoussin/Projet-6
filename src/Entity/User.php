@@ -47,6 +47,11 @@ class User extends BaseUser
        $this->opinions = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     /**
      * @return mixed
      */

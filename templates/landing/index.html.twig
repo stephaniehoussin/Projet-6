@@ -76,7 +76,7 @@
                             <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }}</h5>
-                                <p class="card-spot-description">{{ spot.description }}</p>
+                                <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
                                 <button type="button">Enregistrer dans mes favoris</button>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
         <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Aujourd'hui </h3>
+                    <div id="locale"></div>
                 </div>
             </div>
         </div>
@@ -157,54 +157,44 @@
 
     <section class="landing-stats-content">
         <div class="row">
-            <div class="col-md-12">
-                <div id="locale"></div>
-            </div>
-            </div>
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">Utilisateurs</h5>
+                            <h5 class="card-text">{{ result.totalNbUsers }}</h5>
+                        </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">Spots</h5>
+                            <h5 class="card-text">{{ result.totalNbSpots }}</h5>
+                        </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">J'aime</h5>
+                            <h5 class="card-text">{{ result.totalNbLoves }}</h5>
+                        </div>
+                </div>
 
-        <div class="container-landing-stats-content">
-                <div class="front-landing-stats-content">
-                    <p class="number">{{ result.totalNbComments }}</p>
-                    <p class="text">Utilisateurs</p>
-
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">Trees</h5>
+                            <h5 class="card-text">{{ result.totalNbTrees }}</h5>
+                        </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">Commentaires</h5>
+                            <h5 class="card-text">{{ result.totalNbComments }}</h5>
+                        </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-text">Avis</h5>
+                            <h5 class="card-text">{{ result.totalNbOpinions }}</h5>
+                        </div>
                 </div>
         </div>
-        <div class="container-landing-stats-content">
-            <div class="front-landing-stats-content">
-                <p class="number">{{ result.totalNbSpots }}</p>
-                <p class="text">Spots</p>
-
-            </div>
-        </div>
-        <div class="container-landing-stats-content">
-            <div class="front-landing-stats-content">
-                <p class="number">Nombre</p>
-                <p class="text">J'aime</p>
-
-            </div>
-        </div>
-        <div class="container-landing-stats-content">
-            <div class="front-landing-stats-content">
-                <p class="number">Nombre</p>
-                <p class="text">Arbre</p>
-
-            </div>
-        </div>
-        <div class="container-landing-stats-content">
-            <div class="front-landing-stats-content">
-                <p class="number">{{ result.totalNbComments }}</p>
-                <p class="text"> Commentaires</p>
-
-            </div>
-        </div>
-        <div class="container-landing-stats-content">
-            <div class="front-landing-stats-content">
-                <p class="number">{{ result.totalNbOpinions }}</p>
-                <p class="text"> Avis</p>
-
-            </div>
-        </div>
-
     </section>
 
     <!------------------------------SECTION OPINION--------------->

@@ -71,6 +71,17 @@ class Spot
     private $comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="Love", mappedBy="spot", cascade={"remove"})
+     */
+    private $loves;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Tree", mappedBy="spot", cascade={"remove"})
+     */
+    private $trees;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="spots")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -87,6 +98,8 @@ class Spot
         $this->updateAt = new \DateTime();
         $this->status = 1;
         $this->comments = new ArrayCollection();
+        $this->loves = new ArrayCollection();
+        $this->trees = new ArrayCollection();
     }
 
     public function getId()
@@ -337,6 +350,72 @@ class Spot
     }
 
 
+    /**
+     * @return Collection|Love[]
+     */
+    public function getLove() : Collection
+    {
+        return $this->loves;
+    }
+
+    /**
+     * @return Collection|Love[]
+     */
+    public function getLoves() : Collection
+    {
+        return $this->loves;
+    }
+
+    /**
+     * @param Love $love
+     */
+    public function addLove(Love $love)
+    {
+        $this->loves[] = $love;
+        $love->setSpot($this);
+    }
+
+    /**
+     * @param Love $love
+     */
+    public function removeLove(Love $love)
+    {
+        $this->loves->removeElement($love);
+    }
+
+
+    /**
+     * @return Collection|Tree[]
+     */
+    public function getTree() : Collection
+    {
+        return $this->trees;
+    }
+
+    /**
+     * @return Collection|Tree[]
+     */
+    public function getTrees() : Collection
+    {
+        return $this->trees;
+    }
+
+    /**
+     * @param Tree $tree
+     */
+    public function addTree(Tree $tree)
+    {
+        $this->trees[] = $tree;
+        $tree->setSpot($this);
+    }
+
+    /**
+     * @param Tree $tree
+     */
+    public function removeTree(Tree $tree)
+    {
+        $this->trees->removeElement($tree);
+    }
 
 
 }

@@ -40,15 +40,17 @@ class HomeController extends Controller
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
+    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,OpinionRepository $opinionRepository)
     {
         $datetime = date("d-m-Y");
         $result = $pageDecoratorsService->recupAllData();
         $spots = $spotRepository->allSpotsHome();
+        $opinions = $opinionRepository->allOpinions();
         return $this->render('home/index.html.twig',array(
             'datetime' => $datetime,
             'spots' => $spots,
-            'result' => $result
+            'result' => $result,
+            'opinions' => $opinions
         ));
     }
 

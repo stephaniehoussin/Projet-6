@@ -30,6 +30,15 @@ class OpinionRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function allOpinions()
+    {
+        $rq = $this->createQueryBuilder('o')
+            ->select('o')
+            ->orderBy('o.date', 'DESC')
+            ->setMaxResults(6);
+        return $rq->getQuery()->getResult();
+    }
+
 
 //    /**
 //     * @return Opinion[] Returns an array of Opinion objects

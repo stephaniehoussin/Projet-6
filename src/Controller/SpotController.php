@@ -3,10 +3,15 @@
 namespace App\Controller;
 
 use App\Form\commentType;
+use App\Form\LoveType;
+use App\Entity\Love;
 use App\Form\SpotFilterType;
 use App\Form\spotType;
+use App\Form\TreeType;
 use App\Repository\CommentRepository;
+use App\Repository\LoveRepository;
 use App\Repository\SpotRepository;
+use App\Repository\TreeRepository;
 use App\Services\PageDecoratorsService;
 use App\Services\SpotManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -87,26 +92,60 @@ class SpotController extends Controller
      * @param Spot $spot
      * @return Response
      */
-    public function showOneSpot(SpotManager $spotManager,SpotRepository $spotRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
+    public function showOneSpot(SpotManager $spotManager, SpotRepository $spotRepository,TreeRepository $treeRepository, LoveRepository $loveRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
     {
 
         $spot = $spotRepository->findOneBy(['id' => $id]);
         $nbComments = $commentRepository->countCommentsBySpot($spot->getId());
         $comment = $spotManager->initComment();
-        $form = $this->createForm(commentType::class, $comment);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $formComment = $this->createForm(commentType::class, $comment);
+        $formComment->handleRequest($request);
+        if ($formComment->isSubmitted() && $formComment->isValid()) {
             $currentUser = $this->getUser();
             $comment->setSpot($spot);
             $comment->setUser($currentUser);
             $spotManager->persistComment($comment);
             $this->addFlash('success', 'Merci pour votre commentaire');
         }
+
+
+        $spot = $spotRepository->findOneBy(['id' => $id]);
+        $nbLikes = $loveRepository->countLikesBySpot($spot->getId());
+        $like = $spotManager->initLike();
+        $formLike = $this->createForm(LoveType::class, $like);
+        $formLike->handleRequest($request);
+        if($formLike->isSubmitted() && $formLike->isValid())
+        {
+                $currentUser = $this->getUser();
+                $like->setSpot($spot);
+                $like->setUser($currentUser);
+                $spotManager->persistLike($like);
+
+        }
+
+        $spot = $spotRepository->findOneBy(['id' => $id]);
+        $nbTrees = $treeRepository->countTreesBySpot($spot->getId());
+        $tree = $spotManager->initTree();
+        $formTree = $this->createForm(TreeType::class, $tree);
+        $formTree->handleRequest($request);
+        if($formTree->isSubmitted() && $formTree->isValid())
+        {
+            $currentUser = $this->getUser();
+            $tree->setSpot($spot);
+            $tree->setUser($currentUser);
+            $spotManager->persistTree($tree);
+        }
         return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
             'comment' => $comment,
             'nbComments' => $nbComments,
-            'formComment' => $form->createView(),
+            'formComment' => $formComment->createView(),
+            'formLike' => $formLike->createView(),
+            'formTree' => $formTree->createView(),
+            'nbLikes' => $nbLikes,
+            'nbTrees' => $nbTrees,
+            'like' => $like,
+            'tree' => $tree
         ));
     }
 

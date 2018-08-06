@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\SpotRepository;
+use App\Repository\UserRepository;
 use App\Services\PageDecoratorsService;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,7 +72,7 @@ class AccountController extends Controller
      * @Route("mon-compte/mes-infos", name="mes-infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function informationsByUser()
+    public function informationsByUser(UserRepository $userRepository)
     {
         return $this->render('account/informations.html.twig');
     }

@@ -28,6 +28,18 @@ class TreeRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function countTreesBySpot($spotId)
+    {
+        $nb = $this
+            ->createQueryBuilder('t')
+            ->select('count(t) as nb')
+            ->where('t.spot = :spotId')
+            ->setParameter('spotId', $spotId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
 //    /**
 //     * @return Tree[] Returns an array of Tree objects
 //     */

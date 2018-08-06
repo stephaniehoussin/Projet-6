@@ -19,7 +19,7 @@
     text-transform: uppercase;
     color: black;
     border: 0;
-    background-color: #497435;
+    background-image: url("../img/c7.jpg");
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 /*logo*/
@@ -94,7 +94,7 @@ header.masthead {
 .btn-cover:active, .btn-cover:focus, .btn-cover:hover {
     background-color: #497435 ;
     border-color: #497435;
-    color: white;
+    color: black;
 }
 .btn-cover:active, .btn-cover:focus {
     box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
@@ -186,59 +186,35 @@ header.masthead .cover .cover-title {
     width: 40%;
 }
 /*********LANDING PAGE SECTION STATS *******************/
-.container-landing-stats-content {
-    perspective: 1000px;
-    display: inline-block;
-    margin: 3%;
-}
-
-.container-landing-stats-content,
-.front-landing-stats-content {
-    width: 100px;
-    height: 100px;
-}
-.front-landing-stats-content
- {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.number
-{
-    text-align: center;
-    font-size: 15px;
-    margin-top: 15px;
-}
-.text
-{
-    font-size: 15px;
-    text-align: center;
-}
 #locale
 {
     text-align: center;
     font-size: 30px;
 }
 
-@media all and (max-width: 1024px){
-    .caption i
-    {
-        font-size: 20px;
+.landing-stats-content .card
+{
+    margin-left: 30px;
+    margin-bottom: 35px;
+}
+.landing-stats-content h5
+{
+    font-size: 12px;
+}
+.landing-stats-content .card-text
+{
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    .landing-stats-content  .card {
+        max-width: 8rem;
     }
-    .number
+    .landing-stats-content .card-text
     {
-        text-align: center;
         font-size: 10px;
-        margin-top: 5px;
-    }
-    .container-landing-stats-content,
-    .front-landing-stats-content {
-        width: 75px;
-        height: 75px;
     }
 
 }
@@ -383,12 +359,26 @@ h1 {
     margin: 10px;
     background: url(../img/c5.jpg);
     border: 2px solid #497435;
+
 }
+#subscribe .subscribe-btn:hover
+{
+    text-decoration: none;
+    color: black;
+}
+
 
 .lastSpotsHome .card
 {
     margin-bottom: 20px;
 }
+
+.lastSpotsHome .btn
+{
+    background-image: url("../img/c5.jpg");
+    border-color: #497435;
+}
+
 
 
 /******************PAGES ELEMENTS COMMUNS*******************/
@@ -548,6 +538,14 @@ body {
     height: 15vw;
     object-fit: cover;
 }
+@media all and (max-width: 1024px) {
+
+    .card-img-top
+    {
+        width: 100%;
+        height: auto;
+    }
+}
 
 /******************PAGE MENU JE CHERCHE UN SPOT *******************/
 #map-searchSpot
@@ -566,9 +564,12 @@ body {
     width:100%;
     height: 80%;
 }
-.service-heading {
-    margin: 15px 0;
-    text-transform: none;
+
+/****************** PAGE UN SPOT*******************/
+
+.one-spot .card-img-top
+{
+    height: 360px;
 }
 
 /****************** PAGE LES OPINIONS*******************/
