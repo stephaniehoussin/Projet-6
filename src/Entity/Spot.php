@@ -102,6 +102,11 @@ class Spot
         $this->trees = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -347,6 +352,23 @@ class Spot
         $this->infosSupp = $infosSupp;
 
         return $this;
+    }
+
+    public function libelleStatus()
+    {
+        switch ($this->status)
+        {
+            case 0:
+                return 'Refusée';
+                break;
+            case 1:
+                return 'En attente';
+                break;
+            case 2:
+                return 'Acceptée';
+                break;
+
+        }
     }
 
 

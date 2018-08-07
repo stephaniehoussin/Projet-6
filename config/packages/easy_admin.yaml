@@ -1,0 +1,280 @@
+#easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Product
+#        - App\Entity\Category
+#        - App\Entity\User
+
+easy_admin:
+    site_name: 'Espace administration'
+    formats:
+        date: 'd/m/Y'
+    design:
+        menu:
+            - { label : 'Retour site', route: 'accueil' }
+            - { entity: 'Spot', label: 'Spots'}
+            - { entity: 'User', label: 'Spoteurs'}
+            - { entity: 'Comment', label: 'Commentaires' }
+            - { entity: 'Category',label: 'Catégories'}
+            - { entity: 'Favoris'}
+            - { entity: 'Love', label: 'Likes'}
+            - { entity: 'Tree', label: 'Environnement' }
+            - { entity: 'Newsletter'}
+            - { entity: 'Opinion', label: 'Opinions' }
+
+
+    entities:
+        Spot:
+            class: App\Entity\Spot
+            list:
+                title: 'Spots'
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'date',type: 'date' }
+                    - { property: 'user',label: 'Spoteur' }
+                    - { property: 'category',label: 'Catégorie' }
+                    - { property: 'title',label: 'Titre' }
+                    - { property: 'description' }
+                    - { property: 'picture',label: 'Image', type: 'image', base_path: '%app.path.spots%' }
+                    - { property: 'infosSupp',label: 'Adresse' }
+                    - { property: 'libelleStatus',label: 'Status' }
+                    - { property: 'comments',label: 'Commentaires' }
+                    - { property: 'loves',label: 'Likes' }
+                    - { property: 'trees',label: 'Arbres' }
+
+
+            edit:
+                title: "Editer le spot"
+                fields:
+                    - { property: 'id' }
+                    - {property: 'user',label: 'Spoteur' }
+                    - {property: 'date', type: 'date' }
+                    - {property: 'category', label: 'Catégorie' }
+                    - {property: 'latitude'}
+                    - {property: 'longitude'}
+                    - {property: 'title',label: 'Titre' }
+                    - {property: 'description'}
+                    - {property: 'pictureFile', type: 'vich_image'}
+                    - {property: 'infosSupp', label: 'Adresse' }
+                    - {property: 'status', type: 'choice', type_options: { choices: { 'Rejeté': '0', 'En attente': '1', 'validée': '2'}}}
+                    - { property: 'comments', label: 'Commentaires' }
+                    #- { property: 'loves' }
+                    #- { property: 'trees' }
+
+            new:
+                title: "Ajouter un spot"
+                fields:
+                    - { property: 'user',label: 'Spoteur' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'latitude' }
+                    - { property: 'longitude' }
+                    - { property: 'title',label: 'Titre' }
+                    - { property: 'description' }
+                    - { property: 'pictureFile', type: 'vich_image' }
+                    - { property: 'infosSupp',label: 'Adresse' }
+                    - { property: 'status', type: 'choice', type_options: { choices: { 'Rejeté': '0', 'En attente': '1', 'validée': '2'}} }
+
+            show:
+                title: "Voir le spot"
+                fields:
+                    - { property: 'user' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'libelleStatus', label: 'statut' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'latitude' }
+                    - { property: 'longitude' }
+                    - { property: 'title', label: 'titre' }
+                    - { property: 'description' }
+                    - { property: 'infosSupp', label: 'adresse' }
+                    - { property: 'picture', type: 'image', base_path: '%app.path.spots%' }
+
+
+        Category:
+            class: App\Entity\Category
+            list:
+                title: 'Catégories'
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'name',label: 'Nom de la catégorie' }
+                    - { property: 'spots', label: 'Spots associés' }
+
+            new:
+                title: 'Nouvelle catégorie'
+                fields:
+                    - { property: 'name', label: 'Nom' }
+            edit:
+                title: 'Modifier catégorie'
+                fields:
+                    - { property: 'name', label: 'Nom' }
+            show:
+                title: 'Voir la catégorie'
+                fields:
+                    - { property: 'name', label: 'Nom' }
+
+
+
+
+        Comment:
+            class: App\Entity\Comment
+            list:
+                title: 'Commentaires'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'message' }
+                    - { property: 'spot' }
+
+            show:
+                title: 'Voir le commentaire'
+                fields:
+                    - { property: 'message'}
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+            edit:
+                title: 'Editer le commentaire'
+                fields:
+                     - { property: 'message'}
+                     - { property: 'date', type: 'date' }
+                     - { property: 'user', label: 'Spoteur' }
+                     - { property: 'spot' }
+            new:
+                title: 'Ajouter un commentaire'
+                fields:
+                    - { property: 'message'}
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+
+
+
+        Favoris:
+            class : App\Entity\Favoris
+            list:
+                title: 'Favoris'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+
+        Love:
+            class: App\Entity\Love
+            list:
+                title: 'Jaime'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+
+
+        Tree:
+            class: App\Entity\Tree
+            list:
+                title: 'Arbres'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property : 'id' }
+                    - { property : 'user', label: 'Spoteur' }
+                    - { property : 'spot' }
+
+
+        Newsletter:
+            class: App\Entity\Newsletter
+
+        Opinion:
+            class: App\Entity\Opinion
+            list:
+                 title: 'Avis'
+                 actions:
+                     - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                 fields:
+                     - { property: 'id' }
+                     - { property: 'date', type: 'date' }
+                     - { property: 'user', label: 'Spoteur' }
+                     - { property: 'message' }
+
+
+
+        User:
+            class: App\Entity\User
+            list:
+                title: 'Spoteurs'
+                actions:
+                    - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
+                    - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
+                    - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
+                    - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+
+                fields:
+                    - { property : 'id' }
+                    - { property : 'lastLogin', label: 'Dernière connexion',format: 'd/m/Y' }
+                    - { property : 'username', label: 'Pseudo' }
+                    - { property : 'email' }
+                    - { property : 'roles' }
+                    - { property : 'spots' }
+                    - { property : 'opinions' }
+                    - { property : 'comments', label: 'Commentaires' }
+
+
+            show:
+                title: 'Voir le profil'
+                fields:
+                    - { property: 'username', label: 'Pseudo'}
+                    - { property: 'email', label: 'Email'}
+                    - { property: 'roles', label: 'Role'}
+                    - { property : 'opinions' }
+                    - { property : 'comments', label: 'Commentaires' }
+                    - { property : 'lastLogin', label: 'Dernière connexion' }
+
+
+
+            edit:
+                title: 'Modif profil'
+                fields:
+                    - { property: 'username', label: 'Pseudo' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'roles', type: 'choice', label: 'Role', type_options: { multiple: true, required: true, choices: {'ROLE_USER': 'ROLE_USER', 'ROLE_MODERATEUR': 'ROLE_MODERATEUR', 'ROLE_ADMIN': 'ROLE_ADMIN' }} }
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false }}
+
+            new:
+                title: 'Créer Spoteur'
+                fields:
+                    - { property: 'username', label: 'Pseudo' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'roles',type: 'choice', label: 'Role', type_options: { multiple: true, required: true, choices: {'ROLE_USER': 'ROLE_USER', 'ROLE_MODERATEUR': 'ROLE_MODERATEUR', 'ROLE_ADMIN': 'ROLE_ADMIN' }} }
+                    - { property: 'plainPassword', type: 'text', label: 'Mot de passe', type_options : { required: true }}
+

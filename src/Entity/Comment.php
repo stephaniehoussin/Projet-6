@@ -63,6 +63,11 @@ class Comment
         $this->children = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getMessage();
+    }
+
     public function getId()
     {
         return $this->id;
