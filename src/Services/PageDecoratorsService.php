@@ -34,7 +34,7 @@ class PageDecoratorsService
        $totalNbLoves = $this->loveRepository->countAllLoves();
        $totalNbTrees = $this->treeRepository->countAllTrees();
        $totalNbFavoris = $this->favorisRepository->countAllFavoris();
-       $result = array(
+       $allResult = array(
            'totalNbSpots' => $totalNbSpots,
            'totalNbComments' => $totalNbComments,
            'totalNbUsers' => $totalNbUsers,
@@ -43,7 +43,7 @@ class PageDecoratorsService
            'totalNbTrees' => $totalNbTrees,
            'totalNbFavoris' => $totalNbFavoris
        );
-       return $result;
+       return $allResult;
    }
 
    public function countDataByUser($userId)
@@ -54,7 +54,7 @@ class PageDecoratorsService
        $totalNbLovesByUser = $this->loveRepository->countLovesByUser($userId);
        $totalNbOpinionsByUser = $this->opinionRepository->countOpinionsByUser($userId);
        $totalNbFavorisByUser = $this->favorisRepository->countFavorisByUser($userId);
-       $result = array(
+       $resultByUser = array(
            'totalNbSpotsByUser' => $totalNbSpotsByUser,
            'totalNbCommentsByUser' => $totalNbCommentsByUser,
            'totalNbTreesByUser' => $totalNbTreesByUser,
@@ -62,6 +62,19 @@ class PageDecoratorsService
            'totalNbOpinionsByUser' => $totalNbOpinionsByUser,
            'totalNbFavorisByUser' => $totalNbFavorisByUser
        );
-       return $result;
+       return $resultByUser;
+   }
+
+   public function countDataBySpot($spotId)
+   {
+       $totalNbCommentsBySpot = $this->commentRepository->countCommentsBySpot($spotId);
+       $totalNbLovesBySpot = $this->loveRepository->countLovesBySpot($spotId);
+       $totalNbTreesBySpot= $this->treeRepository->countTreesBySpot($spotId);
+       $resultBySpot = array(
+           'totalNbCommentsBySpot' => $totalNbCommentsBySpot,
+           'totalNbLovesBySpot' => $totalNbLovesBySpot,
+           'totalNbTreesBySpot' => $totalNbTreesBySpot
+       );
+       return $resultBySpot;
    }
 }

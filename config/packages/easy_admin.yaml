@@ -241,6 +241,7 @@ easy_admin:
 
                 fields:
                     - { property : 'id' }
+                    - { property : 'enabled', label: 'actif' }
                     - { property : 'lastLogin', label: 'Dernière connexion',format: 'd/m/Y' }
                     - { property : 'username', label: 'Pseudo' }
                     - { property : 'email' }
@@ -259,6 +260,7 @@ easy_admin:
                     - { property : 'opinions' }
                     - { property : 'comments', label: 'Commentaires' }
                     - { property : 'lastLogin', label: 'Dernière connexion' }
+                    - { property : 'enabled', label: 'actif' }
 
 
 
@@ -269,6 +271,7 @@ easy_admin:
                     - { property: 'email', label: 'Email' }
                     - { property: 'roles', type: 'choice', label: 'Role', type_options: { multiple: true, required: true, choices: {'ROLE_USER': 'ROLE_USER', 'ROLE_MODERATEUR': 'ROLE_MODERATEUR', 'ROLE_ADMIN': 'ROLE_ADMIN' }} }
                     - { property: 'plainPassword', type: 'text', type_options: { required: false }}
+                    - { property : 'enabled', label: 'actif' }
 
             new:
                 title: 'Créer Spoteur'
@@ -277,4 +280,5 @@ easy_admin:
                     - { property: 'email', label: 'Email' }
                     - { property: 'roles',type: 'choice', label: 'Role', type_options: { multiple: true, required: true, choices: {'ROLE_USER': 'ROLE_USER', 'ROLE_MODERATEUR': 'ROLE_MODERATEUR', 'ROLE_ADMIN': 'ROLE_ADMIN' }} }
                     - { property: 'plainPassword', type: 'text', label: 'Mot de passe', type_options : { required: true }}
+                    - { property : 'enabled', label: 'actif' }
 

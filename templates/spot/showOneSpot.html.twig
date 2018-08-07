@@ -54,10 +54,10 @@
                                     </div>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <p>{{ form(formLove) }}<i class="fa fa-heart"> {{ nbLoves }}</i></p>
+                                        <p>{{ form(formLove) }}<i class="fa fa-heart"> {{ resultBySpot.totalNbLovesBySpot }}</i></p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p>{{ form(formTree) }}<i class="fa fa-tree"> {{ nbTrees }}</i></p>
+                                        <p>{{ form(formTree) }}<i class="fa fa-tree"> {{ resultBySpot.totalNbTreesBySpot }}</i></p>
                                     </div>
                                     <div class="col-md-4">
                                         <p>{{ form(formFavoris) }}</p>
@@ -65,8 +65,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                    {% if nbComments %}
-                                {{ nbComments }} commentaires sur ce Spot !
+                                    {% if resultBySpot.totalNbCommentsBySpot %}
+                                {{ resultBySpot.totalNbCommentsBySpot }} commentaires sur ce Spot !
                                 {% else %}
                                     Pas encore de commentaires sur ce spot
                                 {% endif %}

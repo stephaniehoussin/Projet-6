@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Spot;
+use App\Form\modifProfilUserType;
 use App\Repository\FavorisRepository;
 use App\Repository\SpotRepository;
 use App\Repository\UserRepository;
 use App\Services\PageDecoratorsService;
 use App\Services\SpotManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -15,14 +17,17 @@ class AccountController extends Controller
 {
     /**
      * @Route("/mon-compte/", name="mon-compte")
+     * @param PageDecoratorsService $pageDecoratorsService
+     * @param SpotRepository $spotRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $currentUser = $this->getUser();
-        $result = $pageDecoratorsService->countDataByUser($currentUser->getId());
+        $resultByUser = $pageDecoratorsService->countDataByUser($currentUser->getId());
         $nbSpotsWaiting = $spotRepository->countSpotsByWaitingStatus();
         return $this->render('account/index.html.twig',array(
-        'result' => $result,
+        'resultByUser' => $resultByUser,
             'nbSpotsWaiting' => $nbSpotsWaiting));
     }
 
@@ -106,9 +111,23 @@ class AccountController extends Controller
      * @Route("mon-compte/mes-infos", name="mes-infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function informationsByUser(UserRepository $userRepository)
+    public function informationsByUser(SpotManager $spotManager,Request $request)
     {
-        return $this->render('account/informations.html.twig');
+        $user = $this->getUser();
+        $formProfil = $this->createForm(modifProfilUserType::class);
+        $formProfil->handleRequest($request);
+        if($formProfil->isSubmitted() && $formProfil->isValid())
+        {
+            $user->setUsername($user);
+            $user->setEmail($user);
+            $spotManager->persistUser($user);
+
+        }
+
+        return $this->render('account/informations.html.twig',array(
+            'user' => $user,
+            'formProfil' => $formProfil->createView()
+        ));
     }
 
     /**

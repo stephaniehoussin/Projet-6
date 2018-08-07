@@ -25,10 +25,33 @@
             <section class="account-body">
                 <div class="row">
                     <div class="col-md-6">
-                        Mon Compte
+                        <div class="card text-white bg-dark mb-3 col-md-10">
+                            <div class="card-header">Pseudo</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user.username }}</h5>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-dark mb-3 col-md-10">
+                            <div class="card-header">Email</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user.email }}</h5>
+                            </div>
+                        </div>
+                        <div class="card text-white bg-dark mb-3 col-md-10">
+                            <div class="card-header">Dernière connexion</div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user.lastLogin|date('d/m/Y') }}</h5>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         Modifier mes infos
+                        {{ form_start(formProfil) }}
+                        <div class="form-group">
+                            {{ form_row(formProfil) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="submit">Modifier</button>
+                        {{ form_end(formProfil) }}
                     </div>
                 </div>
             </section>

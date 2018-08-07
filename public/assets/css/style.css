@@ -534,6 +534,19 @@ body {
     text-align: center;
 
 }
+
+/*.account-body .card
+{
+    margin-left: 80px;
+}
+
+@media (max-width: 768px)
+{
+    .account-body .card {
+        margin-left: 35px;
+
+    }
+}*/
 /********************PAGES MENU**********************/
 /*****************PAGES GENERAL**********************/
 .page_marge_top

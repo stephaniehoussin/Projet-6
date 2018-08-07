@@ -56,11 +56,10 @@ class SpotController extends Controller
     /**
      * @Route("accueil/je-cherche-un-spot/{page}", requirements={"page" = "\d+"} , name="je-cherche-un-spot")
      * @param SpotRepository $spotRepository
-     * @param Request $request
      * @param $page
      * @return Response
      */
-    public function searchSpot(SpotRepository $spotRepository, Request $request,$page)
+    public function searchSpot(SpotRepository $spotRepository,$page)
     {
         $form = $this->createForm(SpotFilterType::class);
         $spots = $spotRepository->findAllSpotsByDate($page);
@@ -84,23 +83,18 @@ class SpotController extends Controller
 
     /**
      * @Route("accueil/spot/{id}", name="spot")
+     * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotManager $spotManager
      * @param SpotRepository $spotRepository
-     * @param TreeRepository $treeRepository
-     * @param LoveRepository $loveRepository
-     * @param CommentRepository $commentRepository
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
      * @param $id
-     * @param Spot $spot
      * @return Response
-     * @throws \Doctrine\ORM\ORMException
      */
-    public function showOneSpot(SpotManager $spotManager, SpotRepository $spotRepository,TreeRepository $treeRepository, LoveRepository $loveRepository, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManager, $id, Spot $spot)
+    public function showOneSpot(PageDecoratorsService $pageDecoratorsService,SpotManager $spotManager, SpotRepository $spotRepository, Request $request,  $id)
     {
 
         $spot = $spotRepository->findOneBy(['id' => $id]);
-        $nbComments = $commentRepository->countCommentsBySpot($spot->getId());
+        $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
         $comment = $spotManager->initComment();
         $formComment = $this->createForm(commentType::class, $comment);
         $formComment->handleRequest($request);
@@ -111,9 +105,6 @@ class SpotController extends Controller
             $spotManager->persistComment($comment);
         }
 
-
-     //   $spot = $spotRepository->findOneBy(['id' => $id]);
-        $nbLoves = $loveRepository->countLovesBySpot($spot->getId());
         $love = $spotManager->initLove();
         $formLove = $this->createForm(LoveType::class, $love);
         $formLove->handleRequest($request);
@@ -126,8 +117,6 @@ class SpotController extends Controller
 
         }
 
-       // $spot = $spotRepository->findOneBy(['id' => $id]);
-        $nbTrees = $treeRepository->countTreesBySpot($spot->getId());
         $tree = $spotManager->initTree();
         $formTree = $this->createForm(TreeType::class, $tree);
         $formTree->handleRequest($request);
@@ -151,41 +140,15 @@ class SpotController extends Controller
         }
         return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
-            'comment' => $comment,
-            'nbComments' => $nbComments,
+          //  'comment' => $comment,
             'formComment' => $formComment->createView(),
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-            'favoris' => $favoris,
-            'nbLoves' => $nbLoves,
-            'nbTrees' => $nbTrees,
-            'love' => $love,
-            'tree' => $tree
-        ));
-    }
-
-    /**
-     * @Route("/recherche", name="recherche")
-     * @param SpotRepository $spotRepository
-     * @return JsonResponse
-     */
-    public function recupSpotForJs(SpotRepository $spotRepository)
-    {
-        $spots = $spotRepository->findAll();
-        return new JsonResponse($spots);
-    }
-
-    /**
-     * @Route("/test", name="test")
-     * @param PageDecoratorsService $pageDecoratorsService
-     * @return Response
-     */
-    public function test(PageDecoratorsService $pageDecoratorsService)
-    {
-        $result = $pageDecoratorsService->recupAllData();
-        return $this->render('home/test.html.twig',array(
-            'result' => $result
+         //   'favoris' => $favoris,
+          //  'love' => $love,
+         //   'tree' => $tree,
+            'resultBySpot' => $resultBySpot
         ));
     }
 

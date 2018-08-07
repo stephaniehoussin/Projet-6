@@ -8,6 +8,7 @@ use App\Entity\Spot;
 use App\Entity\Opinion;
 use App\Entity\Love;
 use App\Entity\Tree;
+use App\Entity\User;
 
 
 class SpotManager
@@ -53,6 +54,12 @@ class SpotManager
     public function persistSpot(Spot $spot)
     {
         $this->em->persist($spot);
+        $this->em->flush();
+    }
+
+    public function persistUser(User $user)
+    {
+        $this->em->persist($user);
         $this->em->flush();
     }
 

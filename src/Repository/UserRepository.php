@@ -28,7 +28,6 @@ class UserRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
         return $nb;
     }
-
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
