@@ -14,10 +14,11 @@ easy_admin:
             - { label : 'Retour site', route: 'accueil' }
             - { entity: 'Spot', label: 'Spots'}
             - { entity: 'User', label: 'Spoteurs'}
+            - { entity: 'Comment', label: 'Commentaires' }
             - { entity: 'Category',label: 'Catégories'}
             - { entity: 'Favoris'}
-            - { entity: 'Love'}
-            - { entity: 'Tree'}
+            - { entity: 'Love', label: 'Likes'}
+            - { entity: 'Tree', label: 'Environnement' }
             - { entity: 'Newsletter'}
             - { entity: 'Opinion', label: 'Opinions' }
 
@@ -39,20 +40,59 @@ easy_admin:
                     - { property: 'category',label: 'Catégorie' }
                     - { property: 'title',label: 'Titre' }
                     - { property: 'description' }
+                    - { property: 'picture',label: 'Image', type: 'image', base_path: '%app.path.spots%' }
                     - { property: 'infosSupp',label: 'Adresse' }
                     - { property: 'libelleStatus',label: 'Status' }
                     - { property: 'comments',label: 'Commentaires' }
+                    - { property: 'loves',label: 'Likes' }
+                    - { property: 'trees',label: 'Arbres' }
 
 
             edit:
-                - {property: 'user'}
-                - {property: 'date'}
-                - {property: 'category'}
-                - {property: 'title'}
-                - {property: 'description'}
-                - {property: 'infosSupp'}
-                - {property: 'status', type: 'choice', type_options: { choices: { 'Rejeté': '0', 'En attente': '1', 'validée': '2'}}}
+                title: "Editer le spot"
+                fields:
+                    - { property: 'id' }
+                    - {property: 'user',label: 'Spoteur' }
+                    - {property: 'date', type: 'date' }
+                    - {property: 'category', label: 'Catégorie' }
+                    - {property: 'latitude'}
+                    - {property: 'longitude'}
+                    - {property: 'title',label: 'Titre' }
+                    - {property: 'description'}
+                    - {property: 'pictureFile', type: 'vich_image'}
+                    - {property: 'infosSupp', label: 'Adresse' }
+                    - {property: 'status', type: 'choice', type_options: { choices: { 'Rejeté': '0', 'En attente': '1', 'validée': '2'}}}
+                    - { property: 'comments', label: 'Commentaires' }
+                    #- { property: 'loves' }
+                    #- { property: 'trees' }
 
+            new:
+                title: "Ajouter un spot"
+                fields:
+                    - { property: 'user',label: 'Spoteur' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'latitude' }
+                    - { property: 'longitude' }
+                    - { property: 'title',label: 'Titre' }
+                    - { property: 'description' }
+                    - { property: 'pictureFile', type: 'vich_image' }
+                    - { property: 'infosSupp',label: 'Adresse' }
+                    - { property: 'status', type: 'choice', type_options: { choices: { 'Rejeté': '0', 'En attente': '1', 'validée': '2'}} }
+
+            show:
+                title: "Voir le spot"
+                fields:
+                    - { property: 'user' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'libelleStatus', label: 'statut' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'latitude' }
+                    - { property: 'longitude' }
+                    - { property: 'title', label: 'titre' }
+                    - { property: 'description' }
+                    - { property: 'infosSupp', label: 'adresse' }
+                    - { property: 'picture', type: 'image', base_path: '%app.path.spots%' }
 
 
         Category:
@@ -94,6 +134,36 @@ easy_admin:
                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'message' }
+                    - { property: 'spot' }
+
+            show:
+                title: 'Voir le commentaire'
+                fields:
+                    - { property: 'message'}
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+            edit:
+                title: 'Editer le commentaire'
+                fields:
+                     - { property: 'message'}
+                     - { property: 'date', type: 'date' }
+                     - { property: 'user', label: 'Spoteur' }
+                     - { property: 'spot' }
+            new:
+                title: 'Ajouter un commentaire'
+                fields:
+                    - { property: 'message'}
+                    - { property: 'date', type: 'date' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
+
+
 
         Favoris:
             class : App\Entity\Favoris
@@ -104,6 +174,10 @@ easy_admin:
                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
 
         Love:
             class: App\Entity\Love
@@ -114,6 +188,10 @@ easy_admin:
                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property: 'id' }
+                    - { property: 'user', label: 'Spoteur' }
+                    - { property: 'spot' }
 
 
         Tree:
@@ -125,6 +203,10 @@ easy_admin:
                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                fields:
+                    - { property : 'id' }
+                    - { property : 'user', label: 'Spoteur' }
+                    - { property : 'spot' }
 
 
         Newsletter:
@@ -139,6 +221,12 @@ easy_admin:
                      - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
                      - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
                      - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
+                 fields:
+                     - { property: 'id' }
+                     - { property: 'date', type: 'date' }
+                     - { property: 'user', label: 'Spoteur' }
+                     - { property: 'message' }
+
 
 
         User:
