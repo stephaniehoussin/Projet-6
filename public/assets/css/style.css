@@ -172,6 +172,17 @@ header.masthead .cover .cover-title {
     border: 0;
 }
 
+#landing-spot-content  ul
+{
+    list-style-type: none;
+}
+
+#landing-spot-content  .title
+{
+   font-weight: bold;
+}
+
+
 /********* LANDING PAGE SECTION SPOTS *******************/
 @media all and (max-width: 1024px) {
 
@@ -185,6 +196,10 @@ header.masthead .cover .cover-title {
 {
     width: 40%;
 }
+
+/********* LANDING PAGE SECTION COMMENT CA MARCHE *******************/
+
+
 /*********LANDING PAGE SECTION STATS *******************/
 #locale
 {

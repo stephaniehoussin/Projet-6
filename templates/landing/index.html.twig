@@ -9,12 +9,7 @@
     <style>
         #map {
             width: 100%;
-            height: 360px;
-            margin: 0;
-            padding: 0;
-        }
-        html, body {
-            height: 100%;
+            height: 250px;
             margin: 0;
             padding: 0;
         }
@@ -30,7 +25,7 @@
         <div class="container wow fadeInUp">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Un spot c'est quoi? </h3>
+                    <h3>Un spot c'est ça ! </h3>
                 </div>
             </div>
         </div>
@@ -39,53 +34,150 @@
     <section id="landing-spot-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-spots">
-                            <h5 class="card-title">Emplacement du Spot</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><i class="fa fa-heart"> chiffre</i></p>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-spots">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="fa fa-heart"> 12 </i></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="fa fa-tree"> 10 </i></p>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <p><i class="fa fa-tree"> chiffre</i></p>
+                                <div class="col-md-12">
+                                    <div id="map"></div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div id="map"></div>
-                            </div>
-                            <p><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
-                            <p><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
-                            <button type="submit"><i class="fa fa-heart"> Like me</i></button>
-                            <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-spots">
-                            <h5 class="card-title">Informations du Spot</h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p><i class="fa fa-user"> {{ spot.user }}</i></p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i></p>
-                                </div>
-                            </div>
-                            <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }}</h5>
-                                <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
-                                <button type="button">Enregistrer dans mes favoris</button>
+                                <p><i class="fa fa-thumb-tack"> Spot Foret</i></p>
+                                <p><i class="fa fa-map-marker"> 3 allée du lac, Boulogne</i></p>
+                                <button type="submit"><i class="fa fa-heart"> Like me</i></button>
+                                <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-spots">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><i class="fa fa-user"> Fanny</i></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><i class="fa fa-calendar"> 06/08/2018</i></p>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-spot-title">#{{ spot.id }} Super Spot au frais !</h5>
+                                    <p class="card-spot-description">Endroit complètement isolé, très ombragé et vraiment calme! Lac pas loin !
+                                        Vraiment top dépaysant</p>
+                                    <button type="button">Enregistrer dans mes favoris</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-4">
+                    <ul>
+                        <li class="title">Une carte</li>
+                        <ul>
+                            <li>Pas de géolocalisation ? Pas grave, déplaces le curseur !</li>
+                        </ul>
+                        <li class="title">Une photo du spot</li>
+                        <ul>
+                            <li>Parce que avec une photo c'est mieux !</li>
+                        </ul>
+                        <li class="title">Un Spoteur</li>
+                        <ul>
+                            <li>Derrière tout spot un spoteur</li>
+                        </ul>
+                        <li class="title">Une date</li>
+                        <ul>
+                            <li>Parce que un spot à une date</li>
+                        </ul>
+                        <li class="title">Un titre</li>
+                        <ul>
+                            <li>Un titre parlant !</li>
+                        </ul>
+                        <li class="title">Une description</li>
+                        <ul>
+                            <li>Une description sympa du spot</li>
+                        </ul>
+                        <li class="title">Une adresse</li>
+                        <ul>
+                            <li>Pour préciser le lieu </li>
+                        </ul>
+                        <li class="title">Une catégorie</li>
+                        <ul>
+                            <li>Ca permet de filtrer !</li>
+                        </ul>
+                    </ul>
                 </div>
             </div>
         </div>
-
     </section>
+    <section id="landing-spot-content">
+            <section id="landing-title">
+                <div class="container wow fadeInUp">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Mais un spot , c'est aussi ça ! </h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="row">
+                <div class="card col-md-3">
+                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title"> Un environnement </h5>
+                        <p class="card-text"><i class="fa fa-tree"> Tree me</i></p>
+                        <p class="card-text">La notion d'environnement à une place importante
+                        dans cette aplication! Le but n'est pas de montrer du doigt un endroit
+                        qui est sale mais vraiment d'éveiller la conscience de chacun sur l'importance
+                        de préserver tous les lieux sur lesquels on passe un moment !</p>
+                        <p class="card-text">Un clic sur le bouton <i class="fa fa-tree"> Tree me</i> et c'est un spot
+                        qui sera notifié comme préservé!</p>
+                        <p class="card-text">Si un spot a peu de <i class="fa fa-tree"> Tree me</i>, c'est un spot qu'il faudra
+                         essayer de préserver davantage!</p>
+
+                    </div>
+                </div>
+                <div class="card col-md-3">
+                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title"> Des J'aime ! </h5>
+                        <p class="card-text"><i class="fa fa-heart"> Like me</i></p>
+                        <p class="card-text">Un spot qui a des <i class="fa fa-heart"> Like me</i> est un spot qu'on aime!</p>
+                        <p class="card-text">Parce qu'il est bien placé, parce qu'il est complètement dans la nature,
+                        parce qu'il y a peu de monde , parce que on s'y sent tellement comme à la campagne ou
+                            au bord de la mer ,</p>
+                        <p class="card-text">mais aussi parce que c'est un spot préservé, propre , respecté !</p>
+                    </div>
+                </div>
+                <div class="card col-md-3">
+                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title"> Des Favoris ! </h5>
+                        <p class="card-text"><button type="button">Enregistrer dans mes favoris</button></p>
+                        <p class="card-text">Tu aimes un Spot, tu l'enregistres dans tes favoris pour le retrouver plus
+                        facilement </p>
+                        <p class="card-text">Facile de le trouver : il est dans ton compte perso rubrique mes spots favoris ! </p>
+                    </div>
+                </div>
+                <div class="card col-md-3">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title"> Des Commentaires ! </h5>
+                        <p class="card-text">Sympa de pouvoir échanger sur des spots !</p>
+                        <p class="card-text">Tu es allé(e) sur un Spot et tu as envie de donner ton avis</p>
+                        <p class="card-text">Tu as envie de poser une question? </p>
+                        <p class="card-text">Ou alors tu as juste envie de parler avec le spoteur ! </p>
+                    </div>
+                </div>
+            </div>
+    </section>
+
 
 
     <section id="landing-title">
@@ -100,8 +192,47 @@
     <section class="landing-how-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="card" style="width: 30rem;">
+                       <!-- <img class="card-img-top" src="" alt="Card image cap">-->
+                        <div class="card-body">
+                            <h5 class="card-title">Je Spote </h5>
+                            <p class="card-text">Tu as trouvé le spot idéal et tu veux le partager avec les spoteurs</p>
+                            <p class="card-text">Spoter ton super spot va te prendre 2 mn !</p>
+                            <ul>
+                                <li>Géolocalise toi ou bouge l'îcone pour qu'on sache où aller !</li>
+                                <li>Prends une photo pour qu'on voit comme c'est beau  </li>
+                                <li>Remplis le petit formulaire pour qu'on comprenne ton spot </li>
+                                <li>Et valide le !</li>
+                                <li>Il apparaîtra par la magie d'un spoteur Modo !</li>
+                            </ul>
+                        </div>
 
+                        <div class="card-body">
+                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux Spoter !</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card" style="width: 30rem;">
+                       <!-- <img class="card-img-top" src="" alt="Card image cap">-->
+                        <div class="card-body">
+                            <h5 class="card-title">Je cherche un spot</h5>
+                            <p class="card-text">Tu as envie de découvrir de nouveaux endroits et tu ne sais plus ou chercher?</p>
+                            <p class="card-text">Ici tu vas trouver  en 2 mn et autour de toi !</p>
+
+                        <ul>
+                            <li>geolocalise toi ou bouge l'îcone pour te plâcer ou tu cherches</li>
+                            <li>Les spots autour de toi apparaîssent</li>
+                            <li>En cliquant sur les îcones, tu as quelques infos sur le spot</li>
+                            <li>Tu peux filtrer par catégorie ou par spoteur</li>
+                            <li>Si tu veux voir un spot en détails, ouvre le ! </li>
+                        </ul>
+                        </div>
+                        <div class="card-body">
+                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux chercher !</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
