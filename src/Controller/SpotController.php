@@ -2,27 +2,26 @@
 
 namespace App\Controller;
 
-use App\Form\commentType;
+use App\Entity\Spot;
+use App\Form\CommentType;
 use App\Form\FavorisType;
 use App\Form\LoveType;
-use App\Entity\Love;
 use App\Form\SpotFilterType;
-use App\Form\spotType;
+use App\Form\SpotType;
 use App\Form\TreeType;
-use App\Repository\CommentRepository;
-use App\Repository\LoveRepository;
 use App\Repository\SpotRepository;
-use App\Repository\TreeRepository;
+use App\Services\CommentManager;
+use App\Services\FavorisManager;
+use App\Services\LoveManager;
 use App\Services\PageDecoratorsService;
 use App\Services\SpotManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Services\TreeManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Spot;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 class SpotController extends Controller
 {
@@ -32,24 +31,18 @@ class SpotController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function makeSpot(SpotManager $spotManager,Request $request)
+    public function makeSpot(SpotManager $spotManager, Request $request)
     {
+        $formSpot = $this->createForm(SpotType::class);
         $spot = $spotManager->initSpot();
-        $form = $this->createForm(spotType::class, $spot);
+        $form = $this->createForm(SpotType::class, $spot);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $currentUser = $this->getUser();
-            if($currentUser->hasRole('ROLE_MODERATEUR'))
-            {
-                $spot->setStatus(2);
-            }
-            $spot->setUser($currentUser);
-            $spotManager->persistSpot($spot);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $spotManager->save($spot,$this->getUser());
             return $this->redirectToRoute('je-cherche-un-spot', ['page' => 1]);
         }
         return $this->render('spot/makeSpot.html.twig', [
-            'formSpot' => $form->createView(),
+            'formSpot' => $formSpot->createView(),
         ]);
     }
 
@@ -59,14 +52,13 @@ class SpotController extends Controller
      * @param $page
      * @return Response
      */
-    public function searchSpot(SpotRepository $spotRepository,$page)
+    public function searchSpot(SpotRepository $spotRepository, $page, Request $request)
     {
-        $form = $this->createForm(SpotFilterType::class);
+        $formFilter = $this->createForm(SpotFilterType::class);
         $spots = $spotRepository->findAllSpotsByDate($page);
         $nbSpots = $spotRepository->countAllSpots();
         $nbPages = ceil($nbSpots / 12);
-        if($page != 1 && $page > $nbPages)
-        {
+        if ($page != 1 && $page > $nbPages) {
             throw new NotFoundHttpException("La page n'existe pas");
         }
         $pagination = [
@@ -77,79 +69,105 @@ class SpotController extends Controller
         return $this->render('spot/searchSpot.html.twig', array(
             'spots' => $spots,
             'pagination' => $pagination,
-            'formFilter' => $form->createView()
+            'formFilter' => $formFilter->createView()
         ));
     }
 
     /**
      * @Route("accueil/spot/{id}", name="spot")
      * @param PageDecoratorsService $pageDecoratorsService
-     * @param SpotManager $spotManager
-     * @param SpotRepository $spotRepository
+     * @param CommentManager $commentManager
      * @param Request $request
-     * @param $id
+     * @param Spot $spot
      * @return Response
      */
-    public function showOneSpot(PageDecoratorsService $pageDecoratorsService,SpotManager $spotManager, SpotRepository $spotRepository, Request $request,  $id)
+    public function showOneSpot(PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
     {
-
-        $spot = $spotRepository->findOneBy(['id' => $id]);
         $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
-        $comment = $spotManager->initComment();
-        $formComment = $this->createForm(commentType::class, $comment);
+        $formLove = $this->createForm(LoveType::class);
+        $formTree = $this->createForm(TreeType::class);
+        $formFavoris = $this->createForm(FavorisType::class);
+        $formComment = $this->createForm(CommentType::class);
         $formComment->handleRequest($request);
-        if ($formComment->isSubmitted() && $formComment->isValid()) {
-            $currentUser = $this->getUser();
-            $comment->setSpot($spot);
-            $comment->setUser($currentUser);
-            $spotManager->persistComment($comment);
-        }
-
-        $love = $spotManager->initLove();
-        $formLove = $this->createForm(LoveType::class, $love);
-        $formLove->handleRequest($request);
-        if($formLove->isSubmitted() && $formLove->isValid())
+        if ($formComment->isSubmitted() && $formComment->isValid())
         {
-                $currentUser = $this->getUser();
-                $love->setSpot($spot);
-                $love->setUser($currentUser);
-                $spotManager->persistLove($love);
-
+            $commentManager->save($formComment->getData(), $this->getUser(), $spot);
         }
 
-        $tree = $spotManager->initTree();
-        $formTree = $this->createForm(TreeType::class, $tree);
-        $formTree->handleRequest($request);
-        if($formTree->isSubmitted() && $formTree->isValid())
-        {
-            $currentUser = $this->getUser();
-            $tree->setSpot($spot);
-            $tree->setUser($currentUser);
-            $spotManager->persistTree($tree);
-        }
-
-        $favoris = $spotManager->initFavoris();
-        $formFavoris = $this->createForm(FavorisType::class, $favoris);
-        $formFavoris->handleRequest($request);
-        if($formFavoris->isSubmitted() && $formFavoris->isValid())
-        {
-            $currentUser = $this->getUser();
-            $favoris->setSpot($spot);
-            $favoris->setUser($currentUser);
-            $spotManager->persistFavoris($favoris);
-        }
         return $this->render('spot/showOneSpot.html.twig', array(
             'spot' => $spot,
-          //  'comment' => $comment,
             'formComment' => $formComment->createView(),
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-         //   'favoris' => $favoris,
-          //  'love' => $love,
-         //   'tree' => $tree,
             'resultBySpot' => $resultBySpot
         ));
+    }
+
+
+
+    /**
+     * @Route("accueil/spot/{id}/love", name="spot_love")
+     * @Method({"POST"})
+     * @param Request $request
+     * @param Spot $spot
+     * @param LoveManager $loveManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function love(Request $request, Spot $spot, LoveManager $loveManager)
+    {
+        $formLove = $this->createForm(LoveType::class);
+        $formLove->handleRequest($request);
+        if ($formLove->isSubmitted() && $formLove->isValid()) {
+            $loveManager->save($formLove->getData(), $this->getUser(),$spot);
+            $this->addFlash("success","ok");
+        }else{
+            $this->addFlash("warning", "pas ok");
+        }
+        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
+    }
+
+    /**
+     * @Route("accueil/spot/{id}/tree", name="spot_tree")
+     * @Method({"POST"})
+     * @param Request $request
+     * @param Spot $spot
+     * @param TreeManager $treeManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function tree(Request $request, Spot $spot, TreeManager $treeManager)
+    {
+        $formTree = $this->createForm(TreeType::class);
+        $formTree->handleRequest($request);
+        if($formTree->isSubmitted() && $formTree->isValid())
+        {
+            $treeManager->save($formTree->getData(),$this->getUser(),$spot);
+            $this->addFlash("success", "ok");
+        }else{
+            $this->addFlash("warning", "pas ok");
+        }
+        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
+    }
+
+    /**
+     * @Route("accueil/spot/{id}/favoris", name="spot_favoris")
+     * @Method({"POST"})
+     * @param Request $request
+     * @param Spot $spot
+     * @param FavorisManager $favorisManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function favoris(Request $request, Spot $spot, FavorisManager $favorisManager)
+    {
+        $formFavoris = $this->createForm(FavorisType::class);
+        $formFavoris->handleRequest($request);
+        if($formFavoris->isSubmitted() && $formFavoris->isValid()){
+            $favorisManager->save($formFavoris->getData(), $this->getUser(),$spot);
+            $this->addFlash("success","ok");
+        }else{
+            $this->addFlash("warning", "pas ok");
+        }
+        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
     }
 
 }

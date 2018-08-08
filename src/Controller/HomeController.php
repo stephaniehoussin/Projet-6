@@ -3,15 +3,11 @@
 namespace App\Controller;
 
 use App\Form\contactType;
-use App\Repository\CommentRepository;
-use App\Repository\OpinionRepository;
 use App\Repository\SpotRepository;
-use App\Repository\UserRepository;
 use App\Services\PageDecoratorsService;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends Controller
 {
@@ -40,17 +36,15 @@ class HomeController extends Controller
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository,OpinionRepository $opinionRepository)
+    public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
-        $opinions = $opinionRepository->allOpinions();
         return $this->render('home/index.html.twig',array(
             'datetime' => $datetime,
             'spots' => $spots,
             'allResult' => $allResult,
-            'opinions' => $opinions
         ));
     }
 

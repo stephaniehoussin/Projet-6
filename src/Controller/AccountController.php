@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Spot;
-use App\Form\modifProfilUserType;
 use App\Repository\FavorisRepository;
 use App\Repository\SpotRepository;
-use App\Repository\UserRepository;
 use App\Services\PageDecoratorsService;
 use App\Services\SpotManager;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AccountController extends Controller
 {
@@ -114,19 +111,8 @@ class AccountController extends Controller
     public function informationsByUser(SpotManager $spotManager,Request $request)
     {
         $user = $this->getUser();
-        $formProfil = $this->createForm(modifProfilUserType::class);
-        $formProfil->handleRequest($request);
-        if($formProfil->isSubmitted() && $formProfil->isValid())
-        {
-            $user->setUsername($user);
-            $user->setEmail($user);
-            $spotManager->persistUser($user);
-
-        }
-
         return $this->render('account/informations.html.twig',array(
             'user' => $user,
-            'formProfil' => $formProfil->createView()
         ));
     }
 

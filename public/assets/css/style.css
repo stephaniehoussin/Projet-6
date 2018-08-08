@@ -172,16 +172,15 @@ header.masthead .cover .cover-title {
     border: 0;
 }
 
-#landing-spot-content  ul
-{
-    list-style-type: none;
-}
-
 #landing-spot-content  .title
 {
    font-weight: bold;
 }
 
+.landing-how-content ul li
+{
+    list-style-type: square;
+}
 
 /********* LANDING PAGE SECTION SPOTS *******************/
 @media all and (max-width: 1024px) {
@@ -619,4 +618,11 @@ body {
 .card-search span
 {
     font-weight: bold;
+}
+
+/****************** NAVIGATION *******************/
+
+.pagination
+{
+
 }

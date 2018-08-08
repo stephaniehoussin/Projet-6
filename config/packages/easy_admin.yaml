@@ -20,7 +20,6 @@ easy_admin:
             - { entity: 'Love', label: 'Likes'}
             - { entity: 'Tree', label: 'Environnement' }
             - { entity: 'Newsletter'}
-            - { entity: 'Opinion', label: 'Opinions' }
 
 
     entities:
@@ -212,22 +211,6 @@ easy_admin:
         Newsletter:
             class: App\Entity\Newsletter
 
-        Opinion:
-            class: App\Entity\Opinion
-            list:
-                 title: 'Avis'
-                 actions:
-                     - { name: 'show', icon: 'eye', label: 'Voir', title: 'Voir' }
-                     - { name: 'edit', icon: 'pencil', label: 'Editer', title: 'Editer' }
-                     - { name: 'delete', icon: 'eraser', label: 'Supprimer', title: 'Supprimer' }
-                     - { name: 'new', icon: 'plus-circle', label: 'Ajouter', title: 'Ajouter' }
-                 fields:
-                     - { property: 'id' }
-                     - { property: 'date', type: 'date' }
-                     - { property: 'user', label: 'Spoteur' }
-                     - { property: 'message' }
-
-
 
         User:
             class: App\Entity\User
@@ -247,7 +230,7 @@ easy_admin:
                     - { property : 'email' }
                     - { property : 'roles' }
                     - { property : 'spots' }
-                    - { property : 'opinions' }
+
                     - { property : 'comments', label: 'Commentaires' }
 
 
@@ -257,7 +240,7 @@ easy_admin:
                     - { property: 'username', label: 'Pseudo'}
                     - { property: 'email', label: 'Email'}
                     - { property: 'roles', label: 'Role'}
-                    - { property : 'opinions' }
+
                     - { property : 'comments', label: 'Commentaires' }
                     - { property : 'lastLogin', label: 'Dernière connexion' }
                     - { property : 'enabled', label: 'actif' }

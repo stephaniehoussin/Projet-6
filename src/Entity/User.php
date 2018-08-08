@@ -29,11 +29,6 @@ class User extends BaseUser
      */
     private $favoris;
 
-    /**
-     * @var
-     * @ORM\OneToMany(targetEntity="App\Entity\Opinion", mappedBy="user", cascade={"remove"})
-     */
-    private $opinions;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user", cascade={"remove"})
@@ -59,7 +54,6 @@ class User extends BaseUser
        parent::__construct();
        $this->spots = new ArrayCollection();
        $this->comments = new ArrayCollection();
-       $this->opinions = new ArrayCollection();
        $this->loves = new ArrayCollection();
        $this->favoris = new ArrayCollection();
     }
@@ -117,41 +111,6 @@ class User extends BaseUser
     {
         return $this->spots;
     }
-
-
-    /**
-     * @return Collection|Opinion[]
-     */
-    public function getOpinion() : Collection
-    {
-        return $this->opinions;
-    }
-
-    /**
-     * @param Opinion $opinion
-     */
-    public function addOpinion(Opinion $opinion)
-    {
-        $this->opinions[] = $opinion;
-        $opinion->setUser($this);
-    }
-
-    /**
-     * @param Opinion $opinion
-     */
-    public function removeOpinion(Opinion $opinion)
-    {
-        $this->opinions->removeElement($opinion);
-    }
-
-    /**
-     * @return Collection|Opinion[]
-     */
-    public function getOpinions(): Collection
-    {
-        return $this->opinions;
-    }
-
 
     /**
      * @return Collection|Comment[]

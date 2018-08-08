@@ -12,6 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Spot
 {
+    const STATUS_NEED_VALIDATION = 1;
+    const STATUS_VALID = 2;
+    const STATUS_REJECT = 0;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

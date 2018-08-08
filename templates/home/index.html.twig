@@ -114,39 +114,6 @@
                 </div>
             </div>
         </section>
-    <!------------------------------SECTION OPINION--------------->
-    <section id="landing-title">
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Derniers avis postés sur YouSpot !</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="landing-opinion-content">
-        <div id="landing-opinion-content">
-
-            <p><a class="btn btn-opinion  js-scroll-trigger" href="{{ path('les-opinions') }}">Voir tous les avis</a></p>
-            <div class="container-landing-opinion-content">
-                {% for opinion in opinions %}
-                <div class="flipper">
-                    <div class="front-landing-opinion-content">
-                        <p>Opinion : {{ opinion.id }}</p>
-                        <p class="date">{{ opinion.date|date('d/m/Y') }}</p>
-                        <p class="caption"></p>
-                    </div>
-                    <div class="back-landing-opinion-content">
-                            <h1>{{ opinion.user }}</h1>
-                        <p class="date">{{ opinion.date|date('d/m/Y') }}</p>
-                        <p class="description">{{ opinion.message }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
 
     </div>
 {% endblock %}

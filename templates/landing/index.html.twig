@@ -50,8 +50,8 @@
                                 </div>
                                 <p><i class="fa fa-thumb-tack"> Spot Foret</i></p>
                                 <p><i class="fa fa-map-marker"> 3 allée du lac, Boulogne</i></p>
-                                <button type="submit"><i class="fa fa-heart"> Like me</i></button>
-                                <button type="submit"><i class="fa fa-tree"> Tree me</i></button>
+                                <button type="button"><i class="fa fa-heart"> Like me</i></button>
+                                <button type="button"><i class="fa fa-tree"> Tree me</i></button>
                             </div>
                         </div>
                     </div>
@@ -77,40 +77,24 @@
                         </div>
                     </div>
                 <div class="col-md-4">
-                    <ul>
-                        <li class="title">Une carte</li>
-                        <ul>
-                            <li>Pas de géolocalisation ? Pas grave, déplaces le curseur !</li>
-                        </ul>
-                        <li class="title">Une photo du spot</li>
-                        <ul>
-                            <li>Parce que avec une photo c'est mieux !</li>
-                        </ul>
-                        <li class="title">Un Spoteur</li>
-                        <ul>
-                            <li>Derrière tout spot un spoteur</li>
-                        </ul>
-                        <li class="title">Une date</li>
-                        <ul>
-                            <li>Parce que un spot à une date</li>
-                        </ul>
-                        <li class="title">Un titre</li>
-                        <ul>
-                            <li>Un titre parlant !</li>
-                        </ul>
-                        <li class="title">Une description</li>
-                        <ul>
-                            <li>Une description sympa du spot</li>
-                        </ul>
-                        <li class="title">Une adresse</li>
-                        <ul>
-                            <li>Pour préciser le lieu </li>
-                        </ul>
-                        <li class="title">Une catégorie</li>
-                        <ul>
-                            <li>Ca permet de filtrer !</li>
-                        </ul>
-                    </ul>
+                    <dl>
+                        <dt class="title">Une carte</dt>
+                            <dd>Pas de géolocalisation ? Pas grave, déplaces le curseur !</dd>
+                        <dt class="title">Une photo du spot</dt>
+                            <dd>Parce que avec une photo c'est mieux !</dd>
+                        <dt class="title">Un Spoteur</dt>
+                            <dd>Derrière tout spot un spoteur</dd>
+                        <dt class="title">Une date</dt>
+                            <dd>Parce que un spot à une date</dd>
+                        <dt class="title">Un titre</dt>
+                            <dd>Un titre parlant !</dd>
+                        <dt class="title">Une description</dt>
+                            <dd>Une description sympa du spot</dd>
+                        <dt class="title">Une adresse</dt>
+                            <dd>Pour préciser le lieu </dd>
+                        <dt class="title">Une catégorie</dt>
+                            <dd>Ca permet de filtrer !</dd>
+                    </dl>
                 </div>
             </div>
         </div>
@@ -193,7 +177,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card" style="width: 30rem;">
+                    <div class="card">
                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
                         <div class="card-body">
                             <h5 class="card-title">Je Spote </h5>
@@ -207,18 +191,17 @@
                                 <li>Il apparaîtra par la magie d'un spoteur Modo !</li>
                             </ul>
                         </div>
-
                         <div class="card-body">
                             <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux Spoter !</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card" style="width: 30rem;">
+                    <div class="card">
                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
                         <div class="card-body">
                             <h5 class="card-title">Je cherche un spot</h5>
-                            <p class="card-text">Tu as envie de découvrir de nouveaux endroits et tu ne sais plus ou chercher?</p>
+                            <p class="card-text">Tu as envie de découvrir de nouveaux endroits ?</p>
                             <p class="card-text">Ici tu vas trouver  en 2 mn et autour de toi !</p>
 
                         <ul>
@@ -328,74 +311,7 @@
         </div>
     </section>
 
-    <!------------------------------SECTION OPINION--------------->
-    <section id="landing-title">
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Derniers avis postés sur YouSpot !</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="landing-opinion-content">
-        <div id="landing-opinion-content">
-            <p></p>
-            <div class="container-landing-opinion-content">
-                <div class="flipper">
-                    <div class="front-landing-opinion-content">
-                        <img src="assets/img/test.jpg" alt="cherry blossoms">
-                        <p class="date">23/07/1997</p>
-                        <p class="caption"></p>
-                    </div>
-                    <div class="back-landing-opinion-content">
-                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
-                            <h1>User</h1>
-                        </a>
-                        <p class="date">23/07/1997</p>
-                        <p class="description">Extrait</p>
-                        <a class="btn btn-opinion  js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="container-landing-opinion-content">
-                <div class="flipper">
-                    <div class="front-landing-opinion-content">
-                        <img src="assets/img/test.jpg" alt="cherry blossoms">
-                        <p class="date">23/07/1997</p>
-                        <p class="caption"></p>
-                    </div>
-                    <div class="back-landing-opinion-content">
-                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
-                            <h1>User</h1>
-                        </a>
-                        <p class="date">23/07/1997</p>
-                        <p class="description">Extrait</p>
-                        <a class="btn btn-opinion js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-landing-opinion-content">
-                <div class="flipper">
-                    <div class="front-landing-opinion-content">
-                        <img src="assets/img/test.jpg" alt="cherry blossoms">
-                        <p class="date">23/07/1997</p>
-                        <p class="caption"></p>
-                    </div>
-                    <div class="back-landing-opinion-content">
-                        <a href="https://en.wikipedia.org/wiki/Cherry_blossom" target="_blank">
-                            <h1>User</h1>
-                        </a>
-                        <p class="date">23/07/1997</p>
-                        <p class="description">Extrait</p>
-                        <a class="btn btn-opinion  js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">En voir plus</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>
 {% endblock %}
 {% block footer %}
