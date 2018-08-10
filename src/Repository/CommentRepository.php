@@ -56,7 +56,7 @@ class CommentRepository extends ServiceEntityRepository
             ->createQueryBuilder('c')
             ->select('c.message')
             ->where('c.spot = :spotId')
-            //   ->orderBy('c.date', 'ASC')
+            ->orderBy('c.date', 'DESC')
             ->setParameter('spotId', $spotId)
             ->getQuery()
             ->getScalarResult();

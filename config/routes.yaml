@@ -40,3 +40,18 @@ fos_user_registration_confirmed:
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /manage
+
+fos_user_profile_edit:
+    path:    /mon-compte/mes-infos/modifications
+    methods: GET|POST
+    controller: fos_user.profile.controller:editAction
+
+fos_user_change_password:
+    path:    /mon-compte/nouveau-mot-de-passe
+    methods: GET|POST
+    controller: fos_user.change_password.controller:changePasswordAction
+
+fos_user_profile_show:
+    path:    /mon-compte/mes-infos
+    methods: GET|POST
+    controller: fos_user.profile.controller:showAction

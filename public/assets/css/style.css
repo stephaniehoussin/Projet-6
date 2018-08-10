@@ -133,22 +133,31 @@ header.masthead .cover .cover-title {
     text-align: center;
     color : black;
 }
-
-#footer ul.footer-link li a i
+#footer ul li
 {
-    margin-right: 5px;
-    font-size:20px;
-    -webkit-transition: .5s all ease;
-    -moz-transition: .5s all ease;
-    transition: .5s all ease;
+    list-style-type: none;
+    text-align: justify;
+    margin-bottom:20px;
 
 }
-
-#footer ul.footer-link li:hover a i {
-    font-size:25px;
-    margin-top:-10px;
-    color: white;
+#footer ul
+{
+    margin-top: 30px;
 }
+
+#footer .bottom
+{
+    font-weight: bold;
+    margin-top: 10px;
+}
+#footer .title
+{
+    font-weight: bold;
+    font-family: 'Tangerine';
+    font-size: 50px;
+    margin-top: 40px;
+}
+
 
 /******************** LANDING PAGE GENERAL**********************/
 /*bloc titre*/
@@ -444,7 +453,7 @@ h1 {
     line-height: 80px;
     display: block;
     text-align: left;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     color: black;
     font-family: 'Tangerine';
@@ -540,6 +549,10 @@ body {
     font-size: 40px;
     font-weight: bold;
 }
+.nav-item-dropdown li
+{
+    font-size: 30px;
+}
 
 .account-home .card
 {
@@ -549,18 +562,6 @@ body {
 
 }
 
-/*.account-body .card
-{
-    margin-left: 80px;
-}
-
-@media (max-width: 768px)
-{
-    .account-body .card {
-        margin-left: 35px;
-
-    }
-}*/
 /********************PAGES MENU**********************/
 /*****************PAGES GENERAL**********************/
 .page_marge_top
@@ -622,7 +623,74 @@ body {
 
 /****************** NAVIGATION *******************/
 
-.pagination
-{
+#faq a {
+    color: black;
+}
 
+#faq .content
+{
+    margin: 0;
+    text-align: center;
+}
+
+#faq  .content {
+    font-family: "Reenie Beanie", sans-serif;
+    font-size: 1.5em;
+    padding: 10px 10px 0 10px;
+}
+
+#faq .container-faq {
+    perspective: 1000px;
+    display: inline-block;
+    margin: 3%;
+}
+
+#faq .container-faq:hover .flipper {
+    transform: rotateY(180deg);
+}
+
+#faq .container-faq,
+.front,
+.back {
+    width: 300px;
+    height: 300px;
+}
+
+#faq .flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+#faq .front,
+.back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#faq .front {
+    z-index: 2;
+}
+#faq .back, h1
+{
+    font-size: 1em;
+}
+#faq .back {
+    transform: rotateY(180deg);
+}
+
+#faq {
+    text-align: center;
+}
+
+
+/******************INSCRIPTION **************/
+#register
+{
+    margin-bottom: 40px;
 }

@@ -40,18 +40,28 @@ class FavorisRepository extends ServiceEntityRepository
         return $nb;
     }
 
-    public function recupFavoritesSpotsByUser($userId,$spotId)
+    public function recupFavoritesSpotsByUser($spotId)
     {
         $rq = $this
-            ->createQueryBuilder('c')
-            ->select('c.spot,c.user')
-            ->where('c.spot = :spotId')
-            ->andWhere('c.user = :userId')
+            ->createQueryBuilder('f')
+            ->select('f')
+            ->where('f.spot = :spotId')
             ->setParameter('spotId', $spotId)
-            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+        return $rq;
+    }
+
+    public function countFavorisBySpot($spotId)
+    {
+        $nb = $this
+            ->createQueryBuilder('f')
+            ->select('count(f) as nb')
+            ->where('f.spot = :spotId')
+            ->setParameter('spotId', $spotId)
             ->getQuery()
             ->getSingleScalarResult();
-        return $rq;
+        return $nb;
     }
 
 

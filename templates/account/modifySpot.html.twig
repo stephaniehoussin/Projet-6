@@ -3,6 +3,7 @@
 {% block title %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+
 {% endblock %}
 {% block nav %}
 
@@ -16,15 +17,15 @@
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Mes spots favoris</h2>
+                        <h2>Modifier mon spot</h2>
                     </div>
                 </div>
             </div>
         </section>
-        <div class="row">
-
+        <section class="modify">
+            {{ form(formModifySpot) }}
+        </section>
         </div>
-    </div>
 
 
 {% endblock %}

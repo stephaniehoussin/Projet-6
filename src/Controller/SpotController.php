@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Spot;
+use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Form\ReportCommentType;
 use App\Form\FavorisType;
 use App\Form\LoveType;
 use App\Form\SpotFilterType;
 use App\Form\SpotType;
 use App\Form\TreeType;
+use App\Repository\CommentRepository;
 use App\Repository\SpotRepository;
 use App\Services\CommentManager;
 use App\Services\FavorisManager;
@@ -23,10 +26,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class SpotController
+ * @package App\Controller
+ * @Route("accueil/", name="accueil/")
+ */
 class SpotController extends Controller
 {
     /**
-     * @Route("accueil/je-spote", name="je-spote")
+     * @Route("je-spote", name="je-spote")
      * @param SpotManager $spotManager
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -35,19 +43,19 @@ class SpotController extends Controller
     {
         $formSpot = $this->createForm(SpotType::class);
         $spot = $spotManager->initSpot();
-        $form = $this->createForm(SpotType::class, $spot);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+       // $form = $this->createForm(SpotType::class, $spot);
+        $formSpot->handleRequest($request);
+        if ($formSpot->isSubmitted() && $formSpot->isValid()) {
             $spotManager->save($spot,$this->getUser());
-            return $this->redirectToRoute('je-cherche-un-spot', ['page' => 1]);
+            return $this->redirectToRoute('accueil/je-cherche-un-spot', ['page' => 1]);
         }
-        return $this->render('spot/makeSpot.html.twig', [
+        return $this->render('home/makeSpot.html.twig', [
             'formSpot' => $formSpot->createView(),
         ]);
     }
 
     /**
-     * @Route("accueil/je-cherche-un-spot/{page}", requirements={"page" = "\d+"} , name="je-cherche-un-spot")
+     * @Route("je-cherche-un-spot/{page}", requirements={"page" = "\d+"} , name="je-cherche-un-spot")
      * @param SpotRepository $spotRepository
      * @param $page
      * @return Response
@@ -66,7 +74,7 @@ class SpotController extends Controller
             'nbPages' => $nbPages,
             'nbSpots' => $nbSpots
         ];
-        return $this->render('spot/searchSpot.html.twig', array(
+        return $this->render('home/searchSpot.html.twig', array(
             'spots' => $spots,
             'pagination' => $pagination,
             'formFilter' => $formFilter->createView()
@@ -74,40 +82,46 @@ class SpotController extends Controller
     }
 
     /**
-     * @Route("accueil/spot/{id}", name="spot")
+     * @Route("spot/{id}", name="spot")
      * @param PageDecoratorsService $pageDecoratorsService
      * @param CommentManager $commentManager
      * @param Request $request
      * @param Spot $spot
      * @return Response
      */
-    public function showOneSpot(PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
+    public function showOneSpot(CommentRepository $commentRepository,PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
     {
         $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
         $formLove = $this->createForm(LoveType::class);
         $formTree = $this->createForm(TreeType::class);
         $formFavoris = $this->createForm(FavorisType::class);
+
+
         $formComment = $this->createForm(CommentType::class);
         $formComment->handleRequest($request);
         if ($formComment->isSubmitted() && $formComment->isValid())
         {
             $commentManager->save($formComment->getData(), $this->getUser(), $spot);
-        }
 
-        return $this->render('spot/showOneSpot.html.twig', array(
+        }
+        $formReportComment = $this->createForm(ReportCommentType::class);
+
+
+        return $this->render('home/showOneSpot.html.twig', array(
             'spot' => $spot,
             'formComment' => $formComment->createView(),
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-            'resultBySpot' => $resultBySpot
+            'formReportComment' => $formReportComment->createView(),
+            'resultBySpot' => $resultBySpot,
         ));
     }
 
 
 
     /**
-     * @Route("accueil/spot/{id}/love", name="spot_love")
+     * @Route("spot/{id}/love", name="spot_love")
      * @Method({"POST"})
      * @param Request $request
      * @param Spot $spot
@@ -124,11 +138,11 @@ class SpotController extends Controller
         }else{
             $this->addFlash("warning", "pas ok");
         }
-        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
+        return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
     /**
-     * @Route("accueil/spot/{id}/tree", name="spot_tree")
+     * @Route("spot/{id}/tree", name="spot_tree")
      * @Method({"POST"})
      * @param Request $request
      * @param Spot $spot
@@ -146,11 +160,11 @@ class SpotController extends Controller
         }else{
             $this->addFlash("warning", "pas ok");
         }
-        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
+        return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
     /**
-     * @Route("accueil/spot/{id}/favoris", name="spot_favoris")
+     * @Route("spot/{id}/favoris", name="spot_favoris")
      * @Method({"POST"})
      * @param Request $request
      * @param Spot $spot
@@ -167,7 +181,7 @@ class SpotController extends Controller
         }else{
             $this->addFlash("warning", "pas ok");
         }
-        return $this->redirectToRoute("spot",['id'=>$spot->getId()]);
+        return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
 }

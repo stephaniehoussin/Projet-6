@@ -99,7 +99,7 @@ class Spot
     {
         $this->date = new \DateTime();
         $this->updateAt = new \DateTime();
-        $this->status = 1;
+        $this->status= 1;
         $this->comments = new ArrayCollection();
         $this->loves = new ArrayCollection();
         $this->trees = new ArrayCollection();

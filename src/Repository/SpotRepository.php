@@ -34,12 +34,25 @@ class SpotRepository extends ServiceEntityRepository
         ;
     }
    // RECUPERATION DE TOUS LES SPOTS PAR USER
-    public function findAllSpotsByUser($userId)
+    public function findValidedSpotsByUser($userId)
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u')
             ->orderBy('u.date', 'DESC')
             ->where('u.user = :userId')
+            ->andWhere('u.status = 2')
+            ->setParameter('userId', $userId)
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findWaitingSpotsByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->andWhere('u.status = 1')
             ->setParameter('userId', $userId)
             ->setMaxResults(10);
         return $qb->getQuery()->getResult();
@@ -128,6 +141,32 @@ class SpotRepository extends ServiceEntityRepository
             ->createQueryBuilder('s')
             ->select('count(s) as nb')
             ->where('s.status = 1')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function countSpotsValidatedByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 2')
+            ->andWhere('s.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    public function countSpotsWaitingByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 1')
+            ->andWhere('s.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;

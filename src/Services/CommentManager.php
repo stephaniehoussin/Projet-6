@@ -30,4 +30,14 @@ class CommentManager
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
     }
+
+    public function report(Comment $comment, User $user)
+    {
+        $report = $comment->setReport(Comment::COMMENT_IS_REPORT);
+        $comment->setUser($user);
+        // $comment->getMessage();
+         // $comment->setMessage($comment);
+        $this->entityManager->persist($report);
+        $this->entityManager->flush();
+    }
 }

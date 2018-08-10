@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entity\Comment;
 use App\Entity\Favoris;
 use App\Entity\Spot;
 use App\Entity\User;
@@ -23,6 +24,7 @@ class FavorisManager
 
     public function save(Favoris $favoris, User $user, Spot $spot)
     {
+
 
         $favoris->setUser($user);
         $favoris->setSpot($spot);

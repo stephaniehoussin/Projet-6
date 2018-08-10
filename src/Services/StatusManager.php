@@ -7,7 +7,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-class SpotManager
+class StatusManager
 
 {
 
@@ -16,25 +16,17 @@ class SpotManager
         $this->em = $em;
     }
 
-    public function initSpot()
-    {
-        $spot = new Spot();
-        return $spot;
-    }
 
-    public function save(Spot $spot, User $user)
+    public function save(Spot $spot, User $user,$status)
     {
-        if ($user->hasRole('ROLE_MODERATEUR'))
+        if ($status == 2)
         {
             $spot->setStatus(Spot::STATUS_VALID);
+        }elseif ($status == 0)
+        {
+            $spot->setStatus(Spot::STATUS_REJECT);
         }
         $spot->setUser($user);
-        $this->em->persist($spot);
-        $this->em->flush();
-    }
-
-    public function persistSpot($spot)
-    {
         $this->em->persist($spot);
         $this->em->flush();
     }

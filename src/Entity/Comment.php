@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Comment
 {
+
+    const COMMENT_IS_NO_REPORT = 0;
+    const COMMENT_IS_REPORT  = 1;
+    const COMMENT_IS_ALREADY_REPORT = 2;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,21 +34,11 @@ class Comment
     private $message;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent", cascade={"persist", "remove"})
-     */
-    private $children;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="children")
-     */
-    private $parent;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      * @Assert\Range(min = 0, max = 2)
      * 0 = noSignal, 1 = signal, 2 = alreadySignal
      */
-    private $report;
+    private $report = self::COMMENT_IS_NO_REPORT;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
@@ -60,7 +54,6 @@ class Comment
     {
         $this->date = new \DateTime();
         $this->report = 0;
-        $this->children = new ArrayCollection();
     }
 
     public function __toString()
@@ -143,62 +136,6 @@ class Comment
 
         return $this;
     }
-    /**
-     * Set parent
-     *
-     * @param string $parent
-     *
-     * @return Comment
-     */
-    public function setParent(Comment $parent)
-    {
-        $this->parent = $parent;
-        $parent->addChild($this);
-        return $this;
-    }
-    /**
-     * Get parent
-     *
-     * @return string
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-    /**
-     * Add child
-     *
-     * @param Comment $child
-     *
-     * @return Comment
-     */
-    public function addChild(Comment $child)
-    {
-        $this->children[] = $child;
-        return $this;
-    }
-    /**
-     * Remove child
-     *
-     * @param Comment $child
-     */
-    public function removeChild(Comment $child)
-    {
-        $this->children->removeElement($child);
-    }
-    /**
-     * Get children
-     *
-     * @return Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-
-
-
 
 }
 

@@ -3,40 +3,43 @@
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
     <div class="menu-list">
-
         <ul id="menu-content" class="menu-content collapse out">
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ app.user.username|capitalize }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('fos_user_profile_edit') }}">Mon compte</a>
+                        <a class="dropdown-item" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+                    </div>
+                </li>
             <li>
-                <a href="{{ path('mon-compte') }}">Accueil Espace personnel</a>
+                <a href="{{ path('mon-compte/accueil') }}">Accueil Espace personnel</a>
             </li>
             {% if is_granted('ROLE_MODERATEUR') %}
                 <li>
-                    <a href="{{ path('spots-en-attente') }}">Spots en attente de validation</a>
+                    <a href="{{ path('mon-compte/spots-en-attente') }}">Spots en attente de validation</a>
                 </li>
                 <li>
-                    <a href="{{ path('commentaires-signales') }}">Commentaires signalés</a>
+                    <a href="{{ path('mon-compte/commentaires-signales') }}">Commentaires signalés</a>
                 </li>
             {% endif %}
-
             <li>
-                <a href="{{ path('mes-infos') }}">Mes infos</a>
-            </li>
-            <li>
-                <a href="{{ path('mes-spots-valides') }}">Mes Spots validés</a>
+                <a href="{{ path('mon-compte/mes-spots-valides') }}">Mes Spots validés</a>
             </li>
 
             {% if is_granted('ROLE_MODERATEUR') == false %}
             <li>
-                <a href="{{ path('mes-spots-en-attente') }}">Mes Spots en attente de validation</a>
+                <a href="{{ path('mon-compte/mes-spots-en-attente') }}">Mes Spots en attente de validation</a>
             </li>
             {% endif %}
 
             <li>
-                <a href="{{ path('mes-spots-favoris') }}">Mes Spots favoris</a>
+                <a href="{{ path('mon-compte/mes-spots-favoris') }}">Mes Spots favoris</a>
             </li>
             {% if is_granted('ROLE_MODERATEUR') == false %}
             <li>
-                <a href="{{ path('mes-commentaires-signales') }}">Mes commentaires signalés</a>
+                <a href="{{ path('mon-compte/mes-commentaires-signales') }}">Mes commentaires signalés</a>
             </li>
             {% endif %}
             <li>
@@ -44,9 +47,6 @@
             </li>
             <li>
                 <a href="{{ path('admin') }}">Administration</a>
-            </li>
-            <li>
-                <a href="{{ path('fos_user_security_logout') }}">Se deconnecter</a>
             </li>
         </ul>
     </div>

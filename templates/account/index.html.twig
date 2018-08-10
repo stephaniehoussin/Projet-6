@@ -8,6 +8,8 @@
 {% endblock %}
 {% block body %}
 <div class="account-content">
+
+
     <section id="account-title">
         <div class="container wow fadeInUp">
             <div class="row">
@@ -25,14 +27,14 @@
                 <div class="card-body">
                     <h5 class="card-title">SPOTS en attente de validation</h5>
                     <p class="card-text">{{ nbSpotsWaiting }}</p>
-                    <a href="{{ path('spots-en-attente') }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('mon-compte/spots-en-attente') }}" class="btn btn-primary">Voir</a>
                 </div>
             </div>
             <div class="card" style="width: 30rem;">
                 <div class="card-body">
                     <h5 class="card-title">COMMENTAIRES signalés à traiter</h5>
                     <p class="card-text">Commentaires signalés à traiter</p>
-                    <a href="{{ path('commentaires-signales') }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('mon-compte/commentaires-signales') }}" class="btn btn-primary">Voir</a>
                 </div>
             </div>
         </div>
@@ -40,10 +42,16 @@
         <div class="row">
         <div class="card" style="width: 20rem;">
             <div class="card-body">
-                <h5 class="card-title">SPOTS</h5>
-                <p class="card-text">{{ resultByUser.totalNbSpotsByUser }}</p>
+                <h5 class="card-title">SPOTS VALIDES</h5>
+                <p class="card-text">{{ resultByUser.totalNbSpotsValidatedByUser }}</p>
             </div>
         </div>
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">SPOTS EN ATTENTE</h5>
+                    <p class="card-text">{{ resultByUser.totalNbSpotsWaitingByUser }}</p>
+                </div>
+            </div>
         <div class="card" style="width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">COMMENTAIRES</h5>

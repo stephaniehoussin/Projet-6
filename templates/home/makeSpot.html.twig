@@ -56,6 +56,9 @@
         </section>
         </div>
 {% endblock %}
+{% block footer %}
+    {% include 'landing/parts/footerLanding.html.twig' %}
+{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>

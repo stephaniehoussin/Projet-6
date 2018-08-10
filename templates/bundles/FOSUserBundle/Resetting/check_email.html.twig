@@ -1,33 +1,32 @@
 {% extends "@FOSUser/layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
 
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
+
 {% block nav %}
     {% include 'landing/parts/navLanding.html.twig' %}
 {% endblock %}
+
 {% block body %}
     <div class="container">
         <section id="page-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
-                        <h2>Mot de passe oublié</h2>
+                        <h2>Votre demande de nouveau mot de passe a été pris en compte !</h2>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-md-center">
-                {% block fos_user_content %}
-                    {% include "@FOSUser/Resetting/request_content.html.twig" %}
-                {% endblock fos_user_content %}
-        </div>
+
+    <div class="container">
+        {% block fos_user_content %}
+            <p>
+                {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+            </p>
+        {% endblock %}
     </div>
-{% endblock %}
-{% block footer %}
-    {% include 'landing/parts/footerLanding.html.twig' %}
-{% endblock %}
-{% block javascript %}
 {% endblock %}

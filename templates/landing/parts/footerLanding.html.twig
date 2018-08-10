@@ -1,16 +1,29 @@
 <section id="footer">
     <div class="container">
+
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-                <ul class="footer-link">
-                    <li class="list-inline-item"><a href=""><i class="fa fa-linkedin"></i></a></li>
-                    <li class="list-inline-item"><a href="" target="_blank"><i class="fa fa-envelope"></i></a></li>
+
+            <div class="col-md-4">
+                <ul>
+                    <li><a href="{{ path('contact') }}">Nous contacter</a></li>
+                    <li><a href="{{ path('faq') }}">Foire aux questions</a></li>
                 </ul>
+            </div>
+
+            <div class="col-md-4">
+                <ul>
+                    <li><a href="{{ path('legalNotice') }}">Mentions légales</a></li>
+                    <li><a href="{{ path('termsOfService') }}">Conditions générales d'utilisation</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <p class="title">YouSpot</p>
+
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2">
-                <p class="h6">&copy Tous droits réservés . Stéphanie Houssin</p>
+            <div class="col-md-12">
+                <p class="bottom">&copy Tous droits réservés . Stéphanie Houssin</p>
             </div>
         </div>
     </div>

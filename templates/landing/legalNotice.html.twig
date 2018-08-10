@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% if user %}
+        {% include 'home/parts/navHome.html.twig' %}
+    {% else %}
+        {% include 'landing/parts/navLanding.html.twig' %}
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Les mentions légales </h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+{% endblock %}
+{% block footer %}
+    {% include 'landing/parts/footerLanding.html.twig' %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}

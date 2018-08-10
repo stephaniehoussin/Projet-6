@@ -1,0 +1,95 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% if user %}
+        {% include 'home/parts/navHome.html.twig' %}
+    {% else %}
+        {% include 'landing/parts/navLanding.html.twig' %}
+    {% endif %}
+{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Toutes les questions qu'un spoteur se pose!</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="faq">
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">1ere question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">2eme question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">3eme question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">4eme question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">5eme question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-faq">
+                <div class="flipper">
+                    <div class="front">
+                        <p class="question">6eme question</p>
+                    </div>
+                    <div class="back">
+                        <p class="content">Reponse</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+{% endblock %}
+{% block footer %}
+    {% include 'landing/parts/footerLanding.html.twig' %}
+{% endblock %}
+{% block javascript %}
+{% endblock %}
