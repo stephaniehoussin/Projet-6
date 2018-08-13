@@ -9,8 +9,7 @@
     <style>
         #map {
             width: 100%;
-            height: 360px;
-
+            height: 400px;
         }
         html, body {
             height: 100%;
@@ -41,35 +40,32 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Emplacement du Spot</h5>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
                                     </div>
                                 </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div id="map"></div>
-                                        </div>
-                                    </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>{{ form(formLove,{'action': path('accueil/spot_love',{'id': spot.id})}) }}<i class="fa fa-heart"> {{ resultBySpot.totalNbLovesBySpot }}</i></p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>{{ form(formTree,{'action': path('accueil/spot_tree', {'id': spot.id})}) }}<i class="fa fa-tree"> {{ resultBySpot.totalNbTreesBySpot }}</i></p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <p>{{ form(formFavoris, {'action': path('accueil/spot_favoris', {'id': spot.id})}) }}<i class="fa fa-folder"> {{ resultBySpot.totalNbFavorisBySpot }}</i></p>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                    {% if resultBySpot.totalNbCommentsBySpot %}
-                                {{ resultBySpot.totalNbCommentsBySpot }} commentaires sur ce Spot !
-                                {% else %}
-                                    Pas encore de commentaires sur ce spot
-                                {% endif %}
+                                        <div id="map"></div>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="love">{{ form(formLove,{'action': path('accueil/spot_love',{'id': spot.id})}) }}<p>
+                                        <hr class="mb-4">
+                                        <p> <i class="fa fa-heart"> {{ resultBySpot.totalNbLovesBySpot }}</i></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="tree">{{ form(formTree,{'action': path('accueil/spot_tree', {'id': spot.id})}) }}<p>
+                                        <hr class="mb-4">
+                                        <p><i class="fa fa-tree"> {{ resultBySpot.totalNbTreesBySpot }}</i></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="favoris">{{ form(formFavoris, {'action': path('accueil/spot_favoris', {'id': spot.id})}) }}</p>
+                                        <hr class="mb-4">
+                                        <p><i class="fa fa-folder"> {{ resultBySpot.totalNbFavorisBySpot }}</i></p>
                                     </div>
                                 </div>
                             </div>
@@ -78,16 +74,16 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Informations du Spot</h5>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><i class="fa fa-user"> {{ spot.user }}</i></p>
+                                        <p>Spoté par : {{ spot.user }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i></p>
+                                        <p>Le :  {{ spot.date|date("d/m/Y") }}</p>
                                     </div>
                                 </div>
                                 <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <hr class="mb-4">
                                 <div class="card-body">
                                     <p><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
                                     <h5 class="card-spot-title">Spot #{{ spot.id }} - {{ spot.title }}</h5>
@@ -100,34 +96,51 @@
             </div>
         </section>
 
-
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Commentaires</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="comments">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
+                        {% if resultBySpot.totalNbCommentsBySpot %}
+                            {{ resultBySpot.totalNbCommentsBySpot }} commentaire(s) sur ce Spot !
+                        {% else %}
+                            Pas encore de commentaires sur ce spot
+                        {% endif %}
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
                         {{ form_start(formComment) }}
-                            {{ form_label(formComment.message) }}
-                            {{ form_widget(formComment.message) }}
+                        {{ form_label(formComment.message) }}
+                        {{ form_widget(formComment.message) }}
+                        <hr class="mb-4">
                         <button type="submit" id="comment" class="btn">Envoyer</button>
                         {{ form_end(formComment) }}
                     </div>
                 </div>
-
+                <hr class="mb-4">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                {% if  spot.comments %}
-                    {% for comment in spot.comments %}
-                        <h5>{{ comment.user }} {{ comment.date|date("d/m/Y") }}</h5>
-                        <p>{{ comment.message }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Il n'y a pas encore de commentaires !</p>
-                {% endif %}
+                        {% if  spot.comments %}
+                            {% for comment in spot.comments %}
+                                <h5>{{ comment.user }} le : {{ comment.date|date("d/m/Y") }}</h5>
+                                <p>{{ comment.message }}</p>
+                            {% endfor %}
+                        {% endif %}
                     </div>
-            </div>
+                </div>
             </div>
         </section>
-        </div>
+    </div>
 
 
 
@@ -135,35 +148,30 @@
     <!-- JAVASCRIPT FILES -->
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<script>
-    function initMap(position)
-    {
-        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude],9);
-
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Données de la carte &copy; <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">Open Street Map</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken:'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg'
-        }).addTo(map);
-
-        var $element =
-            [
-                ["{{ spot.infosSupp }}", {{ spot.latitude }},{{ spot.longitude }}],
-
-            ];
-
-        for(var $i= 0; $i < $element.length; $i++)
+    <script>
+        function initMap(position)
         {
-            var marker = new L.marker([$element[$i][1], $element[$i][2]])
-                .bindPopup($element[$i][0])
-                .addTo(map)
+            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude],9);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Données de la carte &copy; <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">Open Street Map</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken:'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg'
+            }).addTo(map);
+            var $element =
+                [
+                    ["{{ spot.infosSupp }}", {{ spot.latitude }},{{ spot.longitude }}],
+                ];
+            for(var $i= 0; $i < $element.length; $i++)
+            {
+                var marker = new L.marker([$element[$i][1], $element[$i][2]])
+                    .bindPopup($element[$i][0])
+                    .addTo(map)
+            }
         }
-    }
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(initMap);
-
-</script>
+        if (navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(initMap);
+    </script>
 
 
 {% endblock %}
@@ -173,5 +181,4 @@
 {% block javascripts %}
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
 {% endblock %}
-
 

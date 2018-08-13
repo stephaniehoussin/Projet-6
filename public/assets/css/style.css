@@ -4,7 +4,6 @@
 
 #mainNav
  {
-   /* background-color: #15204C;*/
     background-image: url("../img/c5.jpg");
     background-repeat: no-repeat;
 
@@ -192,6 +191,7 @@ header.masthead .cover .cover-title {
 }
 
 /********* LANDING PAGE SECTION SPOTS *******************/
+
 @media all and (max-width: 1024px) {
 
     #landing-spot-content .card
@@ -204,6 +204,69 @@ header.masthead .cover .cover-title {
 {
     width: 40%;
 }
+
+#landing-spot-content .title-nine
+{
+    background-color: green;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0 10px 0;
+}
+#landing-spot-content .title-nine-button
+{
+    background-color: green;
+    text-align: center;
+
+}
+#landing-spot-content .card-text-i
+{
+    text-align: center;
+    text-transform: uppercase;
+}
+#landing-spot-content .card-text-content
+{
+    text-align: justify;
+
+}
+#landing-spot-content .title-ten
+{
+    background-color: deeppink;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0 10px 0;
+}
+#landing-spot-content .title-ten-button
+{
+    background-color: deeppink;
+}
+#landing-spot-content .title-eleven
+{
+    background-color: turquoise;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0 10px 0;
+
+}
+#landing-spot-content .title-eleven-button
+ {
+     background-color: turquoise;
+ }
+#landing-spot-content .title-twelve
+{
+    background-color: yellow;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 0 10px 0;
+
+}
+#landing-spot-content .sub-title
+{
+    color : red;
+}
+
+
+
+
 
 /********* LANDING PAGE SECTION COMMENT CA MARCHE *******************/
 
@@ -605,7 +668,7 @@ body {
 
 .one-spot .card-img-top
 {
-    height: 360px;
+    height: 400px;
 }
 
 /****************** PAGE LES OPINIONS*******************/

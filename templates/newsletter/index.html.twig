@@ -1,20 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/NewsletterController.php'|file_link(0) }}">src/Controller/NewsletterController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/newsletter/index.html.twig'|file_link(0) }}">templates/newsletter/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <section id="page-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Inscription Newsletter</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if success %}
+        <p>Vous êtes désormais inscrit à notre newsletter</p>
+        <p>Un email vient de vous être envoyé </p>
+        {% else %}
+        <section class="contact">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <hr class="mb-4">
+                    <hr class="mb-4">
+                    {{ form_start(formNewsletter) }}
+                    <div class="form-group">
+                        {{ form_errors(formNewsletter) }}
+                        {{ form_widget(formNewsletter, { 'attr': {'class': 'form-control'} }) }}
+                    </div>
+                    <div class="col-md-3 offset-md-4">
+                        <button type="submit" class="btn" name="submit"  id="connexion">Envoyer</button>
+                    </div>
+                    {{ form_end(formNewsletter) }}
+                </div>
+            </div>
+        </section>
+    </div>
+     {% endif %}
 {% endblock %}

@@ -28,8 +28,8 @@ fos_user_registration_check_email:
     controller: fos_user.registration.controller::checkEmailAction
 
 fos_user_registration_confirm:
-    path:    /confirm
-    methods: GET|POST
+    path:    /confirm/{token}
+    methods: GET
     controller: fos_user.registration.controller::confirmAction
 
 fos_user_registration_confirmed:

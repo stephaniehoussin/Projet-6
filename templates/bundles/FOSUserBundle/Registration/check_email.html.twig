@@ -1,0 +1,34 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}Confirmer votre inscription{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include 'landing/parts/navLanding.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="headline mb-4">
+        <div class="container">
+            <h1 class="pt-4 mb-1 text-center">Confirmer votre inscription</h1>
+            <p class="text-center">Vous avez reçu un lien dans votre boite email</p>
+        </div>
+    </div>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-md-center">
+            <section class="col-md-7">
+                {% block fos_user_content %}
+                    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+                {% endblock fos_user_content %}
+            </section>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include 'landing/parts/footerLanding.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

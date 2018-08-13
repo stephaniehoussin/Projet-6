@@ -59,3 +59,11 @@ fos_user:
     from_email:
         address: '%env(MAILER_ADDRESS)%'
         sender_name: '%env(MAILER_SENDER)%'
+    registration:
+        confirmation:
+            enabled: true
+            template: mails/registration/registration.html.twig
+    resetting:
+        email:
+            template: mails/resetting/resetting.html.twig
+

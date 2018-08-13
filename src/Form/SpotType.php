@@ -36,16 +36,16 @@ class SpotType extends AbstractType
                     'class' => Category::class,
             ))
             ->add('pictureFile', VichImageType::class,array(
-                'label' => 'Image'
+                'label' => 'Ajouter une image'
             ))
             ->add('title', TextType::class,array(
-                'label' => 'Titre'
+                'label' => 'Choisir un titre'
             ))
             ->add('description', TextareaType::class,array(
-                'label' => 'Description'
+                'label' => 'Ajouter une description'
             ))
             ->add('infosSupp', TextType::class,array(
-                'label' => 'Indiquer une adresse'
+                'label' => 'Indiquer une adresse ( boulevard de la paix, 3 rue du lac boulogne, 4 avenue du spot 75015 Paris ... ) '
             ));
 
     }

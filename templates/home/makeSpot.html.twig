@@ -3,7 +3,6 @@
 {% block title %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <!-- CDN Stylesheet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
           integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
           crossorigin=""/>
@@ -27,10 +26,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        YouSpot vous géolocalise ,
-                        Votre localisation est donc bien prise en compte dans l'ajout de votre spot.
-                        Si vous n'êtes pas géolocalisé, vous pouvez bouger le curser à l'emplacement
-                        de votre choix
+                        YouSpot te géolocalise automatiquement !
+                        Donc si c'est le cas, ne touche rien , ton emplacement sera enregistré à validation
+                        de ton spot!
+                        Si tu n'es pas géolocalisé ( problème de géolocalisation ou pas envie de l'être) , pas de panique,
+                        bouge le marqueur sur l'emplacement du spot et il sera enregistré à validation!
                     </div>
                 </div>
             </div>

@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
+use App\Form\NewsletterType;
+use App\Repository\NewsletterRepository;
+use App\Services\MailerService;
+use App\Services\NewsletterService;
 use App\Form\contactType;
 use App\Repository\SpotRepository;
 use App\Services\PageDecoratorsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Doctrine\ORM\EntityManagerInterface;
 class HomeController extends Controller
 {
     /**
@@ -51,15 +56,20 @@ class HomeController extends Controller
     /**
      * @Route("/contact", name="contact")
      * @param Request $request
+     * @param MailerService $mailerService
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function contact(Request $request)
+    public function contact(Request $request, MailerService $mailerService)
     {
         $user = $this->getUser();
         $form = $this->createForm(contactType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            $mailerService->contactSend($form->getData());
             $this->addFlash('success', 'Merci pour votre message, nous allons y répondre très vite');
         }
         return $this->render('landing/contact.html.twig',[

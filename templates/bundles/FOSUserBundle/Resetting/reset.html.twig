@@ -1,5 +1,4 @@
 {% extends "@FOSUser/layout.html.twig" %}
-
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
@@ -7,35 +6,28 @@
     {% include 'landing/parts/navLanding.html.twig' %}
 {% endblock %}
 {% block body %}
-
     <div class="container">
         <section id="page-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
-                        <h2>Connexion</h2>
-                        <h3>Bon retour parmis nous !</h3>
+                        <h2>Réinitialiser son mot de passe</h2>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-
-<div class="container">
-    <section id="connexion">
-        <div class="row">
-            <div class="col-md-6 offset-md-4">
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-md-center">
             {% block fos_user_content %}
-                {{ include('@FOSUser/Security/login_content.html.twig') }}
+                {% include "@FOSUser/Resetting/reset_content.html.twig" %}
             {% endblock fos_user_content %}
-            </div>
         </div>
-    </section>
-</div>
+    </div>
 
 {% endblock %}
 {% block footer %}
     {% include 'landing/parts/footerLanding.html.twig' %}
 {% endblock %}
-{% block javascript %}
+{% block javascripts %}
 {% endblock %}
