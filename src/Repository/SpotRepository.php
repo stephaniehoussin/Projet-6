@@ -31,9 +31,9 @@ class SpotRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
-   // RECUPERATION DE TOUS LES SPOTS PAR USER
+    // RECUPERATION DE TOUS LES SPOTS PAR USER
     public function findValidedSpotsByUser($userId)
     {
         $qb = $this->createQueryBuilder('u')
@@ -58,8 +58,20 @@ class SpotRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findRejectedSpotsByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->andWhere('u.status = 0')
+            ->setParameter('userId', $userId)
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
+    }
 
-  // RECUPERATION DE TOUS LES SPOTS PAR DATE ET PAR PAGE
+
+    // RECUPERATION DE TOUS LES SPOTS PAR DATE ET PAR PAGE
     public function findAllSpotsByDate($page)
     {
 
@@ -200,3 +212,4 @@ class SpotRepository extends ServiceEntityRepository
     }
     */
 }
+

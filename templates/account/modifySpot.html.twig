@@ -22,11 +22,28 @@
                 </div>
             </div>
         </section>
-        <section class="modify">
-            {{ form(formModifySpot) }}
-        </section>
-        </div>
 
+        <section class="modify">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_start(formModify) }}
+                    <div class="form-group">
+                        {{ form_row(formModify.category) }}
+                        {{ form_row(formModify.pictureFile, {'attr': {'class': 'custom-file-input'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_row(formModify.title) }}
+                        {{ form_row(formModify.description) }}
+                        {{ form_row(formModify.infosSupp) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Modifier mon spot</button>
+                {{ form_end(formModify) }}
+            </div>
+        </section>
+    </div>
 
 {% endblock %}
 

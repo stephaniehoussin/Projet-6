@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block nav %}
+    {% include 'account/parts/navAccount.html.twig' %}
+{% endblock %}
+{% block body %}
+    <div class="account-content">
+
+
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Espace personnel</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="account-home">
+            {{ form_start(formReject) }}
+            <div class="form-group">
+                {{ form_row(formReject, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
+            {{ form_end(formReject) }}
+        </section>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
+

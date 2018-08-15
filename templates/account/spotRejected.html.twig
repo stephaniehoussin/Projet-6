@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'account/parts/navAccount.html.twig' %}
+<div class="account-content">
+    <section id="account-title">
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Mes spots rejetés</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="account-spots-rejected">
+        <div class="row">
+            <div class="responsive-table">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>picture</th>
+                        <th>date</th>
+                        <th>title</th>
+                        <th>description</th>
+                        <th>Motif</th>
+                        <th>Modifier</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if rejectedSpots %}
+                        {% for spot in rejectedSpots %}
+                            <tr>
+                                <td>{{ spot.id }}</td>
+                                <td><img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap"></td>
+                                <td>{{ spot.date|date('d/m/Y') }}</td>
+                                <td>{{ spot.title }}</td>
+                                <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
+                                <td></td>
+                                <td><a href="{{ path('mon-compte/mes-spots-rejetes/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a></td>
+
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p>Il n'y a pas encore de spot rejetés</p>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+    {% endblock %}
+
+

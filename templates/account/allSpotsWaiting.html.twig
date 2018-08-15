@@ -23,36 +23,70 @@
             </div>
         </section>
         <div class="row">
-                  <div class="reponsive-table">
-                      <table class="table table-hover table-responsive">
-                          <thead>
-                          <tr>
-                              <th>id</th>
-                              <th>user</th>
-                              <th>date</th>
-                              <th>title</th>
-                              <th>description</th>
-                              <th>Voir</th>
-                              <th>Valider</th>
-                              <th>Rejeter</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                {% for spot in spots %}
-                          <tr>
-                              <td>{{ spot.id }}</td>
-                              <td>{{ spot.user }}</td>
-                              <td>{{ spot.date|date('d/m/Y') }}</td>
-                              <td>{{ spot.title }}</td>
-                              <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
-                              <td><a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir</a></td>
-                              <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 2 }) }}" class="btn btn-success">Valider</a></td>
-                              <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Rejeter</a></td>
-                          </tr>
-                {% endfor %}
-                          </tbody>
-                      </table>
-                  </div>
+            <div class="reponsive-table">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>user</th>
+                        <th>date</th>
+                        <th>title</th>
+                        <th>description</th>
+                        <th>Voir</th>
+                        <th>Valider</th>
+                        <th>Rejeter</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for spot in spots %}
+                        <tr>
+                            <td>{{ spot.id }}</td>
+                            <td>{{ spot.user }}</td>
+                            <td>{{ spot.date|date('d/m/Y') }}</td>
+                            <td>{{ spot.title }}</td>
+                            <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
+                            <td><a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir</a></td>
+                            <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 2 }) }}" class="btn btn-success">Valider</a></td>
+                            {#<td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Rejeter</a></td>#}
+                            <td><button type="button" href="#SuppressionSpot" data-toggle="modal" class="btn btn-danger">Rejeter</button></td>
+                        </tr>
+
+                        <div class="modal fade" id="SuppressionSpot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                ATTENTION : Cette action est définitive !
+                                            </div>
+                                            <div class="card-body">
+                                                <blockquote class="blockquote">
+                                                    <p>Etes vous sur de vouloir supprimer ce spot ?</p>
+                                                    <footer class="blockquote-footer">
+                                                        <!-- ICI INSERER REDIRECTION VERS FORMULAIRE QUI INDIQUE LES RAISONS DU REJET-->
+                                                        <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Oui , je supprime ce Spot</a>
+                                                    </footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
