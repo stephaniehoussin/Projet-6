@@ -4,6 +4,7 @@
 
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
+            <li><a href="{{ path('accueil') }}">Retour site</a></li>
             <li><a href="{{ path('mon-compte/accueil') }}">Accueil Espace personnel</a></li>
             <li><a href="{{ path('fos_user_profile_edit') }}">Gérer mon compte</a></li>
             {% if is_granted('ROLE_MODERATEUR') %}

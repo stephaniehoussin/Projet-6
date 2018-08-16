@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\Spot;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Form\ReportCommentType;
 use App\Form\FavorisType;
 use App\Form\LoveType;
+use App\Form\ReportCommentType;
 use App\Form\SpotFilterType;
 use App\Form\SpotType;
 use App\Form\TreeType;
@@ -17,13 +17,13 @@ use App\Services\CommentManager;
 use App\Services\FavorisManager;
 use App\Services\LoveManager;
 use App\Services\PageDecoratorsService;
+use App\Services\PaginationService;
 use App\Services\SpotManager;
 use App\Services\TreeManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -43,7 +43,6 @@ class SpotController extends Controller
     {
         $formSpot = $this->createForm(SpotType::class);
         $spot = $spotManager->initSpot();
-       // $form = $this->createForm(SpotType::class, $spot);
         $formSpot->handleRequest($request);
         if ($formSpot->isSubmitted() && $formSpot->isValid()) {
             $spotManager->save($spot,$this->getUser());
@@ -60,20 +59,11 @@ class SpotController extends Controller
      * @param $page
      * @return Response
      */
-    public function searchSpot(SpotRepository $spotRepository, $page, Request $request)
+    public function searchSpot(PaginationService $paginationService,SpotRepository $spotRepository, $page, Request $request)
     {
         $formFilter = $this->createForm(SpotFilterType::class);
         $spots = $spotRepository->findAllSpotsByDate($page);
-        $nbSpots = $spotRepository->countAllSpots();
-        $nbPages = ceil($nbSpots / 12);
-        if ($page != 1 && $page > $nbPages) {
-            throw new NotFoundHttpException("La page n'existe pas");
-        }
-        $pagination = [
-            'page' => $page,
-            'nbPages' => $nbPages,
-            'nbSpots' => $nbSpots
-        ];
+        $pagination = $paginationService->paginationHome($page);
         return $this->render('home/searchSpot.html.twig', array(
             'spots' => $spots,
             'pagination' => $pagination,
@@ -83,6 +73,7 @@ class SpotController extends Controller
 
     /**
      * @Route("spot/{id}", name="spot")
+     * @param CommentRepository $commentRepository
      * @param PageDecoratorsService $pageDecoratorsService
      * @param CommentManager $commentManager
      * @param Request $request
@@ -104,7 +95,10 @@ class SpotController extends Controller
             $commentManager->save($formComment->getData(), $this->getUser(), $spot);
 
         }
-        $formReportComment = $this->createForm(ReportCommentType::class);
+        $formReport = $this->createForm(ReportCommentType::class);
+        //$commentsReport = $commentRepository->commentIsReportByUser($spot->getId());
+       // dump($commentsReport);
+
 
 
         return $this->render('home/showOneSpot.html.twig', array(
@@ -113,8 +107,10 @@ class SpotController extends Controller
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-            'formReportComment' => $formReportComment->createView(),
+            'formReport' => $formReport,
             'resultBySpot' => $resultBySpot,
+          //  'commentsReport' => $commentsReport,
+
         ));
     }
 
@@ -177,6 +173,28 @@ class SpotController extends Controller
         $formFavoris->handleRequest($request);
         if($formFavoris->isSubmitted() && $formFavoris->isValid()){
             $favorisManager->save($formFavoris->getData(), $this->getUser(),$spot);
+            $this->addFlash("success","ok");
+        }else{
+            $this->addFlash("warning", "pas ok");
+        }
+        return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
+    }
+
+    /**
+     * @Route("spot/{id}/report", name="comment_report")
+     * @Method({"POST"})
+     * @param Spot $spot
+     * @param Comment $comment
+     * @param CommentManager $commentManager
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function reportComment(Spot $spot,Comment $comment,CommentManager $commentManager,Request $request)
+    {
+        $formReport = $this->createForm(ReportCommentType::class);
+        $formReport->handleRequest($request);
+        if($formReport->isSubmitted() && $formReport->isValid()){
+            $commentManager->save($formReport->getData(), $this->getUser(),$spot);
             $this->addFlash("success","ok");
         }else{
             $this->addFlash("warning", "pas ok");

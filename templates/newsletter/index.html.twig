@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
-
+{% block nav %}
+    {% if app.user %}
+    {% include 'home/parts/navHome.html.twig' %}
+    {% else %}
+    {% include 'landing/parts/navLanding.html.twig' %}
+    {% endif %}
+{% endblock %}
 {% block body %}
 
     <div class="container">
@@ -38,3 +44,7 @@
     </div>
      {% endif %}
 {% endblock %}
+{% block footer %}
+    {% include 'landing/parts/footerLanding.html.twig' %}
+{% endblock %}
+

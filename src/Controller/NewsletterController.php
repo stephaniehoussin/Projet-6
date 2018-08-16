@@ -2,16 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
-use Symfony\Component\HttpFoundation\Request;
-use App\Repository\NewsletterRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Services\NewsletterService;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 
 class NewsletterController extends Controller

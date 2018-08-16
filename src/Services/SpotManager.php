@@ -39,6 +39,12 @@ class SpotManager
         $this->em->flush();
     }
 
+    public function suppressSpot($spot)
+    {
+        $this->em->remove($spot);
+        $this->em->flush();
+    }
+
 
 
 }

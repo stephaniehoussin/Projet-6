@@ -132,10 +132,28 @@
                     <div class="col-md-8 offset-md-2">
                         {% if  spot.comments %}
                             {% for comment in spot.comments %}
-                                <h5>{{ comment.user }} le : {{ comment.date|date("d/m/Y") }}</h5>
-                                <p>{{ comment.message }}</p>
+                                <p>Commentaire {{ comment.id }} laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
+                                <p class="message">"{{ comment.message }}"</p>
+                               {# <p class="report">{{ form(formReport,{'action': path('accueil/comment_report',{'id': spot.id})}) }}<p>#}
+                                {% for comment in comment.report %}
+                                    <p>Ce commentaire a été signalé !</p>
+                                {% endfor %}
+                               {# {% if commentsReport %}
+                                    {% for commentsReport in comment.id %}
+                                        <p>Ce commentaire a été signalé !</p>
+                                    {% endfor %}
+                                    <hr class="mb-4">
+                                {% endif %}#}
+
                             {% endfor %}
+
                         {% endif %}
+
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

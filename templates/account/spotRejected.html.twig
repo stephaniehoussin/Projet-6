@@ -28,18 +28,23 @@
                 <table class="table table-hover table-responsive">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>picture</th>
-                        <th>date</th>
-                        <th>title</th>
-                        <th>description</th>
-                        <th>Motif</th>
+                        <th>Id</th>
+                        <th>Image</th>
+                        <th>Date</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Motif du refus</th>
                         <th>Modifier</th>
+                        <th>Supprimer</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     {% if rejectedSpots %}
+                        <p>Tu as un spot rejeté? Pas de panique , c'est qu'un des points ne colle pas avec la fiche
+                            du spoteur ! Modifie ton spot et en validant ta modif, il va repartir en attente de
+                            validation !</p>
+                        <p>Une fois validé, tu le retrouveras dans tes spots validés et surtout il apparaitra sur le site !</p>
                         {% for spot in rejectedSpots %}
                             <tr>
                                 <td>{{ spot.id }}</td>
@@ -48,12 +53,12 @@
                                 <td>{{ spot.title }}</td>
                                 <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
                                 <td></td>
-                                <td><a href="{{ path('mon-compte/mes-spots-rejetes/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a></td>
-
+                                <td><a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a></td>
+                                <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a></td>
                             </tr>
                         {% endfor %}
                     {% else %}
-                        <p>Il n'y a pas encore de spot rejetés</p>
+                        <p>Bravo ! Tu n'as pas de spots refusés!</p>
                     {% endif %}
                     </tbody>
                 </table>

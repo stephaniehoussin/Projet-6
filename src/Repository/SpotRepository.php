@@ -86,6 +86,7 @@ class SpotRepository extends ServiceEntityRepository
         $rq = $this->createQueryBuilder('s')
             ->select('s')
             ->orderBy('s.date', 'DESC')
+            ->where('s.status =2')
             ->setMaxResults(12)
             ->setFirstResult($page * 12 - 12);
         return $rq->getQuery()->getResult();
@@ -153,6 +154,20 @@ class SpotRepository extends ServiceEntityRepository
             ->createQueryBuilder('s')
             ->select('count(s) as nb')
             ->where('s.status = 1')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+
+    public function countSpotsRejectedByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 0')
+            ->andWhere('s.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;

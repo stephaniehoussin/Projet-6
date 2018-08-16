@@ -15,29 +15,25 @@ class CommentManager
      */
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $em)
     {
-        $this->entityManager = $entityManager;
+        $this->em = $em;
     }
-
-
 
 
     public function save(Comment $comment, User $user, Spot $spot){
 
+        $comment->setReport(Comment::COMMENT_IS_REPORT);
         $comment->setUser($user);
         $comment->setSpot($spot);
-        $this->entityManager->persist($comment);
-        $this->entityManager->flush();
+        $this->em->persist($comment);
+        $this->em->flush();
     }
 
-    public function report(Comment $comment, User $user)
+    public function suppressComment($comment)
     {
-        $report = $comment->setReport(Comment::COMMENT_IS_REPORT);
-        $comment->setUser($user);
-        // $comment->getMessage();
-         // $comment->setMessage($comment);
-        $this->entityManager->persist($report);
-        $this->entityManager->flush();
+        $this->em->remove($comment);
+        $this->em->flush();
     }
+
 }

@@ -40,13 +40,13 @@ class FavorisRepository extends ServiceEntityRepository
         return $nb;
     }
 
-    public function recupFavoritesSpotsByUser($spotId)
+    public function recupFavoritesSpotsByUser($userId)
     {
         $rq = $this
             ->createQueryBuilder('f')
             ->select('f')
-            ->where('f.spot = :spotId')
-            ->setParameter('spotId', $spotId)
+            ->where('f.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
         return $rq;

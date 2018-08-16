@@ -17,8 +17,53 @@
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Commentaires signalés</h2>
+                        <h2>Commentaires signalés à modérer!</h2>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section class="account-all-spots-waiting">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <div class="container">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>user</th>
+                                <th>message</th>
+                                <th>Voir le spot concerné</th>
+                                <th>Valider</th>
+                                <th>Supprimer</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                            {% if commentsReport %}
+                            {% for comment in commentsReport %}
+                            <tr>
+                                <td>{{ comment.id }}</td>
+                                <td>{{ comment.user }}</td>
+                                <td>{{ comment.message }}</td>
+                                <td>{{ comment.spot }}</td>
+                                <td><a href="#" class="btn btn-success">Valider</a> </td>
+                                <td><a href="#" class="btn btn-danger">Supprimer</a> </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <p>Pas encore de commentaires à modérer!</p>
+                            {% endif %}
+                        </table>
+                    </div>
+
+
+
                 </div>
             </div>
         </section>

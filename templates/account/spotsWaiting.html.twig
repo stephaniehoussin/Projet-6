@@ -22,6 +22,12 @@
                 </div>
             </div>
         </section>
+        <section id="account-spots-waiting">
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
         <div class="row">
             {% if spots %}
                 {% for spot in spots %}
@@ -30,44 +36,11 @@
                             <div class="card-spots">
                                 <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title }} {{ spot.user }}</h5>
+                                    <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title|length > 18 ? spot.title|slice(0,18) ~'...': spot.title }}</h5>
                                     <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
                                     <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir</a>
-                                    <a href="{{ path('mon-compte/mes-spots-en-attente/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
-                                    <a href="#SuppressionSpot" data-toggle="modal" class="btn btn-danger">Supprimer</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!---- MODAL POUR SUPPRESSION SPOT PAR USER ------->
-                    <div class="modal fade" id="SuppressionSpot" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            ATTENTION : Cette action est définitive !
-                                        </div>
-                                        <div class="card-body">
-                                            <blockquote class="blockquote">
-                                                <p>Etes vous sur de vouloir supprimer ce spot ?</p>
-                                                <footer class="blockquote-footer">
-                                                    <a href="{{ path('mon-compte/choice-action', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Oui , je supprime ce Spot</a>
-                                                </footer>
-                                            </blockquote>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+                                    <a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
+                                    <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a>
                                 </div>
                             </div>
                         </div>
@@ -77,6 +50,7 @@
 
 
         </div>
+        </section>
     </div>
 
 

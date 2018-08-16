@@ -304,115 +304,7 @@ header.masthead .cover .cover-title {
     }
 
 }
-/*********LANDING PAGE SECTION OPINION *******************/
-img {
-    width: 100%;
-}
 
-a {
-    color: black;
-}
-
-.caption,
-h1,
-.date {
-    margin: 0;
-    text-align: center;
-}
-
-.caption,
-h1 {
-    font-family: "Reenie Beanie", sans-serif;
-    font-size: 2em;
-    padding: 10px 10px 0 10px;
-}
-
-.date {
-    font-size: 0.75em;
-}
-.btn-opinion
-{
-    border: 1px solid white;
-    background-color: red;
-    color: white;
-    margin-top: 30px;
-    text-transform: uppercase;
-}
-
-.description {
-    font-size: 0.9em;
-    padding: 0 20px 20px 20px;
-    text-align: left;
-}
-
-.container-landing-opinion-content {
-    perspective: 1000px;
-    display: inline-block;
-    margin: 3%;
-}
-
-.container-landing-opinion-content:hover .flipper {
-    transform: rotateY(180deg);
-}
-
-.container-landing-opinion-content,
-.front-landing-opinion-content,
-.back-landing-opinion-content {
-    width: 200px;
-    height: 200px;
-}
-
-.flipper {
-    transition: 0.6s;
-    transform-style: preserve-3d;
-    position: relative;
-}
-
-.front-landing-opinion-content,
-.back-landing-opinion-content {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 200px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.front-landing-opinion-content {
-    z-index: 2;
-}
-
-.back-landing-opinion-content {
-    transform: rotateY(180deg);
-}
-
-#landing-opinion-content {
-    text-align: center;
-}
-
-@media all and (max-width: 1024px){
-    .container-landing-opinion-content,
-    .front-landing-opinion-content,
-    .back-landing-opinion-content {
-        width: 120px;
-        height: 120px;
-    }
-    .back-landing-opinion-content .btn-opinion
-    {
-        text-transform: capitalize;
-        font-size: 10px;
-        margin-top: 25px;
-    }
-    .back-landing-opinion-content h1
-    {
-        font-size: 10px;
-    }
-    .back-landing-opinion-content .description
-    {
-        display: none;
-    }
-}
 
 /*************************PAGE ACCUEIL****************/
 #subscribe {
@@ -604,8 +496,6 @@ body {
     text-align: center;
     font-family: 'Tangerine';
     margin-top: 20px;
-
-
 }
 #account-title h2
 {
@@ -625,7 +515,47 @@ body {
 
 }
 
-/********************PAGES MENU**********************/
+.account-home span
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+/********************PAGES MON COMPTE MES SPOTS VALIDES**********************/
+#account-spots-accepted .card
+{
+    margin-bottom: 20px;
+}
+
+#account-spots-accepted .btn
+{
+    padding: 2px;
+}
+/********************PAGES MON COMPTE MES SPOTS EN ATTENTE**********************/
+#account-spots-waiting .card
+{
+    margin-bottom: 20px;
+}
+#account-spots-waiting .btn
+{
+    padding: 3px;
+}
+/********************PAGES MON COMPTE MES SPOTS FAVORIS**********************/
+#account-spots-favoris .card
+{
+    margin-bottom: 20px;
+}
+
+/********************PAGES MON COMPTE MES SPOTS REJETES**********************/
+
+#account-spots-rejected img
+{
+    height: 100px;
+    width: 100px;
+}
+#account-spots-rejected .btn
+{
+    padding: 3px;
+}
 /*****************PAGES GENERAL**********************/
 .page_marge_top
 {
@@ -664,6 +594,15 @@ body {
     height: 80%;
 }
 
+.comments span
+{
+    font-weight: bold;
+}
+.comments .message
+{
+    font-style: italic;
+}
+
 /****************** PAGE UN SPOT*******************/
 
 .one-spot .card-img-top
@@ -671,18 +610,6 @@ body {
     height: 400px;
 }
 
-/****************** PAGE LES OPINIONS*******************/
-
-.search-title
-{
-    font-weight: bold;
-    text-align: center;
-    font-size: 25px;
-}
-.card-search span
-{
-    font-weight: bold;
-}
 
 /****************** NAVIGATION *******************/
 

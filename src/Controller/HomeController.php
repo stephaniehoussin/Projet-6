@@ -2,18 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Newsletter;
-use App\Form\NewsletterType;
-use App\Repository\NewsletterRepository;
-use App\Services\MailerService;
-use App\Services\NewsletterService;
 use App\Form\contactType;
 use App\Repository\SpotRepository;
+use App\Services\MailerService;
 use App\Services\PageDecoratorsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+
 class HomeController extends Controller
 {
     /**
@@ -25,13 +21,15 @@ class HomeController extends Controller
      */
     public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
+        $user = $this->getUser();
         $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
             'spot' => $spot,
             'datetime' => $datetime,
-            'allResult' => $allResult
+            'allResult' => $allResult,
+            'user' => $user
         ));
     }
 
@@ -43,6 +41,7 @@ class HomeController extends Controller
      */
     public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
+        $user = $this->getUser();
         $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
@@ -50,6 +49,7 @@ class HomeController extends Controller
             'datetime' => $datetime,
             'spots' => $spots,
             'allResult' => $allResult,
+            'user' => $user
         ));
     }
 

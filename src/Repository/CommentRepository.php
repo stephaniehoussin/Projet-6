@@ -81,7 +81,19 @@ class CommentRepository extends ServiceEntityRepository
             ->select('c')
             ->where('c.report = 1')
             ->getQuery()
-            ->getSingleResult();
+            ->getResult();
+        return $rq;
+    }
+
+    public function recupCommentsReport()
+    {
+        $rq = $this
+            ->createQueryBuilder('c')
+            ->select('c.message')
+            ->where('c.report = 1')
+            ->orderBy('c.date', 'DESC')
+            ->getQuery()
+            ->getResult();
         return $rq;
     }
 

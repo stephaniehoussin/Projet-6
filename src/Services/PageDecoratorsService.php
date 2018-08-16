@@ -51,6 +51,7 @@ class PageDecoratorsService
        $totalNbFavorisByUser = $this->favorisRepository->countFavorisByUser($userId);
        $totalNbSpotsValidatedByUser = $this->spotRepository->countSpotsValidatedByUser($userId);
        $totalNbSpotsWaitingByUser = $this->spotRepository->countSpotsWaitingByUser($userId);
+       $totalNbSpotsRejectedByUser = $this->spotRepository->countSpotsRejectedByUser($userId);
        $resultByUser = array(
            'totalNbSpotsByUser' => $totalNbSpotsByUser,
            'totalNbCommentsByUser' => $totalNbCommentsByUser,
@@ -58,7 +59,8 @@ class PageDecoratorsService
            'totalNbLovesByUser' => $totalNbLovesByUser,
            'totalNbFavorisByUser' => $totalNbFavorisByUser,
            'totalNbSpotsValidatedByUser' => $totalNbSpotsValidatedByUser,
-           'totalNbSpotsWaitingByUser' => $totalNbSpotsWaitingByUser
+           'totalNbSpotsWaitingByUser' => $totalNbSpotsWaitingByUser,
+           'totalNbSpotsRejectedByUser' => $totalNbSpotsRejectedByUser
        );
        return $resultByUser;
    }
