@@ -24,9 +24,7 @@ class HomeController extends Controller
         $user = $this->getUser();
         $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
-        $spot = $spotRepository->recupLastSpot();
         return $this->render('landing/index.html.twig',array(
-            'spot' => $spot,
             'datetime' => $datetime,
             'allResult' => $allResult,
             'user' => $user

@@ -12,6 +12,7 @@
 {% block body %}
 
     {% include 'account/parts/navAccount.html.twig' %}
+    <section class="modify">
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -23,17 +24,19 @@
             </div>
         </section>
 
-        <section class="modify">
             <div class="row">
                 <div class="col-md-6">
+
                     {{ form_start(formModify) }}
                     <div class="form-group">
-                        {{ form_row(formModify.category) }}
+                        <div class="img">
                         {{ form_row(formModify.pictureFile, {'attr': {'class': 'custom-file-input'}}) }}
-                    </div>
+                        </div>
+                        </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        {{ form_row(formModify.category) }}
                         {{ form_row(formModify.title) }}
                         {{ form_row(formModify.description) }}
                         {{ form_row(formModify.infosSupp) }}
@@ -42,8 +45,9 @@
                 <button type="submit" class="btn btn-primary">Modifier mon spot</button>
                 {{ form_end(formModify) }}
             </div>
+            </div>
         </section>
-    </div>
+
 
 {% endblock %}
 

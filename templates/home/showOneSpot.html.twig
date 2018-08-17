@@ -42,28 +42,29 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <p><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
                                         <div id="map"></div>
                                     </div>
                                 </div>
                                 <hr class="mb-4">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <div class="row">
                                     <div class="col-md-4">
-                                        <p class="love">{{ form(formLove,{'action': path('accueil/spot_love',{'id': spot.id})}) }}<p>
+                                        <p class="card-love">{{ form(formLove,{'action': path('accueil/spot_love',{'id': spot.id})}) }}<p>
                                         <hr class="mb-4">
                                         <p> <i class="fa fa-heart"> {{ resultBySpot.totalNbLovesBySpot }}</i></p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="tree">{{ form(formTree,{'action': path('accueil/spot_tree', {'id': spot.id})}) }}<p>
+                                        <p class="card-tree">{{ form(formTree,{'action': path('accueil/spot_tree', {'id': spot.id})}) }}<p>
                                         <hr class="mb-4">
                                         <p><i class="fa fa-tree"> {{ resultBySpot.totalNbTreesBySpot }}</i></p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="favoris">{{ form(formFavoris, {'action': path('accueil/spot_favoris', {'id': spot.id})}) }}</p>
+                                        <p class="card-favoris">{{ form(formFavoris, {'action': path('accueil/spot_favoris', {'id': spot.id})}) }}</p>
                                         <hr class="mb-4">
                                         <p><i class="fa fa-folder"> {{ resultBySpot.totalNbFavorisBySpot }}</i></p>
                                     </div>
@@ -74,20 +75,21 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p>Spoté par : {{ spot.user }}</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Le :  {{ spot.date|date("d/m/Y") }}</p>
-                                    </div>
-                                </div>
                                 <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <hr class="mb-4">
                                 <div class="card-body">
-                                    <p><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
-                                    <h5 class="card-spot-title">Spot #{{ spot.id }} - {{ spot.title }}</h5>
-                                    <p class="card-spot-description">{{ spot.description }}</p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="card-user"><span>Spoté par : </span>{{ spot.user }}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-date"><span>Le :  </span>{{ spot.date|date("d/m/Y") }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="card-category"><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
+                                    <h5 class="card-title"><span>Spot #</span>{{ spot.id }} - {{ spot.title }}</h5>
+                                    <hr class="mb-4">
+                                    <p class="card-description">"{{ spot.description }}"</p>
                                 </div>
                             </div>
                         </div>
@@ -134,21 +136,14 @@
                             {% for comment in spot.comments %}
                                 <p>Commentaire {{ comment.id }} laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
                                 <p class="message">"{{ comment.message }}"</p>
+                                <hr class="mb-4">
                                {# <p class="report">{{ form(formReport,{'action': path('accueil/comment_report',{'id': spot.id})}) }}<p>#}
                                 {% for comment in comment.report %}
                                     <p>Ce commentaire a été signalé !</p>
                                 {% endfor %}
-                               {# {% if commentsReport %}
-                                    {% for commentsReport in comment.id %}
-                                        <p>Ce commentaire a été signalé !</p>
-                                    {% endfor %}
-                                    <hr class="mb-4">
-                                {% endif %}#}
-
                             {% endfor %}
 
                         {% endif %}
-
                         {% for message in app.flashes('success') %}
                             <div class="alert alert-success" role="alert">
                                 {{ message }}

@@ -19,7 +19,7 @@ class FavorisRepository extends ServiceEntityRepository
         parent::__construct($registry, Favoris::class);
     }
 
-
+   // Recup le nombre total de spots mis en favoris
     public function countAllFavoris()
     {
         $nb = $this->createQueryBuilder('f')
@@ -28,30 +28,8 @@ class FavorisRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
         return $nb;
     }
-    public function countFavorisByUser($userId)
-    {
-        $nb = $this
-            ->createQueryBuilder('f')
-            ->select('count(f) as nb')
-            ->where('f.user = :userId')
-            ->setParameter('userId', $userId)
-            ->getQuery()
-            ->getSingleScalarResult();
-        return $nb;
-    }
 
-    public function recupFavoritesSpotsByUser($userId)
-    {
-        $rq = $this
-            ->createQueryBuilder('f')
-            ->select('f')
-            ->where('f.user = :userId')
-            ->setParameter('userId', $userId)
-            ->getQuery()
-            ->getResult();
-        return $rq;
-    }
-
+    // Recup le nombre total de favoris par spot
     public function countFavorisBySpot($spotId)
     {
         $nb = $this
@@ -64,33 +42,30 @@ class FavorisRepository extends ServiceEntityRepository
         return $nb;
     }
 
-
-//    /**
-//     * @return Favoris[] Returns an array of Favoris objects
-//     */
-    /*
-    public function findByExampleField($value)
+    // Recup du nombre total de spots mis en favoris par User
+    public function countFavorisByUser($userId)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        $nb = $this
+            ->createQueryBuilder('f')
+            ->select('count(f) as nb')
+            ->where('f.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getSingleScalarResult();
+        return $nb;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Favoris
+    // Recup les spots mis en favoris par User
+    public function recupFavoritesSpotsByUser($userId)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+        $rq = $this
+            ->createQueryBuilder('f')
+            ->select('f')
+            ->where('f.user = :userId')
+            ->setParameter('userId', $userId)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
+        return $rq;
     }
-    */
+
 }

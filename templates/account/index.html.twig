@@ -41,14 +41,24 @@
             <div class="card" style="width: 45%;">
                 <div class="card-body">
                     <h5 class="card-title">SPOTS en attente de validation</h5>
-                    <p class="card-text">{{ nbSpotsWaiting }}</p>
+                    {% if nbSpotsWaiting %}
+                    <p class="card-text"><span>{{ nbSpotsWaiting }}</span></p>
+                    <p class="card-text">Spots actuellement en attente de traitement</p>
+                    {% else %}
+                    <p class="card-text">Aucun spots en attente de traitement pour le moment!</p>
+                    {% endif %}
                     <a href="{{ path('mon-compte/spots-en-attente') }}" class="btn btn-primary">Voir</a>
                 </div>
             </div>
             <div class="card" style="width: 45%;">
                 <div class="card-body">
                     <h5 class="card-title">COMMENTAIRES signalés à traiter</h5>
-                    <p class="card-text">Commentaires signalés à traiter</p>
+                    {% if allResult.totalNbCommentsIsReport %}
+                    <p class="card-text"><span>{{ allResult.totalNbCommentsIsReport }}</span></p>
+                    <p>Commentaires signalés en attente de traitement</p>
+                    {% else %}
+                    <p class="card-text">Pas encore de commentaires signalés à traiter !</p>
+                    {% endif %}
                     <a href="{{ path('mon-compte/commentaires-signales') }}" class="btn btn-primary">Voir</a>
                 </div>
             </div>
@@ -90,12 +100,17 @@
             <div class="card" style="width: 45%;">
                 <div class="card-body">
                     <h5 class="card-title">MES COMMENTAIRES SIGNALES</h5>
-                    <p class="card-text"></p>
+                    {% if resultByUser.totalNbCommentsReportByUser %}
+                    <p class="card-text"><span>{{ resultByUser.totalNbCommentsReportByUser }}</span></p>
+                    <p class="card-text">Commentaires signalés ! </p>
+                    {% else %}
+                    <p class="card-text">Pas encore de commentaires signalés !</p>{% endif %}
+
                     <a href="{{ path('mon-compte/mes-commentaires-signales') }}" class="btn btn-primary">Voir</a>
                 </div>
             </div>
         <div class="card" style="width: 45%;">
-            <div class="card-body" href="{{ path('mon-compte/mes-spots-valides') }}">
+            <div class="card-body">
                 <h5 class="card-title">SPOTS FAVORIS</h5>
                 {% if resultByUser.totalNbFavorisByUser %}
                     <p class="card-text"><span>{{ resultByUser.totalNbFavorisByUser }}</span></p>

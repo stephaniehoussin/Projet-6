@@ -33,9 +33,11 @@ class AccountController extends Controller
     {
         $currentUser = $this->getUser();
         $resultByUser = $pageDecoratorsService->countDataByUser($currentUser->getId());
+        $allResult = $pageDecoratorsService->countAllData();
         $nbSpotsWaiting = $spotRepository->countSpotsByWaitingStatus();
         return $this->render('account/index.html.twig',array(
             'resultByUser' => $resultByUser,
+            'allResult' => $allResult,
             'nbSpotsWaiting' => $nbSpotsWaiting));
     }
 
@@ -192,7 +194,6 @@ class AccountController extends Controller
     {
          $user = $this->getUser();
          $favoris = $favorisRepository->recupFavoritesSpotsByUser($user);
-         dump($favoris);
         return $this->render('account/favoritesSpots.html.twig',array(
             'favoris' => $favoris,
         ));
@@ -216,9 +217,13 @@ class AccountController extends Controller
      * @Route("mes-commentaires-signales", name="mes-commentaires-signales")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function reportCommentsByUser()
+    public function reportCommentsByUser(CommentRepository $commentRepository)
     {
-        return $this->render('account/userReportComments.html.twig');
+        $user = $this->getUser();
+        $commentsReportByUser = $commentRepository->recupCommentIsReportByUSer($user);
+        return $this->render('account/userReportComments.html.twig',array(
+            'commentsReportByUser' => $commentsReportByUser
+        ));
     }
 
     /**
@@ -230,7 +235,7 @@ class AccountController extends Controller
     public function reportAllComments(CommentRepository $commentRepository)
     {
 
-        $commentsReport = $commentRepository->commentIsReport();
+        $commentsReport = $commentRepository->recupCommentIsReport();
         return $this->render('account/reportAllComments.html.twig',array(
             'commentsReport' => $commentsReport
         ));

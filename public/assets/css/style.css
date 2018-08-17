@@ -68,7 +68,6 @@ header.masthead {
     text-align: center;
     color: black;
     background-image: url("../img/c7.jpg");
-  /*  background-color: greenyellow;*/
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -384,6 +383,55 @@ header.masthead .cover .cover-title {
 }
 
 
+/**************LES CARDS ***************************/
+
+.card-infos
+{
+
+}
+.card-love
+{
+
+}
+.card-tree
+{
+
+}
+.card-favoris
+{
+
+}
+.card-user
+{
+    text-transform: capitalize;
+}
+.card-date
+{
+    text-transform: capitalize;
+}
+.card-category
+{
+
+}
+.card-title
+{
+  text-transform: capitalize;
+}
+.card-description
+{
+    font-style: italic;
+    text-transform: capitalize;
+}
+i
+{
+    margin-right: 10px;
+
+}
+
+span
+{
+    font-weight: bold;
+}
 
 
 
@@ -520,6 +568,14 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+
+/********************PAGES MON COMPTE MODIFIER SPOT**********************/
+
+.modify img
+{
+    height: 200px;
+    width: 200px;
+}
 /********************PAGES MON COMPTE MES SPOTS VALIDES**********************/
 #account-spots-accepted .card
 {
@@ -608,6 +664,25 @@ body {
 .one-spot .card-img-top
 {
     height: 400px;
+}
+
+.one-spot .card-infos
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+.one-spot span
+{
+    font-weight: bold;
+}
+.one-spot .card-title
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+.one-spot .card-description
+{
+    font-style: italic;
 }
 
 

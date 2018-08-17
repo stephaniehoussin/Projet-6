@@ -19,14 +19,7 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-
-    public function getAllComments()
-    {
-        return $this->createQueryBuilder('c')
-            ->getQuery()
-            ->getResult();
-    }
-
+    // Recup le nombre total de commentaires
     public function countAllComments()
     {
         $nb = $this
@@ -37,7 +30,7 @@ class CommentRepository extends ServiceEntityRepository
             return $nb;
     }
 
-// METHODE OK QUI COMPTE LE NOMBRE DE COMMENTAIRES D UN SPOT
+    // Recup le nombre total de commentaires par spot
     public function countCommentsBySpot($spotId)
     {
         $nb = $this
@@ -49,7 +42,22 @@ class CommentRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
         return $nb;
     }
-// METHODE QUI RECUPERE LE CONTENU DES MESSAGES D UN SPOT
+
+    // Recup le nombre de commentaires par User
+    public function countCommentsByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('c')
+            ->select('count(c) as nb')
+            ->where('c.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+    // Recup tous les commentaires d'un spot
+    // NE SERT NUL PART POUR LE MOMENT
     public function recupCommentsBySpot($spotId)
     {
         $rq = $this
@@ -63,18 +71,36 @@ class CommentRepository extends ServiceEntityRepository
         return $rq;
     }
 
-    public function countCommentsByUser($userId)
+
+
+
+    // Recup le nombre de commentaires signalés par User
+    public function countCommentIsReportByUser($userId)
     {
         $nb = $this
             ->createQueryBuilder('c')
             ->select('count(c) as nb')
             ->where('c.user = :userId')
+            ->andWhere('c.report = 1')
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;
     }
-    public function commentIsReport()
+
+    // Recup le nombre total de commentaires signalés à traiter
+    public function countCommentsIsReport()
+    {
+        $nb = $this
+            ->createQueryBuilder('c')
+            ->select('count(c) as nb')
+            ->where('c.report = 1')
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+    // Recup les commentaires qui sont signalés
+    public function recupCommentIsReport()
     {
         $rq = $this
             ->createQueryBuilder('c')
@@ -85,45 +111,21 @@ class CommentRepository extends ServiceEntityRepository
         return $rq;
     }
 
-    public function recupCommentsReport()
+    // Recup les commentaires qui sont signalés par user
+    public function recupCommentIsReportByUSer($userId)
     {
         $rq = $this
             ->createQueryBuilder('c')
-            ->select('c.message')
-            ->where('c.report = 1')
+            ->select('c')
             ->orderBy('c.date', 'DESC')
+            ->where('c.user = :userId')
+            ->AndWhere('c.report = 1')
+            ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
         return $rq;
     }
 
-//    /**
-//     * @return Comment[] Returns an array of Comment objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Comment
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
 

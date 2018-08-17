@@ -22,56 +22,20 @@ class SpotRepository extends ServiceEntityRepository
 
     }
 
-    // RECUPERATION DU DERNIER SPOT
-    public function recupLastSpot()
+    // Recup des 6 derniers spots
+    // page d'accueil
+    public function allSpotsHome()
     {
-        return  $this
-            ->createQueryBuilder('s')
-            ->orderBy('s.id', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult()
-            ;
-    }
-    // RECUPERATION DE TOUS LES SPOTS PAR USER
-    public function findValidedSpotsByUser($userId)
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u')
-            ->orderBy('u.date', 'DESC')
-            ->where('u.user = :userId')
-            ->andWhere('u.status = 2')
-            ->setParameter('userId', $userId)
-            ->setMaxResults(10);
-        return $qb->getQuery()->getResult();
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->where('s.status = 2')
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(6);
+        return $rq->getQuery()->getResult();
     }
 
-    public function findWaitingSpotsByUser($userId)
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u')
-            ->orderBy('u.date', 'DESC')
-            ->where('u.user = :userId')
-            ->andWhere('u.status = 1')
-            ->setParameter('userId', $userId)
-            ->setMaxResults(10);
-        return $qb->getQuery()->getResult();
-    }
-
-    public function findRejectedSpotsByUser($userId)
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->select('u')
-            ->orderBy('u.date', 'DESC')
-            ->where('u.user = :userId')
-            ->andWhere('u.status = 0')
-            ->setParameter('userId', $userId)
-            ->setMaxResults(10);
-        return $qb->getQuery()->getResult();
-    }
-
-
-    // RECUPERATION DE TOUS LES SPOTS PAR DATE ET PAR PAGE
+    // Recup de tous les spots par date et avec pagination
+    // pour la page  acueil je cherche un spot
     public function findAllSpotsByDate($page)
     {
 
@@ -92,52 +56,20 @@ class SpotRepository extends ServiceEntityRepository
         return $rq->getQuery()->getResult();
     }
 
-    // RECUPERATION DE 6 SPOTS POUR PAGE ACCUEIL
-    public function allSpotsHome()
-    {
-        $rq = $this->createQueryBuilder('s')
-            ->select('s')
-            ->where('s.status = 2')
-            ->orderBy('s.date', 'DESC')
-            ->setMaxResults(6);
-        return $rq->getQuery()->getResult();
-    }
-
-    // RECUPERATIONS DE SPOTS PAR TITRE
-    public function findSpotByTitle($term)
-    {
-        $qb = $this->createQueryBuilder('s');
-        $qb->where($qb->expr()->like('s.title', ':title'))
-            ->setParameter("title", "%$term%")
-            ->setMaxResults(20);
-
-        return $qb->getQuery()->getResult();
-    }
-
-    // COMPTEUR DE TOUS LES SPOTS
+    // Recup du nombre total de spots validés
+    // pour stats sur site
     public function countAllSpots()
     {
         $nb = $this->createQueryBuilder('s')
             ->select('count(s) as nb')
+            ->where('s.status =2')
             ->getQuery()
             ->getSingleScalarResult();
         return $nb;
     }
 
-    // COMPTEUR DE TOUS LES SPOTS PAR USER
-    public function countSpotsByUser($userId)
-    {
-        $nb = $this
-            ->createQueryBuilder('s')
-            ->select('count(s) as nb')
-            ->where('s.user = :userId')
-            ->setParameter('userId', $userId)
-            ->getQuery()
-            ->getSingleScalarResult();
-        return $nb;
-    }
-
-    // RECUPERE TOUS LES SPOTS EN ATTENTE DE VALIDATION
+    // Recup de tous les spots en attente de validation
+    // Pour modérateur dans mon compte
     public function findSpotsByWaitingStatus()
     {
         $qb = $this->createQueryBuilder('s')
@@ -148,6 +80,8 @@ class SpotRepository extends ServiceEntityRepository
 
     }
 
+    // Recup du nombre total de spot en attente de validation
+    // Pour modérateur dans mon compte
     public function countSpotsByWaitingStatus()
     {
         $nb = $this
@@ -159,33 +93,22 @@ class SpotRepository extends ServiceEntityRepository
         return $nb;
     }
 
-
-    public function countSpotsRejectedByUser($userId)
+    // Recup de tous les spots en attente par User
+    // Pour user dans mon compte
+    public function findWaitingSpotsByUser($userId)
     {
-        $nb = $this
-            ->createQueryBuilder('s')
-            ->select('count(s) as nb')
-            ->where('s.status = 0')
-            ->andWhere('s.user = :userId')
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->andWhere('u.status = 1')
             ->setParameter('userId', $userId)
-            ->getQuery()
-            ->getSingleScalarResult();
-        return $nb;
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
     }
 
-    public function countSpotsValidatedByUser($userId)
-    {
-        $nb = $this
-            ->createQueryBuilder('s')
-            ->select('count(s) as nb')
-            ->where('s.status = 2')
-            ->andWhere('s.user = :userId')
-            ->setParameter('userId', $userId)
-            ->getQuery()
-            ->getSingleScalarResult();
-        return $nb;
-    }
 
+    // Recup du nombre total de spots en attente par user
     public function countSpotsWaitingByUser($userId)
     {
         $nb = $this
@@ -199,32 +122,83 @@ class SpotRepository extends ServiceEntityRepository
         return $nb;
     }
 
-//     * @return Spot[] Returns an array of Spot objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Spot
+    // Recup de tous les spots validés par User
+    //Pour user et modérateur dans mon compte
+    public function findValidedSpotsByUser($userId)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->andWhere('u.status = 2')
+            ->setParameter('userId', $userId)
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
     }
-    */
+
+    // Recup du nombre total de spots validés par user
+    public function countSpotsValidatedByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 2')
+            ->andWhere('s.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+
+    // Recup de tous les spots refusés par User
+    // Pour user dans mon compte
+    public function findRejectedSpotsByUser($userId)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->orderBy('u.date', 'DESC')
+            ->where('u.user = :userId')
+            ->andWhere('u.status = 0')
+            ->setParameter('userId', $userId)
+            ->setMaxResults(10);
+        return $qb->getQuery()->getResult();
+    }
+
+
+    // Recup du nombre total de spots rejetés par user
+    public function countSpotsRejectedByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.status = 0')
+            ->andWhere('s.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+
+    // Recup du nombre total de spot par user
+    // A VIRER JE PENSE !!!
+    public function countSpotsByUser($userId)
+    {
+        $nb = $this
+            ->createQueryBuilder('s')
+            ->select('count(s) as nb')
+            ->where('s.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
+        return $nb;
+    }
+
+
+
+
+
 }
 
