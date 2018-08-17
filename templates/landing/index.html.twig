@@ -20,29 +20,32 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-    <section class="landing-how-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
+
+    <!-------------------SECTION YOUSPOT------------------>
+        <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Ok ! Mais l'idée , c'est quoi? </h3>
+                        <h3>Sur YouSpot ! </h3>
                     </div>
                 </div>
-            </div>
         </section>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
-                        <div class="card-body">
-                            <h5 class="card-title">Tu partages ! </h5>
-                            <p class="card-text">Tu connais un endroit top où tu n'as pas l'impression d'être en ville !</p>
-                            <p class="card-text">Tu as l'impression d'être en fôret , à la mer ,à à la campagne</p>
-                            <p class="card-text">Tu as trouvé le spot idéal pour le partager sur YouSpot !</p>
-                            <p class="card-text">Spoter ton super spot va te prendre 2 mn !</p>
-                            <ul>
+        <section class="landing-youSpot">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="section-youSpot">
+                            <div class="section-youSpot-btn">
+                                <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Partager !</a>
+                            </div>
+                            <h4 class="section-youSpot-title">Tu partages !</h4>
+                            <p class="description">
+                                Tu connais un endroit top où tu n'as pas l'impression d'être en ville !
+                                Tu as l'impression d'être en fôret , à la mer ,à la campagne.
+                                Tu as trouvé le spot idéal pour le partager sur YouSpot !
+                                Spoter ton super spot va te prendre 2 mn !
+                            </p>
+                            <ul class="description">
                                 <li>Géolocalise toi ou bouge l'îcone pour qu'on sache où aller !</li>
                                 <li>Prends une photo pour qu'on voit comme c'est beau  </li>
                                 <li>Remplis le petit formulaire pour qu'on comprenne ton spot </li>
@@ -50,22 +53,19 @@
                                 <li>Il apparaîtra par la magie d'un spoteur Modo!</li>
                             </ul>
                         </div>
-                        <div class="card-body">
-                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux partager !</a>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
-                        <div class="card-body">
-                            <h5 class="card-title">Tu cherches !</h5>
-                            <p class="card-text">Tu as envie de découvrir de nouveaux endroits ?</p>
-                            <p class="card-text">Tu en as marre de retrouver tes potes au bord d'une route ?</p>
-                            <p class="card-text">Tu as envie de respirer et d'être au vert mais sans sortir de ta ville</p>
-                            <p class="card-text">Ici tu vas trouver ton spot idéal en 2 mn et autour de toi !</p>
-
-                            <ul>
+                    <div class="col-md-6">
+                        <div class="section-youSpot">
+                            <div class="section-youSpot-btn">
+                                <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Chercher !</a>
+                            </div>
+                            <h4 class="section-youSpot-title">Tu cherches !</h4>
+                            <p class="description">Tu as envie de découvrir de nouveaux endroits ?
+                                Tu en as marre de retrouver tes potes au bord d'une route ?
+                                Tu as envie de respirer et d'être au vert mais sans sortir de ta ville
+                                Ici tu vas trouver ton spot idéal en 2 mn et autour de toi !
+                            </p>
+                            <ul class="description">
                                 <li>geolocalise toi ou bouge l'îcone pour te plâcer ou tu cherches</li>
                                 <li>Les spots autour de toi apparaîssent</li>
                                 <li>En cliquant sur les îcones, tu as quelques infos sur le spot</li>
@@ -73,72 +73,63 @@
                                 <li>Si tu veux voir un spot en détails, ouvre le ! </li>
                             </ul>
                         </div>
-                        <div class="card-body">
-                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux chercher !</a>
-                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
-                        <div class="card-body">
-                            <h5 class="card-title">Tu communiques ! </h5>
-                            <p class="card-text">Derrière YouSpot , une communauté de Spoteurs !</p>
-                            <p class="card-text">Commentes les spots !</p>
-                            <p class="card-text">Poses ou réponds aux questions</p>
-                            <p class="card-text"></p>
-
-                            <p class="card-text">Parce que communiquer va faire de toi un Spoteur investi! !</p>
-                            <ul>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="section-youSpot">
+                            <div class="section-youSpot-btn">
+                                <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Communiquer !</a>
+                            </div>
+                            <h4 class="section-youSpot-title">Tu communiques !</h4>
+                            <p class="description">
+                                Derrière YouSpot , une communauté de Spoteurs  !
+                                Commentes les spots !
+                                Poses ou réponds aux questions
+                            </p>
+                            <ul class="description">
                                 <li>Sous chaques spots tu peux laisser un commentaire</li>
                                 <li>Tu peux répondre aux commentaires  </li>
                                 <li>Tu peux signaler un commentaire pas sympa ou injurieux</li>
                                 <li>Et il sera modéré par un Modo!</li>
                             </ul>
                         </div>
-                        <div class="card-body">
-                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux communiquer !</a>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <!-- <img class="card-img-top" src="" alt="Card image cap">-->
-                        <div class="card-body">
-                            <h5 class="card-title">Tu préserves ton EcoSystème !</h5>
-                            <p class="card-text">Tu as un super spot et il est préservé ? Dis le !</p>
-                            <p class="card-text">Tu vas sur un spot qui est respecté alors clique sur TREE ME!</p>
-                            <p class="card-text">Tu trouves qu'un spot n'est pas respecté , alors commentes le !</p>
-                            <p class="card-text">Ce spot est préservé ? Alors laisses l'endroit tel que tu l'as trouvé !</p>
-                            <ul>
+                    <div class="col-md-6">
+                        <div class="section-youSpot">
+                            <div class="section-youSpot-btn">
+                                <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Préserver !</a>
+                            </div>
+                            <h4 class="section-youSpot-title">Tu préserves ton EcoSystème !</h4>
+                            <p class="description">
+                                Tu as un super spot et il est préservé ? Dis le !
+                                Tu vas sur un spot qui est respecté alors clique sur TREE ME!
+                                Tu trouves qu'un spot n'est pas respecté , alors commentes le !
+                                Ce spot est préservé ? Alors laisses l'endroit tel que tu l'as trouvé !
+                            </p>
+                            <ul class="description">
                                 <li>Ramasser et regrouper ses détritus : quelques secondes </li>
                                 <li>Les mettre à la poubelle : quelques secondes</li>
                                 <li>Rassembler les mégots dans un cendrier de fortune : Si peu </li>
                                 <li>Jeter le cendrier de fortune à la poubelle : quelques secondes</li>
                             </ul>
                         </div>
-                        <div class="card-body">
-                            <a class="btn btn-cover" href="{{ path('fos_user_registration_register') }}">Je veux préserver !</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="landing-spot-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Un spot c'est ça! </h3>
                     </div>
                 </div>
             </div>
         </section>
 
+    <!-------------------SECTION ONE SPOT------------------>
+
+        <section id="section-title">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Un spot c'est ça! </h3>
+                    </div>
+                </div>
+        </section>
+
+        <section class="landing-oneSpot">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -146,14 +137,15 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p class="title"><i class="fa fa-map-marker"> Allée du lac, Boulogne</i></p>
-                                    <p class="sub-title"> * Un adresse : Parce que c'est mieux de préciser le lieux </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
                                     <img class="card-img-top" src="{{ asset('assets/img/carteLanding.png') }}" alt="Card image cap">
                                     <p class="sub-title">* Une carte : Pas de géolocalisation ? Pas grave , déplaces le curseur! </p>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="card-infos"><i class="fa fa-map-marker"> Allée du lac, Boulogne</i></p>
+                                    <p class="sub-title"> * Un adresse : Parce que c'est mieux de préciser le lieux </p>
                                 </div>
                             </div>
                             <hr class="mb-4">
@@ -181,26 +173,33 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <p class="title">Spoté par : Fanny </p>
-                                    <p class="sub-title">* Derrière tout spot un spoteur </p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="title">Le :  15 /08 / 2018</p>
-                                    <p class="sub-title">* Parce que un spot a une date</p>
+                                <div class="col-md-12">
+                                    <img class="card-img-top" src="{{ asset('assets/img/boisdeboulogne.jpg') }}" alt="Card image cap">
+                                    <p class="sub-title">* Une photo, parce que avec, c'est mieux !</p>
                                 </div>
                             </div>
-                            <img class="card-img-top" src="{{ asset('assets/img/boisdeboulogne.jpg') }}" alt="Card image cap">
-                            <p class="*">* Parce que avec une photo , c'est mieux !</p>
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-user"><span>Spoté par :</span> Fanny </p>
+                                    <p class="sub-title">* Un Pseudo : Derrière tout spot un spoteur </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-date"><span>Le : </span> 15 /08 / 2018</p>
+                                    <p class="sub-title">* Une date : Parce qu'un spot a une date</p>
+                                </div>
+                            </div>
                             <hr class="mb-4">
                             <div class="card-body">
-                                <p class="title"><i class="fa fa-thumb-tack"> Spot Foret </i></p>
-                                <p class="sub-title">* Une catégorie ça permet de filtrer les recherches !</p>
-                                <h5 class="title">Spot #25 - Endroit incroyable !</h5>
-                                <p class="sub-title">* Un titre parlant! </p>
-                                <p class="title">Absolument fou ! Un calme incroyable, personne autour de nous . Un endroit vraiment
+                                <p class="card-category"><i class="fa fa-thumb-tack"> Spot Foret </i></p>
+                                <p class="sub-title">* Une catégorie :  ça permet de filtrer les recherches !</p>
+                                <hr class="mb-4">
+                                <h5 class="card-title">Spot #25 - Endroit incroyable !</h5>
+                                <p class="sub-title">* Un titre :  parlant! </p>
+                                <hr class="mb-4">
+                                <p class="card-description">Absolument fou ! Un calme incroyable, personne autour de nous . Un endroit vraiment
                                 préservé! Vous pouvez ajouter des Tree Me sans problème ! </p>
-                                <p class="sub-title">* Une description sympa du spot</p>
+                                <p class="sub-title">* Une description :  Détaillée si possible</p>
                             </div>
                         </div>
                     </div>
@@ -208,19 +207,18 @@
             </div>
             <hr class="mb-4">
             </div>
-    </section>
+        </section>
 
-    <section id="landing-spot-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
+    <!-------------------SECTION ONE SPOT COMPLEMENT ------------------>
+        <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Et un spot , c'est aussi ça ! </h3>
                     </div>
                 </div>
-            </div>
         </section>
 
+        <section class="landing-oneSpotMore">
         <div class="row">
             <div class="card col-md-12">
                    <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
@@ -266,23 +264,20 @@
                     <p class="card-text">Ou alors tu as juste envie de parler avec le spoteur ! </p></div>
             </div>
         </div>
-    </section>
+        </section>
 
 
+    <!-------------------SECTION NOUS REJOINDRE ------------------>
 
-
-    <!-------------------SECTION REJOIGNEZ NOUS------------------>
-    <section class="landing-join-us-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
+        <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Rejoins nous ! </h3>
                     </div>
                 </div>
-            </div>
         </section>
 
+    <section class="landing-joinUs">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -298,23 +293,12 @@
                 </div>
                 </div>
             </div>
-
     </section>
 
-    <!-------------------SECTION ASSOCIATION-------------->
-    <section id="landing-newsletter">
+    <!-------------------SECTION NEWSLETTER-------------->
 
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Newsletter </h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="subscribe">
+    <section class="newsletter">
+        <section class="subscribe">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-8">
@@ -329,17 +313,17 @@
         </section>
     </section>
     <!-------------------SECTION STATS------------------>
-    <section class="landing-stats-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
+
+
+        <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Aujourd'hui YouSpot c'est !</h3>
                  </div>
                 </div>
-            </div>
         </section>
 
+        <section class="stats">
         <div class="row">
                 <div class="card" style="width: 10rem;">
                         <div class="card-body">
@@ -384,7 +368,7 @@
 {% endblock %}
 
 {% block footer %}
-    {% include 'landing/parts/footerLanding.html.twig' %}
+    {% include 'landing/parts/footer.html.twig' %}
 {% endblock %}
 
 {% block javascripts %}

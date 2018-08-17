@@ -11,7 +11,7 @@
     <div class="container">
     <!-------------------SECTION DERNIERS SPOTS-------------->
 
-        <section id="landing-title">
+        <section id="section-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
@@ -44,33 +44,33 @@
         </section>
 
 
-        <!-------------------SECTION ASSOCIATION-------------->
+        <!-------------------SECTION NEWSLETTER-------------->
 
-        <section id="subscribe">
-            <div class="container wow fadeInUp">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h3 class="subscribe-title">Recevoir la newsletter</h3>
-                        <p class="subscribe-text">Tous les derniers spots postés et la vie d'une association !</p>
-                    </div>
+        <section class="newsletter">
+            <section class="subscribe">
+                <div class="container wow fadeInUp">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="subscribe-title">Recevoir la newsletter</h3>
+                            <p class="subscribe-text">Tous les derniers spots postés et la vie d'une association !</p>
+                        </div>
                     <div class="col-md-4 subscribe-btn-container">
                         <a class="subscribe-btn" href="{{ path('newsletter') }}">M'inscrire</a>
                     </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </section>
 
-    <!-------------------SECTION STATS------------------>
-        <section class="landing-stats-content">
-        <section id="landing-title">
-            <div class="container wow fadeInUp">
+    <!-------------------SECTION STATS------------------>>
+        <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
                         <h3>Aujourd'hui YouSpot c'est !</h3>
                     </div>
                 </div>
-            </div>
         </section>
+        <section class="stats">
             <div class="row">
                 <div class="card" style="width: 10rem;">
                     <div class="card-body">
@@ -115,7 +115,7 @@
     </div>
 {% endblock %}
 {% block footer %}
-    {% include 'landing/parts/footerLanding.html.twig' %}
+    {% include 'landing/parts/footer.html.twig' %}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
