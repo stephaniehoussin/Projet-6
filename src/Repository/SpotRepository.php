@@ -137,6 +137,12 @@ class SpotRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    // recup spots par user et par category
+    public function findSpotsByUserAndByCategory($user =null, $category=null)
+    {
+
+    }
+
     // Recup du nombre total de spots validés par user
     public function countSpotsValidatedByUser($userId)
     {

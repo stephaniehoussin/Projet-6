@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+      crossorigin=""/>
+<style>
+    #map {
+        width: 100%;
+        height: 250px;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+{% endblock %}
+{% block nav %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% include 'account/parts/navAccount.html.twig' %}
+    <div class="account-content">
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Un Spot</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="account-one-spot">
+            <div class="container">
+                <section class="account-one-spot">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="account-card-user"><span>Spoté par : </span>{{ spot.user }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-date"><span>Le :  </span>{{ spot.date|date("d/m/Y") }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="map"></div>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
+                                                <hr class="mb-4">
+                                                <p class="card-category"><i class="fa fa-thumb-tack"> {{ spot.category }}</i></p>
+                                            </div>
+                                        </div>
+                                        <hr class="mb-4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                        <hr class="mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><span>Spot #</span>{{ spot.id }} - {{ spot.title }}</h5>
+                                            <hr class="mb-4">
+                                            <p class="card-description">"{{ spot.description }}"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function initMap(position)
+        {
+            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude],9);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Données de la carte &copy; <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">Open Street Map</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken:'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg'
+            }).addTo(map);
+            var $element =
+                [
+                    ["{{ spot.infosSupp }}", {{ spot.latitude }},{{ spot.longitude }}],
+                ];
+            for(var $i= 0; $i < $element.length; $i++)
+            {
+                var marker = new L.marker([$element[$i][1], $element[$i][2]])
+                    .bindPopup($element[$i][0])
+                    .addTo(map)
+            }
+        }
+        if (navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(initMap);
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+{% endblock %}
+
+
+

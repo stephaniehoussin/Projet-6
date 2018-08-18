@@ -560,7 +560,16 @@ body {
     font-weight: bold;
     font-size: 20px;
 }
+/********PAGE MON COMPTE ONE SPOT*************/
+.account-one-spot img
+{
+    height: 250px;
+}
 
+.account-card-user
+{
+    text-align: center;
+}
 /********************PAGES MON COMPTE MODIFIER SPOT**********************/
 
 .modify img

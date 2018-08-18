@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <h5 class="card-spot-title">#{{ favori.spot.id }} {{ favori.spot.title|length > 18 ? favori.spot.title|slice(0,18) ~'...': favori.spot.title }}</h5>
                             <p class="card-spot-description">{{ favori.spot.description|length > 20 ? favori.spot.description|slice(0,20) ~'...': favori.spot.description }}</p>
-                            <a href="{{ path('accueil/spot', { id : favori.spot.id }) }}" class="btn btn-primary">Voir</a>
+                            <a href="{{ path('mon-compte/oneSpot', { id : favori.spot.id }) }}" class="btn btn-primary">Voir</a>
                         </div>
                         </div>
                     </div>

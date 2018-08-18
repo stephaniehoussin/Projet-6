@@ -90,7 +90,7 @@ class Spot
      */
     private $category;
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      */
     private $infosSupp;
 

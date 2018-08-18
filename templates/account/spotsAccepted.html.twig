@@ -39,7 +39,7 @@
                                 <div class="card-body">
                                     <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title|length > 14 ? spot.title|slice(0,14) ~'...': spot.title }}</h5>
                                     <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
-                                    <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir</a>
+                                    <a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Voir</a>
                                     <a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
                                     <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 11 }) }}" class="btn btn-danger">Supprimer</a>
                                 </div>

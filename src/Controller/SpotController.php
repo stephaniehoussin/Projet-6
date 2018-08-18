@@ -41,10 +41,11 @@ class SpotController extends Controller
      */
     public function makeSpot(SpotManager $spotManager, Request $request)
     {
-        $formSpot = $this->createForm(SpotType::class);
         $spot = $spotManager->initSpot();
+        $formSpot = $this->createForm(SpotType::class,$spot);
         $formSpot->handleRequest($request);
-        if ($formSpot->isSubmitted() && $formSpot->isValid()) {
+        if ($formSpot->isSubmitted() && $formSpot->isValid())
+        {
             $spotManager->save($spot,$this->getUser());
             return $this->redirectToRoute('accueil/je-cherche-un-spot', ['page' => 1]);
         }
@@ -61,14 +62,24 @@ class SpotController extends Controller
      */
     public function searchSpot(PaginationService $paginationService,SpotRepository $spotRepository, $page, Request $request)
     {
+
         $formFilter = $this->createForm(SpotFilterType::class);
+        $formFilter->handleRequest($request);
+
+        if($formFilter->isSubmitted() && $formFilter->isValid())
+        {
+             $datas = $formFilter->getData();
+            dump($datas);
+             return $datas;
+
+        }
 
         $spots = $spotRepository->findAllSpotsByDate($page);
         $pagination = $paginationService->paginationHome($page);
         return $this->render('home/searchSpot.html.twig', array(
             'spots' => $spots,
             'pagination' => $pagination,
-            'formFilter' => $formFilter->createView()
+            'formFilter' => $formFilter->createView(),
         ));
     }
 

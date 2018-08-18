@@ -241,6 +241,25 @@ class AccountController extends Controller
         ));
     }
 
+    /**
+     * @Route("oneSpot/{id}" , name="oneSpot")
+     * @param PageDecoratorsService $pageDecoratorsService
+     * @param CommentManager $commentManager
+     * @param Request $request
+     * @param Spot $spot
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function OneSpot(PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
+    {
+        $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
+        return $this->render('account/oneSpot.html.twig', array(
+            'spot' => $spot,
+            'resultBySpot' => $resultBySpot,
+            //  'commentsReport' => $commentsReport,
+
+        ));
+    }
+
 
 }
 
