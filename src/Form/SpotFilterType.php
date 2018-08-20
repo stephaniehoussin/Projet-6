@@ -18,11 +18,15 @@ class SpotFilterType extends AbstractType
         $builder
             ->add('category', EntityType::class,[
                 'class'=> Category::class,
-                    'label' => 'Filtre par catégories']
+                    'label' => 'Filtre par catégories',
+                    'placeholder' => 'Choisir',
+                    'required' => false]
             )
             ->add('user', EntityType::class,[
                 'class' => User::class,
-                'label' => 'Filtre par Spoteur'
+                'label' => 'Filtre par Spoteur',
+                'placeholder' => 'Choisir',
+                'required' => false
             ]);
 
 

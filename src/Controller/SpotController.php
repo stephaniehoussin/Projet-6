@@ -62,19 +62,19 @@ class SpotController extends Controller
      */
     public function searchSpot(PaginationService $paginationService,SpotRepository $spotRepository, $page, Request $request)
     {
+        $spots = $spotRepository->findAllSpotsByDate($page);
 
         $formFilter = $this->createForm(SpotFilterType::class);
         $formFilter->handleRequest($request);
 
         if($formFilter->isSubmitted() && $formFilter->isValid())
         {
-             $datas = $formFilter->getData();
-            dump($datas);
-             return $datas;
-
+             $data = $formFilter->getData();
+            $spots = $spotRepository->findSpotsByUserAndCategory($data['user'],$data['category'],$page);
+            dump($spots);
         }
 
-        $spots = $spotRepository->findAllSpotsByDate($page);
+       // $spots = $spotRepository->findAllSpotsByDate($page);
         $pagination = $paginationService->paginationHome($page);
         return $this->render('home/searchSpot.html.twig', array(
             'spots' => $spots,

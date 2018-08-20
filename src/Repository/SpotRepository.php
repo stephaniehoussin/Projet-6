@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Spot;
+use App\Entity\User;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use http\Exception\InvalidArgumentException;
@@ -138,9 +140,34 @@ class SpotRepository extends ServiceEntityRepository
     }
 
     // recup spots par user et par category
-    public function findSpotsByUserAndByCategory($user =null, $category=null)
+    public function findSpotsByUserAndCategory(User $user = null, Category $category =null,$page)
     {
+        if (!is_numeric($page)) {
+            throw new InvalidArgumentException("La page que vous souhaitez atteindre ne semble pas valide");
+        }
 
+        if($page < 1)
+        {
+            throw new NotFoundHttpException("Désolé la page souhaitée n'existe pas");
+        }
+        $rq = $this->createQueryBuilder('s')
+            ->select('s')
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(12)
+            ->setFirstResult($page * 12 -12)
+            ->where('s.status = 2');
+        if($user)
+        {
+            $rq->andWhere('s.user = :userId');
+            $rq->setParameter('userId', $user);
+        }
+        if($category)
+        {
+            $rq->andWhere('s.category = :categoryId');
+            $rq->setParameter('categoryId', $category);
+        }
+
+            return $rq->getQuery()->getResult();
     }
 
     // Recup du nombre total de spots validés par user
