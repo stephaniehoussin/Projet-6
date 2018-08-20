@@ -111,6 +111,17 @@ class CommentRepository extends ServiceEntityRepository
         return $rq;
     }
 
+    public function recupCommentIsNoReport()
+    {
+        $rq = $this
+            ->createQueryBuilder('c')
+            ->select('c')
+            ->where('c.report = 0')
+            ->getQuery()
+            ->getResult();
+        return $rq;
+    }
+
     // Recup les commentaires qui sont signalés par user
     public function recupCommentIsReportByUSer($userId)
     {

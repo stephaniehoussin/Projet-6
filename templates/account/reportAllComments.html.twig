@@ -50,8 +50,8 @@
                                 <td>{{ comment.id }}</td>
                                 <td>{{ comment.user }}</td>
                                 <td>{{ comment.message }}</td>
-                                <td><a href="#" class="btn btn-success">Valider</a> </td>
-                                <td><a href="#" class="btn btn-danger">Supprimer</a> </td>
+                                <td><a href="{{ path('valider-commentaires',{'id': comment.id}) }}" class="btn btn-success">Valider</a> </td>
+                                <td><a href="{{ path('supprimer-commentaires', {'id' : comment.id}) }}" class="btn btn-danger">Supprimer</a> </td>
                             </tr>
                             {% endfor %}
                             {% else %}

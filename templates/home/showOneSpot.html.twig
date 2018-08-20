@@ -134,21 +134,25 @@
                     <div class="col-md-8 offset-md-2">
                         {% if  spot.comments %}
                             {% for comment in spot.comments %}
-                                <p>Commentaire {{ comment.id }} laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
-                                <p class="message">"{{ comment.message }}"</p>
-                                <hr class="mb-4">
-                               {# <p class="report">{{ form(formReport,{'action': path('accueil/comment_report',{'id': spot.id})}) }}<p>#}
-                                {% for comment in comment.report %}
-                                    <p>Ce commentaire a été signalé !</p>
-                                {% endfor %}
-                            {% endfor %}
-
-                        {% endif %}
+                                <div class="comment" id="comment- {{ comment.id }}">
+                                    <p>Commentaire {{ comment.id }}  laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
+                                    <p class="message">"{{ comment.message }}"</p>
+                                    <div class="bouton">
+                                        <a href="{{ path('comment-report', {'id': comment.id}) }}" class="btn btn-danger">Signaler</a>
+                                            {% for report in comment %}
+                                        <p>Le commentaire est signalé</p>
+                                            {% endfor %}
+                                    </div>
+                                    <hr class="mb-4">
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
                         {% for message in app.flashes('success') %}
                             <div class="alert alert-success" role="alert">
                                 {{ message }}
                             </div>
                         {% endfor %}
+
                     </div>
                 </div>
             </div>

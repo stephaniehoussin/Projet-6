@@ -71,7 +71,6 @@ class SpotController extends Controller
         {
              $data = $formFilter->getData();
             $spots = $spotRepository->findSpotsByUserAndCategory($data['user'],$data['category'],$page);
-            dump($spots);
         }
 
        // $spots = $spotRepository->findAllSpotsByDate($page);
@@ -92,34 +91,38 @@ class SpotController extends Controller
      * @param Spot $spot
      * @return Response
      */
-    public function showOneSpot(CommentRepository $commentRepository,PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
+    public function showOneSpot($id,SpotRepository $spotRepository,CommentRepository $commentRepository,PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
     {
         $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
         $formLove = $this->createForm(LoveType::class);
         $formTree = $this->createForm(TreeType::class);
         $formFavoris = $this->createForm(FavorisType::class);
 
-
-        $formComment = $this->createForm(CommentType::class);
+        $spot = $spotRepository->find($id);
+        $comment = new Comment();
+        $formComment = $this->createForm(CommentType::class,$comment);
         $formComment->handleRequest($request);
         if ($formComment->isSubmitted() && $formComment->isValid())
         {
-            $commentManager->save($formComment->getData(), $this->getUser(), $spot);
-
+            $user = $this->getUser();
+            $comment->setSpot($spot);
+            $comment->setUser($user);
+            $commentManager->save($comment);
         }
-        $formReport = $this->createForm(ReportCommentType::class);
-        //$commentsReport = $commentRepository->commentIsReportByUser($spot->getId());
-       // dump($commentsReport);
 
-
+        $report = $commentRepository->recupCommentIsReport();
+        dump($report);
 
         return $this->render('home/showOneSpot.html.twig', array(
             'spot' => $spot,
+            'comment' => $comment,
+          //  'commentId' => $commentId,
             'formComment' => $formComment->createView(),
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-            'formReport' => $formReport,
+          'report' => $report,
+          //  'formReport' => $formReport,
             'resultBySpot' => $resultBySpot,
           //  'commentsReport' => $commentsReport,
 

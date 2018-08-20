@@ -13,7 +13,7 @@ class CommentManager
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    private $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -21,13 +21,19 @@ class CommentManager
     }
 
 
-    public function save(Comment $comment, User $user, Spot $spot){
+    public function commentReport(Comment $comment)
+    {
 
-        $comment->setReport(Comment::COMMENT_IS_REPORT);
-        $comment->setUser($user);
-        $comment->setSpot($spot);
+
+    }
+    public function save(Comment $comment){
+
+       // $comment->setReport(Comment::COMMENT_IS_REPORT);
         $this->em->persist($comment);
         $this->em->flush();
+       //
+      //  $comment->setUser($user);
+      //  $comment->setSpot($spot);
     }
 
     public function suppressComment($comment)

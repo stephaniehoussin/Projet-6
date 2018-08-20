@@ -15,7 +15,7 @@ class Comment
 
     const COMMENT_IS_NO_REPORT = 0;
     const COMMENT_IS_REPORT  = 1;
-    const COMMENT_IS_ALREADY_REPORT = 2;
+ //   const COMMENT_IS_ALREADY_REPORT = 2;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

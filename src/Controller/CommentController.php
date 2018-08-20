@@ -26,32 +26,56 @@ class CommentController extends Controller
     }
 
     /**
-     * @Route("spot/{id}/comment/{comment_id}/report", name="comment-report")
-     * @ParamConverter("comment", class="App:Comment", options={"id" = "comment_id"})
+     * @Route("comment/{id}/report", name="comment-report")
+     * @ParamConverter("comment", class="App:Comment", options={"id" = "id"})
      * @Method({"POST"})
-     * @param Spot $spot
-     * @param Comment $comment
-     * @param Request $request
+     * @param $id
+     * @param CommentManager $commentManager
+     * @param CommentRepository $commentRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function reportComment($id,CommentManager $commentManager,CommentRepository $commentRepository)
+    {
+            $comment = $commentRepository->find($id);
+             $comment->setReport(1);
+             $commentManager->save($comment);
+            $spot = $comment->getSpot();
+            $idSpot = $spot->getId();
+        $this->addFlash("success","Vous venez de signaler un commentaire!");
+        return $this->redirectToRoute('accueil/spot',[
+            'id'=>$idSpot]);
+
+    }
+
+    /**
+     * @Route("valider-commentaires-signales/{id}", name="valider-commentaires")
+     * @param CommentManager $commentManager
+     * @param $id
+     * @param CommentRepository $commentRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function validateReportComment(CommentManager $commentManager,$id,CommentRepository $commentRepository)
+    {
+        $comment = $commentRepository->find($id);
+        $comment->setReport(0);
+        $commentManager->save($comment);
+        $this->addFlash('success', 'Le commentaire n\'est plus signalé');
+        return $this->redirectToRoute('mon-compte/commentaires-signales');
+    }
+
+    /**
+     * @Route("supprimer-commentaires-signales/{id}", name="supprimer-commentaires")
+     * @param $id
+     * @param CommentRepository $commentRepository
      * @param CommentManager $commentManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function report(Spot $spot,Comment $comment,Request $request,CommentManager $commentManager,CommentRepository $commentRepository)
+    public function deleteReportComment($id,CommentRepository $commentRepository, CommentManager $commentManager)
     {
-
-        $commentsReport = $commentRepository->commentIsReport($comment->getId());
-        dump($commentsReport);
-        $formReportComment = $this->createForm(ReportCommentType::class);
-        $formReportComment->handleRequest($request);
-        if($formReportComment->isSubmitted() && $formReportComment->isValid())
-        {
-            $commentManager->report($formReportComment->getData(), $this->getUser());
-            $this->addFlash("success", "Ce commentaire a été signalé!");
-        }else{
-            $this->addFlash("warning", "pas ok");
-
-        }
-        return $this->redirectToRoute('accueil/spot',['id'=>$spot->getId()]);
-
+        $comment = $commentRepository->find($id);
+        $commentManager->suppressComment($comment);
+        $this->addFlash('success', 'Le commentaire a été supprimé avec succès');
+        return $this->redirectToRoute('mon-compte/commentaires-signales');
 
     }
 
