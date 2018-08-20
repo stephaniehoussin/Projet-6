@@ -36,12 +36,24 @@ class CommentController extends Controller
      */
     public function reportComment($id,CommentManager $commentManager,CommentRepository $commentRepository)
     {
-            $comment = $commentRepository->find($id);
-             $comment->setReport(1);
-             $commentManager->save($comment);
+        $comment = $commentRepository->find($id);
+        if($comment->getReport() == 1)
+        {
+            $this->addFlash("success","Commentaire déjà signalé!");
+        }
+
+        if($comment->getReport() == 0 )
+        {
+            $comment->setReport(1);
+            $commentManager->save($comment);
+            $this->addFlash("success","Commentaire signalé , il va être étudié!");
+        }
             $spot = $comment->getSpot();
             $idSpot = $spot->getId();
-        $this->addFlash("success","Vous venez de signaler un commentaire!");
+
+
+
+
         return $this->redirectToRoute('accueil/spot',[
             'id'=>$idSpot]);
 

@@ -116,15 +116,12 @@ class SpotController extends Controller
         return $this->render('home/showOneSpot.html.twig', array(
             'spot' => $spot,
             'comment' => $comment,
-          //  'commentId' => $commentId,
             'formComment' => $formComment->createView(),
             'formLove' => $formLove->createView(),
             'formTree' => $formTree->createView(),
             'formFavoris' => $formFavoris->createView(),
-          'report' => $report,
-          //  'formReport' => $formReport,
+            'report' => $report,
             'resultBySpot' => $resultBySpot,
-          //  'commentsReport' => $commentsReport,
 
         ));
     }
@@ -188,28 +185,6 @@ class SpotController extends Controller
         $formFavoris->handleRequest($request);
         if($formFavoris->isSubmitted() && $formFavoris->isValid()){
             $favorisManager->save($formFavoris->getData(), $this->getUser(),$spot);
-            $this->addFlash("success","ok");
-        }else{
-            $this->addFlash("warning", "pas ok");
-        }
-        return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
-    }
-
-    /**
-     * @Route("spot/{id}/report", name="comment_report")
-     * @Method({"POST"})
-     * @param Spot $spot
-     * @param Comment $comment
-     * @param CommentManager $commentManager
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function reportComment(Spot $spot,Comment $comment,CommentManager $commentManager,Request $request)
-    {
-        $formReport = $this->createForm(ReportCommentType::class);
-        $formReport->handleRequest($request);
-        if($formReport->isSubmitted() && $formReport->isValid()){
-            $commentManager->save($formReport->getData(), $this->getUser(),$spot);
             $this->addFlash("success","ok");
         }else{
             $this->addFlash("warning", "pas ok");

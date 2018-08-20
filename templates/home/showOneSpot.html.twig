@@ -138,10 +138,14 @@
                                     <p>Commentaire {{ comment.id }}  laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
                                     <p class="message">"{{ comment.message }}"</p>
                                     <div class="bouton">
-                                        <a href="{{ path('comment-report', {'id': comment.id}) }}" class="btn btn-danger">Signaler</a>
-                                            {% for report in comment %}
-                                        <p>Le commentaire est signalé</p>
-                                            {% endfor %}
+                                        <a href="{{ path('comment-report', {'id': comment.id }) }}" class="btn btn-danger">Signaler</a>
+                                    </div>
+                                    <div class="report">
+                                        {% if comment.report == 1 %}
+                                            {# {% for report in comment %}#}
+                                            <p><i class="fa fa-exclamation-triangle"></i> Ce commentaire a été signalé. Il est en attente de modération !</p>
+                                            {# {% endfor %}#}
+                                        {% endif %}
                                     </div>
                                     <hr class="mb-4">
                                     {% endfor %}

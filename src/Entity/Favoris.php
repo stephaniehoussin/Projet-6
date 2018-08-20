@@ -16,7 +16,7 @@ class Favoris
      */
     private $id;
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Spot", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Spot")
      */
     private $spot;
 
