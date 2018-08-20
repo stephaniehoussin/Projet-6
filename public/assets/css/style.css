@@ -760,3 +760,17 @@ body {
 {
     margin-bottom: 40px;
 }
+
+.form-group input
+{
+    width: 300px;
+}
+
+@media (max-width: 768px)
+{
+    .form-group input
+    {
+        width: auto;
+        margin: 0;
+    }
+}

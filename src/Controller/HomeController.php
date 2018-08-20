@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends Controller
 {
     /**
-     * @Route("/landing", name="landing")
+     * @Route("/", name="landing")
      * @param PageDecoratorsService $pageDecoratorsService
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
