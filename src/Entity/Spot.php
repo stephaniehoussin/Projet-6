@@ -89,11 +89,16 @@ class Spot
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\OneToMany(targetEntity="Favorite", mappedBy="spot", cascade={"remove"})
+     */
+    private $favorites;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $infosSupp;
-
 
     public function __construct()
     {
@@ -101,6 +106,7 @@ class Spot
         $this->updateAt = new \DateTime();
         $this->status= 1;
         $this->comments = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
         $this->loves = new ArrayCollection();
         $this->trees = new ArrayCollection();
     }
@@ -345,17 +351,7 @@ class Spot
         return $this;
     }
 
-    public function getInfosSupp(): ?string
-    {
-        return $this->infosSupp;
-    }
 
-    public function setInfosSupp(?string $infosSupp): self
-    {
-        $this->infosSupp = $infosSupp;
-
-        return $this;
-    }
 
     public function libelleStatus()
     {
@@ -442,6 +438,49 @@ class Spot
         $this->trees->removeElement($tree);
     }
 
+    public function getInfosSupp(): ?string
+    {
+        return $this->infosSupp;
+    }
 
+    public function setInfosSupp(string $infosSupp): self
+    {
+        $this->infosSupp = $infosSupp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorite() : Collection
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites() : Collection
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @param Favorite $favorite
+     */
+    public function addFavorite(Favorite $favorite)
+    {
+        $this->favorites[] = $favorite;
+        $favorite->setSpot($this);
+    }
+
+    /**
+     * @param Favorite $favorite
+     */
+    public function removeFavorite(Favorite $favorite)
+    {
+        $this->favorites->removeElement($favorite);
+    }
 }
 

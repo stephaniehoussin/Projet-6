@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\FavorisRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\FavoriteRepository")
  */
-class Favoris
+class Favorite
 {
     /**
      * @ORM\Id()
@@ -16,12 +16,12 @@ class Favoris
      */
     private $id;
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Spot")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Spot", inversedBy="favorites")
      */
     private $spot;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favoris")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="favorites")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

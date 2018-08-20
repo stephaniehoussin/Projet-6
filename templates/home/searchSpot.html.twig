@@ -53,6 +53,15 @@
                         {{ form_end(formFilter) }}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </section>
         <section class="page-content">

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Spot;
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Form\FavorisType;
+use App\Form\FavoriteType;
 use App\Form\LoveType;
 use App\Form\ReportCommentType;
 use App\Form\SpotFilterType;
@@ -14,7 +14,7 @@ use App\Form\TreeType;
 use App\Repository\CommentRepository;
 use App\Repository\SpotRepository;
 use App\Services\CommentManager;
-use App\Services\FavorisManager;
+use App\Services\FavoriteManager;
 use App\Services\LoveManager;
 use App\Services\PageDecoratorsService;
 use App\Services\PaginationService;
@@ -71,6 +71,10 @@ class SpotController extends Controller
         {
              $data = $formFilter->getData();
             $spots = $spotRepository->findSpotsByUserAndCategory($data['user'],$data['category'],$page);
+            if(!$spots)
+            {
+                $this->addFlash('success','Aucun résultat pour le moment !');
+            }
         }
 
        // $spots = $spotRepository->findAllSpotsByDate($page);
@@ -96,7 +100,7 @@ class SpotController extends Controller
         $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
         $formLove = $this->createForm(LoveType::class);
         $formTree = $this->createForm(TreeType::class);
-        $formFavoris = $this->createForm(FavorisType::class);
+        $formFavoris = $this->createForm(FavoriteType::class);
 
         $spot = $spotRepository->find($id);
         $comment = new Comment();
@@ -176,12 +180,12 @@ class SpotController extends Controller
      * @Method({"POST"})
      * @param Request $request
      * @param Spot $spot
-     * @param FavorisManager $favorisManager
+     * @param FavoriteManager $favorisManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function favoris(Request $request, Spot $spot, FavorisManager $favorisManager)
+    public function favoris(Request $request, Spot $spot, FavoriteManager $favorisManager)
     {
-        $formFavoris = $this->createForm(FavorisType::class);
+        $formFavoris = $this->createForm(FavoriteType::class);
         $formFavoris->handleRequest($request);
         if($formFavoris->isSubmitted() && $formFavoris->isValid()){
             $favorisManager->save($formFavoris->getData(), $this->getUser(),$spot);

@@ -25,7 +25,7 @@
         <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Sur YouSpot ! </h3>
+                        <h3>Sur YouSpot, qu'est ce qu'on fait ? </h3>
                     </div>
                 </div>
         </section>
@@ -124,7 +124,7 @@
         <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Un spot c'est ça! </h3>
+                        <h3>Un spot c'est quoi? </h3>
                     </div>
                 </div>
         </section>
@@ -150,20 +150,38 @@
                             </div>
                             <hr class="mb-4">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <button type="button" class="title-ten-button">Love me!</button>
-                                    <hr class="mb-4">
-                                    <p> <i class="fa fa-heart">10</i></p>
+                                <div class="col-md-12">
+                                    <p class="sub-title"> * Click sur les boutons pour voir!  </p>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="title-nine-button">Tree me!</button>
+                                    <button type="button" class="btn" data-toggle="modal" href="#modalLove">Love me!</button>
+                                    <p class="sub-title"> * Des likes  </p>
+                                    <hr class="mb-4">
+                                    <p> <i class="fa fa-heart">10</i></p>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn" data-toggle="modal" href="#modalTree">Tree me!</button>
+                                    <p class="sub-title"> * Des Trees  </p>
                                     <hr class="mb-4">
                                     <p><i class="fa fa-tree"> 5</i></p>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="title-eleven-button">Fav me!</button>
+                                    <button type="button" class="btn" data-toggle="modal" href="#modalFav">Fav me!</button>
+                                    <p class="sub-title"> * Des Fav  </p>
                                     <hr class="mb-4">
                                     <p><i class="fa fa-folder"> 2</i></p>
+                                </div>
+                            </div>
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p>Tu t'inscris juste avec ton email , un pseudo et un mot de passe </p>
+                                    <p>Après ton inscription tu reçois un email </p>
+                                    <p>Tu fais partis de la communauté des spoteurs!</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <a class="btn btn-primary" href="{{ path('fos_user_registration_register') }}">Rejoins nous !</a>
                                 </div>
                             </div>
                         </div>
@@ -205,95 +223,62 @@
                     </div>
                 </div>
             </div>
-            <hr class="mb-4">
             </div>
         </section>
 
-    <!-------------------SECTION ONE SPOT COMPLEMENT ------------------>
-        <section id="section-title">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Et un spot , c'est aussi ça ! </h3>
-                    </div>
-                </div>
-        </section>
+    <!-------------------SECTION STATS------------------>
 
-        <section class="landing-oneSpotMore">
+
+    <section id="section-title">
         <div class="row">
-            <div class="card col-md-12">
-                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body">
-                    <h5 class="title-nine"> Un environnement </h5>
-                    <p class="card-text-i"><i class="fa fa-tree"> Tree me</i></p>
-                    <p class="card-text-content">La notion d'environnement à une place importante dans cette application!
-                        Le but n'est pas de pointer du doigt un endroit qui est sale mais vraiment d'éveiller
-                        la conscience de chacun sur l'importance de préserver tous les lieux sur lesquels on passe un moment !</p>
-                    <p class="card-text-content">Un clic sur le bouton <i class="fa fa-tree"> Tree me</i> et c'est un spot qui sera notifié
-                        comme préservé!</p>
-                </div>
+            <div class="col-md-12">
+                <h3>Aujourd'hui YouSpot c'est !</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="card col-md-4">
-                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body">
-                    <h5 class="title-ten"> Des J'aime ! </h5>
-                    <p class="card-text"><i class="fa fa-heart"> Like me</i></p>
-                    <p class="card-text">On ne réinvente pas la roue , un spot qui a des Like est un spot qu'on aime!</p>
-                    <p class="card-text">Parce qu'il est complètement préservé, parce que on s'y sent ailleurs qu'en ville</p>
-                    <p class="card-text">mais aussi parce que c'est un spot préservé, propre , respecté !</p>
-                </div>
-            </div>
-            <div class="card col-md-4">
-                   <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body">
-                    <h5 class="title-eleven"> Des Favoris ! </h5>
-                    <p><i class="fa fa-folder"> Fav me </i></p>
-                    <p class="card-text">Tu aimes un Spot, tu l'enregistres dans tes favoris pour le retrouver plus facilement </p>
-                    <p class="card-text">Facile de le trouver : il est dans ton compte perso rubrique mes spots favoris ! </p>
-                    <p class="card-text">Tu peux aussi l'uploader, comme ça le réseau n'est plus un problème ! </p>
-                </div>
-            </div>
-            <div class="card col-md-4">
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body">
-                    <h5 class="title-twelve"> Des Commentaires ! </h5>
-                    <p class="card-text">C'est toujours sympa de pouvoir échanger sur des spots !</p>
-                    <p class="card-text">Tu es allé(e) sur un Spot et tu as envie de donner ton avis</p>
-                    <p class="card-text">Tu as envie de poser une question? </p>
-                    <p class="card-text">Ou alors tu as juste envie de parler avec le spoteur ! </p></div>
-            </div>
-        </div>
-        </section>
-
-
-    <!-------------------SECTION NOUS REJOINDRE ------------------>
-
-        <section id="section-title">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Rejoins nous ! </h3>
-                    </div>
-                </div>
-        </section>
-
-    <section class="landing-joinUs">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Tu t'inscris juste avec ton email , un pseudo et un mot de passe </p>
-                    <p>Pas besoin d'autre chose! </p>
-                    <p>Après ton inscription tu reçois un email </p>
-                    <p>Et rien d'autre ! </p>
-                    <p>Tu fais partis de la communauté des spoteurs!</p>
-                </div>
-                <div class="col-md-6">
-                    <div class="cover-text "> </div>
-                    <a class="btn btn-cover  text-uppercase js-scroll-trigger" href="{{ path('fos_user_registration_register') }}">Rejoins nous !</a>
-                </div>
-                </div>
-            </div>
     </section>
+
+    <section class="stats">
+        <div class="row">
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">Spoteurs</h5>
+                    <h5 class="card-text">{{ allResult.totalNbUsers }}</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">Spots</h5>
+                    <h5 class="card-text">{{ allResult.totalNbSpots }}</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">J'aime</h5>
+                    <h5 class="card-text">{{ allResult.totalNbLoves }}</h5>
+                </div>
+            </div>
+
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">Trees</h5>
+                    <h5 class="card-text">{{ allResult.totalNbTrees }}</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">Commentaires</h5>
+                    <h5 class="card-text">{{ allResult.totalNbComments }}</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 10rem;">
+                <div class="card-body">
+                    <h5 class="card-text">Favoris</h5>
+                    <h5 class="card-text">{{ allResult.totalNbFavoris }}</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
     <!-------------------SECTION NEWSLETTER-------------->
 
@@ -312,59 +297,102 @@
             </div>
         </section>
     </section>
-    <!-------------------SECTION STATS------------------>
 
-
-        <section id="section-title">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Aujourd'hui YouSpot c'est !</h3>
-                 </div>
+    <!-- MODALS -->
+    <div class="modal fade" id="modalLove" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Des J'aime !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-        </section>
-
-        <section class="stats">
-        <div class="row">
-                <div class="card" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-text">Utilisateurs</h5>
-                            <h5 class="card-text">{{ allResult.totalNbUsers }}</h5>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-heart"> Like me</i>
                         </div>
-                </div>
-                <div class="card" style="width: 10rem;">
                         <div class="card-body">
-                            <h5 class="card-text">Spots</h5>
-                            <h5 class="card-text">{{ allResult.totalNbSpots }}</h5>
+                            <blockquote class="blockquote">
+                                <p class="card-text">On ne réinvente pas la roue , un spot qui a des Like est un spot qu'on aime!</p>
+                                <p class="card-text">Parce qu'il est complètement préservé, parce que on s'y sent ailleurs qu'en ville</p>
+                                <p class="card-text">mais aussi parce que c'est un spot préservé, propre , respecté !</p>
+                            </blockquote>
                         </div>
+                    </div>
+                    <hr class="mb-4">
                 </div>
-                <div class="card" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-text">J'aime</h5>
-                            <h5 class="card-text">{{ allResult.totalNbLoves }}</h5>
-                        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-
-                <div class="card" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-text">Trees</h5>
-                            <h5 class="card-text">{{ allResult.totalNbTrees }}</h5>
-                        </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-text">Commentaires</h5>
-                            <h5 class="card-text">{{ allResult.totalNbComments }}</h5>
-                        </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                        <div class="card-body">
-                            <h5 class="card-text">Favoris</h5>
-                            <h5 class="card-text">{{ allResult.totalNbFavoris }}</h5>
-                        </div>
-                </div>
+            </div>
         </div>
-    </section>
-</div>
+    </div>
+
+    <div class="modal fade" id="modalTree" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Des Trees !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-tree"> Tree me</i>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote">
+                                <p class="card-text-content">La notion d'environnement à une place importante dans cette application!
+                                    Le but n'est pas de pointer du doigt un endroit qui est sale mais vraiment d'éveiller
+                                    la conscience de chacun sur l'importance de préserver tous les lieux sur lesquels on passe un moment !</p>
+                                <p class="card-text-content">Un clic sur le bouton <i class="fa fa-tree"> Tree me</i> et c'est un spot qui sera notifié
+                                    comme préservé!</p>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalFav" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Des Fav !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-folder"> Fav me </i>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote">
+                                <p class="card-text">Tu aimes un Spot, tu l'enregistres dans tes favoris pour le retrouver plus facilement </p>
+                                <p class="card-text">Facile de le trouver : il est dans ton compte perso rubrique mes spots favoris ! </p>
+                                <p class="card-text">Tu peux aussi l'uploader, comme ça le réseau n'est plus un problème ! </p>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block footer %}

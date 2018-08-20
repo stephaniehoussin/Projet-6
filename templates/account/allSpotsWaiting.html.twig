@@ -39,9 +39,7 @@
                         <th>date</th>
                         <th>title</th>
                         <th>description</th>
-                        <th>Voir</th>
-                        <th>Valider</th>
-                        <th>Rejeter</th>
+                        <th>Gérer le spot</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,9 +50,7 @@
                             <td>{{ spot.date|date('d/m/Y') }}</td>
                             <td>{{ spot.title }}</td>
                             <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
-                            <td><a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Voir</a></td>
-                            <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 2 }) }}" class="btn btn-success">Valider</a></td>
-                            <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Rejeter</a></td>
+                            <td><a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Gérer le spot</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

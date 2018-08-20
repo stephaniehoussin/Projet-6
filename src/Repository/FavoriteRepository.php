@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Favoris;
+use App\Entity\Favorite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Favoris|null find($id, $lockMode = null, $lockVersion = null)
- * @method Favoris|null findOneBy(array $criteria, array $orderBy = null)
- * @method Favoris[]    findAll()
- * @method Favoris[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Favorite|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Favorite|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Favorite[]    findAll()
+ * @method Favorite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FavorisRepository extends ServiceEntityRepository
+class FavoriteRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Favoris::class);
+        parent::__construct($registry, Favorite::class);
     }
 
    // Recup le nombre total de spots mis en favoris

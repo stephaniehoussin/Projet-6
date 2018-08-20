@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Entity\Comment;
-use App\Entity\Favoris;
+use App\Entity\Favorite;
 use App\Entity\Spot;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-class FavorisManager
+class FavoriteManager
 {
     /**
      * @var EntityManagerInterface
@@ -22,13 +22,13 @@ class FavorisManager
     }
 
 
-    public function save(Favoris $favoris, User $user, Spot $spot)
+    public function save(Favorite $favorite, User $user, Spot $spot)
     {
 
 
-        $favoris->setUser($user);
-        $favoris->setSpot($spot);
-        $this->entityManager->persist($favoris);
+        $favorite->setUser($user);
+        $favorite->setSpot($spot);
+        $this->entityManager->persist($favorite);
         $this->entityManager->flush();
     }
 }

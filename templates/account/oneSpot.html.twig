@@ -82,8 +82,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 2 }) }}" class="btn btn-success">Valider</a>
+                                <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 0 }) }}" class="btn btn-danger">Rejeter</a>
+                        </div>
                     </div>
+                    </div>
+
                 </section>
+
             </div>
         </section>
     </div>

@@ -3,7 +3,7 @@ namespace App\Services;
 
 
 use App\Repository\CommentRepository;
-use App\Repository\FavorisRepository;
+use App\Repository\FavoriteRepository;
 use App\Repository\LoveRepository;
 use App\Repository\SpotRepository;
 use App\Repository\TreeRepository;
@@ -12,7 +12,7 @@ use App\Repository\UserRepository;
 class PageDecoratorsService
 {
 
-    public function __construct(SpotRepository $spotRepository, CommentRepository $commentRepository,FavorisRepository $favorisRepository, UserRepository $userRepository, TreeRepository $treeRepository, LoveRepository $loveRepository)
+    public function __construct(SpotRepository $spotRepository, CommentRepository $commentRepository, FavoriteRepository $favorisRepository, UserRepository $userRepository, TreeRepository $treeRepository, LoveRepository $loveRepository)
     {
         $this->spotRepository = $spotRepository;
         $this->commentRepository = $commentRepository;

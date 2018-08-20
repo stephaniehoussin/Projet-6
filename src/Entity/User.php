@@ -25,9 +25,9 @@ class User extends BaseUser
     private $spots;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Favoris", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorite", mappedBy="user", cascade={"remove"})
      */
-    private $favoris;
+    private $favorites;
 
 
     /**
@@ -55,7 +55,7 @@ class User extends BaseUser
        $this->spots = new ArrayCollection();
        $this->comments = new ArrayCollection();
        $this->loves = new ArrayCollection();
-       $this->favoris = new ArrayCollection();
+       $this->favorites = new ArrayCollection();
     }
 
     public function __toString()
@@ -213,31 +213,39 @@ class User extends BaseUser
         return $this->trees;
     }
 
-
     /**
-     * @return Collection|Favoris[]
+     * @return Collection|Favorite[]
      */
-    public function getFavoris() : Collection
+    public function getFavorite() : Collection
     {
-        return $this->favoris;
+        return $this->favorites;
     }
 
     /**
-     * @param Favoris $favoris
+     * @param Favorite $favorite
      */
-    public function addFavoris(Favoris $favoris)
+    public function addFavorite(Favorite $favorite)
     {
-        $this->favoris[] = $favoris;
-        $favoris->setUser($this);
+        $this->favorites[] = $favorite;
+        $favorite->setUser($this);
     }
 
     /**
-     * @param Favoris $favoris
+     * @param Favorite $favorite
      */
-    public function removeFavoris(Favoris $favoris)
+    public function removeFavorite(Favorite $favorite)
     {
-        $this->favoris->removeElement($favoris);
+        $this->favorites->removeElement($favorite);
     }
+
+    /**
+     * @return Collection|Favorite[]
+     */
+    public function getFavorites(): Collection
+    {
+        return $this->favorites;
+    }
+
 
 
 

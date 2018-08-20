@@ -6,7 +6,7 @@ use App\Entity\Spot;
 use App\Form\ModifSpotType;
 use App\Form\SpotRejectReasonType;
 use App\Repository\CommentRepository;
-use App\Repository\FavorisRepository;
+use App\Repository\FavoriteRepository;
 use App\Repository\SpotRepository;
 use App\Services\CommentManager;
 use App\Services\PageDecoratorsService;
@@ -187,13 +187,14 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("mes-spots-favoris", name="mes-spots-favoris")
+     * * @Route("mes-spots-favoris", name="mes-spots-favoris")
+     * @param FavoriteRepository $favoriteRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function favoritesSpotsByUser(FavorisRepository $favorisRepository)
+    public function favoritesSpotsByUser(FavoriteRepository $favoriteRepository)
     {
          $user = $this->getUser();
-         $favoris = $favorisRepository->recupFavoritesSpotsByUser($user);
+         $favoris = $favoriteRepository->recupFavoritesSpotsByUser($user);
         return $this->render('account/favoritesSpots.html.twig',array(
             'favoris' => $favoris,
         ));
