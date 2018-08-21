@@ -73,6 +73,8 @@ class Spot
      */
     private $comments;
 
+
+
     /**
      * @ORM\OneToMany(targetEntity="Love", mappedBy="spot", cascade={"remove"})
      */

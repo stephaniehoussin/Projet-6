@@ -92,17 +92,25 @@ class AccountController extends Controller
         {
             $formReject = $this->createForm(SpotRejectReasonType::class);
             $formReject->handleRequest($request);
+            $spotId = $spot->getId();
+            $user = $this->getUser();
+
             if($formReject->isSubmitted() && $formReject->isValid())
             {
-                $formReject->getData();
+                $reason = $formReject->getData();
+                dump($reason);
                 $spot->setStatus(Spot::STATUS_REJECT);
                 $spotManager->persistSpot($spot);
-               // return $this->redirectToRoute('mon-compte/spots-en-attente');
+                return $this->redirectToRoute('mon-compte/spots-en-attente');
+
             }
+
         }
         return $this->render('account/spotRejectedReason.html.twig',array(
             'formReject' => $formReject->createView(),
-            'user' => $user
+            'user' => $user,
+            'spotId' => $spotId
+
         ));
     }
 

@@ -52,6 +52,18 @@ class TreeRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function findTreeSpotByUSer($userId,$spotId)
+    {
+        $rq = $this->createQueryBuilder('t')
+            ->select('t')
+            ->where('t.user = :userId')
+            ->setParameter('userId', $userId)
+            ->andWhere('t.spot = :spotId')
+            ->setParameter('spotId', $spotId);
+        return $rq->getQuery()->getResult();
+
+    }
+
 //    /**
 //     * @return Tree[] Returns an array of Tree objects
 //     */

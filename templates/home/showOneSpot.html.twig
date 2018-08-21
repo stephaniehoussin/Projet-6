@@ -69,9 +69,24 @@
                                         <p><i class="fa fa-folder"> {{ resultBySpot.totalNbFavorisBySpot }}</i></p>
                                     </div>
                                 </div>
+                                <div class="row">
+                                <div class="col-md-12">
+                                {% for message in app.flashes('warning') %}
+                                        <div class="alert alert-warning" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                    {% for message in app.flashes('info') %}
+                                        <div class="alert alert-info" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">

@@ -12,7 +12,10 @@ use App\Form\SpotFilterType;
 use App\Form\SpotType;
 use App\Form\TreeType;
 use App\Repository\CommentRepository;
+use App\Repository\FavoriteRepository;
+use App\Repository\LoveRepository;
 use App\Repository\SpotRepository;
+use App\Repository\TreeRepository;
 use App\Services\CommentManager;
 use App\Services\FavoriteManager;
 use App\Services\LoveManager;
@@ -115,7 +118,6 @@ class SpotController extends Controller
         }
 
         $report = $commentRepository->recupCommentIsReport();
-        dump($report);
 
         return $this->render('home/showOneSpot.html.twig', array(
             'spot' => $spot,
@@ -140,15 +142,23 @@ class SpotController extends Controller
      * @param LoveManager $loveManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function love(Request $request, Spot $spot, LoveManager $loveManager)
+    public function love(LoveRepository $loveRepository,Request $request, Spot $spot, LoveManager $loveManager)
     {
         $formLove = $this->createForm(LoveType::class);
         $formLove->handleRequest($request);
-        if ($formLove->isSubmitted() && $formLove->isValid()) {
-            $loveManager->save($formLove->getData(), $this->getUser(),$spot);
-            $this->addFlash("success","ok");
-        }else{
-            $this->addFlash("warning", "pas ok");
+        $spotId = $spot->getId();
+        $user= $this->getUser();
+        $love = $loveRepository->findLoveSpotByUSer($user,$spotId);
+        if ($formLove->isSubmitted() && $formLove->isValid())
+        {
+             if($love)
+             {
+                 $this->addFlash("warning", "Vous avez déja liké ce spot!");
+             }else{
+                 $loveManager->save($formLove->getData(),$this->getUser(),$spot);
+                 $this->addFlash("info", "Vous venez de liker ce spot!");
+             }
+
         }
         return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
@@ -161,17 +171,25 @@ class SpotController extends Controller
      * @param TreeManager $treeManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function tree(Request $request, Spot $spot, TreeManager $treeManager)
+    public function tree(TreeRepository $treeRepository,Request $request, Spot $spot, TreeManager $treeManager)
     {
         $formTree = $this->createForm(TreeType::class);
         $formTree->handleRequest($request);
-        if($formTree->isSubmitted() && $formTree->isValid())
+        $spotId = $spot->getId();
+        $user = $this->getUser();
+        $tree = $treeRepository->findTreeSpotByUSer($user, $spotId);
+        if ($formTree->isSubmitted() && $formTree->isValid())
         {
-            $treeManager->save($formTree->getData(),$this->getUser(),$spot);
-            $this->addFlash("success", "ok");
-        }else{
-            $this->addFlash("warning", "pas ok");
+            if($tree)
+            {
+                $this->addFlash("warning", "Vous avez déja Tree me ce spot!");
+            }
+            else{
+                $treeManager->save($formTree->getData(),$this->getUser(),$spot);
+                $this->addFlash("info", "Vous venez de Tree Me ce spot!");
+            }
         }
+
         return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
@@ -183,15 +201,23 @@ class SpotController extends Controller
      * @param FavoriteManager $favorisManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function favoris(Request $request, Spot $spot, FavoriteManager $favorisManager)
+    public function favoris(FavoriteRepository $favoriteRepository,Request $request, Spot $spot, FavoriteManager $favoriteManager)
     {
         $formFavoris = $this->createForm(FavoriteType::class);
         $formFavoris->handleRequest($request);
-        if($formFavoris->isSubmitted() && $formFavoris->isValid()){
-            $favorisManager->save($formFavoris->getData(), $this->getUser(),$spot);
-            $this->addFlash("success","ok");
-        }else{
-            $this->addFlash("warning", "pas ok");
+        $spotId = $spot->getId();
+        $user = $this->getUser();
+        $favorite = $favoriteRepository->findfavoriteSpotByUSer($user,$spotId);
+        if($formFavoris->isSubmitted() && $formFavoris->isValid())
+        {
+            if($favorite)
+            {
+                $this->addFlash("warning", "Vous avez déja Fav me ce spot!");
+            }
+            else{
+                $favoriteManager->save($formFavoris->getData(),$this->getUser(),$spot);
+                $this->addFlash("info", "Vous venez de Fav Me ce spot!");
+            }
         }
         return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }

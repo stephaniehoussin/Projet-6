@@ -67,5 +67,15 @@ class FavoriteRepository extends ServiceEntityRepository
             ->getResult();
         return $rq;
     }
+    public function findfavoriteSpotByUSer($userId,$spotId)
+    {
+        $rq = $this->createQueryBuilder('f')
+            ->select('f')
+            ->where('f.user = :userId')
+            ->setParameter('userId', $userId)
+            ->andWhere('f.spot = :spotId')
+            ->setParameter('spotId', $spotId);
+        return $rq->getQuery()->getResult();
 
+    }
 }

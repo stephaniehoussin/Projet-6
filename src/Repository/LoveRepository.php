@@ -52,6 +52,18 @@ class LoveRepository extends ServiceEntityRepository
         return $nb;
     }
 
+    public function findLoveSpotByUSer($userId,$spotId)
+    {
+        $rq = $this->createQueryBuilder('l')
+        ->select('l')
+            ->where('l.user = :userId')
+            ->setParameter('userId', $userId)
+            ->andWhere('l.spot = :spotId')
+            ->setParameter('spotId', $spotId);
+        return $rq->getQuery()->getResult();
+
+    }
+
 //    /**
 //     * @return Love[] Returns an array of Love objects
 //     */
