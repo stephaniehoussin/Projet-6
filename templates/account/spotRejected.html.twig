@@ -52,21 +52,28 @@
                                 <td>{{ spot.date|date('d/m/Y') }}</td>
                                 <td>{{ spot.title }}</td>
                                 <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
-                                <td></td>
+                                <td><a href="{{ path('mon-compte/mes-spots-rejetes/motif', {id : spot.id}) }}" class="btn btn-primary">Voir le Motif</a></td>
                                 <td><a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a></td>
                                 <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a></td>
                             </tr>
                         {% endfor %}
+
                     {% else %}
                         <p>Bravo ! Tu n'as pas de spots refusés!</p>
                     {% endif %}
+
+
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
+</div>
 
+   {# {% for reject in rejectedReason %}
+        {{ reject.situation }}
+        {{ reject.picture }}
+        {{ reject.content }}
+    {% endfor %}#}
 
     {% endblock %}
-
-

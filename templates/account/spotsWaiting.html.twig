@@ -6,12 +6,12 @@
 
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    {% include 'account/parts/navAccount.html.twig' %}
+
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -40,18 +40,18 @@
                                     <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
                                     <a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Voir</a>
                                     <a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
-                                    <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a>
-                                </div>
+                                   <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a>
+
                             </div>
                         </div>
                     </div>
+                    </div>
                 {% endfor %}
             {% endif %}
-
-
         </div>
         </section>
     </div>
+
 
 
 {% endblock %}

@@ -1,6 +1,7 @@
 <?php
 namespace App\Form;
 
+use App\Entity\Reject;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -13,7 +14,7 @@ class SpotRejectReasonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Spot', ChoiceType::class,array(
+            ->add('situation', ChoiceType::class,array(
                 'label' => 'Spot',
                 'placeholder'=> 'Choisir',
                 'choices' =>array(
@@ -22,7 +23,7 @@ class SpotRejectReasonType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('Image', ChoiceType::class,array(
+            ->add('picture', ChoiceType::class,array(
                 'label' => 'Image',
                 'placeholder' => 'Choisir',
                 'choices' =>array(
@@ -31,7 +32,7 @@ class SpotRejectReasonType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('Contenu' , ChoiceType::class,array(
+            ->add('content' , ChoiceType::class,array(
                 'label' => 'Contenu',
                 'placeholder' => 'Choisir',
                 'choices' => array(
@@ -40,7 +41,7 @@ class SpotRejectReasonType extends AbstractType
                 ),
                 'required' => false
             ))
-            ->add('Informations', TextareaType::class,array(
+            ->add('informations', TextareaType::class,array(
                 'label' => 'Informations supplémentaires'
             ));
 
@@ -48,7 +49,9 @@ class SpotRejectReasonType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            'data_class' => Reject::class
+        ]);
     }
 }
 

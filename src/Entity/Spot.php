@@ -43,10 +43,12 @@ class Spot
     private $updateAt;
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
     /**
      * @ORM\Column(type="text", length=255)
+     * @Assert\NotBlank()
      */
     private $description;
     /**
@@ -73,8 +75,6 @@ class Spot
      */
     private $comments;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity="Love", mappedBy="spot", cascade={"remove"})
      */
@@ -85,6 +85,10 @@ class Spot
      */
     private $trees;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Reject", mappedBy="spot")
+     */
+    private $rejects;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="spots")
@@ -99,6 +103,7 @@ class Spot
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $infosSupp;
 
@@ -111,6 +116,7 @@ class Spot
         $this->favorites = new ArrayCollection();
         $this->loves = new ArrayCollection();
         $this->trees = new ArrayCollection();
+        $this->rejects = new ArrayCollection();
     }
 
     public function __toString()
@@ -440,11 +446,18 @@ class Spot
         $this->trees->removeElement($tree);
     }
 
+    /**
+     * @return null|string
+     */
     public function getInfosSupp(): ?string
     {
         return $this->infosSupp;
     }
 
+    /**
+     * @param string $infosSupp
+     * @return Spot
+     */
     public function setInfosSupp(string $infosSupp): self
     {
         $this->infosSupp = $infosSupp;
@@ -484,5 +497,39 @@ class Spot
     {
         $this->favorites->removeElement($favorite);
     }
+
+    /**
+     * @return Collection|Reject[]
+     */
+    public function getReject() : Collection
+    {
+        return $this->rejects;
+    }
+
+    /**
+     * @return Collection|Reject[]
+     */
+    public function getRejects() : Collection
+    {
+        return $this->rejects;
+    }
+
+    /**
+     * @param Reject $reject
+     */
+    public function addReject(Reject $reject)
+    {
+        $this->rejects[] = $reject;
+        $reject->setSpot($this);
+    }
+
+    /**
+     * @param Reject $reject
+     */
+    public function removeReject(Reject $reject)
+    {
+        $this->rejects->removeElement($reject);
+    }
+
 }
 

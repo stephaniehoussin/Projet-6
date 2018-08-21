@@ -2,19 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\Reject;
 use App\Entity\Spot;
 use App\Form\ModifSpotType;
 use App\Form\SpotRejectReasonType;
 use App\Repository\CommentRepository;
 use App\Repository\FavoriteRepository;
+use App\Repository\RejectRepository;
 use App\Repository\SpotRepository;
 use App\Services\CommentManager;
 use App\Services\PageDecoratorsService;
 use App\Services\PaginationService;
+use App\Services\RejectManager;
 use App\Services\SpotManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class AccountController
@@ -65,7 +69,7 @@ class AccountController extends Controller
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
 
-    public function choiceStatus(Request $request,$id, $status,SpotRepository $spotRepository,SpotManager $spotManager)
+    public function choiceStatus(RejectManager $rejectManager,Request $request,$id, $status,SpotRepository $spotRepository,SpotManager $spotManager)
     {
         $spot = $spotRepository->findOneBy(['id' => $id]);
         $user = $this->getUser();
@@ -90,23 +94,22 @@ class AccountController extends Controller
         }
         if($status == 0)
         {
-            $formReject = $this->createForm(SpotRejectReasonType::class);
+            $reject = new Reject();
+            $formReject = $this->createForm(SpotRejectReasonType::class,$reject);
             $formReject->handleRequest($request);
             $spotId = $spot->getId();
             $user = $this->getUser();
 
             if($formReject->isSubmitted() && $formReject->isValid())
             {
-                $reason = $formReject->getData();
-                dump($reason);
                 $spot->setStatus(Spot::STATUS_REJECT);
-                $spotManager->persistSpot($spot);
+                $rejectManager->save($formReject->getData(),$this->getUser(),$spot);
                 return $this->redirectToRoute('mon-compte/spots-en-attente');
 
             }
 
         }
-        return $this->render('account/spotRejectedReason.html.twig',array(
+        return $this->render('account/spotRejectedFormReason.html.twig',array(
             'formReject' => $formReject->createView(),
             'user' => $user,
             'spotId' => $spotId
@@ -145,16 +148,30 @@ class AccountController extends Controller
 
     /**
      * @Route("mes-spots-rejetes", name="mes-spots-rejetes")
+     * @param RejectRepository $rejectRepository
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function SpotsRejected(SpotRepository $spotRepository)
+    public function SpotsRejected(RejectRepository $rejectRepository,SpotRepository $spotRepository)
     {
 
         $user = $this->getUser();
         $rejectedSpots = $spotRepository->findRejectedSpotsByUser($user->getId());
         return $this->render('account/spotRejected.html.twig',array(
-            'rejectedSpots' => $rejectedSpots,
+            'rejectedSpots' => $rejectedSpots
+        ));
+    }
+
+    /**
+     * @Route("mes-spots-rejetes/motif/{id}", name="mes-spots-rejetes/motif")
+     */
+    public function SpotsRejectedReason($id,SpotRepository $spotRepository,RejectRepository $rejectRepository)
+    {
+       // $user = $this->getUser();
+        $spot = $spotRepository->findOneBy(['id' => $id]);
+        $rejectedReason = $rejectRepository->recupReasonReject($spot->getId());
+        return $this->render('account/spotRejectReason.html.twig',array(
+            'rejectedReason' => $rejectedReason
         ));
     }
 
@@ -202,9 +219,9 @@ class AccountController extends Controller
     public function favoritesSpotsByUser(FavoriteRepository $favoriteRepository)
     {
          $user = $this->getUser();
-         $favoris = $favoriteRepository->recupFavoritesSpotsByUser($user);
+         $favorites = $favoriteRepository->recupFavoritesSpotsByUser($user);
         return $this->render('account/favoritesSpots.html.twig',array(
-            'favoris' => $favoris,
+            'favorites' => $favorites,
         ));
     }
 

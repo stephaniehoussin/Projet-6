@@ -23,11 +23,6 @@
         </section>
 
         <section class="account-all-spots-waiting">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
             <div class="container">
                 <div class="row">
                     <div class="table-responsive">
@@ -35,8 +30,8 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>user</th>
-                                <th>message</th>
+                                <th>Date</th>
+                                <th>Message</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,7 +41,7 @@
                                 {% for comment in commentsReportByUser %}
                                     <tr>
                                         <td>{{ comment.id }}</td>
-                                        <td>{{ comment.user }}</td>
+                                        <td>{{ comment.date|date('d/m/Y') }}</td>
                                         <td>{{ comment.message }}</td>
                                     </tr>
                                 {% endfor %}
@@ -55,15 +50,10 @@
                             {% endif %}
                         </table>
                     </div>
-
-
-
                 </div>
             </div>
         </section>
     </div>
-
-
 {% endblock %}
 
 

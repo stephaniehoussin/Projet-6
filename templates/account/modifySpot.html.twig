@@ -6,12 +6,11 @@
 
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    {% include 'account/parts/navAccount.html.twig' %}
     <section class="modify">
     <div class="account-content">
         <section id="account-title">
@@ -32,7 +31,7 @@
                         <div class="img">
                         {{ form_row(formModify.pictureFile, {'attr': {'class': 'custom-file-input'}}) }}
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">

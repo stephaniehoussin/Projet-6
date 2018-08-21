@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block nav %}
+    {% include 'account/parts/navAccount.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="account-content">
+        <section id="account-title">
+            <div class="container wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Motif du rejet de mon spot</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="account-spots-rejected">
+            <div class="row">
+                {% for reject in rejectedReason %}
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                {{ reject.situation }}
+                                {{ reject.picture }}
+                                {{ reject.content }}
+                                <hr class="mb-4">
+                            </div>
+                            <div class="card-description">
+                                {{ reject.informations }}
+                            </div>
+                        </div>
+                        <a href="{{ path('mon-compte/mes-spots-rejetes')}}" class="btn btn-primary">Retour vers mes spots rejetés</a>
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                     Rappel : La Fiche "technique" du Spot
+                                    <hr class="mb-4">
+                                </div>
+                                <div class="card-description">
+                                    <ul>
+                                        <li>Lieu en plein air</li>
+                                        <li>En ville</li>
+                                        <li>Mais Où l'on ne se sent pas en ville</li>
+                                        <li>Une photo adaptée</li>
+                                        <li>Un titre parlant</li>
+                                        <li>Une description un minimum détaillée</li>
+                                        <li>Une adresse la plus précise possible</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    {# {% for reject in rejectedReason %}
+         {{ reject.situation }}
+         {{ reject.picture }}
+         {{ reject.content }}
+     {% endfor %}#}
+
+{% endblock %}

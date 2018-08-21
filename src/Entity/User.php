@@ -46,6 +46,11 @@ class User extends BaseUser
      */
     private $trees;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Reject", mappedBy="user")
+     */
+    private $rejects;
+
 
 
 
@@ -56,6 +61,7 @@ class User extends BaseUser
        $this->comments = new ArrayCollection();
        $this->loves = new ArrayCollection();
        $this->favorites = new ArrayCollection();
+       $this->rejects = new ArrayCollection();
     }
 
     public function __toString()
@@ -244,6 +250,40 @@ class User extends BaseUser
     public function getFavorites(): Collection
     {
         return $this->favorites;
+    }
+
+
+    /**
+     * @return Collection|Reject[]
+     */
+    public function getReject() : Collection
+    {
+        return $this->rejects;
+    }
+
+    /**
+     * @param Reject $reject
+     */
+    public function addReject(Reject $reject)
+    {
+        $this->rejects[] = $reject;
+        $reject->setUser($this);
+    }
+
+    /**
+     * @param Reject $reject
+     */
+    public function removeReject(Reject $reject)
+    {
+        $this->rejects->removeElement($reject);
+    }
+
+    /**
+     * @return Collection|Reject[]
+     */
+    public function getRejects(): Collection
+    {
+        return $this->rejects;
     }
 
 

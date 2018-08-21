@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entity\Spot;
 use App\Entity\User;
+use App\Entity\Reject;
 use Doctrine\ORM\EntityManagerInterface;
 
 
@@ -44,7 +45,5 @@ class SpotManager
         $this->em->remove($spot);
         $this->em->flush();
     }
-
-
 
 }
