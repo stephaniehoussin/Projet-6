@@ -16,10 +16,11 @@ easy_admin:
             - { entity: 'User', label: 'Spoteurs'}
             - { entity: 'Comment', label: 'Commentaires' }
             - { entity: 'Category',label: 'Catégories'}
-            - { entity: 'Favoris'}
+            - { entity: 'Favorite', label: 'Favoris'}
             - { entity: 'Love', label: 'Likes'}
             - { entity: 'Tree', label: 'Environnement' }
             - { entity: 'Newsletter'}
+            - { entity: 'Reject'}
 
 
     entities:
@@ -41,7 +42,7 @@ easy_admin:
                     - { property: 'description' }
                     - { property: 'picture',label: 'Image', type: 'image', base_path: '%app.path.spots%' }
                     - { property: 'infosSupp',label: 'Adresse' }
-                    - { property: 'libelleStatus',label: 'Status' }
+                    - { property: 'status',label: 'Status' }
                     - { property: 'comments',label: 'Commentaires' }
                     - { property: 'loves',label: 'Likes' }
                     - { property: 'trees',label: 'Arbres' }
@@ -139,6 +140,7 @@ easy_admin:
                     - { property: 'user', label: 'Spoteur' }
                     - { property: 'message' }
                     - { property: 'spot' }
+                    - { property: 'libelleReport' }
 
             show:
                 title: 'Voir le commentaire'
@@ -147,6 +149,7 @@ easy_admin:
                     - { property: 'date', type: 'date' }
                     - { property: 'user', label: 'Spoteur' }
                     - { property: 'spot' }
+
             edit:
                 title: 'Editer le commentaire'
                 fields:
@@ -154,6 +157,7 @@ easy_admin:
                      - { property: 'date', type: 'date' }
                      - { property: 'user', label: 'Spoteur' }
                      - { property: 'spot' }
+
             new:
                 title: 'Ajouter un commentaire'
                 fields:
@@ -164,8 +168,8 @@ easy_admin:
 
 
 
-        Favoris:
-            class : App\Entity\Favoris
+        Favorite:
+            class : App\Entity\Favorite
             list:
                 title: 'Favoris'
                 actions:
@@ -211,6 +215,9 @@ easy_admin:
         Newsletter:
             class: App\Entity\Newsletter
 
+        Reject:
+            class : App\Entity\Reject
+
 
         User:
             class: App\Entity\User
@@ -230,8 +237,9 @@ easy_admin:
                     - { property : 'email' }
                     - { property : 'roles' }
                     - { property : 'spots' }
-
                     - { property : 'comments', label: 'Commentaires' }
+                    - { property : 'rejects', label: 'Spots refusés' }
+
 
 
             show:
@@ -240,7 +248,8 @@ easy_admin:
                     - { property: 'username', label: 'Pseudo'}
                     - { property: 'email', label: 'Email'}
                     - { property: 'roles', label: 'Role'}
-
+                    - { property : 'spots' }
+                    - { property : 'rejects' }
                     - { property : 'comments', label: 'Commentaires' }
                     - { property : 'lastLogin', label: 'Dernière connexion' }
                     - { property : 'enabled', label: 'actif' }
@@ -255,6 +264,9 @@ easy_admin:
                     - { property: 'roles', type: 'choice', label: 'Role', type_options: { multiple: true, required: true, choices: {'ROLE_USER': 'ROLE_USER', 'ROLE_MODERATEUR': 'ROLE_MODERATEUR', 'ROLE_ADMIN': 'ROLE_ADMIN' }} }
                     - { property: 'plainPassword', type: 'text', type_options: { required: false }}
                     - { property : 'enabled', label: 'actif' }
+                    - { property : 'comments', label: 'Commentaires' }
+                    - { property : 'spots' }
+
 
             new:
                 title: 'Créer Spoteur'

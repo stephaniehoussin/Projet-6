@@ -137,5 +137,19 @@ class Comment
         return $this;
     }
 
+    public function libelleReport()
+    {
+        switch ($this->report)
+        {
+            case 0:
+                return 'Non signalé';
+                break;
+            case 1:
+                return 'Signalé';
+                break;
+
+        }
+    }
+
 }
 

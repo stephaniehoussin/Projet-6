@@ -53,8 +53,14 @@
     font-size: 15px;
     padding: 10px 10px;
    /* background-image: url("../img/c7.jpg");*/
-    background-color: white;
+    background-color: aliceblue;
     border-color: #497435;
+}
+#mainNav .btn-nav:hover
+{
+    background-color:#1b6d85 ;
+    color: aliceblue;
+    border : 1px solid aliceblue;
 }
 
 @media(max-width: 768px)
@@ -94,14 +100,15 @@ header.masthead {
 .cover-landing .btn-cover {
     font-size: 18px;
     padding: 15px 20px;
-    background-color: white;
+    background-color: aliceblue;
     border-color: #497435;
     margin-top: 10%;
     color: black;
 }
 
 .btn-cover:active, .btn-cover:focus, .btn-cover:hover {
-    background-image: url("../img/c7coupe.jpg");
+   /* background-image: url("../img/c7coupe.jpg");*/
+    background-color:#1b6d85 ;
     border-color: #497435;
     color: black;
 }
@@ -513,10 +520,16 @@ span
     top: 100px;
     display: inline-block;
     margin-bottom: 40px;
-   /* padding: 10px;*/
-    background: white;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+
+.section-youSpot .section-youSpot-btn .btn-cover
+{
+    background: aliceblue;
+    padding: 10px 20px;
+    color: black;
+    text-transform: uppercase;
 }
 
 .section-youSpot .section-youSpot-title {
@@ -526,10 +539,18 @@ span
     transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.section-youSpot .section-youSpot-btn > a.btn btn-cover {
-    width: 40px;
+.section-youSpot .section-youSpot-btn > a.btn-cover {
+    width: auto;
+    background-color:#1b6d85 ;
 }
-
+.section-youSpot .section-youSpot-btn > a.btn-cover:hover
+{
+    background-color:aliceblue ;
+}
+.section-youSpot
+{
+    background-color: aliceblue;
+}
 .section-youSpot:hover {
     border-color: #00a8ff;
     /*background-color: #1b6d85;*/
@@ -943,11 +964,20 @@ body {
 }
 
 /****************** PAGE UN SPOT*******************/
+.landing-oneSpot .btn-landing-spot
+{
+    background: aliceblue;
+    padding: 10px 10px;
+    color: black;
+    text-transform: uppercase;
+    margin-top: 50px;
+}
 
-          .one-spot .card-img-top
-          {
-              height: 400px;
-          }
+
+.one-spot .card-img-top
+{
+    height: 400px;
+}
 
 @media(max-width: 768px)
 {
