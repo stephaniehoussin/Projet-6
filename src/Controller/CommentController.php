@@ -39,14 +39,14 @@ class CommentController extends Controller
         $comment = $commentRepository->find($id);
         if($comment->getReport() == 1)
         {
-            $this->addFlash("success","Commentaire déjà signalé!");
+            $this->addFlash("primary","Commentaire déjà signalé!");
         }
 
         if($comment->getReport() == 0 )
         {
             $comment->setReport(1);
             $commentManager->save($comment);
-            $this->addFlash("success","Commentaire signalé , il va être étudié!");
+            $this->addFlash("danger","Commentaire signalé , il va être étudié!");
         }
             $spot = $comment->getSpot();
             $idSpot = $spot->getId();

@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{% endblock %}
+{% block description %}{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
 {% endblock %}
@@ -27,13 +30,15 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-spots">
-                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <img class="card-img-top img-fluid" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-spot-title"> <i class="fa fa-calendar">  {{ spot.date|date("d/m/Y") }}</i> <i class="fa fa-user"> {{ spot.user }}</i></h5>
-                                    <p class="card-spot-description">Spot #{{ spot.id }}</p>
-                                    <p class="card-spot-description">{{ spot.title }}</p>
-                                    <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
-                                    <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn">Voir le spot</a>
+                                    <hr class="mb-4">
+                                    <p class="card-date"> <i class="fa fa-calendar"> <span>{{ spot.date|date("d/m/Y à H:h") }}</span></i>  <i class="fa fa-user"> Spoté par  <span>{{ spot.user }}</span></i></p>
+                                    <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
+                                    <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title }}</span></p>
+                                    <hr class="mb-4">
+                                    <p class="card-description">"{{ spot.description|length > 40 ? spot.description|slice(0,40) ~'...': spot.description }}"</p>
+                                    <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
                                 </div>
                             </div>
                         </div>
@@ -50,19 +55,21 @@
             <section class="subscribe">
                 <div class="container wow fadeInUp">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
+                            <div class="subscribe-deco">
                             <h3 class="subscribe-title">Recevoir la newsletter</h3>
                             <p class="subscribe-text">Tous les derniers spots postés et la vie d'une association !</p>
                         </div>
-                    <div class="col-md-4 subscribe-btn-container">
-                        <a class="subscribe-btn" href="{{ path('newsletter') }}">M'inscrire</a>
+                        </div>
+                    <div class="col-md-6 subscribe-btn-container">
+                        <a class="btn btn-cover js-scroll-trigger" href="{{ path('newsletter') }}">M'inscrire</a>
                     </div>
                     </div>
                 </div>
             </section>
         </section>
 
-    <!-------------------SECTION STATS------------------>>
+    <!-------------------SECTION STATS------------------>
         <section id="section-title">
                 <div class="row">
                     <div class="col-md-12">

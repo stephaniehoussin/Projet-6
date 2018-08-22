@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
+{% block description %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
@@ -77,7 +78,7 @@
                                                 <hr class="mb-4">
                                                 <p class="card-date"> <i class="fa fa-calendar"> <span>{{ spot.date|date("d/m/Y à H:h") }}</span></i>  <i class="fa fa-user"> Spoté par  <span>{{ spot.user }}</span></i></p>
                                                 <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
-                                                <p class="card-title"><span>{{ spot.title }}</span></p>
+                                                <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title }}</span></p>
                                                 <hr class="mb-4">
                                                 <p class="card-description">"{{ spot.description|length > 40 ? spot.description|slice(0,40) ~'...': spot.description}}"</p>
                                                 <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>

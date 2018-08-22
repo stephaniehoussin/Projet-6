@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
+{% block description %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
@@ -150,7 +151,7 @@
                         {% if  spot.comments %}
                             {% for comment in spot.comments %}
                                 <div class="comment" id="comment- {{ comment.id }}">
-                                    <p>Commentaire {{ comment.id }}  laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y H:i") }}</span></p>
+                                    <p>Commentaire {{ comment.id }}  laissé par : <span>{{ comment.user }}</span> le : <span>{{ comment.date|date("d/m/Y à H:i") }}</span></p>
                                     <p class="message">"{{ comment.message }}"</p>
                                     <div class="bouton">
                                         <a href="{{ path('comment-report', {'id': comment.id }) }}" class="btn btn-danger">Signaler</a>
@@ -164,8 +165,13 @@
                                     {% endfor %}
                                     {% endif %}
                                 </div>
-                        {% for message in app.flashes('success') %}
-                            <div class="alert alert-success" role="alert">
+                        {% for message in app.flashes('danger') %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        {% for message in app.flashes('primary') %}
+                            <div class="alert alert-primary" role="alert">
                                 {{ message }}
                             </div>
                         {% endfor %}
