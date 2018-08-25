@@ -16,7 +16,7 @@
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Inscription Newsletter</h3>
+                        <h2>Inscription Newsletter</h2>
                     </div>
                 </div>
             </div>
@@ -25,10 +25,9 @@
         <p>Vous êtes désormais inscrit à notre newsletter</p>
         <p>Un email vient de vous être envoyé </p>
         {% else %}
-        <section class="contact">
+        <section class="newsletter">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <hr class="mb-4">
                     <hr class="mb-4">
                     {{ form_start(formNewsletter) }}
                     <div class="form-group">
@@ -36,7 +35,7 @@
                         {{ form_widget(formNewsletter, { 'attr': {'class': 'form-control'} }) }}
                     </div>
                     <div class="col-md-3 offset-md-4">
-                        <button type="submit" class="btn" name="submit"  id="connexion">Envoyer</button>
+                        <button type="submit" class="btn" name="submit">Envoyer</button>
                     </div>
                     {{ form_end(formNewsletter) }}
                 </div>

@@ -1,12 +1,8 @@
-          /* ELEMENTS COMMUNS SUR TOUT LE SITE */
-
-/*Menu de navigation */
+/*MENU DE NAVIGATION */
 #mainNav
  {
-    /*background-image: url("../img/c7.jpg");*/
     background-color: #1b6d85;
-
-}
+ }
 
 #mainNav .navbar-toggler
 {
@@ -16,15 +12,14 @@
     text-transform: uppercase;
     color: black;
     border: 0;
-   /*background-image: url("../img/c7.jpg");*/
-    background-color: white;
+    background-color: aliceblue;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #mainNav .navbar-brand
 {
     color: black;
-    font-family: 'Tangerine', 'Helvetica Neue', Helvetica, Arial, cursive;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 40px;
 }
 
@@ -52,15 +47,13 @@
 {
     font-size: 15px;
     padding: 10px 10px;
-   /* background-image: url("../img/c7.jpg");*/
     background-color: aliceblue;
     border-color: #497435;
+    color: black;
 }
 #mainNav .btn-nav:hover
 {
-    background-color:#1b6d85 ;
-    color: aliceblue;
-    border : 1px solid aliceblue;
+    background-image: url("../img/cover/cover.jpg");
 }
 
 @media(max-width: 768px)
@@ -74,14 +67,18 @@
     {
         flex-direction: row;
     }
+    #mainNav .navbar-brand
+    {
+        font-size: 25px;
+    }
 }
 
-/*Cover*/
+/*COVER COMMUNS ACCUEIL + LANDING*/
 
 header.masthead {
     text-align: center;
     color: black;
-    background-image: url("../img/a2.jpg");
+    background-image: url("../img/cover/cover.jpg");
     opacity: 0.9;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -92,53 +89,45 @@ header.masthead {
     background-size: cover;
 }
 
-.btn {
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
+.btn-cover:active, .btn-cover:focus, .btn-cover:hover {
+    background-image: url("../img/cover/cover.jpg");
 }
 
+/*COVER LANDING */
+/* bouton cover-landing*/
 .cover-landing .btn-cover {
     font-size: 18px;
     padding: 15px 20px;
     background-color: aliceblue;
-    border-color: #497435;
     margin-top: 10%;
     color: black;
+    font-weight: 200;
+    font-family: Helvetica;
 }
-
-.btn-cover:active, .btn-cover:focus, .btn-cover:hover {
-   /* background-image: url("../img/c7coupe.jpg");*/
-    background-color:#1b6d85 ;
-    border-color: #497435;
-    color: black;
-}
-.btn-cover:active, .btn-cover:focus {
-    box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
-}
-
-.cover-landing header.masthead .cover {
+/* cover image carte cover-landing*/
+.cover-landing header.masthead .cover
+{
     padding-top: 200px;
     padding-bottom: 150px;
-    color:black;
-    font-weight: bold;
 }
+/* Titre du cover-landing*/
+.cover-landing header.masthead .cover .cover-title {
+
+    margin-bottom: 50px;
+    color:black;
+    font-family: 'Handlee';
+    font-size: 80px;
+    line-height: 75px;
+}
+/* texte cover-landing*/
  .cover-landing header.masthead .cover .cover-text {
     font-size: 18px;
     line-height: 30px;
     margin-bottom: 25px;
-    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: black;
 }
-
-.cover-landing header.masthead .cover .cover-title {
-    font-family: 'Tangerine';
-    font-size: 80px;
-    font-weight: 700;
-    line-height: 75px;
-    margin-bottom: 50px;
-
-}
-
+/*cadre du texte cover-landing*/
 .cover-landing .masthead .cover .text
 {
     padding-top: 56px;
@@ -146,8 +135,16 @@ header.masthead {
     border : 1px solid black;
     background-color: aliceblue;
 }
-
-
+/*cadre titre et bouton cover-landing*/
+.cover-landing .cover-deco
+{
+    background-image: url("../img/cover/protect.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+/* Cover landing en responsive */
 @media(max-width: 768px){
     .cover-landing .masthead .cover .text{
         margin-bottom: 15px;
@@ -165,15 +162,12 @@ header.masthead {
         line-height: 40px;
         margin-bottom: 20px;
     }
-    .cover
-    {
-        height: 570px;
-    }
     .cover-landing header.masthead .cover
     {
         padding-top: 100px;
         padding-bottom: 100px;
         font-weight: lighter;
+        height: 570px;
     }
     .cover-landing .btn-cover
     {
@@ -181,34 +175,26 @@ header.masthead {
         padding: 10px 10px;
     }
 }
-.cover-landing .cover-deco
-{
-    /*background-color: #1b6d85;*/
-    background-image: url("../img/protect.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  /*  border : 1px solid #1b6d85;*/
 
-}
-
+/* COVER HOME*/
+/* boutons cover-home*/
 .cover-home .btn-cover
 {
     font-size: 18px;
-    padding: 15px 20px;
+    padding: 10px 15px;
     background-color: white;
     border-color: #497435;
     margin-top: 40px;
     color: black;
+    font-family: 'Handlee';
 }
-
-.cover-home header.masthead .cover{
+/* cover image carte cover-home*/
+.cover-home header.masthead .cover
+{
     padding-top: 200px;
     padding-bottom: 150px;
-    color:black;
-    font-weight: bold;
 }
+/* texte cover-home*/
 .cover-home header.masthead .cover .cover-text
 {
     font-size: 18px;
@@ -217,15 +203,16 @@ header.masthead {
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: black;
 }
+/* titre du cover-home*/
 .cover-home header.masthead .cover .cover-title
 {
-    font-family: 'Tangerine';
+    font-family: 'Handlee';
     font-size: 90px;
-    font-weight: 700;
+    font-weight: 200;
     line-height: 75px;
     margin-bottom: 50px;
 }
-
+/* cover home en responsive*/
 @media(max-width: 768px) {
     .cover-home .btn-cover
     {
@@ -234,7 +221,7 @@ header.masthead {
     }
     .cover-home header.masthead .cover .cover-title
     {
-        font-size: 70px;
+        font-size: 50px;
         margin-bottom: 30px;
     }
     .cover-home header.masthead .cover .cover-text
@@ -242,168 +229,77 @@ header.masthead {
         font-size: 14px;
     }
 }
-/*Footer*/
 
-.footer
-{
-    background-color: #1b6d85;
-    text-align: center;
-    color : black;
-}
-.footer ul li
-{
-    list-style-type: none;
-    padding-right: 110px;
-}
-.footer ul
-{
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-
-}
-.footer ul li a
-{
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.footer ul li a:hover
-{
-    color:white;
-}
-
-.footer .bottom
-{
-    font-weight: bold;
-    margin-top: 5px;
-}
-.footer .title
-{
-    font-weight: bold;
-    font-family: 'Tangerine';
-    font-size: 50px;
-    margin-top: 5px;
-}
-
-@media (max-width: 768px){
-
-    .footer ul li
-    {
-        font-size: 10px;
-        padding-right: 20px;
-    }
-    .footer ul li a:hover{
-        color: white;
-    }
-    .footer .title
-    {
-        font-size: 25px;
-    }
-    .footer .bottom
-    {
-        font-size: 12px;
-    }
-
-
-}
-
-/* Bandeau titre*/
-
+/* PAGE LANDING ET ACCUEIL ELEMENTS COMMUNS*/
+/*les sections title : bandeau de titre des deux pages*/
 #section-title
 {
-    background-image: url("../img/protect.jpg");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-color:#1b6d85 ;
-    padding: 30px 0;
+    border-style: outset;
+    padding: 20px 0;
     width: 100%;
     margin-top: 40px;
     margin-bottom: 40px;
+    color: black;
 }
-
 #section-title h3
 {
-    font-size: 50px;
-    font-weight: bold;
-    margin-left: 40px;
-    font-family: 'tangerine';
+    font-size: 30px;
+    font-family: 'Handlee';
+    text-align: center;
 }
-
+/* section title en responsive*/
 @media(max-width: 768px){
     #section-title h3{
         text-align: center;
         margin-left: auto;
-        font-size: 30px;
-        color: white;
+        font-size: 20px;
+        color: black;
     }
     #section-title{
         margin-top: 20px;
         margin-bottom: 20px;
-        background-image: url("../img/protect.jpg");
-        background-repeat: no-repeat;
-        opacity: 0.8;
+        background-color:aliceblue ;
     }
 }
-/* Les cards */
-
-.card-infos
+/*section STATISTIQUES*/
+.stats .card
 {
-
+    margin-left: 30px;
+    margin-bottom: 35px;
 }
-.card-love
+.stats .card-text
 {
-
-}
-.card-tree
-{
-
-}
-.card-favoris
-{
-
-}
-.card-user
-{
-    text-transform: capitalize;
-}
-.card-date
-{
-    text-transform: capitalize;
-}
-.card-category
-{
-
-}
-.card-title
-{
-    text-transform: capitalize;
-}
-.card-description
-{
-    font-style: italic;
-    text-transform: capitalize;
-}
-
-
-
-span
-{
+    text-align: center;
     font-weight: bold;
+    font-family: 'Handlee';
+    font-size: 20px;
+}
+/*stats en responsive*/
+@media (max-width: 768px)
+{
+    .stats  .card
+    {
+        max-width: 8rem;
+    }
+    .stats .card-text
+    {
+        font-size: 13px;
+    }
 }
 
-/* section newsletter */
-.subscribe {
-    background: url(../img/a2.jpg) fixed center center;
+/*section NEWSLETTER */
+/* visuel de la section*/
+.subscribe
+{
+    background: url(../img/cover/cover.jpg) fixed center center;
     background-size: cover;
     padding: 80px 0;
+    margin-bottom: 40px;
 }
-
+/* déco derrière le texte*/
 .subscribe-deco
 {
     background-color: #1b6d85;
-    /* moz-opacity: 0.5;*/
     opacity: 0.8;
     filter:alpha(opacity=50);
     padding-top: 30px;
@@ -412,27 +308,26 @@ span
     border-radius: 100px;
     padding-left: 60px;
 }
-
+/* titre de la newsletter*/
 .subscribe .subscribe-title {
-    font-size: 56px;
-    font-weight: bold;
-    font-family: 'Tangerine';
+    font-size: 40px;
+    font-family: 'Handlee';
     color:white;
 }
+/* texte de la newsletter*/
 .subscribe .subscribe-text
 {
     font-size: 18px;
     color: white;
 }
-
-
-.subscribe .subscribe-btn-container {
+/* container du bouton*/
+.subscribe .subscribe-btn-container
+{
     text-align: center;
     padding-top: 20px;
 }
-
+/* bouton de la newsletter*/
 .subscribe .btn {
-    font-family: "Raleway", sans-serif;
     text-transform: uppercase;
     font-weight: 500;
     font-size: 16px;
@@ -442,24 +337,20 @@ span
     border-radius: .25rem;
     transition: 0.5s;
     margin: 10px;
-    background: url(../img/c5.jpg);
+    background-color: aliceblue;
     border: 1px solid #497435;
-
-}
-.subscribe .subscribe-btn:hover
-{
-    text-decoration: none;
     color: black;
 }
-
-@media(max-width: 768px){
+/* newsletter en responsive*/
+@media(max-width: 768px)
+{
     .subscribe .btn{
         font-size: 12px;
         padding: 10px 10px;
     }
     .subscribe .subscribe-title{
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
     }
     .subscribe .subscribe-text{
         font-size: 12px;
@@ -473,39 +364,11 @@ span
 
     }
 }
-/* Section stats*/
-          .stats .card
-          {
-              margin-left: 30px;
-              margin-bottom: 35px;
-          }
-          .stats h5
-          {
-              font-size: 12px;
-          }
-          .stats .card-text
-          {
-              text-align: center;
-              font-weight: bold;
-          }
 
-          @media (max-width: 768px) {
-
-              .stats  .card {
-                  max-width: 8rem;
-              }
-              .stats .card-text
-              {
-                  font-size: 10px;
-              }
-
-          }
-
-
-
-                             /*LANDING PAGE*/
-/*section youSpot*/
-.section-youSpot {
+/*LANDING PAGE*/
+/*section youSpot pour landing page*/
+.section-youSpot
+{
     width: 100%;
     height: 500px;
     margin: 40px 0;
@@ -514,7 +377,6 @@ span
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
 .section-youSpot .section-youSpot-btn {
     position: relative;
     top: 100px;
@@ -523,7 +385,6 @@ span
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
 .section-youSpot .section-youSpot-btn .btn-cover
 {
     background: aliceblue;
@@ -531,7 +392,6 @@ span
     color: black;
     text-transform: uppercase;
 }
-
 .section-youSpot .section-youSpot-title {
     position: relative;
     top: 80px;
@@ -554,7 +414,7 @@ span
 .section-youSpot:hover {
     border-color: #00a8ff;
     /*background-color: #1b6d85;*/
-    background: url(../img/a2.jpg) fixed center center;
+    background: url(../img/cover/cover.jpg) fixed center center;
 }
 
 .section-youSpot:hover .section-youSpot-btn {
@@ -564,7 +424,6 @@ span
 .section-youSpot:hover .section-youSpot-title {
     top: -30px;
 }
-
 .section-youSpot .description {
     width: 80%;
     margin: 0 auto;
@@ -575,13 +434,11 @@ span
     -ms-transform: scale(0);
     transform: scale(0);
     background-color: white;
-  /*  padding: 17px;*/
     padding-right: 20px;
     padding-left: 30px;
     padding-top: 10px;
     padding-bottom: 5px;
 }
-
 
 .section-youSpot:hover .description {
     opacity: 1;
@@ -603,21 +460,17 @@ span
 {
     list-style-type: square;
 }
-
-@media(max-width: 768px){
+/*section youspot en responsive*/
+@media(max-width: 768px)
+{
     .section-youSpot .description
     {
         font-size: 10px;
         width: 90%;
-
-
     }
     .section-youSpot:hover .section-youSpot-title
     {
         display: none;
-        top: -60px
-
-
     }
     .section-youSpot .section-youSpot-title
     {
@@ -626,27 +479,41 @@ span
     .section-youSpot
     {
         height: 320px;
+        margin-bottom: 0;
+    }
+    .section-youSpot .section-youSpot-btn
+    {
+        margin-bottom: 24px;
     }
 }
 
-/*Section oneSpot*/
-
+/*section oneSpot pour landing page*/
+.landing-oneSpot .btn-landing-spot
+{
+    background-color: aliceblue;
+    padding: 10px 10px;
+    color: black;
+    text-transform: uppercase;
+    margin-top: 50px;
+    border: 1px solid black;
+}
+.landing-oneSpot .btn-landing-spot:hover
+{
+    background-image: url("../img/cover/cover.jpg");
+}
 .landing-oneSpot .sub-title
 {
     color : red;
 }
-
-
-@media(max-width: 768px) {
+/*section OneSpot pour landing en responsive*/
+@media(max-width: 768px)
+{
     .landing-oneSpot .sub-title
     {
         font-size: 10px;
     }
-    .card-infos
+    .landing-oneSpot .btn
     {
-        font-size: 12px;
-    }
-    .landing-oneSpot .btn{
         font-size: 12px;
     }
     .landing-oneSpot .col-md-4
@@ -663,42 +530,73 @@ span
     {
         font-size: 14px;
     }
-    .blockquote
-    {
-        font-size: 12px;
-    }
-
 }
 
-
-
-/*Section JoinUs*/
-
-
-
-/*************************PAGE ACCUEIL****************/
-
-
+/*PAGE D'ACCUEIL*/
+/*section lastSpotHome pour accueil*/
+/* marge entre les spots*/
 .lastSpotsHome .card
 {
     margin-bottom: 20px;
 }
+.lastSpotsHome .btn
+{
+    background-image: url("../img/cover/cover.jpg");
+    color: black;
+}
+/*section lastSpotHome en responsive*/
+@media(max-width: 768px)
+{
+    /*gérer la hauteur des images*/
+    .lastSpotsHome .card-img-top
+    {
+        height: 250px;
+    }
+}
 
-/******************PAGES ELEMENTS COMMUNS*******************/
+
+
+/* ELEMENTS COMMUNS A TOUTES LES CARDS DU SITE*/
+.card-user::first-letter
+{
+    text-transform: uppercase;
+}
+.card-date::first-letter
+{
+    text-transform: uppercase;
+}
+.card-title::first-letter
+{
+    text-transform: uppercase;
+}
+.card-description::first-letter
+{
+    text-transform: uppercase;
+}
+.card-description
+{
+    font-style: italic;
+}
+/*span sur tout le site*/
+span
+{
+    font-weight: bold;
+}
+
+/* les pages du site ELEMENTS COMMUNS*/
 #page-title {
-    background: url(../img/a2.jpg) fixed center center;
+    background-color: #1b6d85;
     background-size: cover;
-    padding: 30px 0;
+    padding: 20px 0;
     width: 100%;
     margin-top: 130px;
     margin-bottom: 60px;
 }
 #page-title h2
 {
-    font-size: 60px;
-    font-weight: 700;
+    font-size: 40px;
     text-align: center;
-    font-family: 'Tangerine';
+    font-family: 'Handlee';
 }
 #page-title h3
 {
@@ -706,254 +604,159 @@ span
     font-size: 20px;
 
 }
-.page-content .card
-{
-    margin-bottom: 20px;
-}
-.page-content
-{
-    margin-bottom: 100px;
-}
-
-@media(max-width: 768px)
-{
+/* pages du site en responsive*/
+@media (max-width: 768px) {
     #page-title h2
     {
-        font-size: 35px;
+        font-size: 25px;
     }
     #page-title h3
     {
         font-size: 12px;
     }
-    #connexion .col-md-4
+    #page-title
     {
-        margin-left: 40px;
-        font-size: 12px;
+        margin-top: 80px;
         margin-bottom: 20px;
     }
-
 }
-
-
-                                /*MON COMPTE*/
-/*Mon compte / Menu de navigation*/
-
-.nav-account-menu {
-    overflow: auto;
-    font-weight: 400;
-    background-color: #e9ecef;
-    position: fixed;
-    top: 0;
-    width: 300px;
-    height: 100%;
-    font-size: 20px;
-}
-
-.nav-account-menu .brand {
-    background-color: #e9ecef;
-    line-height: 80px;
-    display: block;
-    text-align: left;
-    font-size: 30px;
-    font-weight: bold;
-    color: black;
-    font-family: 'Tangerine';
-    margin-left: 20px;
-}
-
-.nav-account-menu .toggle-btn {
-    display: none;
-}
-
-.nav-account-menu ul,
-.nav-account-menu li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    line-height: 35px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.nav-account-menu li a {
-    text-decoration: none;
-    color: black;
-    font-size: 15px;
-}
-
-@media (max-width: 767px) {
-    .nav-account-menu {
-        position: relative;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .nav-account-menu .toggle-btn {
-        display: block;
-        cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        z-index: 10;
-        padding: 3px;
-        color: #000;
-        width: 40px;
-    }
-    .brand {
-        text-align: left;
-        font-size: 22px;
-        padding-left: 20px;
-        line-height: 50px;
-    }
-}
-@media (min-width: 767px) {
-    .nav-account-menu .menu-list .menu-content {
-        display: block;
-    }
-}
-body {
-    margin: 0;
-    padding: 0;
-}
-
-.account-content
-{
-    margin-left: 235px;
-    padding-left: 100px;
-    padding-right: 35px;
-}
-@media (max-width: 768px)
-{
-    .account-content {
-        margin-left: 0;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-
-/***************MON COMPTE ACCUEIL ************************/
-#account-title {
-    background-color: #e9ecef;
-    padding: 30px;
-    margin-bottom: 60px;
-    text-align: center;
-    font-family: 'Tangerine';
-    margin-top: 20px;
-}
-#account-title h2
-{
-    font-size: 40px;
-    font-weight: bold;
-}
-.nav-item-dropdown li
-{
-    font-size: 30px;
-}
-
-.account-home .card
-{
-    margin-bottom: 20px;
-    margin-left: 40px;
-    text-align: center;
-
-}
-
-.account-home span
-{
-    font-weight: bold;
-    font-size: 20px;
-}
-/********PAGE MON COMPTE ONE SPOT*************/
-.account-one-spot img
-{
-    height: 250px;
-}
-
-.account-card-user
-{
-    text-align: center;
-}
-/********************PAGES MON COMPTE MODIFIER SPOT**********************/
-
-.modify img
-{
-    height: 200px;
-    width: auto;
-}
-/********************PAGES MON COMPTE MES SPOTS VALIDES**********************/
-#account-spots-accepted .card
-{
-    margin-bottom: 20px;
-}
-
-#account-spots-accepted .btn
-{
-    padding: 2px;
-}
-/********************PAGES MON COMPTE MES SPOTS EN ATTENTE**********************/
-#account-spots-waiting .card
-{
-    margin-bottom: 20px;
-}
-#account-spots-waiting .btn
-{
-    padding: 3px;
-}
-/********************PAGES MON COMPTE MES SPOTS FAVORIS**********************/
-#account-spots-favoris .card
-{
-    margin-bottom: 20px;
-}
-
-/********************PAGES MON COMPTE MES SPOTS REJETES**********************/
-
-#account-spots-rejected img
-{
-    height: 100px;
-    width: 100px;
-}
-#account-spots-rejected .btn
-{
-    padding: 3px;
-}
-/*****************PAGES GENERAL**********************/
-.page_marge_top
-{
-    margin-top: 20px;
-}
-.card-img-top
-{
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-@media all and (max-width: 1024px) {
-
-    .card-img-top
-    {
-        width: 100%;
-        height: auto;
-    }
-}
-
-/******************PAGE MENU JE CHERCHE UN SPOT *******************/
+/*PAGE MENU JE CHERCHE UN SPOT */
 #map-searchSpot
 {
     width:100%;
     height: 100%;
 }
+.search-spot-map .smap
+{
+    border : 1px solid black;
+    width: 100%;
+    height: 450px;
+}
+.search-spot-map
+{
+    margin-bottom: 25px;
+}
+.search-spot-form .btn-custom
+{
+    margin-bottom: 25px;
+}
 
-/****************** PAGE MENU JE SPOTE*******************/
-.smap {
+@media (max-width: 768px)
+{
+    .card-search-spots .card-img-top
+    {
+        height: 250px;
+    }
+    .search-spot-map .smap
+    {
+        width: 100%;
+        height: 250px;
+        margin-bottom: 20px;
+    }
+    #map-searchSpot
+    {
+        width: 100%;
+        height: 100%;
+    }
+    .search-spot-form .btn-custom
+    {
+        margin-bottom: 15px;
+    }
+}
+/* PAGE MENU JE SPOTE*/
+
+.make-spot-map .smap
+{
+    border: 1px solid black;
     width: 100%;
     height: 500px;
 }
 #map-makeSpot
 {
     width:100%;
-    height: 80%;
+    height: 100%;
+}
+.make-spot .header
+{
+    text-align: center;
+    background-image: url("../img/cover/cover.jpg");
+    height: 40px;
+    padding-top: 5px;
+    font-family: Handlee;
+    font-size: 25px;
+    font-weight: bold;
+}
+.make-spot .list-group
+{
+    text-align: justify;
+}
+.make-spot .card
+{
+    margin-bottom: 15px;
+}
+/* je spote en responsive*/
+@media(max-width: 768px)
+{
+    .make-spot-map .smap
+    {
+        height: 250px;
+    }
 }
 
+/* Page menu ONE SPOT */
+.one-spot .smap
+{
+    border : 1px solid black;
+    width: 100%;
+    height: 400px;
+}
+#map-oneSpot
+{
+    width: 100%;
+    height: 100%;
+}
+
+.one-spot .card-img-top
+{
+    height: 400px;
+}
+@media(max-width: 768px)
+{
+    .one-spot .col-md-4
+    {
+        width: 33.3%;
+
+    }
+    .one-spot .smap
+    {
+        height: 250px;
+    }
+    .one-spot .btn
+    {
+        font-size: 10px;
+        padding: 4px 5px;
+    }
+    .one-spot p{
+        font-size: 12px;
+    }
+    .one-spot .card-title
+    {
+        font-size: 14px;
+    }
+    .one-spot .card-img-top
+    {
+        height: 200px;
+    }
+    .comments .btn
+    {
+        font-size: 12px;
+    }
+    .comments p
+    {
+        font-size: 12px;
+    }
+
+}
 .comments span
 {
     font-weight: bold;
@@ -963,53 +766,26 @@ body {
     font-style: italic;
 }
 
-/****************** PAGE UN SPOT*******************/
-.landing-oneSpot .btn-landing-spot
+
+
+/*PAGE CONTACT*/
+.contact .btn
 {
-    background: aliceblue;
-    padding: 10px 10px;
-    color: black;
-    text-transform: uppercase;
-    margin-top: 50px;
+    margin-bottom: 50px;
 }
-
-
-.one-spot .card-img-top
+.contact .form-group
 {
-    height: 400px;
+    text-align: justify;
 }
+@media(max-width: 768px) {
 
-@media(max-width: 768px)
-{
-   .one-spot .col-md-4
-   {
-       width: 33.3%;
-
-   }
-    .one-spot .btn
+    .contact .form-group
     {
         font-size: 12px;
-    }
-    .one-spot p{
-        font-size: 12px;
-    }
-    .one-spot .card-title
-    {
-        font-size: 14px;
-    }
-
-    .comments .btn
-    {
-        font-size: 12px;
-    }
-    .comments p
-    {
-        font-size: 12px;
+        text-align: justify;
     }
 }
-
-/****************** NAVIGATION *******************/
-
+/*PAGE FAQ*/
 #faq a {
     color: black;
 }
@@ -1075,8 +851,28 @@ body {
     text-align: center;
 }
 
+#faq .card
+{
+    margin-bottom: 20px;
+}
+#faq .header
+{
+    background-color: aliceblue;
+}
+@media (max-width: 768px) {
+    #faq .list-group
+    {
+        font-size: 10px;
+        text-align: justify;
+    }
+    #faq .header
+    {
+        font-size: 12px;
+        font-weight: bold;
+    }
+}
 
-/******************INSCRIPTION **************/
+/* PAGES  INSCRIPTION ET CONNEXION*/
 #register
 {
     margin-bottom: 40px;
@@ -1093,5 +889,386 @@ body {
     {
         width: auto;
         margin: 0;
+    }
+}
+
+/* PARTIE MON COMPTE ACCOUNT PERSONNEL*/
+/*Mon compte / Menu de navigation*/
+.nav-account-menu
+{
+    overflow: auto;
+    font-weight: 400;
+    background-color: #e9ecef;
+    position: fixed;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    font-size: 20px;
+}
+
+.nav-account-menu .brand {
+    background-color: #e9ecef;
+    line-height: 80px;
+    display: block;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    font-family: 'Handlee';
+    margin-left: 20px;
+}
+
+.nav-account-menu .toggle-btn {
+    display: none;
+}
+
+.nav-account-menu ul,
+.nav-account-menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 35px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.nav-account-menu li a {
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+}
+/* menu de nav en responsive*/
+@media (max-width: 767px) {
+    .nav-account-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .nav-account-menu .toggle-btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10;
+        padding: 3px;
+        color: #000;
+        width: 40px;
+    }
+    .brand {
+        text-align: left;
+        font-size: 22px;
+        padding-left: 20px;
+        line-height: 50px;
+    }
+}
+@media (min-width: 767px) {
+    .nav-account-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.account-content
+{
+    margin-left: 235px;
+    padding-left: 100px;
+    padding-right: 35px;
+}
+@media (max-width: 768px)
+{
+    .account-content {
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+/***************MON COMPTE ACCUEIL ************************/
+#account-title {
+    background-color: #e9ecef;
+    padding: 30px;
+    margin-bottom: 60px;
+    text-align: center;
+    font-family: 'Handlee';
+    margin-top: 20px;
+}
+#account-title h2
+{
+    font-size: 30px;
+    font-weight: bold;
+}
+.nav-item-dropdown li
+{
+    font-size: 30px;
+}
+
+.account-home .card
+{
+    margin-bottom: 20px;
+    margin-left: 40px;
+    text-align: center;
+
+}
+
+.account-home span
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media(max-width: 768px)
+{
+    .account-home .card
+    {
+
+        margin-left: 0;
+    }
+    #account-title h2
+    {
+        font-size: 20px;
+    }
+}
+/********PAGE MON COMPTE ONE SPOT*************/
+.account-one-spot img
+{
+    height: 250px;
+}
+
+.account-card-user
+{
+    text-align: center;
+}
+/********************PAGES MON COMPTE MODIFIER SPOT**********************/
+
+.modify img
+{
+    height: 200px;
+    width: auto;
+}
+@media (max-width: 768px) {
+    .modify img
+    {
+        height: 50px;
+        width: 50px;
+    }
+    .modify .btn
+    {
+       font-size: xx-small;
+        margin-left: 150px;
+        margin-bottom: 50px;
+    }
+}
+/********************PAGES MON COMPTE MES SPOTS VALIDES**********************/
+#account-spots-accepted .card
+{
+    margin-bottom: 20px;
+}
+
+#account-spots-accepted .btn
+{
+    padding: 2px;
+}
+/********************PAGES MON COMPTE MES SPOTS EN ATTENTE**********************/
+#account-spots-waiting .card
+{
+    margin-bottom: 20px;
+}
+#account-spots-waiting .btn
+{
+    padding: 3px;
+}
+/********************PAGES MON COMPTE MES SPOTS FAVORIS**********************/
+#account-spots-favoris .card
+{
+    margin-bottom: 20px;
+}
+
+/********************PAGES MON COMPTE MES SPOTS REJETES**********************/
+
+#account-spots-rejected img
+{
+    height: 50px;
+    width: 50px;
+}
+#account-spots-rejected .btn
+{
+    padding: 3px;
+}
+
+@media(max-width: 768px)
+{
+    #account-spots-rejected .img
+    {
+        display: none;
+    }
+    #account-spots-rejected .title{
+        display: none;
+    }
+    #account-spots-rejected .description
+    {
+        display: none;
+    }
+    #account-spots-rejected .date
+    {
+        display: none;
+    }
+    #account-spots-rejected .btn
+    {
+       font-size: x-small;
+    }
+    #account-spots-rejected thead>tr>th
+    {
+        font-size: 10px;
+    }
+    #account-spots-rejected p
+    {
+        font-size: 12px;
+        text-align: justify;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+}
+
+/*FOOTER*/
+.footer
+{
+    background-color: #1b6d85;
+    text-align: center;
+    color : black;
+}
+.footer ul li
+{
+    list-style-type: none;
+    padding-right: 90px;
+    padding-left: 20px;
+}
+.footer ul
+{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+
+}
+.footer ul li a
+{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer ul li a:hover
+{
+    color:white;
+}
+
+.footer .bottom
+{
+    font-weight: bold;
+    margin-top: 5px;
+}
+.footer .title
+{
+    font-weight: bold;
+    font-family: 'Handlee';
+    font-size: 20px;
+    margin-top: 5px;
+}
+/*footer en responsive*/
+@media (max-width: 768px){
+
+    .footer ul li
+    {
+        font-size: 10px;
+        /*padding-right: 20px;*/
+        text-align: justify;
+        margin-left: 40px;
+    }
+    .footer ul li a:hover{
+        color: white;
+    }
+    .footer .title
+    {
+        font-size: 15px;
+    }
+    .footer .bottom
+    {
+        font-size: 12px;
+    }
+    .footer ul
+    {
+        flex-direction: column;
+    }
+}
+
+
+
+/******************A VERIFIER*******************/
+
+.page-content .card
+{
+    margin-bottom: 20px;
+}
+.page-content
+{
+    margin-bottom: 100px;
+}
+.page-content .btn
+{
+    background-image: url("../img/cover/cover.jpg");
+    color: black;
+}
+#connexion
+{
+    margin-bottom: 20px;
+}
+@media(max-width: 768px)
+{
+
+    #connexion .col-md-4
+    {
+        margin-left: 40px;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+
+
+}
+
+@media(max-width: 768px) {
+    .card-infos
+    {
+        font-size: 12px;
+    }
+
+    .blockquote
+    {
+        font-size: 12px;
+    }
+
+}
+
+/*****************PAGES GENERAL**********************/
+.page_marge_top
+{
+    margin-top: 20px;
+}
+.card-img-top
+{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+@media all and (max-width: 1024px) {
+
+    .card-img-top
+    {
+        width: 100%;
+        height: auto;
     }
 }

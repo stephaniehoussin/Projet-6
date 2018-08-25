@@ -7,17 +7,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
           integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
           crossorigin=""/>
-    <style>
-        #map {
-            width: 100%;
-            height: 400px;
-        }
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
 {% endblock %}
 {% block nav %}
     {% include 'home/parts/navHome.html.twig' %}
@@ -43,7 +32,9 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="map"></div>
+                                        <div class="smap">
+                                        <div id="map-oneSpot"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr class="mb-4">
@@ -91,7 +82,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <img class="card-img-top img-thumbnail" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <hr class="mb-4">
                                 <div class="card-body">
                                     <div class="row">
@@ -191,7 +182,7 @@
     <script>
         function initMap(position)
         {
-            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude],9);
+            var map = L.map('map-oneSpot').setView([position.coords.latitude, position.coords.longitude],9);
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: 'Données de la carte &copy; <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">Open Street Map</a>',
                 maxZoom: 18,

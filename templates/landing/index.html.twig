@@ -139,7 +139,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img class="card-img-top" src="{{ asset('assets/img/carteLanding.png') }}" alt="Card image cap">
+                                    <img class="card-img-top" src="{{ asset('assets/img/pages/carteLanding.png') }}" alt="Card image cap">
                                     <p class="sub-title">* Une carte : Pas de géolocalisation ? Pas grave , déplaces le curseur! </p>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <img class="card-img-top" src="{{ asset('assets/img/boisdeboulogne.jpg') }}" alt="Card image cap">
+                                    <img class="card-img-top" src="{{ asset('assets/img/pages/boisdeboulogne.jpg') }}" alt="Card image cap">
                                     <p class="sub-title">* Une photo, parce que avec, c'est mieux !</p>
                                 </div>
                             </div>
@@ -243,48 +243,61 @@
         <div class="row">
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">Spoteurs</h5>
                     <h5 class="card-text">{{ allResult.totalNbUsers }}</h5>
+                    <h5 class="card-text">Spoteurs</h5>
+
                 </div>
             </div>
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">Spots</h5>
                     <h5 class="card-text">{{ allResult.totalNbSpots }}</h5>
+                    <h5 class="card-text">Spots</h5>
+
                 </div>
             </div>
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">J'aime</h5>
                     <h5 class="card-text">{{ allResult.totalNbLoves }}</h5>
+                    <h5 class="card-text">J'aimes</h5>
+
                 </div>
             </div>
 
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">Trees</h5>
                     <h5 class="card-text">{{ allResult.totalNbTrees }}</h5>
+                    <h5 class="card-text">Trees</h5>
+
                 </div>
             </div>
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">Commentaires</h5>
                     <h5 class="card-text">{{ allResult.totalNbComments }}</h5>
+                    <h5 class="card-text">Commentaires</h5>
+
                 </div>
             </div>
             <div class="card" style="width: 10rem;">
                 <div class="card-body">
-                    <h5 class="card-text">Favoris</h5>
                     <h5 class="card-text">{{ allResult.totalNbFavoris }}</h5>
+                    <h5 class="card-text">Favoris</h5>
+
                 </div>
             </div>
         </div>
     </section>
-</div>
+
 
     <!-------------------SECTION NEWSLETTER-------------->
 
-    <section class="newsletter">
+    <section id="section-title">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Newsletter </h3>
+            </div>
+        </div>
+    </section>
+
         <section class="subscribe">
             <div class="container wow fadeInUp">
                 <div class="row">
@@ -300,7 +313,7 @@
                 </div>
             </div>
         </section>
-    </section>
+</div>
 
     <!-- MODALS -->
     <div class="modal fade" id="modalLove" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

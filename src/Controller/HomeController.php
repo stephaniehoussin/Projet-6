@@ -27,7 +27,9 @@ class HomeController extends Controller
         return $this->render('landing/index.html.twig',array(
             'datetime' => $datetime,
             'allResult' => $allResult,
-            'user' => $user
+            'user' => $user,
+
+
         ));
     }
 
@@ -43,11 +45,13 @@ class HomeController extends Controller
         $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
+        $lastSpot = $spotRepository->lastSpot();
         return $this->render('home/index.html.twig',array(
             'datetime' => $datetime,
             'spots' => $spots,
             'allResult' => $allResult,
-            'user' => $user
+            'user' => $user,
+            'lastSpot' => $lastSpot
         ));
     }
 
@@ -75,6 +79,18 @@ class HomeController extends Controller
             'user' => $user
         ]);
 
+    }
+
+    /**
+     * @Route("/fiche-spot", name="fiche-spot")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function fiche()
+    {
+        $user = $this->getUser();
+        return $this->render('landing/fiche.html.twig',array(
+            'user' => $user
+        ));
     }
 
     /**

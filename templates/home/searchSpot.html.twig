@@ -24,7 +24,8 @@
                 </div>
             </div>
         </section>
-        <section class="page-content">
+
+        <section class="search-spot-map">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -35,8 +36,8 @@
                 </div>
             </div>
         </section>
-        <section class="page-content">
-            <div class="container">
+
+        <section class="search-spot-form">
                 {{ form_start(formFilter) }}
                 <div class="form-group row">
                     <div class="col-md-6">
@@ -63,7 +64,6 @@
                         {% endfor %}
                     </div>
                 </div>
-            </div>
         </section>
         <section class="page-content">
             <div class="container">
@@ -72,16 +72,15 @@
                             {% for spot in spots %}
                                 <div class="col-md-4">
                                     <div class="card">
-                                        <div class="card-spots">
-                                            <img class="card-img-top img-fluid" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                        <div class="card-search-spots">
+                                            <img class="card-img-top img-thumbnail" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                             <div class="card-body">
-                                                <hr class="mb-4">
                                                 <p class="card-date"> <i class="fa fa-calendar"> <span>{{ spot.date|date("d/m/Y à H:h") }}</span></i>  <i class="fa fa-user"> Spoté par  <span>{{ spot.user }}</span></i></p>
                                                 <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
-                                                <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title }}</span></p>
+                                                <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title|length > 22 ? spot.title|slice(0,22) ~'...': spot.title }}</span></p>
                                                 <hr class="mb-4">
-                                                <p class="card-description">"{{ spot.description|length > 40 ? spot.description|slice(0,40) ~'...': spot.description}}"</p>
-                                                <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                                                <p class="card-description">"{{ spot.description|length > 35 ? spot.description|slice(0,35) ~'...': spot.description}}"</p>
+                                                <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn">Voir le spot</a>
                                             </div>
                                         </div>
                                     </div>
@@ -89,11 +88,9 @@
                             {% endfor %}
                         {% endif %}
                     </div>
-                <div class="row">
-                    <div class="col-md-4 offset-4">
+                    <div class="mt-4 mb-5">
                         {% include 'pagination/homePagination.html.twig' %}
                     </div>
-                </div>
                 </div>
         </section>
         </div>

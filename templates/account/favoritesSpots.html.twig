@@ -31,8 +31,11 @@
                         <div class="card-spots">
                             <img class="card-img-top" src="{{ asset('uploads/spots/'~favorite.spot.picture) }}" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-spot-title">#{{ favorite.spot.id }} {{ favorite.spot.title|length > 18 ? favorite.spot.title|slice(0,18) ~'...': favorite.spot.title }}</h5>
-                            <p class="card-spot-description">{{ favorite.spot.description|length > 20 ? favorite.spot.description|slice(0,20) ~'...': favorite.spot.description }}</p>
+                            <p class="card-date"> <i class="fa fa-calendar"> <span>{{ favorite.spot.date|date("d/m/Y à H:h") }}</span></i>  <i class="fa fa-user"> Spoté par  <span>{{ favorite.spot.user }}</span></i></p>
+                            <p class="card-infos"><i class="fa fa-map-marker"> {{ favorite.spot.infosSupp }}</i></p>
+                            <p class="card-title">Spot #{{ favorite.spot.id }} - <span>{{ favorite.spot.title|length > 10 ? favorite.spot.title|slice(0,10) ~'...': favorite.spot.title }}</span></p>
+                            <hr class="mb-4">
+                            <p class="card-description">"{{ favorite.spot.description|length > 10 ? favorite.spot.description|slice(0,10) ~'...': favorite.spot.description}}"</p>
                             <a href="{{ path('mon-compte/oneSpot', { id : favorite.spot.id }) }}" class="btn btn-primary">Voir</a>
                         </div>
                         </div>

@@ -19,7 +19,7 @@
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>Formulaire de contact</h3>
+                        <h2>Formulaire de contact</h2>
                     </div>
                 </div>
             </div>
@@ -28,9 +28,6 @@
         <section class="contact">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <hr class="mb-4">
-                <h2>Contactez nous</h2>
-                <hr class="mb-4">
                 {% for message in app.flashes('success') %}
                 <div class="alert alert-success" role="alert">
                     {{ message }}
@@ -41,7 +38,7 @@
                     {{ form_widget(contact, { 'attr': {'class': 'form-control'} }) }}
                 </div>
                 <div class="col-md-3 offset-md-4">
-                <button type="submit" class="btn" name="submit"  id="connexion">Envoyer</button>
+                <button type="submit" class="btn" name="submit">Envoyer</button>
                 </div>
                     {{ form_end(contact) }}
             </div>

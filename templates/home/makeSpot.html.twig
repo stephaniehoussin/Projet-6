@@ -23,20 +23,41 @@
                 </div>
             </div>
         </section>
-        <section class="page-content">
+
+        <section class="make-spot">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        YouSpot te géolocalise automatiquement !
-                        Donc si c'est le cas, ne touche rien , ton emplacement sera enregistré à validation
-                        de ton spot!
-                        Si tu n'es pas géolocalisé ( problème de géolocalisation ou pas envie de l'être) , pas de panique,
-                        bouge le marqueur sur l'emplacement du spot et il sera enregistré à validation!
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                Tu es géolocalisé?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Parfait ! YouSpot te géolocalise donc tu n'as rien à faire sur la carte .
+                                    Les coordonnées de ton emplacement vont être enregistrées automatiquement !
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                Tu n'est pas géolocalisé?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Pas de souçis ! Il te suffit de bouger le marqueur et de le positionner où tu veux .
+                                    Une fois ton marqueur positionné, ton emplacement sera enregistré automatiquement.
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="page-content">
+
+        <section class="make-spot-map">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -44,16 +65,37 @@
                             <div id="map-makeSpot"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section class="make-spot-form">
                     <div class="col-md-12">
                         {{ form_start(formSpot)}}
+
                         <div class="form-group">
-                            {{ form_row(formSpot, { 'attr': {'class': 'form-control'} }) }}
+                            {#{{ form_row(formSpot, { 'attr': {'class': 'form-control'} }) }}#}
+                            {{ form_row(formSpot.category) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(formSpot.pictureFile) }}
+                            {{ form_widget(formSpot.pictureFile, {'attr': {'class': 'custom-file-input'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(formSpot.title) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(formSpot.description) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(formSpot.infosSupp) }}
                         </div>
                         <button type="submit" class="btn btn-primary" name="submit"  id="inscription">Valider</button>
                         {{ form_end(formSpot) }}
                     </div>
+        </section>
                 </div>
             </div>
+
         </section>
         </div>
 {% endblock %}

@@ -8,7 +8,7 @@
 {% endblock %}
 {% block nav %}
     {% include 'home/parts/navHome.html.twig' %}
-    {% include 'home/parts/coverHome.html.twig' %}
+{% include 'home/parts/coverHome.html.twig' %}
 {% endblock %}
 {% block body %}
     <div class="container">
@@ -30,15 +30,14 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-spots">
-                                <img class="card-img-top img-fluid" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <img class="card-img-top img-thumbnail" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <hr class="mb-4">
                                     <p class="card-date"> <i class="fa fa-calendar"> <span>{{ spot.date|date("d/m/Y à H:h") }}</span></i>  <i class="fa fa-user"> Spoté par  <span>{{ spot.user }}</span></i></p>
                                     <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
                                     <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title }}</span></p>
                                     <hr class="mb-4">
-                                    <p class="card-description">"{{ spot.description|length > 40 ? spot.description|slice(0,40) ~'...': spot.description }}"</p>
-                                    <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn btn-primary">Voir le spot</a>
+                                    <p class="card-description">"{{ spot.description|length > 35 ? spot.description|slice(0,35) ~'...': spot.description }}"</p>
+                                    <a href="{{ path('accueil/spot', { id : spot.id }) }}" class="btn ">Voir le spot</a>
                                 </div>
                             </div>
                         </div>
@@ -49,9 +48,64 @@
         </section>
 
 
+        <!-------------------SECTION STATS------------------>
+        <section id="section-title">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Aujourd'hui YouSpot c'est !</h3>
+                </div>
+            </div>
+        </section>
+        <section class="stats">
+            <div class="row">
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbUsers }}</h5>
+                        <h5 class="card-text">Spoteurs</h5>
+
+                    </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbSpots }}</h5>
+                        <h5 class="card-text">Spots</h5>
+
+                    </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbLoves }}</h5>
+                        <h5 class="card-text">J'aimes</h5>
+
+                    </div>
+                </div>
+
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbTrees }}</h5>
+                        <h5 class="card-text">Trees</h5>
+
+                    </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbComments }}</h5>
+                        <h5 class="card-text">Commentaires</h5>
+
+                    </div>
+                </div>
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h5 class="card-text">{{ allResult.totalNbFavoris }}</h5>
+                        <h5 class="card-text">Favoris</h5>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-------------------SECTION NEWSLETTER-------------->
 
-        <section class="newsletter">
             <section class="subscribe">
                 <div class="container wow fadeInUp">
                     <div class="row">
@@ -67,57 +121,8 @@
                     </div>
                 </div>
             </section>
-        </section>
 
-    <!-------------------SECTION STATS------------------>
-        <section id="section-title">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Aujourd'hui YouSpot c'est !</h3>
-                    </div>
-                </div>
-        </section>
-        <section class="stats">
-            <div class="row">
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">Utilisateurs</h5>
-                        <h5 class="card-text">{{ allResult.totalNbUsers }}</h5>
-                    </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">Spots</h5>
-                        <h5 class="card-text">{{ allResult.totalNbSpots }}</h5>
-                    </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">J'aime</h5>
-                        <h5 class="card-text">{{ allResult.totalNbLoves }}</h5>
-                    </div>
-                </div>
 
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">Trees</h5>
-                        <h5 class="card-text">{{ allResult.totalNbTrees }}</h5>
-                    </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">Commentaires</h5>
-                        <h5 class="card-text">{{ allResult.totalNbComments }}</h5>
-                    </div>
-                </div>
-                <div class="card" style="width: 10rem;">
-                    <div class="card-body">
-                        <h5 class="card-text">Favoris</h5>
-                        <h5 class="card-text">{{ allResult.totalNbFavoris }}</h5>
-                    </div>
-                </div>
-            </div>
-        </section>
 
     </div>
 {% endblock %}

@@ -35,19 +35,26 @@
                     <div class="col-md-3">
                         <div class="card">
                             <div class="card-spots">
-                                <img class="card-img-top" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
+                                <img class="card-img-top img-thumbnail" src="{{ asset('uploads/spots/'~spot.picture) }}" alt="Card image cap">
                                 <div class="card-body">
-                                    <h5 class="card-spot-title">#{{ spot.id }} {{ spot.title|length > 18 ? spot.title|slice(0,18) ~'...': spot.title }}</h5>
-                                    <p class="card-spot-description">{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</p>
+                                    <p class="card-date"> <i class="fa fa-calendar"> <span>{{ spot.date|date("d/m/Y à H:h") }}</span></i></p>
+                                    <p class="card-infos"><i class="fa fa-map-marker"> {{ spot.infosSupp }}</i></p>
+                                    <p class="card-title">Spot #{{ spot.id }} - <span>{{ spot.title|length > 10 ? spot.title|slice(0,10) ~'...': spot.title }}</span></p>
+                                    <hr class="mb-4">
+                                    <p class="card-description">"{{ spot.description|length > 10 ? spot.description|slice(0,10) ~'...': spot.description}}"</p>
+                                    <hr class="mb-4">
                                     <a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Voir</a>
                                     <a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
                                    <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a>
+                                    <hr class="mb-4">
 
                             </div>
                         </div>
                     </div>
                     </div>
                 {% endfor %}
+                {% else %}
+                <p>Vous n'avez pas de spots en attente de validation</p>
             {% endif %}
         </div>
         </section>
