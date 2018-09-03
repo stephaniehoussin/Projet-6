@@ -12,7 +12,6 @@
 
 {% block body %}
 
-
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -25,53 +24,29 @@
         </section>
         <section id="account-spots-rejected">
             <div class="row">
-                {% for reject in rejectedReason %}
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">
+                    <div class="col-md-12">
+                        <div class="jumbotron">
+                            {% for reject in rejectedReason %}
+                            <p class="display-6">L'un de tes spots n'a pas passé l'étape de validation. Pas de problème, c'est surement pas grand chose.
+                            </p>
+                            <p class="display-6">Consultes bien les raisons et n''hésites pas à relire la fiche du spot!
+                            </p>
+
+                            <p class="lead">Raison :
                                 {{ reject.situation }}
                                 {{ reject.picture }}
                                 {{ reject.content }}
-                                <hr class="mb-4">
-                            </div>
-                            <div class="card-description">
+                            </p>
+                            <hr class="my-4">
+                            <p>Informations supplémentaires :
                                 {{ reject.informations }}
-                            </div>
-                        </div>
-                        <a href="{{ path('mon-compte/mes-spots-rejetes')}}" class="btn btn-primary">Retour vers mes spots rejetés</a>
-                    </div>
-                </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                     Rappel : La Fiche "technique" du Spot
-                                    <hr class="mb-4">
-                                </div>
-                                <div class="card-description">
-                                    <ul>
-                                        <li>Lieu en plein air</li>
-                                        <li>En ville</li>
-                                        <li>Mais Où l'on ne se sent pas en ville</li>
-                                        <li>Une photo adaptée</li>
-                                        <li>Un titre parlant</li>
-                                        <li>Une description un minimum détaillée</li>
-                                        <li>Une adresse la plus précise possible</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </p>
+                            <a class="btn btn-success btn-lg" href="{{ path('mon-compte/fiche_spot') }}" role="button">Voir la fiche du Spot</a>
+                            <a class="btn btn-primary btn-lg" href="{{ path('mon-compte/mes-spots-rejetes')}}" role="button">Retour</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </section>
     </div>
-
-    {# {% for reject in rejectedReason %}
-         {{ reject.situation }}
-         {{ reject.picture }}
-         {{ reject.content }}
-     {% endfor %}#}
-
 {% endblock %}

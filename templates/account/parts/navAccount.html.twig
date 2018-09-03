@@ -4,17 +4,18 @@
 
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
-            <li><a href="{{ path('accueil') }}">Retour site</a></li>
+            <li class="menu-home-return"><i class="fa fa-arrow-circle-o-left"><a href="{{ path('accueil') }}"> Retour site</a></i></li>
             <li><a href="{{ path('mon-compte/accueil') }}">Accueil Espace personnel</a></li>
             <li><a href="{{ path('fos_user_profile_edit') }}">Gérer mon compte</a></li>
+            <li><a href="{{ path('mon-compte/fiche_spot') }}">La fiche du spot</a></li>
             {% if is_granted('ROLE_MODERATEUR') %}
-                <li><a href="{{ path('mon-compte/spots-en-attente') }}">Spots en attente de validation</a></li>
-                <li><a href="{{ path('mon-compte/commentaires-signales') }}">Commentaires signalés</a></li>
+                <li><a href="{{ path('mon-compte/spots-en-attente') }}">Spots en attente de validation</a>
+                <li><a href="{{ path('mon-compte/commentaires-signales') }}">Commentaires signalés</a>
             {% endif %}
             <li><a href="{{ path('mon-compte/mes-spots-valides') }}">Mes Spots validés</a></li>
             {% if is_granted('ROLE_MODERATEUR') == false %}
                 <li><a href="{{ path('mon-compte/mes-spots-en-attente') }}">Mes Spots en attente de validation</a></li>
-                <li><a href="{{ path('mon-compte/mes-spots-rejetes') }}">Mes Spots rejetes</a></li>
+                <li><a href="{{ path('mon-compte/mes-spots-rejetes') }}">Mes Spots refusés</a></li>
             {% endif %}
             <li><a href="{{ path('mon-compte/mes-spots-favoris') }}">Mes Spots favoris</a></li>
                 <li><a href="{{ path('mon-compte/mes-commentaires-signales') }}">Mes commentaires signalés</a></li>
@@ -22,7 +23,7 @@
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('admin') }}">Administration</a></li>
             {% endif %}
-            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+            <li><i class="fa fa-times-circle"> <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></i></li>
         </ul>
     </div>
 </div>

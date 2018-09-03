@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}{% endblock %}
 {% block description %}{% endblock %}
 {% block stylesheets %}
@@ -11,7 +10,6 @@
 {% endblock %}
 {% block body %}
 <div class="account-content">
-
 
     <section id="account-title">
         <div class="container wow fadeInUp">
@@ -31,7 +29,7 @@
                           <h5 class="card-title">SPOTS VALIDES : {% if resultByUser.totalNbSpotsValidatedByUser %}<span>{{ resultByUser.totalNbSpotsValidatedByUser }}</span></h5>
                                  <p class="card-text">de vos spots sont validés ! Bravo !</p>
                             {% else %}
-                                <p>Vous n'avez pas encore spoter ou vos spots sont encore en attente de validation!</p>
+                                <p class="card-text">Vous n'avez pas encore spoter ou vos spots sont encore en attente de validation!</p>
                             {% endif %}
                             <a href="{{ path('mon-compte/mes-spots-valides') }}" class="btn btn-primary">Voir</a>
                     </div>
@@ -44,10 +42,10 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">SPOTS en attente de validation : {% if nbSpotsWaiting %} <span>{{ nbSpotsWaiting }}</span></h5>
-                            <p>Spots actuellement en attente de traitement</p>
+                        <h5 class="card-title">SPOTS EN ATTENTE DE VALIDATION : {% if nbSpotsWaiting %} <span>{{ nbSpotsWaiting }}</span></h5>
+                            <p class="card-text">Spots actuellement en attente de traitement</p>
                         {% else %}
-                            <p>Aucun spots en attente de traitement pour le moment!</p>
+                            <p class="card-text">Aucun spots en attente de traitement pour le moment!</p>
                         {% endif %}
                         <a href="{{ path('mon-compte/spots-en-attente') }}" class="btn btn-primary">Voir</a>
                     </div>
@@ -56,10 +54,10 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">COMMENTAIRES signalés à traiter : {% if allResult.totalNbCommentsIsReport %} <span>{{ allResult.totalNbCommentsIsReport }}</span></h5>
-                            <p>Commentaires signalés en attente de traitement</p>
+                        <h5 class="card-title">COMMENTAIRES SIGNALES A TRAITER : {% if allResult.totalNbCommentsIsReport %} <span>{{ allResult.totalNbCommentsIsReport }}</span></h5>
+                            <p class="card-text">Commentaires signalés en attente de traitement</p>
                         {% else %}
-                            <p>Pas encore de commentaires signalés à traiter !</p>
+                            <p class="card-text">Pas encore de commentaires signalés à traiter !</p>
                         {% endif %}
                         <a href="{{ path('mon-compte/commentaires-signales') }}" class="btn btn-primary">Voir</a>
                     </div>
@@ -74,10 +72,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">SPOTS EN ATTENTE : {% if resultByUser.totalNbSpotsWaitingByUser %} <span>{{ resultByUser.totalNbSpotsWaitingByUser }}</span></h5>
-                                <p>de vos spots sont en attente de validation
+                                <p class="card-text">de vos spots sont en attente de validation
                                 . Patience, ils vont bientôt être validé</p>
                             {% else %}
-                                <p>Tous vos spots ont été validé pour le moment!</p>
+                                <p class="card-text">Tous vos spots ont été validé pour le moment!</p>
                             {% endif %}
                             <a href="{{ path('mon-compte/mes-spots-en-attente') }}" class="btn btn-primary">Voir</a>
                         </div>
@@ -87,9 +85,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">SPOTS REFUSES :  {% if resultByUser.totalNbSpotsRejectedByUser %}<span>{{ resultByUser.totalNbSpotsRejectedByUser }}</span></h5>
-                                 <p>de vos spots ont été refusés. Vous pouvez les modifier et les re soumettre.</p>
+                                 <p class="card-text">de vos spots ont été refusés. Vous pouvez les modifier et les re soumettre.</p>
                             {% else %}
-                                <p>Bonne nouvelle ! Aucun de vos spots n'a été refusé!</p>
+                                <p class="card-text">Bonne nouvelle ! Aucun de vos spots n'a été refusé!</p>
                             {% endif %}
                                 <a href="{{ path('mon-compte/mes-spots-rejetes') }}" class="btn btn-primary">Voir</a>
                         </div>
@@ -103,9 +101,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">MES COMMENTAIRES SIGNALES : {% if resultByUser.totalNbCommentsReportByUser %}<span>{{ resultByUser.totalNbCommentsReportByUser }}</span></h5>
-                            <p>Commentaires signalés ! </p>
+                            <p class="card-text">Commentaires signalés ! </p>
                         {% else %}
-                            <p>Pas encore de commentaires signalés !</p>
+                            <p class="card-text">Pas encore de commentaires signalés !</p>
                         {% endif %}
                             <a href="{{ path('mon-compte/mes-commentaires-signales') }}" class="btn btn-primary">Voir</a>
                     </div>
@@ -115,9 +113,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">SPOTS FAVORIS :  {% if resultByUser.totalNbFavorisByUser %}<span>{{ resultByUser.totalNbFavorisByUser }}</span></h5>
-                            <p>spot(s) dans vos favoris actuellement !</p>
+                            <p class="card-text">spot(s) dans vos favoris actuellement !</p>
                         {% else %}
-                            <p>Vous n'avez pas encore de spots favoris</p>
+                            <p class="card-text">Vous n'avez pas encore de spots favoris</p>
                         {% endif %}
                             <a href="{{ path('mon-compte/mes-spots-favoris') }}" class="btn btn-primary">Voir</a>
                     </div>
@@ -130,9 +128,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">COMMENTAIRES :  {% if resultByUser.totalNbCommentsByUser %}<span>{{ resultByUser.totalNbCommentsByUser }}</span></h5>
-                            <p>commentaires laissés !</p>
+                            <p class="card-text">commentaires laissés !</p>
                         {% else %}
-                            <p>Vous n'avez pas encore laissé de commentaires</p>
+                            <p class="card-text">Vous n'avez pas encore laissé de commentaires</p>
                         {% endif %}
                     </div>
                 </div>
@@ -141,9 +139,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">LIKE :  {% if resultByUser.totalNbLovesByUser %}<span>{{ resultByUser.totalNbLovesByUser }}</span></h5>
-                            <p>LIKE ME laissé(s) sur des spots !</p>
+                            <p class="card-text">LIKE ME laissé(s) sur des spots !</p>
                         {% else %}
-                            <p>Vous n'avez pas encore LIKE ME</p>
+                            <p class="card-text">Vous n'avez pas encore LIKE ME</p>
                         {% endif %}
                     </div>
                 </div>
@@ -152,10 +150,10 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">TREE :  {% if resultByUser.totalNbTreesByUser %}<span>{{ resultByUser.totalNbTreesByUser }}</span></h5>
-                            <p>TREE ME donné(s)!</p>
+                            <p class="card-text">TREE ME donné(s)!</p>
                         {% else %}
-                            <p>Vous n'avez pas encore TREE ME</p>
-                            <p>N'hésitez pas à le faire si l'endroit est préservé !</p>
+                            <p class="card-text">Vous n'avez pas encore TREE ME</p>
+                            <p class="card-text">N'hésitez pas à le faire si l'endroit est préservé !</p>
                         {% endif %}
                     </div>
                 </div>
@@ -168,5 +166,4 @@
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
-    <script src="{{ asset('assets/js/time.js') }}"></script>
 {% endblock %}

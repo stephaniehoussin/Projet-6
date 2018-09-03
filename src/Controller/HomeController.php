@@ -15,21 +15,15 @@ class HomeController extends Controller
     /**
      * @Route("/", name="landing")
      * @param PageDecoratorsService $pageDecoratorsService
-     * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function landing(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
+    public function landing(PageDecoratorsService $pageDecoratorsService)
     {
         $user = $this->getUser();
-        $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         return $this->render('landing/index.html.twig',array(
-            'datetime' => $datetime,
             'allResult' => $allResult,
             'user' => $user,
-
-
         ));
     }
 
@@ -42,16 +36,12 @@ class HomeController extends Controller
     public function home(PageDecoratorsService $pageDecoratorsService,SpotRepository $spotRepository)
     {
         $user = $this->getUser();
-        $datetime = date("d-m-Y");
         $allResult = $pageDecoratorsService->countAllData();
         $spots = $spotRepository->allSpotsHome();
-        $lastSpot = $spotRepository->lastSpot();
         return $this->render('home/index.html.twig',array(
-            'datetime' => $datetime,
             'spots' => $spots,
             'allResult' => $allResult,
             'user' => $user,
-            'lastSpot' => $lastSpot
         ));
     }
 
@@ -78,7 +68,6 @@ class HomeController extends Controller
             'contact' => $form->createView(),
             'user' => $user
         ]);
-
     }
 
     /**

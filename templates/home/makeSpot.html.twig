@@ -60,7 +60,7 @@
         <section class="make-spot-map">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10 offset-1">
                         <div class="smap">
                             <div id="map-makeSpot"></div>
                         </div>
@@ -69,35 +69,39 @@
             </div>
         </section>
         <section class="make-spot-form">
-                    <div class="col-md-12">
+                    <div class="col-md-10 offset-1">
                         {{ form_start(formSpot)}}
-
                         <div class="form-group">
-                            {#{{ form_row(formSpot, { 'attr': {'class': 'form-control'} }) }}#}
-                            {{ form_row(formSpot.category) }}
+                            {{ form_label(formSpot.category, 'Choisir la catégorie', {'label_attr': {'class': 'form_label'}}) }}
+                            <hr class="mb-4">
+                            {{ form_widget(formSpot.category) }}
+
                         </div>
                         <div class="form-group">
-                            {{ form_row(formSpot.pictureFile) }}
+                            {{ form_label(formSpot.pictureFile,'Ajouter une image', {'label_attr': {'class': 'form_label'}} ) }}
+                            <hr class="mb-4">
                             {{ form_widget(formSpot.pictureFile, {'attr': {'class': 'custom-file-input'}}) }}
                         </div>
                         <div class="form-group">
-                            {{ form_row(formSpot.title) }}
+                            {{ form_label(formSpot.title,'Ajouter un titre', {'label_attr': {'class': 'form_label'}}) }}
+                            <hr class="mb-4">
+                            {{ form_widget(formSpot.title) }}
                         </div>
                         <div class="form-group">
-                            {{ form_row(formSpot.description) }}
+                            {{ form_label(formSpot.description,'Ajouter une description', {'label_attr': {'class': 'form_label'}}) }}
+                            <hr class="mb-4">
+                            {{ form_widget(formSpot.description) }}
                         </div>
                         <div class="form-group">
-                            {{ form_row(formSpot.infosSupp) }}
+                            {{ form_label(formSpot.infosSupp,'Ajouter une adresse ( la plus précise possible : 3 rue du lac, Boulogne)', {'label_attr': {'class': 'form_label'}}) }}
+                            <hr class="mb-4">
+                            {{ form_widget(formSpot.infosSupp) }}
                         </div>
-                        <button type="submit" class="btn btn-primary" name="submit"  id="inscription">Valider</button>
+                        <button type="submit" class="btn btn-make-spot-form" name="submit"  id="inscription">Valider</button>
                         {{ form_end(formSpot) }}
                     </div>
         </section>
-                </div>
-            </div>
-
-        </section>
-        </div>
+    </div>
 {% endblock %}
 {% block footer %}
     {% include 'landing/parts/footer.html.twig' %}

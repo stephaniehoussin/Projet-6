@@ -18,14 +18,14 @@
 
 #mainNav .navbar-brand
 {
-    color: black;
+    color: white;
     font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 40px;
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover
 {
-    color: black;
+    color: white;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link
@@ -33,14 +33,14 @@
     font-size: 90%;
     font-weight: 600;
     letter-spacing: 1px;
-    color: black;
+    color: white;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     padding: 1.1em 1em;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover
 {
-    color: white;
+    color: black;
 }
 
 #mainNav .btn-nav
@@ -53,7 +53,9 @@
 }
 #mainNav .btn-nav:hover
 {
-    background-image: url("../img/cover/cover.jpg");
+    /*background-image: url("../img/cover/cover.jpg");*/
+    background-color: #8bb11d;
+    color: white;
 }
 
 @media(max-width: 768px)
@@ -77,7 +79,7 @@
 
 header.masthead {
     text-align: center;
-    color: black;
+    color: white;
     background-image: url("../img/cover/cover.jpg");
     opacity: 0.9;
     background-repeat: no-repeat;
@@ -89,7 +91,8 @@ header.masthead {
     background-size: cover;
 }
 
-.btn-cover:active, .btn-cover:focus, .btn-cover:hover {
+.btn-cover:active, .btn-cover:focus, .btn-cover:hover
+{
     background-image: url("../img/cover/cover.jpg");
 }
 
@@ -98,9 +101,9 @@ header.masthead {
 .cover-landing .btn-cover {
     font-size: 18px;
     padding: 15px 20px;
-    background-color: aliceblue;
+    background-color: #8bb11d;
     margin-top: 10%;
-    color: black;
+    color: white;
     font-weight: 200;
     font-family: Helvetica;
 }
@@ -114,26 +117,29 @@ header.masthead {
 .cover-landing header.masthead .cover .cover-title {
 
     margin-bottom: 50px;
-    color:black;
-    font-family: 'Handlee';
-    font-size: 80px;
+    color:white;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+    font-size: 60px;
     line-height: 75px;
 }
 /* texte cover-landing*/
  .cover-landing header.masthead .cover .cover-text {
     font-size: 18px;
     line-height: 30px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+     margin-top: 20px;
     font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: black;
+    color: white;
 }
 /*cadre du texte cover-landing*/
 .cover-landing .masthead .cover .text
 {
     padding-top: 56px;
     padding-bottom: 56px;
-    border : 1px solid black;
-    background-color: aliceblue;
+    background-color: #8bb11d;
+    opacity: 0.9;
+    filter:alpha(opacity=50);
+
 }
 /*cadre titre et bouton cover-landing*/
 .cover-landing .cover-deco
@@ -142,7 +148,7 @@ header.masthead {
     background-repeat: no-repeat;
     background-position: center center;
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
 }
 /* Cover landing en responsive */
 @media(max-width: 768px){
@@ -186,7 +192,7 @@ header.masthead {
     border-color: #497435;
     margin-top: 40px;
     color: black;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
 }
 /* cover image carte cover-home*/
 .cover-home header.masthead .cover
@@ -197,20 +203,23 @@ header.masthead {
 /* texte cover-home*/
 .cover-home header.masthead .cover .cover-text
 {
-    font-size: 18px;
+    font-size: 22px;
     line-height: 30px;
     margin-bottom: 25px;
+    font-weight: bold;
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: black;
 }
 /* titre du cover-home*/
 .cover-home header.masthead .cover .cover-title
 {
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 90px;
     font-weight: 200;
     line-height: 75px;
     margin-bottom: 50px;
+    color: white;
+    text-shadow: 2px 2px 2px black;
 }
 /* cover home en responsive*/
 @media(max-width: 768px) {
@@ -239,12 +248,13 @@ header.masthead {
     width: 100%;
     margin-top: 40px;
     margin-bottom: 40px;
-    color: black;
+    color: white;
+    background-color: #1b6d85;
 }
 #section-title h3
 {
     font-size: 30px;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     text-align: center;
 }
 /* section title en responsive*/
@@ -258,32 +268,86 @@ header.masthead {
     #section-title{
         margin-top: 20px;
         margin-bottom: 20px;
-        background-color:aliceblue ;
     }
 }
 /*section STATISTIQUES*/
-.stats .card
+#stats
 {
-    margin-left: 30px;
-    margin-bottom: 35px;
+    background : url(../img/protection.jpg) fixed center center;
+    opacity: 0.9;
 }
-.stats .card-text
+#stats .caption
+ {
+     font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+     font-size: 1.6em;
+     font-weight: 600;
+     padding: 20px 6px 0 6px;
+     color: white;
+ }
+
+/* agit sur le placement des card*/
+#stats .container-stats {
+    perspective: 1000px;
+    display: inline-block;
+    margin-left: 25px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/*donne une taille au card*/
+#stats .container-stats,
+.front-test
 {
+    width: 160px;
+    height: 160px;
+}
+
+/* permet d'avoir un front et un back*/
+#stats .front-test
+{
+   /* backface-visibility: hidden;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 160px;
+    height: 160px;
+    border: 1px solid white;
+   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+
+/*aligne le texte*/
+#stats {
     text-align: center;
-    font-weight: bold;
-    font-family: 'Handlee';
-    font-size: 20px;
 }
+
+#stats .card
+{
+    margin-bottom: 35px;
+    margin-top: 15px;
+}
+
 /*stats en responsive*/
 @media (max-width: 768px)
 {
-    .stats  .card
+    #stats .container-stats,
+    .front-test
     {
-        max-width: 8rem;
+        width: 80px;
+        height: 80px;
     }
-    .stats .card-text
+    #stats .front-test
     {
-        font-size: 13px;
+        width: 80px;
+        height: 80px;
+        /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    }
+    #stats .caption
+    {
+        font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+        font-size: 0.7em;
+        font-weight: 600;
+        padding: 8px 6px 0 6px;
+        color: white;
     }
 }
 
@@ -311,7 +375,7 @@ header.masthead {
 /* titre de la newsletter*/
 .subscribe .subscribe-title {
     font-size: 40px;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     color:white;
 }
 /* texte de la newsletter*/
@@ -532,6 +596,77 @@ header.masthead {
     }
 }
 
+/* test avec changement de design*/
+#on-youspot .caption
+{
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+    font-size: 1em;
+    padding: 10px 10px 0 10px;
+}
+#on-youspot .btn
+{
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+/* agit sur le placement des card*/
+#on-youspot .container-on-youspot {
+    perspective: 1000px;
+    display: inline-block;
+    margin: 3%;
+}
+
+/*donne une taille au card*/
+#on-youspot .container-on-youspot,
+.front-test
+{
+    width: 220px;
+    height: 220px;
+}
+
+/* permet d'avoir un front et un back*/
+#on-youspot .front-test
+{
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 220px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*aligne le texte*/
+#on-youspot {
+    text-align: center;
+}
+/* gere la taille des images */
+#on-youspot img
+{
+    height: 100px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#on-youspot .card
+{
+    margin-bottom: 35px;
+    margin-top: 15px;
+}
+
+/*modal*/
+.blockquote
+{
+    font-style: italic;
+    font-size: 16px;
+}
+@media(max-width: 768px)
+{
+    .modal-body .description
+    {
+        font-size: 12px;
+    }
+}
+
 /*PAGE D'ACCUEIL*/
 /*section lastSpotHome pour accueil*/
 /* marge entre les spots*/
@@ -594,14 +729,17 @@ span
 }
 #page-title h2
 {
-    font-size: 40px;
+    font-size: 30px;
+    color: white;
     text-align: center;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+    margin-bottom: 0;
 }
 #page-title h3
 {
     text-align: center;
     font-size: 20px;
+    color: white;
 
 }
 /* pages du site en responsive*/
@@ -620,6 +758,47 @@ span
         margin-bottom: 20px;
     }
 }
+
+/*PAGE Newsletter Form*/
+
+.btn-newsletter
+{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.img-newsletter
+{
+    background-image: url("../img/cover/protect.jpg");
+    background-repeat: no-repeat;
+    height: 500px;
+}
+.newsletter-text
+{
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+    font-size: 20px;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/*PAGE connexion*/
+
+.btn-connexion
+{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/*PAGE inscription*/
+.btn-registration
+{
+    margin-top: 15px;
+
+}
+
+
 /*PAGE MENU JE CHERCHE UN SPOT */
 #map-searchSpot
 {
@@ -628,7 +807,7 @@ span
 }
 .search-spot-map .smap
 {
-    border : 1px solid black;
+    border : 2px solid #1b6d85;
     width: 100%;
     height: 450px;
 }
@@ -639,6 +818,14 @@ span
 .search-spot-form .btn-custom
 {
     margin-bottom: 25px;
+}
+
+.card-search .btn-searchSpot
+{
+    color: black;
+    background-image: url("../img/cover/cover.jpg");
+    margin-left: 60px;
+    font-size: 10px;
 }
 
 @media (max-width: 768px)
@@ -661,15 +848,30 @@ span
     .search-spot-form .btn-custom
     {
         margin-bottom: 15px;
+        width: 40%;
+        margin-left: 100px;
+    }
+    .search-spot-form .offset-1
+    {
+        margin-left: 0;
+    }
+    .search-spot-form .col-md-5
+    {
+        margin-bottom: 20px;
+    }
+    .page-content .card-title
+    {
+        font-size: 12px;
     }
 }
 /* PAGE MENU JE SPOTE*/
 
 .make-spot-map .smap
 {
-    border: 1px solid black;
+    border : 2px solid #1b6d85;
     width: 100%;
     height: 500px;
+    margin-bottom: 40px;
 }
 #map-makeSpot
 {
@@ -682,7 +884,7 @@ span
     background-image: url("../img/cover/cover.jpg");
     height: 40px;
     padding-top: 5px;
-    font-family: Handlee;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 25px;
     font-weight: bold;
 }
@@ -692,7 +894,14 @@ span
 }
 .make-spot .card
 {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
+}
+.make-spot-form .form_label
+{
+    font-style: italic;
+}
+.make-spot-form .btn{
+    margin-bottom: 20px;
 }
 /* je spote en responsive*/
 @media(max-width: 768px)
@@ -701,12 +910,21 @@ span
     {
         height: 250px;
     }
+    .make-spot-map .col-md-10
+    {
+        margin-left: 0;
+    }
+    .make-spot-form .col-md-10
+    {
+        margin-left: 0;
+    }
+
 }
 
 /* Page menu ONE SPOT */
 .one-spot .smap
 {
-    border : 1px solid black;
+    border : 2px solid #1b6d85;
     width: 100%;
     height: 400px;
 }
@@ -786,78 +1004,22 @@ span
     }
 }
 /*PAGE FAQ*/
-#faq a {
-    color: black;
-}
-
-#faq .content
-{
-    margin: 0;
-    text-align: center;
-}
-
-#faq  .content {
-    font-family: "Reenie Beanie", sans-serif;
-    font-size: 1.5em;
-    padding: 10px 10px 0 10px;
-}
-
-#faq .container-faq {
-    perspective: 1000px;
-    display: inline-block;
-    margin: 3%;
-}
-
-#faq .container-faq:hover .flipper {
-    transform: rotateY(180deg);
-}
-
-#faq .container-faq,
-.front,
-.back {
-    width: 300px;
-    height: 300px;
-}
-
-#faq .flipper {
-    transition: 0.6s;
-    transform-style: preserve-3d;
-    position: relative;
-}
-
-#faq .front,
-.back {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 300px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-#faq .front {
-    z-index: 2;
-}
-#faq .back, h1
-{
-    font-size: 1em;
-}
-#faq .back {
-    transform: rotateY(180deg);
-}
 
 #faq {
-    text-align: center;
+    text-align: justify;
 }
 
 #faq .card
 {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 #faq .header
 {
-    background-color: aliceblue;
+    background-color: #8bb11d;
+    text-align: center;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 @media (max-width: 768px) {
     #faq .list-group
@@ -869,6 +1031,10 @@ span
     {
         font-size: 12px;
         font-weight: bold;
+    }
+    #faq .offset-2
+    {
+        margin-left:0;
     }
 }
 
@@ -894,6 +1060,12 @@ span
 
 /* PARTIE MON COMPTE ACCOUNT PERSONNEL*/
 /*Mon compte / Menu de navigation*/
+.nav-account-menu .menu-home-return
+{
+    text-transform: uppercase;
+    font-family: "Handlee", sans-serif;
+    margin-right: 15px;
+}
 .nav-account-menu
 {
     overflow: auto;
@@ -914,7 +1086,7 @@ span
     font-size: 20px;
     font-weight: bold;
     color: black;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     margin-left: 20px;
 }
 
@@ -994,7 +1166,7 @@ body {
     padding: 30px;
     margin-bottom: 60px;
     text-align: center;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     margin-top: 20px;
 }
 #account-title h2
@@ -1014,6 +1186,10 @@ body {
     text-align: center;
 
 }
+.account-home .card-title
+{
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
+}
 
 .account-home span
 {
@@ -1025,13 +1201,17 @@ body {
 {
     .account-home .card
     {
-
         margin-left: 0;
     }
     #account-title h2
     {
         font-size: 20px;
     }
+    .account-home .card-text
+    {
+        font-size: 12px;
+    }
+
 }
 /********PAGE MON COMPTE ONE SPOT*************/
 .account-one-spot img
@@ -1139,69 +1319,53 @@ body {
 {
     background-color: #1b6d85;
     text-align: center;
-    color : black;
+    color : white;
+    padding-top: 20px;
+
 }
-.footer ul li
+.footer .list
 {
-    list-style-type: none;
-    padding-right: 90px;
-    padding-left: 20px;
+    text-align: left;
+}
+.footer  ul li a
+{
+    color: white;
+    text-decoration: none;
+
 }
 .footer ul
 {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: row;
-
+    list-style-type: none;
 }
-.footer ul li a
+.footer .row
 {
-    color: black;
-    text-decoration: none;
+    margin-bottom: 15px;
+}
+.title-footer
+{
+    margin-top: 50px;
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-weight: bold;
 }
 
-.footer ul li a:hover
-{
-    color:white;
-}
-
-.footer .bottom
+.footer .footer-copyright
 {
     font-weight: bold;
-    margin-top: 5px;
-}
-.footer .title
-{
-    font-weight: bold;
-    font-family: 'Handlee';
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, cursive;
     font-size: 20px;
-    margin-top: 5px;
+    margin-top: 20px;
+}
+.footer .mb-4
+{
+    border-top : 1px solid white;
+    width: 25%;
 }
 /*footer en responsive*/
 @media (max-width: 768px){
 
-    .footer ul li
-    {
-        font-size: 10px;
-        /*padding-right: 20px;*/
-        text-align: justify;
-        margin-left: 40px;
-    }
-    .footer ul li a:hover{
-        color: white;
-    }
-    .footer .title
+    .footer .footer-copyright
     {
         font-size: 15px;
-    }
-    .footer .bottom
-    {
-        font-size: 12px;
-    }
-    .footer ul
-    {
-        flex-direction: column;
     }
 }
 
@@ -1270,5 +1434,25 @@ body {
     {
         width: 100%;
         height: auto;
+    }
+}
+/* fiche spot*/
+#fiche-spot .card
+{
+    margin-bottom: 10px;
+}
+#fiche-spot
+{
+    margin-bottom: 40px;
+}
+#fiche-spot .card-header
+{
+    font-family: 'Handlee', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@media(max-width: 768px)
+{
+    #fiche-spot .offset-3
+    {
+        margin-left: 0;
     }
 }

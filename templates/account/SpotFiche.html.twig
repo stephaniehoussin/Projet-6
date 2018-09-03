@@ -1,25 +1,23 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{% endblock %}
 {% block description %}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+
 {% endblock %}
 {% block nav %}
-    {% if user %}
-        {% include 'home/parts/navHome.html.twig' %}
-    {% else %}
-        {% include 'landing/parts/navLanding.html.twig' %}
-    {% endif %}
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
+
 {% block body %}
 
-    <div class="container">
-        <section id="page-title">
+    <div class="account-content">
+        <section id="account-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>La fiche du spot !</h2>
+                        <h2>la fiche du spot!</h2>
                     </div>
                 </div>
             </div>
@@ -65,11 +63,4 @@
             </div>
         </section>
     </div>
-
-
-{% endblock %}
-{% block footer %}
-    {% include 'landing/parts/footer.html.twig' %}
-{% endblock %}
-{% block javascript %}
 {% endblock %}

@@ -2,29 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\Spot;
-use App\Form\ReportCommentType;
 use App\Repository\CommentRepository;
 use App\Services\CommentManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class CommentController extends Controller
 {
-    /**
-     * @Route("/comment", name="comment")
-     */
-    public function index()
-    {
-        return $this->render('comment/index.html.twig', [
-            'controller_name' => 'CommentController',
-        ]);
-    }
-
     /**
      * @Route("comment/{id}/report", name="comment-report")
      * @ParamConverter("comment", class="App:Comment", options={"id" = "id"})
@@ -41,7 +27,6 @@ class CommentController extends Controller
         {
             $this->addFlash("primary","Commentaire déjà signalé!");
         }
-
         if($comment->getReport() == 0 )
         {
             $comment->setReport(1);
@@ -50,9 +35,6 @@ class CommentController extends Controller
         }
             $spot = $comment->getSpot();
             $idSpot = $spot->getId();
-
-
-
 
         return $this->redirectToRoute('accueil/spot',[
             'id'=>$idSpot]);

@@ -6,12 +6,10 @@
     {{ parent() }}
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
-
-    {% include 'account/parts/navAccount.html.twig' %}
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -36,8 +34,6 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            </tbody>
                             {% if commentsReportByUser %}
                                 {% for comment in commentsReportByUser %}
                                     <tr>
@@ -49,6 +45,7 @@
                             {% else %}
                                 <p>Vous n'avez pas de commentaires signalés !!</p>
                             {% endif %}
+                            </tbody>
                         </table>
                     </div>
                 </div>

@@ -27,7 +27,11 @@
         {% else %}
         <section class="newsletter">
             <div class="row">
-                <div class="col-md-6 offset-md-3">
+                    <div class="col-md-6">
+                        <div class="img-newsletter"></div>
+                    </div>
+                <div class="col-md-6">
+                    <p class="newsletter-text">Retrouvez l'actualité de YouSpot dans votre boîte mail</p>
                     <hr class="mb-4">
                     {{ form_start(formNewsletter) }}
                     <div class="form-group">
@@ -35,7 +39,7 @@
                         {{ form_widget(formNewsletter, { 'attr': {'class': 'form-control'} }) }}
                     </div>
                     <div class="col-md-3 offset-md-4">
-                        <button type="submit" class="btn" name="submit">Envoyer</button>
+                        <button type="submit" class="btn btn-newsletter" name="submit">Envoyer</button>
                     </div>
                     {{ form_end(formNewsletter) }}
                 </div>

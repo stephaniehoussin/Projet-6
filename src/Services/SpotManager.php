@@ -46,4 +46,10 @@ class SpotManager
         $this->em->flush();
     }
 
+    public function removefavorite($spot)
+    {
+        $this->removefavorite($spot);
+        $this->em->flush();
+    }
+
 }

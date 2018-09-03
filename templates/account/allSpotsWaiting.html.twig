@@ -7,18 +7,17 @@
 
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    {% include 'account/parts/navAccount.html.twig' %}
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Spots en attente de validation</h2>
+                        <h2>Spots en attente de validation <span class="badge badge-primary badge-pill"> {{ nbSpotsWaiting }}</span></h2>
                     </div>
                 </div>
             </div>
@@ -30,40 +29,37 @@
                 </div>
             {% endfor %}
             <div class="container">
-        <div class="row">
-            <div class="table">
-                <table class="table table-hover table-responsive">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>user</th>
-                        <th>date</th>
-                        <th>title</th>
-                        <th>description</th>
-                        <th>Gérer le spot</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for spot in spots %}
-                        <tr>
-                            <td>{{ spot.id }}</td>
-                            <td>{{ spot.user }}</td>
-                            <td>{{ spot.date|date('d/m/Y') }}</td>
-                            <td>{{ spot.title }}</td>
-                            <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
-                            <td><a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Gérer le spot</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+                <div class="row">
+                    <div class="table">
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>user</th>
+                                    <th>date</th>
+                                    <th>title</th>
+                                    <th>description</th>
+                                    <th>Gérer le spot</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for spot in spots %}
+                                    <tr>
+                                        <td>{{ spot.id }}</td>
+                                        <td>{{ spot.user }}</td>
+                                        <td>{{ spot.date|date('d/m/Y') }}</td>
+                                        <td>{{ spot.title }}</td>
+                                        <td>{{ spot.description|length > 20 ? spot.description|slice(0,20) ~'...': spot.description }}</td>
+                                        <td><a href="{{ path('mon-compte/oneSpot', { id : spot.id }) }}" class="btn btn-primary">Gérer le spot</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
-
-
 {% endblock %}
 
 

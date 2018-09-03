@@ -12,13 +12,11 @@ use App\Repository\RejectRepository;
 use App\Repository\SpotRepository;
 use App\Services\CommentManager;
 use App\Services\PageDecoratorsService;
-use App\Services\PaginationService;
 use App\Services\RejectManager;
 use App\Services\SpotManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class AccountController
@@ -50,12 +48,13 @@ class AccountController extends Controller
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function allSpotsWaiting(SpotRepository $spotRepository,PaginationService $paginationService)
+    public function allSpotsWaiting(SpotRepository $spotRepository)
     {
-
         $spots = $spotRepository->findSpotsByWaitingStatus();
+        $nbSpotsWaiting = $spotRepository->countSpotsByWaitingStatus();
         return $this->render('account/allSpotsWaiting.html.twig',array(
             'spots' => $spots,
+            'nbSpotsWaiting' => $nbSpotsWaiting
         ));
     }
 
@@ -107,13 +106,11 @@ class AccountController extends Controller
                 return $this->redirectToRoute('mon-compte/spots-en-attente');
 
             }
-
         }
         return $this->render('account/spotRejectedFormReason.html.twig',array(
             'formReject' => $formReject->createView(),
             'user' => $user,
             'spotId' => $spotId
-
         ));
     }
 
@@ -148,13 +145,11 @@ class AccountController extends Controller
 
     /**
      * @Route("mes-spots-rejetes", name="mes-spots-rejetes")
-     * @param RejectRepository $rejectRepository
      * @param SpotRepository $spotRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function SpotsRejected(RejectRepository $rejectRepository,SpotRepository $spotRepository)
+    public function SpotsRejected(SpotRepository $spotRepository)
     {
-
         $user = $this->getUser();
         $rejectedSpots = $spotRepository->findRejectedSpotsByUser($user->getId());
         return $this->render('account/spotRejected.html.twig',array(
@@ -164,10 +159,13 @@ class AccountController extends Controller
 
     /**
      * @Route("mes-spots-rejetes/motif/{id}", name="mes-spots-rejetes/motif")
+     * @param $id
+     * @param SpotRepository $spotRepository
+     * @param RejectRepository $rejectRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function SpotsRejectedReason($id,SpotRepository $spotRepository,RejectRepository $rejectRepository)
     {
-       // $user = $this->getUser();
         $spot = $spotRepository->findOneBy(['id' => $id]);
         $rejectedReason = $rejectRepository->recupReasonReject($spot->getId());
         return $this->render('account/spotRejectReason.html.twig',array(
@@ -212,7 +210,7 @@ class AccountController extends Controller
     }
 
     /**
-     * * @Route("mes-spots-favoris", name="mes-spots-favoris")
+     * @Route("mes-spots-favoris", name="mes-spots-favoris")
      * @param FavoriteRepository $favoriteRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -225,13 +223,11 @@ class AccountController extends Controller
         ));
     }
 
-
-
     /**
      * @Route("mes-infos", name="mes-infos")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function informationsByUser(SpotManager $spotManager,Request $request)
+    public function informationsByUser()
     {
         $user = $this->getUser();
         return $this->render('account/informations.html.twig',array(
@@ -241,6 +237,7 @@ class AccountController extends Controller
 
     /**
      * @Route("mes-commentaires-signales", name="mes-commentaires-signales")
+     * @param CommentRepository $commentRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function reportCommentsByUser(CommentRepository $commentRepository)
@@ -255,37 +252,42 @@ class AccountController extends Controller
     /**
      * @Route("commentaires-signales", name="commentaires-signales")
      * @param CommentRepository $commentRepository
+     * @param PageDecoratorsService $pageDecoratorsService
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
      */
-    public function reportAllComments(CommentRepository $commentRepository)
+    public function reportAllComments(CommentRepository $commentRepository,PageDecoratorsService $pageDecoratorsService)
     {
-
         $commentsReport = $commentRepository->recupCommentIsReport();
+        $allResult = $pageDecoratorsService->countAllData();
         return $this->render('account/reportAllComments.html.twig',array(
-            'commentsReport' => $commentsReport
+            'commentsReport' => $commentsReport,
+            'allResult' => $allResult
         ));
     }
 
     /**
      * @Route("oneSpot/{id}" , name="oneSpot")
      * @param PageDecoratorsService $pageDecoratorsService
-     * @param CommentManager $commentManager
-     * @param Request $request
      * @param Spot $spot
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function OneSpot(PageDecoratorsService $pageDecoratorsService, CommentManager $commentManager, Request $request, Spot $spot)
+    public function OneSpot(PageDecoratorsService $pageDecoratorsService, Spot $spot)
     {
         $resultBySpot = $pageDecoratorsService->countDataBySpot($spot->getId());
         return $this->render('account/oneSpot.html.twig', array(
             'spot' => $spot,
             'resultBySpot' => $resultBySpot,
-            //  'commentsReport' => $commentsReport,
-
         ));
     }
 
+    /**
+     * @Route("fiche_spot", name="fiche_spot")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function SpotFiche()
+    {
+        return $this->render('account/SpotFiche.html.twig');
+    }
 
 }
 

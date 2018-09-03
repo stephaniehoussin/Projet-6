@@ -36,16 +36,6 @@ class SpotRepository extends ServiceEntityRepository
         return $rq->getQuery()->getResult();
     }
 
-    public function lastSpot()
-    {
-        $rq = $this->createQueryBuilder('s')
-            ->select('s')
-            ->where('s.status = 2')
-            ->orderBy('s.date', 'DESC')
-            ->setMaxResults(1);
-        return $rq->getQuery()->getResult();
-    }
-
     // Recup de tous les spots par date et avec pagination
     // pour la page  acueil je cherche un spot
     public function findAllSpotsByDate($page)

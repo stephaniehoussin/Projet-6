@@ -8,17 +8,16 @@
 {% endblock %}
 {% block nav %}
 
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
-
-    {% include 'account/parts/navAccount.html.twig' %}
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>Commentaires signalés à modérer!</h2>
+                        <h2>Commentaires signalés à modérer  <span class="badge badge-primary badge-pill"> {{ allResult.totalNbCommentsIsReport }}</span> </h2>
                     </div>
                 </div>
             </div>
@@ -34,17 +33,15 @@
                     <div class="table-responsive">
                         <table class="table table-hover table-responsive">
                             <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>user</th>
-                                <th>message</th>
-                                <th>Valider</th>
-                                <th>Supprimer</th>
-                            </tr>
+                                <tr>
+                                    <th>id</th>
+                                    <th>user</th>
+                                    <th>message</th>
+                                    <th>Valider</th>
+                                    <th>Supprimer</th>
+                                </tr>
                             </thead>
                             <tbody>
-
-                            </tbody>
                             {% if commentsReport %}
                             {% for comment in commentsReport %}
                             <tr>
@@ -58,18 +55,13 @@
                             {% else %}
                                 <p>Pas encore de commentaires à modérer!</p>
                             {% endif %}
+                            </tbody>
                         </table>
                     </div>
-
-
-
                 </div>
             </div>
-
         </section>
     </div>
-
-
 {% endblock %}
 
 

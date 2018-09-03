@@ -52,8 +52,6 @@ class User extends BaseUser
     private $rejects;
 
 
-
-
     public function __construct()
     {
        parent::__construct();

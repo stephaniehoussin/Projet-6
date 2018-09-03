@@ -37,8 +37,6 @@ class NewsletterController extends Controller
                 $newsletterService->newsletterSend($newsletter);
                 $entityManager->flush();
                 $success = true;
-
-        //    return $this->redirectToRoute('landing');
         }
         return $this->render('newsletter/index.html.twig',array(
             'formNewsletter' => $formNewsletter->createView(),

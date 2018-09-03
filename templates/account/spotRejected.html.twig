@@ -7,12 +7,11 @@
 
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    {% include 'account/parts/navAccount.html.twig' %}
 <div class="account-content">
     <section id="account-title">
         <div class="container wow fadeInUp">
@@ -27,17 +26,16 @@
             <div class="responsive-table">
                 <table class="table table-hover table-responsive">
                     <thead>
-                    <tr>
-                        <th>Spot</th>
-                        <th class="img">Image</th>
-                        <th class="date">Date</th>
-                        <th class="title">Titre</th>
-                        <th class="description">Description</th>
-                        <th>Motif du refus</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
-
-                    </tr>
+                        <tr>
+                            <th>Spot</th>
+                            <th class="img">Image</th>
+                            <th class="date">Date</th>
+                            <th class="title">Titre</th>
+                            <th class="description">Description</th>
+                            <th>Motif du refus</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {% if rejectedSpots %}
@@ -57,22 +55,12 @@
                                 <td><a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a></td>
                             </tr>
                         {% endfor %}
-
                     {% else %}
                         <p>Bravo ! Tu n'as pas de spots refusés!</p>
                     {% endif %}
-
-
                     </tbody>
                 </table>
             </div>
     </section>
 </div>
-
-   {# {% for reject in rejectedReason %}
-        {{ reject.situation }}
-        {{ reject.picture }}
-        {{ reject.content }}
-    {% endfor %}#}
-
-    {% endblock %}
+{% endblock %}

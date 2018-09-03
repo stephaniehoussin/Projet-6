@@ -1,18 +1,25 @@
 <section class="footer">
     <div class="container">
-
         <div class="row">
-                <ul>
+            <div class="col-md-4">
+            <ul class="list">
+                <li><a href="{{ path('fiche-spot') }}">La fiche du Spot</a></li>
+                <li><a href="{{ path('faq') }}">Foire aux questions</a></li>
+                <li><a href="{{ path('legalNotice') }}">Mentions légales</a></li>
+                <li><a href="{{ path('termsOfService') }}">Conditions générales d'utilisation</a></li>
+            </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list">
+                <li><a href="{{ path('accueil/je-spote') }}">Je spote</a></li>
+                <li><a href="{{ path('accueil/je-cherche-un-spot',{ 'page' : 1}) }}">Je cherche un spot</a></li>
+                <li><a href="{{ path('mon-compte/accueil') }}">Mon compte</a></li>
                     <li><a href="{{ path('contact') }}">Nous contacter</a></li>
-                    <li><a href="{{ path('fiche-spot') }}">La fiche du Spot</a></li>
-                    <li><a href="{{ path('faq') }}">Foire aux questions</a></li>
-                    <li><a href="{{ path('legalNotice') }}">Mentions légales</a></li>
-                    <li><a href="{{ path('termsOfService') }}">Conditions générales d'utilisation</a></li>
                 </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <p class="title">YouSpot ! &copy Tous droits réservés . Stéphanie Houssin</p>
+            </div>
+            <div class="col-md-4">
+                <div class="footer-copyright text-center py-3">© 2018 Copyright : YouSpot!
+                </div>
             </div>
         </div>
     </div>

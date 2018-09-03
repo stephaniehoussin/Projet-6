@@ -6,12 +6,11 @@
     {{ parent() }}
 {% endblock %}
 {% block nav %}
-
+    {% include 'account/parts/navAccount.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    {% include 'account/parts/navAccount.html.twig' %}
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -36,7 +35,7 @@
                             <p class="card-title">Spot #{{ favorite.spot.id }} - <span>{{ favorite.spot.title|length > 10 ? favorite.spot.title|slice(0,10) ~'...': favorite.spot.title }}</span></p>
                             <hr class="mb-4">
                             <p class="card-description">"{{ favorite.spot.description|length > 10 ? favorite.spot.description|slice(0,10) ~'...': favorite.spot.description}}"</p>
-                            <a href="{{ path('mon-compte/oneSpot', { id : favorite.spot.id }) }}" class="btn btn-primary">Voir</a>
+                            <a href="{{ path('accueil/spot', { id : favorite.spot.id }) }}" class="btn btn-primary">Voir le spot</a>
                         </div>
                         </div>
                     </div>

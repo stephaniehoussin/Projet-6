@@ -31,4 +31,5 @@ class FavoriteManager
         $this->entityManager->persist($favorite);
         $this->entityManager->flush();
     }
+
 }

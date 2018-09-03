@@ -11,8 +11,6 @@
 {% endblock %}
 
 {% block body %}
-
-
     <div class="account-content">
         <section id="account-title">
             <div class="container wow fadeInUp">
@@ -47,21 +45,17 @@
                                     <a href="{{ path('mon-compte/spot/modification', {id : spot.id}) }}" class="btn btn-success">Modifier</a>
                                    <a href="{{ path('mon-compte/choice-status', { id : spot.id, status : 10 }) }}" class="btn btn-danger">Supprimer</a>
                                     <hr class="mb-4">
-
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 {% endfor %}
-                {% else %}
+            {% else %}
                 <p>Vous n'avez pas de spots en attente de validation</p>
             {% endif %}
         </div>
         </section>
     </div>
-
-
-
 {% endblock %}
 
 

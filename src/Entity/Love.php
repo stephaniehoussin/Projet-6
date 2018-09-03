@@ -23,8 +23,10 @@ class Love
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="loves")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
 
     public function getId()
     {

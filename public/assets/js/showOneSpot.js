@@ -1,6 +1,6 @@
 function initMap(position)
 {
-    var map = L.map('map').setView([position.coords.latitude, position.coords.longitude],9);
+    var map = L.map('map-oneSpot').setView([position.coords.latitude, position.coords.longitude],9);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Données de la carte &copy; <a href="http://www.openstreetmap.org/#map=5/51.500/-0.100">Open Street Map</a>',
@@ -8,12 +8,6 @@ function initMap(position)
         id: 'mapbox.streets',
         accessToken:'pk.eyJ1Ijoic3RlcGhhbmllaG91c3NpbiIsImEiOiJjamg1ejFrNDYxZnNyMnFsbmsxOXFoNmwxIn0.Cfc6uy_CpLtKoUjAKMQelg'
     }).addTo(map);
-
-    var $element =
-        [
-            ["{{ spot.infosSupp }}", {{ spot.latitude }},{{ spot.longitude }}],
-
-];
 
     for(var $i= 0; $i < $element.length; $i++)
     {

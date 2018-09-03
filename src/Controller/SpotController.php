@@ -7,7 +7,6 @@ use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Form\FavoriteType;
 use App\Form\LoveType;
-use App\Form\ReportCommentType;
 use App\Form\SpotFilterType;
 use App\Form\SpotType;
 use App\Form\TreeType;
@@ -59,14 +58,15 @@ class SpotController extends Controller
 
     /**
      * @Route("je-cherche-un-spot/{page}", requirements={"page" = "\d+"} , name="je-cherche-un-spot")
+     * @param PaginationService $paginationService
      * @param SpotRepository $spotRepository
      * @param $page
+     * @param Request $request
      * @return Response
      */
     public function searchSpot(PaginationService $paginationService,SpotRepository $spotRepository, $page, Request $request)
     {
         $spots = $spotRepository->findAllSpotsByDate($page);
-
         $formFilter = $this->createForm(SpotFilterType::class);
         $formFilter->handleRequest($request);
 
@@ -79,8 +79,6 @@ class SpotController extends Controller
                 $this->addFlash('success','Aucun résultat pour le moment !');
             }
         }
-
-       // $spots = $spotRepository->findAllSpotsByDate($page);
         $pagination = $paginationService->paginationHome($page);
         return $this->render('home/searchSpot.html.twig', array(
             'spots' => $spots,
@@ -91,6 +89,8 @@ class SpotController extends Controller
 
     /**
      * @Route("spot/{id}", name="spot")
+     * @param $id
+     * @param SpotRepository $spotRepository
      * @param CommentRepository $commentRepository
      * @param PageDecoratorsService $pageDecoratorsService
      * @param CommentManager $commentManager
@@ -104,7 +104,6 @@ class SpotController extends Controller
         $formLove = $this->createForm(LoveType::class);
         $formTree = $this->createForm(TreeType::class);
         $formFavoris = $this->createForm(FavoriteType::class);
-
         $spot = $spotRepository->find($id);
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class,$comment);
@@ -128,15 +127,13 @@ class SpotController extends Controller
             'formFavoris' => $formFavoris->createView(),
             'report' => $report,
             'resultBySpot' => $resultBySpot,
-
         ));
     }
 
 
-
     /**
      * @Route("spot/{id}/love", name="spot_love")
-     * @Method({"POST"})
+     * @param LoveRepository $loveRepository
      * @param Request $request
      * @param Spot $spot
      * @param LoveManager $loveManager
@@ -158,14 +155,13 @@ class SpotController extends Controller
                  $loveManager->save($formLove->getData(),$this->getUser(),$spot);
                  $this->addFlash("info", "Vous venez de liker ce spot!");
              }
-
         }
         return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
     /**
      * @Route("spot/{id}/tree", name="spot_tree")
-     * @Method({"POST"})
+     * @param TreeRepository $treeRepository
      * @param Request $request
      * @param Spot $spot
      * @param TreeManager $treeManager
@@ -189,16 +185,16 @@ class SpotController extends Controller
                 $this->addFlash("info", "Vous venez de Tree Me ce spot!");
             }
         }
-
         return $this->redirectToRoute("accueil/spot",['id'=>$spot->getId()]);
     }
 
     /**
      * @Route("spot/{id}/favoris", name="spot_favoris")
      * @Method({"POST"})
+     * @param FavoriteRepository $favoriteRepository
      * @param Request $request
      * @param Spot $spot
-     * @param FavoriteManager $favorisManager
+     * @param FavoriteManager $favoriteManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function favoris(FavoriteRepository $favoriteRepository,Request $request, Spot $spot, FavoriteManager $favoriteManager)
